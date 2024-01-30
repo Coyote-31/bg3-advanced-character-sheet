@@ -7228,6 +7228,7 @@ Source="{StaticResource SavingThrowDice}">
 
                     <b:Interaction.Behaviors>
                         <ls:DragGenericBehavior StartDragCommand="{Binding DataContext.DragInventoryCommand , RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
+<ls:WidgetDataConnectionBehavior/>
                     </b:Interaction.Behaviors>
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="ListBoxItem" BasedOn="{StaticResource BaseInvContainerItemStyle}">
@@ -7235,14 +7236,14 @@ Source="{StaticResource SavingThrowDice}">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="ListBoxItem">
                                         <ls:LSEntityObject x:Name="invCellBase" Context="Inventory" DataContext="{Binding Object}" EntityRef="{Binding EntityHandle}" Background="{TemplateBinding Background}"
-                                                               ToolTipService.Placement="Right" Tag="{Binding DataContext,RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"
+                                                               ToolTipService.Placement="Right" Tag="{Binding (ls:WidgetData.DataContext), RelativeSource={RelativeSource TemplatedParent}}"
                                                                ls:ContextMenuService.GenerateEnabled="False" ls:MoveFocus.Focusable="True" Focusable="True">
                                             <b:Interaction.Behaviors>
-                                                <ls:ContextMenuFillBehavior Context="Inventory" Player="{Binding DataContext.CurrentPlayer, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" TargetObject="{Binding .}" Source="{Binding SelectedItems,ElementName=InventoryHolder}" Command="{Binding DataContext.ContextActionPressed, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
+                                                <ls:ContextMenuFillBehavior Context="Inventory" Player="{Binding (ls:WidgetData.DataContext).CurrentPlayer, RelativeSource={RelativeSource TemplatedParent}}" TargetObject="{Binding .}" Source="{Binding SelectedItems,ElementName=InventoryHolder}" Command="{Binding (ls:WidgetData.DataContext).ContextActionPressed, RelativeSource={RelativeSource TemplatedParent}}"/>
                                             </b:Interaction.Behaviors>
                                             <b:Interaction.Triggers>
                                                 <b:EventTrigger EventName="MouseEnter">
-                                                    <b:InvokeCommandAction IsEnabled="{Binding IsNew}" Command="{Binding DataContext.ClearItemNewFlag, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="{Binding .}"/>
+                                                    <b:InvokeCommandAction IsEnabled="{Binding IsNew}" Command="{Binding (ls:WidgetData.DataContext).ClearItemNewFlag, RelativeSource={RelativeSource TemplatedParent}}" CommandParameter="{Binding .}"/>
                                                 </b:EventTrigger>
                                                 <b:EventTrigger EventName="MouseLeftButtonDown">
                                                     <b:Interaction.Behaviors>
@@ -7255,10 +7256,10 @@ Source="{StaticResource SavingThrowDice}">
                                                     <ls:LSPlaySound Sound="UI_HUD_Inventory_PickupCharacter"/>
                                                 </b:EventTrigger>
                                                 <b:EventTrigger EventName="DragEnter">
-                                                    <b:InvokeCommandAction Command="{Binding DataContext.UpdateDragErrorCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="{Binding Path=DataContext.Object, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                                                    <b:InvokeCommandAction Command="{Binding (ls:WidgetData.DataContext).UpdateDragErrorCommand, RelativeSource={RelativeSource TemplatedParent}}" CommandParameter="{Binding Path=DataContext.Object, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
                                                 </b:EventTrigger>
                                                 <b:EventTrigger EventName="DragLeave">
-                                                    <b:InvokeCommandAction Command="{Binding DataContext.UpdateDragErrorCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="{x:Null}"/>
+                                                    <b:InvokeCommandAction Command="{Binding (ls:WidgetData.DataContext).UpdateDragErrorCommand, RelativeSource={RelativeSource TemplatedParent}}" CommandParameter="{x:Null}"/>
                                                 </b:EventTrigger>
                                             </b:Interaction.Triggers>
                                             <ls:LSEntityObject.ToolTip>
