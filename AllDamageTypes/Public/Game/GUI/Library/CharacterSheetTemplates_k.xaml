@@ -3155,6 +3155,7 @@ Source="{StaticResource SavingThrowDice}">
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
+    <!-- MOD ADT : START -->
     <!-- ===== RESISTANCES GRID TEMPLATE=====-->
     <ControlTemplate x:Key="ResistancesGridTemplate">
         <Grid>
@@ -3163,12 +3164,15 @@ Source="{StaticResource SavingThrowDice}">
                     <DataTemplate>
                         <DataTemplate.Resources>
                             <BitmapImage x:Key="hourglass" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/ico_resistance_hourglass.png"/>
+                            <BitmapImage x:Key="ResistanceNone" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ADT/Resistances/ico_resistance_none.png"/><!-- MOD ADT -->
+                            <BitmapImage x:Key="ResistanceVulnerable" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ADT/Resistances/ico_resistance_vulnerable.png"/><!-- MOD ADT -->
                         </DataTemplate.Resources>
 
                         <Grid x:Name="Object" Tag="Immune" ToolTip="{StaticResource ManagedTooltip}" Background="Transparent">
                             <Grid HorizontalAlignment="Center" Margin="0,10,0,0">
                                 <Image x:Name="ImmuneShield" Source="{StaticResource ImmuneShield}" Stretch="None" Visibility="Hidden"/>
                                 <Control x:Name="TypIcon" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource ResistanceIcon}" />
+                                <Image x:Name="NoShield" Source="{StaticResource ResistanceNone}" Stretch="None" Visibility="Hidden"/><!-- MOD ADT -->
                             </Grid>
 
                             <Image x:Name="NonMagicalArrow" HorizontalAlignment="Center" VerticalAlignment="Top" Source="{StaticResource ResistantNonMagical}" Stretch="None" Margin="0,-2,0,0" Visibility="Collapsed"/>
@@ -3208,8 +3212,8 @@ Source="{StaticResource SavingThrowDice}">
                             </DataTrigger>
 
                             <DataTrigger Binding="{Binding Full}" Value="Vulnerable">
-                                <Setter TargetName="NonMagicalArrow" Property="Visibility" Value="Visible"/>
-                                <Setter TargetName="NonMagicalArrow" Property="Source" Value="{StaticResource Vulnerable}"/>
+                                <Setter TargetName="ImmuneShield" Property="Visibility" Value="Visible"/><!-- MOD ADT -->
+                                <Setter TargetName="ImmuneShield" Property="Source" Value="{StaticResource ResistanceVulnerable}"/><!-- MOD ADT -->
                             </DataTrigger>
 
                             <MultiDataTrigger>
@@ -3217,6 +3221,16 @@ Source="{StaticResource SavingThrowDice}">
                                     <Condition Binding="{Binding Full}" Value="None"/>
                                     <Condition Binding="{Binding NonMagical}" Value="None"/>
                                     <Condition Binding="{Binding Magical}" Value="None"/>
+                                </MultiDataTrigger.Conditions>
+                                <Setter TargetName="NoShield" Property="Visibility" Value="Visible"/><!-- MOD ADT -->
+                            </MultiDataTrigger>
+                            
+                            <MultiDataTrigger><!-- MOD ADT -->
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding Full}" Value="None"/>
+                                    <Condition Binding="{Binding NonMagical}" Value="None"/>
+                                    <Condition Binding="{Binding Magical}" Value="None"/>
+                                    <Condition Binding="{Binding DamageType}" Value="Spell"/>
                                 </MultiDataTrigger.Conditions>
                                 <Setter TargetName="Object" Property="Visibility" Value="Collapsed"/>
                             </MultiDataTrigger>
@@ -3270,6 +3284,7 @@ Source="{StaticResource SavingThrowDice}">
             </Grid>
         </Grid>
     </ControlTemplate>
+    <!-- MOD ADT : END -->
 
     <!-- ===== RESISTANCES LIST TEMPLATE=====-->
     <ControlTemplate x:Key="ResistanceListTemplate">
