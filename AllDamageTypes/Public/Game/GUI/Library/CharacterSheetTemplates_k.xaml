@@ -3157,16 +3157,16 @@ Source="{StaticResource SavingThrowDice}">
     
     
 
-    <!-- ===== MOD ADT : START ===== -->
+    <!-- ===== MOD_ADT: START ===== -->
     
-    <!-- MOD ADT : Images -->
+    <!-- MOD_ADT: Images -->
     <BitmapImage x:Key="hourglass" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/ico_resistance_hourglass.png"/>
     <BitmapImage x:Key="ResistanceNone" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ADT/Resistances/ico_resistance_none.png"/>
     <BitmapImage x:Key="ResistanceVulnerable" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ADT/Resistances/ico_resistance_vulnerable.png"/>
     
-    <!-- MOD ADT : Templates -->
+    <!-- MOD_ADT: Templates -->
     
-    <!-- MOD ADT : ImmuneShield -->
+    <!-- MOD_ADT: ImmuneShield -->
     <ControlTemplate x:Key="CtrlImmuneShield" TargetType="Control">
         <Image x:Name="ImmuneShield" Source="{StaticResource ImmuneShield}" Stretch="None" Visibility="Hidden"/>
         <ControlTemplate.Triggers>
@@ -3189,7 +3189,7 @@ Source="{StaticResource SavingThrowDice}">
         </ControlTemplate.Triggers>
     </ControlTemplate>
     
-        <!-- MOD ADT : NonMagicalArrow -->
+        <!-- MOD_ADT: NonMagicalArrow -->
         <ControlTemplate x:Key="CtrlNonMagicalArrow" TargetType="Control">
             <Image x:Name="NonMagicalArrow" HorizontalAlignment="Center" VerticalAlignment="Top" Source="{StaticResource ResistantNonMagical}" Stretch="None" Margin="0,-2,0,0" Visibility="Collapsed"/>
             <ControlTemplate.Triggers>
@@ -3199,7 +3199,7 @@ Source="{StaticResource SavingThrowDice}">
             </ControlTemplate.Triggers>
         </ControlTemplate>
         
-        <!-- MOD ADT : MagicalArrow -->
+        <!-- MOD_ADT: MagicalArrow -->
         <ControlTemplate x:Key="CtrlMagicalArrow" TargetType="Control">
             <Image x:Name="MagicalArrow" HorizontalAlignment="Center" VerticalAlignment="Top" Source="{StaticResource ResistantMagical}" Stretch="None" Margin="0,-14,0,0" Visibility="Collapsed"/>
             <ControlTemplate.Triggers>
@@ -3213,7 +3213,7 @@ Source="{StaticResource SavingThrowDice}">
             </ControlTemplate.Triggers>
         </ControlTemplate>
         
-        <!-- MOD ADT : NoShield -->
+        <!-- MOD_ADT: NoShield -->
         <ControlTemplate x:Key="CtrlNoShield" TargetType="Control">
             <Image x:Name="NoShield" Source="{StaticResource ResistanceNone}" Stretch="None" Visibility="Hidden"/>
             <ControlTemplate.Triggers>
@@ -3228,7 +3228,7 @@ Source="{StaticResource SavingThrowDice}">
             </ControlTemplate.Triggers>
         </ControlTemplate>
         
-        <!-- MOD ADT : Hourglass -->
+        <!-- MOD_ADT: Hourglass -->
         <ControlTemplate x:Key="CtrlHourglass" TargetType="Control">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Orientation="Horizontal" Visibility="{Binding Duration, Converter={StaticResource CountToVisibilityConverter}}" Margin="0,0,0,-10" IsHitTestVisible="False">
                 <Image Stretch="None" Source="{StaticResource hourglass}" VerticalAlignment="Center" Margin="0,0,-4,0"/>
@@ -3242,7 +3242,7 @@ Source="{StaticResource SavingThrowDice}">
     <ControlTemplate x:Key="ResistancesGridTemplate">
         
         <ControlTemplate.Resources>
-            <!-- MOD ADT : StatusEndingStoryboard -->
+            <!-- MOD_ADT: StatusEndingStoryboard -->
             <Storyboard x:Key="ResourceStatusEndingStoryboard">
                 <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Object" Storyboard.TargetProperty="Opacity" AutoReverse="True" RepeatBehavior="Forever">
                     <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
@@ -3275,10 +3275,10 @@ Source="{StaticResource SavingThrowDice}">
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource LS_accent100TxtColor}" Text="{Binding Source='h529efdfdgda98g4ed3g8d1eg46cbf1d0a5e3', Converter={StaticResource TranslatedStringConverter}}"/>
             </Grid>
             
-            <!-- MOD ADT : Row 1 => Slashing / Bludgeoning / Piercing -->
+            <!-- MOD_ADT: Row 1 => Slashing / Bludgeoning / Piercing -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 
-                <!-- MOD ADT : Slashing -->
+                <!-- MOD_ADT: Slashing -->
                 <ItemsControl x:Name="ResistancesSlashing" ItemsSource="{Binding Stats.Resistances}" Visibility="{Binding Stats.NumActiveResistances, Converter={StaticResource CountToVisibilityConverter}}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -3296,7 +3296,7 @@ Source="{StaticResource SavingThrowDice}">
 
                             <DataTemplate.Triggers>
                                 
-                                <!-- MOD ADT : Control physical slashing visibility -->
+                                <!-- MOD_ADT: Control physical slashing visibility -->
                                 <DataTrigger Binding="{Binding DamageType}" Value="Slashing">
                                     <Setter TargetName="Object" Property="Visibility" Value="Visible"/>
                                 </DataTrigger>
@@ -3316,7 +3316,7 @@ Source="{StaticResource SavingThrowDice}">
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
                 
-                <!-- MOD ADT : Bludgeoning -->
+                <!-- MOD_ADT: Bludgeoning -->
                 <ItemsControl x:Name="ResistanceBludgeoning" ItemsSource="{Binding Stats.Resistances}" Visibility="{Binding Stats.NumActiveResistances, Converter={StaticResource CountToVisibilityConverter}}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -3334,7 +3334,7 @@ Source="{StaticResource SavingThrowDice}">
 
                             <DataTemplate.Triggers>
                                 
-                                <!-- MOD ADT : Control physical bludgeoning visibility -->
+                                <!-- MOD_ADT: Control physical bludgeoning visibility -->
                                 <DataTrigger Binding="{Binding DamageType}" Value="Bludgeoning">
                                     <Setter TargetName="Object" Property="Visibility" Value="Visible"/>
                                 </DataTrigger>
@@ -3354,7 +3354,7 @@ Source="{StaticResource SavingThrowDice}">
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
                 
-                <!-- MOD ADT : Piercing -->
+                <!-- MOD_ADT: Piercing -->
                 <ItemsControl x:Name="ResistancePiercing" ItemsSource="{Binding Stats.Resistances}" Visibility="{Binding Stats.NumActiveResistances, Converter={StaticResource CountToVisibilityConverter}}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -3372,7 +3372,7 @@ Source="{StaticResource SavingThrowDice}">
 
                             <DataTemplate.Triggers>
                                 
-                                <!-- MOD ADT : Control physical piercing visibility -->
+                                <!-- MOD_ADT: Control physical piercing visibility -->
                                 <DataTrigger Binding="{Binding DamageType}" Value="Piercing">
                                     <Setter TargetName="Object" Property="Visibility" Value="Visible"/>
                                 </DataTrigger>
@@ -3394,10 +3394,10 @@ Source="{StaticResource SavingThrowDice}">
                 
             </StackPanel>
 
-            <!-- MOD ADT : Row 2 => Fire / Cold / Lightning / Thunder / Force -->
+            <!-- MOD_ADT: Row 2 => Fire / Cold / Lightning / Thunder / Force -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 
-                <!-- MOD ADT : Fire -->
+                <!-- MOD_ADT: Fire -->
                 <ItemsControl x:Name="ResistanceFire" ItemsSource="{Binding Stats.Resistances}" Visibility="{Binding Stats.NumActiveResistances, Converter={StaticResource CountToVisibilityConverter}}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -3415,7 +3415,7 @@ Source="{StaticResource SavingThrowDice}">
 
                             <DataTemplate.Triggers>
                                 
-                                <!-- MOD ADT : Control fire visibility -->
+                                <!-- MOD_ADT: Control fire visibility -->
                                 <DataTrigger Binding="{Binding DamageType}" Value="Fire">
                                     <Setter TargetName="Object" Property="Visibility" Value="Visible"/>
                                 </DataTrigger>
@@ -3435,7 +3435,7 @@ Source="{StaticResource SavingThrowDice}">
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
                 
-                <!-- MOD ADT : Cold -->
+                <!-- MOD_ADT: Cold -->
                 <ItemsControl x:Name="ResistanceCold" ItemsSource="{Binding Stats.Resistances}" Visibility="{Binding Stats.NumActiveResistances, Converter={StaticResource CountToVisibilityConverter}}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -3453,7 +3453,7 @@ Source="{StaticResource SavingThrowDice}">
 
                             <DataTemplate.Triggers>
                                 
-                                <!-- MOD ADT : Control cold visibility -->
+                                <!-- MOD_ADT: Control cold visibility -->
                                 <DataTrigger Binding="{Binding DamageType}" Value="Cold">
                                     <Setter TargetName="Object" Property="Visibility" Value="Visible"/>
                                 </DataTrigger>
@@ -3473,7 +3473,7 @@ Source="{StaticResource SavingThrowDice}">
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
                 
-                <!-- MOD ADT : Lightning -->
+                <!-- MOD_ADT: Lightning -->
                 <ItemsControl x:Name="ResistanceLightning" ItemsSource="{Binding Stats.Resistances}" Visibility="{Binding Stats.NumActiveResistances, Converter={StaticResource CountToVisibilityConverter}}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -3491,7 +3491,7 @@ Source="{StaticResource SavingThrowDice}">
 
                             <DataTemplate.Triggers>
                                 
-                                <!-- MOD ADT : Control lightning visibility -->
+                                <!-- MOD_ADT: Control lightning visibility -->
                                 <DataTrigger Binding="{Binding DamageType}" Value="Lightning">
                                     <Setter TargetName="Object" Property="Visibility" Value="Visible"/>
                                 </DataTrigger>
@@ -3511,7 +3511,7 @@ Source="{StaticResource SavingThrowDice}">
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
                 
-                <!-- MOD ADT : Thunder -->
+                <!-- MOD_ADT: Thunder -->
                 <ItemsControl x:Name="ResistanceThunder" ItemsSource="{Binding Stats.Resistances}" Visibility="{Binding Stats.NumActiveResistances, Converter={StaticResource CountToVisibilityConverter}}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -3529,7 +3529,7 @@ Source="{StaticResource SavingThrowDice}">
 
                             <DataTemplate.Triggers>
                                 
-                                <!-- MOD ADT : Control thunder visibility -->
+                                <!-- MOD_ADT: Control thunder visibility -->
                                 <DataTrigger Binding="{Binding DamageType}" Value="Thunder">
                                     <Setter TargetName="Object" Property="Visibility" Value="Visible"/>
                                 </DataTrigger>
@@ -3549,7 +3549,7 @@ Source="{StaticResource SavingThrowDice}">
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
                 
-                <!-- MOD ADT : Force -->
+                <!-- MOD_ADT: Force -->
                 <ItemsControl x:Name="ResistanceForce" ItemsSource="{Binding Stats.Resistances}" Visibility="{Binding Stats.NumActiveResistances, Converter={StaticResource CountToVisibilityConverter}}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -3567,7 +3567,7 @@ Source="{StaticResource SavingThrowDice}">
 
                             <DataTemplate.Triggers>
                                 
-                                <!-- MOD ADT : Control force visibility -->
+                                <!-- MOD_ADT: Control force visibility -->
                                 <DataTrigger Binding="{Binding DamageType}" Value="Force">
                                     <Setter TargetName="Object" Property="Visibility" Value="Visible"/>
                                 </DataTrigger>
@@ -3590,10 +3590,10 @@ Source="{StaticResource SavingThrowDice}">
             </StackPanel>
             
             
-            <!-- MOD ADT : Row 3 => Poison / Acid / Necrotic / Radiant / Psychic -->
+            <!-- MOD_ADT: Row 3 => Poison / Acid / Necrotic / Radiant / Psychic -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 
-                <!-- MOD ADT : Poison -->
+                <!-- MOD_ADT: Poison -->
                 <ItemsControl x:Name="ResistancePoison" ItemsSource="{Binding Stats.Resistances}" Visibility="{Binding Stats.NumActiveResistances, Converter={StaticResource CountToVisibilityConverter}}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -3611,7 +3611,7 @@ Source="{StaticResource SavingThrowDice}">
 
                             <DataTemplate.Triggers>
                                 
-                                <!-- MOD ADT : Control poison visibility -->
+                                <!-- MOD_ADT: Control poison visibility -->
                                 <DataTrigger Binding="{Binding DamageType}" Value="Poison">
                                     <Setter TargetName="Object" Property="Visibility" Value="Visible"/>
                                 </DataTrigger>
@@ -3631,7 +3631,7 @@ Source="{StaticResource SavingThrowDice}">
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
                 
-                <!-- MOD ADT : Acid -->
+                <!-- MOD_ADT: Acid -->
                 <ItemsControl x:Name="ResistanceAcid" ItemsSource="{Binding Stats.Resistances}" Visibility="{Binding Stats.NumActiveResistances, Converter={StaticResource CountToVisibilityConverter}}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -3649,7 +3649,7 @@ Source="{StaticResource SavingThrowDice}">
 
                             <DataTemplate.Triggers>
                                 
-                                <!-- MOD ADT : Control acid visibility -->
+                                <!-- MOD_ADT: Control acid visibility -->
                                 <DataTrigger Binding="{Binding DamageType}" Value="Acid">
                                     <Setter TargetName="Object" Property="Visibility" Value="Visible"/>
                                 </DataTrigger>
@@ -3669,7 +3669,7 @@ Source="{StaticResource SavingThrowDice}">
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
                 
-                <!-- MOD ADT : Necrotic -->
+                <!-- MOD_ADT: Necrotic -->
                 <ItemsControl x:Name="ResistanceNecrotic" ItemsSource="{Binding Stats.Resistances}" Visibility="{Binding Stats.NumActiveResistances, Converter={StaticResource CountToVisibilityConverter}}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -3687,7 +3687,7 @@ Source="{StaticResource SavingThrowDice}">
 
                             <DataTemplate.Triggers>
                                 
-                                <!-- MOD ADT : Control necrotic visibility -->
+                                <!-- MOD_ADT: Control necrotic visibility -->
                                 <DataTrigger Binding="{Binding DamageType}" Value="Necrotic">
                                     <Setter TargetName="Object" Property="Visibility" Value="Visible"/>
                                 </DataTrigger>
@@ -3707,7 +3707,7 @@ Source="{StaticResource SavingThrowDice}">
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
                 
-                <!-- MOD ADT : Radiant -->
+                <!-- MOD_ADT: Radiant -->
                 <ItemsControl x:Name="ResistanceRadiant" ItemsSource="{Binding Stats.Resistances}" Visibility="{Binding Stats.NumActiveResistances, Converter={StaticResource CountToVisibilityConverter}}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -3725,7 +3725,7 @@ Source="{StaticResource SavingThrowDice}">
 
                             <DataTemplate.Triggers>
                                 
-                                <!-- MOD ADT : Control radiant visibility -->
+                                <!-- MOD_ADT: Control radiant visibility -->
                                 <DataTrigger Binding="{Binding DamageType}" Value="Radiant">
                                     <Setter TargetName="Object" Property="Visibility" Value="Visible"/>
                                 </DataTrigger>
@@ -3745,7 +3745,7 @@ Source="{StaticResource SavingThrowDice}">
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
                 
-                <!-- MOD ADT : Psychic -->
+                <!-- MOD_ADT: Psychic -->
                 <ItemsControl x:Name="ResistancePsychic" ItemsSource="{Binding Stats.Resistances}" Visibility="{Binding Stats.NumActiveResistances, Converter={StaticResource CountToVisibilityConverter}}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -3763,7 +3763,7 @@ Source="{StaticResource SavingThrowDice}">
 
                             <DataTemplate.Triggers>
                                 
-                                <!-- MOD ADT : Control psychic visibility -->
+                                <!-- MOD_ADT: Control psychic visibility -->
                                 <DataTrigger Binding="{Binding DamageType}" Value="Psychic">
                                     <Setter TargetName="Object" Property="Visibility" Value="Visible"/>
                                 </DataTrigger>
@@ -3788,7 +3788,7 @@ Source="{StaticResource SavingThrowDice}">
         </StackPanel>
     </ControlTemplate>
     
-    <!-- ===== MOD ADT : END ===== -->
+    <!-- ===== MOD_ADT: END ===== -->
 
     <!-- ===== RESISTANCES LIST TEMPLATE=====-->
     <ControlTemplate x:Key="ResistanceListTemplate">
