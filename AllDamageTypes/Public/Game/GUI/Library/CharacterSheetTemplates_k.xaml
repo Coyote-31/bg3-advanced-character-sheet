@@ -3163,6 +3163,9 @@ Source="{StaticResource SavingThrowDice}">
     <BitmapImage x:Key="hourglass" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/ico_resistance_hourglass.png"/>
     <BitmapImage x:Key="ResistanceNone" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ADT/Resistances/ico_resistance_none.png"/>
     <BitmapImage x:Key="ResistanceVulnerable" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ADT/Resistances/ico_resistance_vulnerable.png"/>
+    <BitmapImage x:Key="ResistantNonMagicalShield" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ADT/Resistances/ico_resistance_physical_shield.png"/>
+    <BitmapImage x:Key="ResistantMagicalShield" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ADT/Resistances/ico_resistance_magic_shield.png"/>
+    <BitmapImage x:Key="ResistantMagicalShieldShort" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ADT/Resistances/ico_resistance_magic_shield_short.png"/>
     
     <!-- MOD_ADT: Templates -->
     
@@ -3189,9 +3192,9 @@ Source="{StaticResource SavingThrowDice}">
         </ControlTemplate.Triggers>
     </ControlTemplate>
     
-        <!-- MOD_ADT: NonMagicalArrow -->
+        <!-- MOD_ADT: Resistant NonMagical -->
         <ControlTemplate x:Key="CtrlNonMagicalArrow" TargetType="Control">
-            <Image x:Name="NonMagicalArrow" HorizontalAlignment="Center" VerticalAlignment="Top" Source="{StaticResource ResistantNonMagical}" Stretch="None" Margin="0,-2,0,0" Visibility="Collapsed"/>
+            <Image x:Name="NonMagicalArrow" HorizontalAlignment="Center" VerticalAlignment="center" Source="{StaticResource ResistantNonMagicalShield}" Stretch="None" Margin="0,8,0,0" Visibility="Collapsed"/>
             <ControlTemplate.Triggers>
                 <DataTrigger Binding="{Binding NonMagical}" Value="Resistant">
                     <Setter TargetName="NonMagicalArrow" Property="Visibility" Value="Visible"/>
@@ -3199,16 +3202,17 @@ Source="{StaticResource SavingThrowDice}">
             </ControlTemplate.Triggers>
         </ControlTemplate>
         
-        <!-- MOD_ADT: MagicalArrow -->
+        <!-- MOD_ADT: Resistant Magical -->
         <ControlTemplate x:Key="CtrlMagicalArrow" TargetType="Control">
-            <Image x:Name="MagicalArrow" HorizontalAlignment="Center" VerticalAlignment="Top" Source="{StaticResource ResistantMagical}" Stretch="None" Margin="0,-14,0,0" Visibility="Collapsed"/>
+            <Image x:Name="MagicalArrow" HorizontalAlignment="Center" VerticalAlignment="center" Source="{StaticResource ResistantMagicalShield}" Stretch="None" Margin="0,10,0,0" Visibility="Collapsed"/>
             <ControlTemplate.Triggers>
                 <DataTrigger Binding="{Binding Magical}" Value="Resistant">
                     <Setter TargetName="MagicalArrow" Property="Visibility" Value="Visible"/>
-                    <Setter TargetName="MagicalArrow" Property="Margin" Value="0,-2,0,0"/>
+                    <Setter TargetName="MagicalArrow" Property="Margin" Value="0,10,0,0"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Full}" Value="Resistant">
-                    <Setter TargetName="MagicalArrow" Property="Margin" Value="0,-14,0,0"/>
+                    <Setter TargetName="MagicalArrow" Property="Source" Value="{StaticResource ResistantMagicalShieldShort}"/>
+                    <Setter TargetName="MagicalArrow" Property="Margin" Value="0,-6,0,0"/>
                 </DataTrigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
