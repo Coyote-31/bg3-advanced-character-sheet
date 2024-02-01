@@ -3234,7 +3234,7 @@ Source="{StaticResource SavingThrowDice}">
         
         <!-- MOD_ADT: Hourglass -->
         <ControlTemplate x:Key="CtrlHourglass" TargetType="Control">
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Orientation="Horizontal" Visibility="{Binding Duration, Converter={StaticResource CountToVisibilityConverter}}" Margin="0,0,0,-10" IsHitTestVisible="False">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Orientation="Horizontal" Visibility="{Binding Duration, Converter={StaticResource CountToVisibilityConverter}}" Margin="0,0,0,-8" IsHitTestVisible="False">
                 <Image Stretch="None" Source="{StaticResource hourglass}" VerticalAlignment="Center" Margin="0,0,-4,0"/>
                 <TextBlock Text="{Binding Duration}" Foreground="{StaticResource LS_tint100}" FontFamily="{StaticResource DefaultFont}" FontSize="{StaticResource SmallishFontSize}" VerticalAlignment="Center"/>
             </StackPanel>
@@ -3280,14 +3280,14 @@ Source="{StaticResource SavingThrowDice}">
             </Grid>
             
             <!-- MOD_ADT: Row 1 => Slashing / Bludgeoning / Piercing -->
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,-4">
                 
                 <!-- MOD_ADT: Slashing -->
                 <ItemsControl x:Name="ResistancesSlashing" ItemsSource="{Binding Stats.Resistances}" Visibility="{Binding Stats.NumActiveResistances, Converter={StaticResource CountToVisibilityConverter}}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                                 
-                            <Grid x:Name="Object" Tag="Immune" ToolTip="{StaticResource ManagedTooltip}" Background="Transparent" Visibility="Collapsed" Margin="0,0,0,0">
+                            <Grid x:Name="Object" Tag="Immune" ToolTip="{StaticResource ManagedTooltip}" Background="Transparent" Visibility="Collapsed" Margin="-2,0">
                                 <Grid HorizontalAlignment="Center" Margin="0,10,0,0">
                                     <Control x:Name="ImmuneShield" Template="{StaticResource CtrlImmuneShield}" />
                                     <Control x:Name="TypIcon" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource ResistanceIcon}" />
@@ -3325,7 +3325,7 @@ Source="{StaticResource SavingThrowDice}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                                 
-                            <Grid x:Name="Object" Tag="Immune" ToolTip="{StaticResource ManagedTooltip}" Background="Transparent" Visibility="Collapsed" Margin="0,0,0,0">
+                            <Grid x:Name="Object" Tag="Immune" ToolTip="{StaticResource ManagedTooltip}" Background="Transparent" Visibility="Collapsed" Margin="-2,0">
                                 <Grid HorizontalAlignment="Center" Margin="0,10,0,0">
                                     <Control x:Name="ImmuneShield" Template="{StaticResource CtrlImmuneShield}" />
                                     <Control x:Name="TypIcon" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource ResistanceIcon}" />
@@ -3363,7 +3363,7 @@ Source="{StaticResource SavingThrowDice}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                                 
-                            <Grid x:Name="Object" Tag="Immune" ToolTip="{StaticResource ManagedTooltip}" Background="Transparent" Visibility="Collapsed" Margin="0,0,0,0">
+                            <Grid x:Name="Object" Tag="Immune" ToolTip="{StaticResource ManagedTooltip}" Background="Transparent" Visibility="Collapsed" Margin="-2,0">
                                 <Grid HorizontalAlignment="Center" Margin="0,10,0,0">
                                     <Control x:Name="ImmuneShield" Template="{StaticResource CtrlImmuneShield}" />
                                     <Control x:Name="TypIcon" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource ResistanceIcon}" />
@@ -3399,14 +3399,14 @@ Source="{StaticResource SavingThrowDice}">
             </StackPanel>
 
             <!-- MOD_ADT: Row 2 => Fire / Cold / Lightning / Thunder / Force -->
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,-4">
                 
                 <!-- MOD_ADT: Fire -->
                 <ItemsControl x:Name="ResistanceFire" ItemsSource="{Binding Stats.Resistances}" Visibility="{Binding Stats.NumActiveResistances, Converter={StaticResource CountToVisibilityConverter}}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                                 
-                            <Grid x:Name="Object" Tag="Immune" ToolTip="{StaticResource ManagedTooltip}" Background="Transparent" Visibility="Collapsed" Margin="0,0,0,0">
+                            <Grid x:Name="Object" Tag="Immune" ToolTip="{StaticResource ManagedTooltip}" Background="Transparent" Visibility="Collapsed" Margin="-2,0">
                                 <Grid HorizontalAlignment="Center" Margin="0,10,0,0">
                                     <Control x:Name="ImmuneShield" Template="{StaticResource CtrlImmuneShield}" />
                                     <Control x:Name="TypIcon" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource ResistanceIcon}" />
@@ -3444,7 +3444,7 @@ Source="{StaticResource SavingThrowDice}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                                 
-                            <Grid x:Name="Object" Tag="Immune" ToolTip="{StaticResource ManagedTooltip}" Background="Transparent" Visibility="Collapsed" Margin="0,0,0,0">
+                            <Grid x:Name="Object" Tag="Immune" ToolTip="{StaticResource ManagedTooltip}" Background="Transparent" Visibility="Collapsed" Margin="-2,0">
                                 <Grid HorizontalAlignment="Center" Margin="0,10,0,0">
                                     <Control x:Name="ImmuneShield" Template="{StaticResource CtrlImmuneShield}" />
                                     <Control x:Name="TypIcon" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource ResistanceIcon}" />
@@ -3482,7 +3482,7 @@ Source="{StaticResource SavingThrowDice}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                                 
-                            <Grid x:Name="Object" Tag="Immune" ToolTip="{StaticResource ManagedTooltip}" Background="Transparent" Visibility="Collapsed" Margin="0,0,0,0">
+                            <Grid x:Name="Object" Tag="Immune" ToolTip="{StaticResource ManagedTooltip}" Background="Transparent" Visibility="Collapsed" Margin="-2,0">
                                 <Grid HorizontalAlignment="Center" Margin="0,10,0,0">
                                     <Control x:Name="ImmuneShield" Template="{StaticResource CtrlImmuneShield}" />
                                     <Control x:Name="TypIcon" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource ResistanceIcon}" />
@@ -3520,7 +3520,7 @@ Source="{StaticResource SavingThrowDice}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                                 
-                            <Grid x:Name="Object" Tag="Immune" ToolTip="{StaticResource ManagedTooltip}" Background="Transparent" Visibility="Collapsed" Margin="0,0,0,0">
+                            <Grid x:Name="Object" Tag="Immune" ToolTip="{StaticResource ManagedTooltip}" Background="Transparent" Visibility="Collapsed" Margin="-2,0">
                                 <Grid HorizontalAlignment="Center" Margin="0,10,0,0">
                                     <Control x:Name="ImmuneShield" Template="{StaticResource CtrlImmuneShield}" />
                                     <Control x:Name="TypIcon" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource ResistanceIcon}" />
@@ -3558,7 +3558,7 @@ Source="{StaticResource SavingThrowDice}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                                 
-                            <Grid x:Name="Object" Tag="Immune" ToolTip="{StaticResource ManagedTooltip}" Background="Transparent" Visibility="Collapsed" Margin="0,0,0,0">
+                            <Grid x:Name="Object" Tag="Immune" ToolTip="{StaticResource ManagedTooltip}" Background="Transparent" Visibility="Collapsed" Margin="-2,0">
                                 <Grid HorizontalAlignment="Center" Margin="0,10,0,0">
                                     <Control x:Name="ImmuneShield" Template="{StaticResource CtrlImmuneShield}" />
                                     <Control x:Name="TypIcon" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource ResistanceIcon}" />
@@ -3595,14 +3595,14 @@ Source="{StaticResource SavingThrowDice}">
             
             
             <!-- MOD_ADT: Row 3 => Poison / Acid / Necrotic / Radiant / Psychic -->
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,-4">
                 
                 <!-- MOD_ADT: Poison -->
                 <ItemsControl x:Name="ResistancePoison" ItemsSource="{Binding Stats.Resistances}" Visibility="{Binding Stats.NumActiveResistances, Converter={StaticResource CountToVisibilityConverter}}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                                 
-                            <Grid x:Name="Object" Tag="Immune" ToolTip="{StaticResource ManagedTooltip}" Background="Transparent" Visibility="Collapsed" Margin="0,0,0,0">
+                            <Grid x:Name="Object" Tag="Immune" ToolTip="{StaticResource ManagedTooltip}" Background="Transparent" Visibility="Collapsed" Margin="-2,0">
                                 <Grid HorizontalAlignment="Center" Margin="0,10,0,0">
                                     <Control x:Name="ImmuneShield" Template="{StaticResource CtrlImmuneShield}" />
                                     <Control x:Name="TypIcon" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource ResistanceIcon}" />
@@ -3640,7 +3640,7 @@ Source="{StaticResource SavingThrowDice}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                                 
-                            <Grid x:Name="Object" Tag="Immune" ToolTip="{StaticResource ManagedTooltip}" Background="Transparent" Visibility="Collapsed" Margin="0,0,0,0">
+                            <Grid x:Name="Object" Tag="Immune" ToolTip="{StaticResource ManagedTooltip}" Background="Transparent" Visibility="Collapsed" Margin="-2,0">
                                 <Grid HorizontalAlignment="Center" Margin="0,10,0,0">
                                     <Control x:Name="ImmuneShield" Template="{StaticResource CtrlImmuneShield}" />
                                     <Control x:Name="TypIcon" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource ResistanceIcon}" />
@@ -3678,7 +3678,7 @@ Source="{StaticResource SavingThrowDice}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                                 
-                            <Grid x:Name="Object" Tag="Immune" ToolTip="{StaticResource ManagedTooltip}" Background="Transparent" Visibility="Collapsed" Margin="0,0,0,0">
+                            <Grid x:Name="Object" Tag="Immune" ToolTip="{StaticResource ManagedTooltip}" Background="Transparent" Visibility="Collapsed" Margin="-2,0">
                                 <Grid HorizontalAlignment="Center" Margin="0,10,0,0">
                                     <Control x:Name="ImmuneShield" Template="{StaticResource CtrlImmuneShield}" />
                                     <Control x:Name="TypIcon" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource ResistanceIcon}" />
@@ -3716,7 +3716,7 @@ Source="{StaticResource SavingThrowDice}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                                 
-                            <Grid x:Name="Object" Tag="Immune" ToolTip="{StaticResource ManagedTooltip}" Background="Transparent" Visibility="Collapsed" Margin="0,0,0,0">
+                            <Grid x:Name="Object" Tag="Immune" ToolTip="{StaticResource ManagedTooltip}" Background="Transparent" Visibility="Collapsed" Margin="-2,0">
                                 <Grid HorizontalAlignment="Center" Margin="0,10,0,0">
                                     <Control x:Name="ImmuneShield" Template="{StaticResource CtrlImmuneShield}" />
                                     <Control x:Name="TypIcon" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource ResistanceIcon}" />
@@ -3754,7 +3754,7 @@ Source="{StaticResource SavingThrowDice}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                                 
-                            <Grid x:Name="Object" Tag="Immune" ToolTip="{StaticResource ManagedTooltip}" Background="Transparent" Visibility="Collapsed" Margin="0,0,0,0">
+                            <Grid x:Name="Object" Tag="Immune" ToolTip="{StaticResource ManagedTooltip}" Background="Transparent" Visibility="Collapsed" Margin="-2,0">
                                 <Grid HorizontalAlignment="Center" Margin="0,10,0,0">
                                     <Control x:Name="ImmuneShield" Template="{StaticResource CtrlImmuneShield}" />
                                     <Control x:Name="TypIcon" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource ResistanceIcon}" />
