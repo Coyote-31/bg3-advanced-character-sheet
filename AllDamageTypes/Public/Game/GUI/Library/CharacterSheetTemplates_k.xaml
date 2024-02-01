@@ -5187,17 +5187,8 @@ Source="{StaticResource SavingThrowDice}">
 
                                     <!-- ======== ABILITIES INFO ======== -->
                                     <ItemsControl x:Name="Abilities" ItemsSource="{Binding Stats.Abilities}" VerticalAlignment="Center" Style="{StaticResource AbilitiesGridStyle}"/>
-
-                                    <!-- ======== CONDITIONS ======== -->
-                                    <StackPanel Visibility="{Binding StatusEffects.Count, Converter={StaticResource CountToVisibilityConverter}}">
-                                        <ContentControl Style="{StaticResource BaseTitleStyle}">
-                                            <TextBlock Text="{Binding Source='h3baf1fe2g7d16g4d77gbc35gc17a90fb27d6', Converter={StaticResource TranslatedStringConverter}}"/>
-                                        </ContentControl>
-                                        <Border Style="{StaticResource ListSectionBackground}" Visibility="{Binding StatusEffects.Count, Converter={StaticResource CountToVisibilityConverter}}">
-                                            <ItemsControl x:Name="StatusHolder" ItemsSource="{Binding StatusEffects}" ItemTemplate="{StaticResource StatusListItemTemplate}" Background="Transparent" Margin="12"/>
-                                        </Border>
-                                    </StackPanel>
-
+                                    
+                                    <!-- MOD_ADT: Switch resistances & conditions order -->
                                     <!-- ======== RESISTANCES ======== -->
                                     <StackPanel Name="ResistancesSection">
                                         <Grid>
@@ -5206,6 +5197,17 @@ Source="{StaticResource SavingThrowDice}">
                                             </ContentControl>
                                         </Grid>
                                         <Control x:Name="ResistanceContainer" HorizontalAlignment="Center" Template="{StaticResource ResistancesGridTemplate}"/>
+                                    </StackPanel>
+
+                                    <!-- MOD_ADT: Switch resistances & conditions order -->
+                                    <!-- ======== CONDITIONS ======== -->
+                                    <StackPanel Visibility="{Binding StatusEffects.Count, Converter={StaticResource CountToVisibilityConverter}}">
+                                        <ContentControl Style="{StaticResource BaseTitleStyle}">
+                                            <TextBlock Text="{Binding Source='h3baf1fe2g7d16g4d77gbc35gc17a90fb27d6', Converter={StaticResource TranslatedStringConverter}}"/>
+                                        </ContentControl>
+                                        <Border Style="{StaticResource ListSectionBackground}" Visibility="{Binding StatusEffects.Count, Converter={StaticResource CountToVisibilityConverter}}">
+                                            <ItemsControl x:Name="StatusHolder" ItemsSource="{Binding StatusEffects}" ItemTemplate="{StaticResource StatusListItemTemplate}" Background="Transparent" Margin="12"/>
+                                        </Border>
                                     </StackPanel>
 
                                     <!-- ======== FEATURES ======== -->
