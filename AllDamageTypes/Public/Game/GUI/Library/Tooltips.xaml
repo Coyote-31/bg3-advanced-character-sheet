@@ -8230,7 +8230,9 @@
     
     <!-- MOD_ADT: images -->
     <ImageSource x:Key="NoResistanceIcon">pack://application:,,,/GustavNoesisGUI;component/Assets/ADT/Resistances/ico_resistance_none_shield.png</ImageSource>
-    <BitmapImage x:Key="ResistanceVulnerableIcon">pack://application:,,,/GustavNoesisGUI;component/Assets/ADT/Resistances/ico_resistance_vulnerable.png</BitmapImage> 
+    <BitmapImage x:Key="ResistanceVulnerableIcon">pack://application:,,,/GustavNoesisGUI;component/Assets/ADT/Resistances/ico_resistance_vulnerable.png</BitmapImage>
+    <BitmapImage x:Key="ResistantNonMagicalShield">pack://application:,,,/GustavNoesisGUI;component/Assets/ADT/Resistances/ico_resistance_physical_shield.png</BitmapImage>
+    <BitmapImage x:Key="ResistantMagicalShield">pack://application:,,,/GustavNoesisGUI;component/Assets/ADT/Resistances/ico_resistance_magic_shield.png</BitmapImage>
 
     <DataTemplate DataType="{x:Type ls:VMResistance}">
         <!-- Enum value stored in tag as LocaEnum doesn't correctly support values past MAX. For those cases we have to alter the value (see triggers) -->
@@ -8266,8 +8268,8 @@
                 <TextBlock x:Name="BaseDescription" Style="{StaticResource TooltipBodyStyle}" Margin="0 20" ls:TextBlockFormatter.SourceText="{Binding Tag, ElementName=root, Converter={StaticResource EnumTranslatedStringConverter}, ConverterParameter='h8aa64a61g697ag44eag8025g72455bb15041'}" DockPanel.Dock="Right"/>
             </DockPanel>
             <DockPanel x:Name="AdditionalDescriptionContainer" Visibility="Collapsed" Width="{StaticResource MaxTooltipContentWidth}">
-                <!-- MOD_ADT: Change margin -->
-                <Image x:Name="AdditionalIcon" Source="{StaticResource ResistantNonMagical}" Stretch="None" VerticalAlignment="Center" Margin="0,0,20,0" DockPanel.Dock="Left"/>
+                <!-- MOD_ADT: Change icon & margin -->
+                <Image x:Name="AdditionalIcon" Source="{StaticResource ResistantNonMagicalShield}" Stretch="None" VerticalAlignment="Center" Margin="0,0,20,0" DockPanel.Dock="Left"/>
                 <TextBlock x:Name="AdditionalDescription" Style="{StaticResource TooltipBodyStyle}" Margin="0 20" ls:TextBlockFormatter.SourceText="{Binding Tag, ElementName=root, Converter={StaticResource EnumTranslatedStringConverter}, ConverterParameter='h05322b79g00ecg45c6gbbe0g691acc45fe63'}" DockPanel.Dock="Right"/>
             </DockPanel>
 
@@ -8307,11 +8309,13 @@
             <DataTrigger Binding="{Binding NonMagical}" Value="Resistant">
                 <Setter TargetName="BaseDescriptionContainer" Property="Visibility" Value="Collapsed"/>
                 <Setter TargetName="AdditionalDescriptionContainer" Property="Visibility" Value="Visible"/>
+                <Setter TargetName="AdditionalIcon" Property="Margin" Value="0,10,20,0"/>
                 <Setter TargetName="Title" Property="ls:TextBlockFormatter.SourceText" Value="{Binding Tag, ElementName=root, Converter={StaticResource EnumTranslatedStringConverter}, ConverterParameter='h1acad36eg1d2ag46c5g9b98g906b8a17bb70'}"/>
             </DataTrigger>
             <DataTrigger Binding="{Binding Magical}" Value="Resistant">
                 <Setter TargetName="BaseDescriptionContainer" Property="Visibility" Value="Visible"/>
-                <Setter TargetName="BaseIcon" Property="Source" Value="{StaticResource ResistantMagical}"/>
+                <Setter TargetName="BaseIcon" Property="Source" Value="{StaticResource ResistantMagicalShield}"/>
+                <Setter TargetName="BaseIcon" Property="Margin" Value="0,10,20,0"/>
                 <Setter TargetName="BaseDescription" Property="ls:TextBlockFormatter.SourceText" Value="{Binding Tag, ElementName=root, Converter={StaticResource EnumTranslatedStringConverter}, ConverterParameter='h613f3ccbgb531g4175ga9cbge4a9ed938a12'}"/>
                 <Setter TargetName="Title" Property="ls:TextBlockFormatter.SourceText" Value="{Binding Tag, ElementName=root, Converter={StaticResource EnumTranslatedStringConverter}, ConverterParameter='h1acad36eg1d2ag46c5g9b98g906b8a17bb70'}"/>
             </DataTrigger>
