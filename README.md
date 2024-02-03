@@ -1,6 +1,6 @@
-# All Damage Types (BG3 mod) `version 0.3.0`
+# AToR : AllTypesOfResistance (BG3 mod) `version 0.3.0`
 
-The purpose of this mod is to display all damage types including ones without any resistance or weakness.
+The purpose of this mod is to display all types of resistances including ones without any resistance or weakness.
 
 > Compatible with BG3 : `version 4.1.1`
 

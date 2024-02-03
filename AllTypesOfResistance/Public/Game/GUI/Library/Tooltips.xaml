@@ -8226,13 +8226,13 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
     
-    <!--===== MOD_ADT: START =====-->
+    <!--===== MOD_AToR: START =====-->
     
-    <!-- MOD_ADT: images -->
-    <ImageSource x:Key="NoResistanceIcon">pack://application:,,,/GustavNoesisGUI;component/Assets/ADT/Resistances/ico_resistance_none_shield.png</ImageSource>
-    <BitmapImage x:Key="ResistanceVulnerableIcon">pack://application:,,,/GustavNoesisGUI;component/Assets/ADT/Resistances/ico_resistance_vulnerable.png</BitmapImage>
-    <BitmapImage x:Key="ResistantNonMagicalShield">pack://application:,,,/GustavNoesisGUI;component/Assets/ADT/Resistances/ico_resistance_physical_shield.png</BitmapImage>
-    <BitmapImage x:Key="ResistantMagicalShield">pack://application:,,,/GustavNoesisGUI;component/Assets/ADT/Resistances/ico_resistance_magic_shield.png</BitmapImage>
+    <!-- MOD_AToR: images -->
+    <ImageSource x:Key="NoResistanceIcon">pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Resistances/ico_resistance_none_shield.png</ImageSource>
+    <BitmapImage x:Key="ResistanceVulnerableIcon">pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Resistances/ico_resistance_vulnerable.png</BitmapImage>
+    <BitmapImage x:Key="ResistantNonMagicalShield">pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Resistances/ico_resistance_physical_shield.png</BitmapImage>
+    <BitmapImage x:Key="ResistantMagicalShield">pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Resistances/ico_resistance_magic_shield.png</BitmapImage>
 
     <DataTemplate DataType="{x:Type ls:VMResistance}">
         <!-- Enum value stored in tag as LocaEnum doesn't correctly support values past MAX. For those cases we have to alter the value (see triggers) -->
@@ -8263,12 +8263,12 @@
             </Border>
             <Rectangle Style="{StaticResource tooltipHeaderDividerLine}" />
             <DockPanel x:Name="BaseDescriptionContainer" Width="{StaticResource MaxTooltipContentWidth}">
-                <!-- MOD_ADT: Change icon & margin -->
+                <!-- MOD_AToR: Change icon & margin -->
                 <Image x:Name="BaseIcon" Source="{StaticResource ResistanceVulnerableIcon}" Stretch="None" VerticalAlignment="Center" Margin="0,0,20,0" DockPanel.Dock="Left"/>
                 <TextBlock x:Name="BaseDescription" Style="{StaticResource TooltipBodyStyle}" Margin="0 20" ls:TextBlockFormatter.SourceText="{Binding Tag, ElementName=root, Converter={StaticResource EnumTranslatedStringConverter}, ConverterParameter='h8aa64a61g697ag44eag8025g72455bb15041'}" DockPanel.Dock="Right"/>
             </DockPanel>
             <DockPanel x:Name="AdditionalDescriptionContainer" Visibility="Collapsed" Width="{StaticResource MaxTooltipContentWidth}">
-                <!-- MOD_ADT: Change icon & margin -->
+                <!-- MOD_AToR: Change icon & margin -->
                 <Image x:Name="AdditionalIcon" Source="{StaticResource ResistantNonMagicalShield}" Stretch="None" VerticalAlignment="Center" Margin="0,0,20,0" DockPanel.Dock="Left"/>
                 <TextBlock x:Name="AdditionalDescription" Style="{StaticResource TooltipBodyStyle}" Margin="0 20" ls:TextBlockFormatter.SourceText="{Binding Tag, ElementName=root, Converter={StaticResource EnumTranslatedStringConverter}, ConverterParameter='h05322b79g00ecg45c6gbbe0g691acc45fe63'}" DockPanel.Dock="Right"/>
             </DockPanel>
@@ -8320,7 +8320,7 @@
                 <Setter TargetName="Title" Property="ls:TextBlockFormatter.SourceText" Value="{Binding Tag, ElementName=root, Converter={StaticResource EnumTranslatedStringConverter}, ConverterParameter='h1acad36eg1d2ag46c5g9b98g906b8a17bb70'}"/>
             </DataTrigger>
             
-            <!-- MOD_ADT: Add no resistance or vulnerable tooltip -->
+            <!-- MOD_AToR: Add no resistance or vulnerable tooltip -->
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
                     <Condition Binding="{Binding Full}" Value="None"/>
@@ -8337,7 +8337,7 @@
         </DataTemplate.Triggers>
     </DataTemplate>
     
-    <!--===== MOD_ADT: END =====-->
+    <!--===== MOD_AToR: END =====-->
 
     <DataTemplate DataType="{x:Type ls:VMTag}">
         <TextBlock Style="{StaticResource TooltipDescriptionStyle}" Margin="0,10,0,10" Text="{Binding Tooltip}"/>
