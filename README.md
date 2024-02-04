@@ -7,7 +7,7 @@
 This is a mod for the game Baldur's Gate 3. The purpose of this mod is to display all types of resistance including ones without any immunity, resistance or weakness.
 
 > [!NOTE]
-> - AToR mod version : `0.4.0`
+> - AToR mod version : `1.0.0`
 > - BG3 compatible version : `4.1.1`
 
 ## 💾 Install
