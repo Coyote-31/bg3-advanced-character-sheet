@@ -1,12 +1,14 @@
-# AToR : All Types of Resistance (BG3 mod) `version 0.4.0`
-
-The purpose of this mod is to display all types of resistance including ones without any immunity, resistance or weakness.
-
-> Compatible with BG3 : `version 4.1.1`
+# AToR : All Types of Resistance (BG3 mod)
 
 <p align="center">
   <img src="Docs/Banner/AToR_Banner.png" alt="AToR Banner"/>
 </p>
+
+This is a mod for the game Baldur's Gate 3. The purpose of this mod is to display all types of resistance including ones without any immunity, resistance or weakness.
+
+> [!NOTE]
+> - AToR mod version : `0.4.0`
+> - BG3 compatible version : `4.1.1`
 
 ## 💾 Install
 
