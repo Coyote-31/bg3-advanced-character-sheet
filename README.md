@@ -1,28 +1,16 @@
-# AToR : All Types of Resistance (BG3 mod)
-
 <p align="center">
   <img src="Docs/Banner/AToR_Banner.png" alt="AToR Banner"/>
 </p>
 
-This is a mod for the game Baldur's Gate 3. The purpose of this mod is to display all types of resistance including ones without any immunity, resistance or weakness.
+# AToR : All Types of Resistance (BG3 mod)
 
-> [!NOTE]
-> - AToR mod version : `1.0.0`
-> - BG3 compatible version : `4.1.1`
+This is a mod for the game Baldur's Gate 3.
 
-## 💾 Install
+The purpose of this mod is to display **all types of resistance** including ones without any immunity, resistance or weakness.
 
-Dowload the mod : [Releases](https://github.com/Coyote-31/bg3-all-types-of-resistance/releases).
-
-Drop the `.pak` file from the archive to `user/appdata/local/larian studios/baldur's gate 3/mods`.
-Or install it with `BG3 Mod Manager` / `Vortex`.
-
-With `BG3 Mod Manager` : The mod should be in **Overrides**.
-With `Vortex` : Mark the mod as **replacer** .
-
-## ❌ Uninstall
-
-Remove the mod's `.pak` file manually from `user/appdata/local/larian studios/baldur's gate 3/mods`. Or with `BG3 Mod Manager` / `Vortex`.
+## 🔖 Version
+- 📦 **AToR** mod : `1.0.0`
+- 🎮 **BG3** compatible : `4.1.1`
 
 ## ✨ Features
 
@@ -31,6 +19,51 @@ Remove the mod's `.pak` file manually from `user/appdata/local/larian studios/ba
 - Reverse order between Resistances and Conditions.
 - Some icons are reworked for a better visual.
 - Tooltip added for damage type without any immunity, resistance or weakness.
+
+## 🔀 Compatibility
+
+### Files :
+
+This mod changes the following files of the game :
+
+- Public\Game\GUI\Library\
+  - **CharacterSheetTemplates_k.xaml**
+  - **Tooltips.xaml**
+  
+### Other mods :
+
+🚫 Not compatible with the following mods :
+- Better Character and Party Panels
+- Better Tooltips
+
+*NB : I am currently working on it to make this possible. Stay tuned !*
+
+## 💾 Install
+
+### Download the mod : 
+- [GitHub](https://github.com/Coyote-31/bg3-all-types-of-resistance/releases)
+- [NexusMods](https://www.nexusmods.com/baldursgate3/mods/6458)
+
+### Manual :
+Drop the `.pak` file from the `.zip` archive inside the folder :
+
+    %LocalAppData%\Larian Studios\Baldur's Gate 3\Mods
+
+### Manager :
+- With `BG3 Mod Manager` : The mod should be in **Overrides**.
+- With `Vortex` : Mark the mod as **replacer**.
+
+## ❌ Uninstall
+
+### Manual :
+Remove the mod's `.pak` file from :
+
+    %LocalAppData%\Larian Studios\Baldur's Gate 3\Mods
+
+### Manager :
+
+- With `BG3 Mod Manager`.
+- With `Vortex`.
 
 ## 🔍 Screenshots
 
