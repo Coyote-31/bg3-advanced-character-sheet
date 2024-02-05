@@ -8305,13 +8305,13 @@
             <DataTrigger Binding="{Binding NonMagical}" Value="Resistant">
                 <Setter TargetName="BaseDescriptionContainer" Property="Visibility" Value="Collapsed"/>
                 <Setter TargetName="AdditionalDescriptionContainer" Property="Visibility" Value="Visible"/>
-                <Setter TargetName="AdditionalIcon" Property="Margin" Value="0,10,20,0"/>
+                <Setter TargetName="AdditionalIcon" Property="Margin" Value="0,15,20,0"/>
                 <Setter TargetName="Title" Property="ls:TextBlockFormatter.SourceText" Value="{Binding Tag, ElementName=root, Converter={StaticResource EnumTranslatedStringConverter}, ConverterParameter='h1acad36eg1d2ag46c5g9b98g906b8a17bb70'}"/>
             </DataTrigger>
             <DataTrigger Binding="{Binding Magical}" Value="Resistant">
                 <Setter TargetName="BaseDescriptionContainer" Property="Visibility" Value="Visible"/>
                 <Setter TargetName="BaseIcon" Property="Source" Value="{StaticResource ResistantMagical}"/>
-                <Setter TargetName="BaseIcon" Property="Margin" Value="0,10,20,0"/>
+                <Setter TargetName="BaseIcon" Property="Margin" Value="0,15,20,0"/>
                 <Setter TargetName="BaseDescription" Property="ls:TextBlockFormatter.SourceText" Value="{Binding Tag, ElementName=root, Converter={StaticResource EnumTranslatedStringConverter}, ConverterParameter='h613f3ccbgb531g4175ga9cbge4a9ed938a12'}"/>
                 <Setter TargetName="Title" Property="ls:TextBlockFormatter.SourceText" Value="{Binding Tag, ElementName=root, Converter={StaticResource EnumTranslatedStringConverter}, ConverterParameter='h1acad36eg1d2ag46c5g9b98g906b8a17bb70'}"/>
             </DataTrigger>
