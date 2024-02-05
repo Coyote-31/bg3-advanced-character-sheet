@@ -1,0 +1,49 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:System="clr-namespace:System;assembly=mscorlib"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+                    xmlns:ls="clr-namespace:ls;assembly=SharedGUI"
+                    xmlns:noesis="clr-namespace:NoesisGUIExtensions;assembly=Noesis.GUI.Extensions"
+					mc:Ignorable="d">
+
+    <!--Keep in mind that anything you add here will be always in memory! Only images that are used globally and are visible most of the time should be added.-->
+
+    <BitmapImage x:Key="IconHourglass" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/BottomBar/ico_hourglass_default.png" />
+    <BitmapImage x:Key="BtnSmallRound" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/btn_small_round_d.png" />
+    <BitmapImage x:Key="btnRoundImg" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/btn_round_d.png"/>
+    <BitmapImage x:Key="IconDownArrow" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_downArrow_d.png" />
+    <BitmapImage x:Key="IconMiniCantrip" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_mini_cantrip.png" />
+    <BitmapImage x:Key="OverflowNumberBg" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Combatants/overflowNum_bg.png" />
+    <BitmapImage x:Key="IconAdvantage" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_advantage.png" />
+    <BitmapImage x:Key="IconDisadvantage" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_disadvantage.png" />
+
+    <BitmapImage x:Key="MarkerSelectedCharacter" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Map/ico_selChar.png" />
+    <BitmapImage x:Key="MarkerSelectedCharacterHighlight" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Map/ico_selChar_h.png" />
+    <BitmapImage x:Key="MarkerPoI" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Map/ico_POI.png" />
+    <BitmapImage x:Key="MarkerPoIHighlight" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Map/ico_POI_h.png" />
+    <BitmapImage x:Key="MarkerQuest" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Map/mapSelector_quest.png" />
+    <BitmapImage x:Key="MarkerQuestHighlight" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Map/mapSelector_selected.png" />
+    <BitmapImage x:Key="MarkerSecret" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Map/ico_secret.png" />
+    <BitmapImage x:Key="MarkerSecretHighlight" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Map/ico_secret_h.png" />
+    <BitmapImage x:Key="MarkerSpecialItemWithersWardrobe" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Map/ico_avatarCloset_d.png" />
+    <BitmapImage x:Key="MarkerSpecialItemWithersWardrobeHighlight" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Map/ico_avatarCloset_h.png" />
+    <BitmapImage x:Key="MarkerSpecialItemMagicMirror" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Map/ico_mirror_d.png" />
+    <BitmapImage x:Key="MarkerSpecialItemMagicMirrorHighlight" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Map/ico_mirror_h.png" />    
+    <BitmapImage x:Key="MarkerWaypoint" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Map/ico_waypoint.png" />
+    <BitmapImage x:Key="MarkerWaypointHighlight" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Map/ico_waypoint_h.png" />
+    
+    <BitmapImage x:Key="MarkerCustom" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Map/mapSelector_custom.png" />
+    <BitmapImage x:Key="MarkerCustomHighlight" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Map/mapSelector_custom_h.png" />
+
+    <BitmapImage x:Key="IconLevelUpArrow" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_levelUp_d.png"/>
+    <BitmapImage x:Key="OptionsBackground" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Options/opaqueBG.png"/>
+
+    <BitmapImage x:Key="MarkerPortal" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Map/ico_portal.png" />
+    <BitmapImage x:Key="MarkerPortalHighlight" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Map/ico_exit_HL.png" />
+    <BitmapImage x:Key="MarkerCampChest" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Map/ico_campStash_d.png" />
+    <BitmapImage x:Key="MarkerCampChestHighlight" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Map/ico_campStash_h.png" />
+    <BitmapImage x:Key="MarkerTrader" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Map/ico_trader_d.png" />
+    <BitmapImage x:Key="MarkerTraderHighlight" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Map/ico_trader_h.png" />
+</ResourceDictionary>
