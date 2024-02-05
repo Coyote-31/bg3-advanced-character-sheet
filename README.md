@@ -9,7 +9,7 @@ This is a mod for the game Baldur's Gate 3.
 The purpose of this mod is to display **all types of resistance** including ones without any immunity, resistance or weakness.
 
 ## 🔖 Version
-- 📦 **AToR** mod : `1.0.0`
+- 📦 **AToR** mod : `1.1.0`
 - 🎮 **BG3** compatible : `4.1.1`
 
 ## ✨ Features
@@ -29,11 +29,13 @@ This mod changes the following files of the game :
 - Public\Game\GUI\Library\
   - **CharacterSheetTemplates_k.xaml**
   - **Tooltips.xaml**
+  - **Images_k.xaml**
   
 ### Other mods :
 
-🚫 Not compatible with the following mods :
+#### 🚫 Not compatible with the following mods :
 - Better Character and Party Panels
+- Better Target Info
 - Better Tooltips
 
 *NB : I am currently working on it to make this possible. Stay tuned !*
