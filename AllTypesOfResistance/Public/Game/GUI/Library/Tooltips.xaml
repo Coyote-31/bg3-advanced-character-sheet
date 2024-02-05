@@ -8184,7 +8184,6 @@
     </DataTemplate>
 
     <!-- Resistance Tooltips -->
-    
     <ControlTemplate x:Key="ResistanceTypesTemplate">
         <StackPanel>
             <StackPanel.Resources>
@@ -8229,10 +8228,7 @@
     <!--===== MOD_AToR: START =====-->
     
     <!-- MOD_AToR: images -->
-    <ImageSource x:Key="NoResistanceIcon">pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Resistances/ico_resistance_none_shield.png</ImageSource>
-    <BitmapImage x:Key="ResistanceVulnerableIcon">pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Resistances/ico_resistance_vulnerable.png</BitmapImage>
-    <BitmapImage x:Key="ResistantNonMagicalShield">pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Resistances/ico_resistance_physical_shield.png</BitmapImage>
-    <BitmapImage x:Key="ResistantMagicalShield">pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Resistances/ico_resistance_magic_shield.png</BitmapImage>
+    <ImageSource x:Key="NoResistanceIcon">pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/resistance_none_bg.png</ImageSource>
 
     <DataTemplate DataType="{x:Type ls:VMResistance}">
         <!-- Enum value stored in tag as LocaEnum doesn't correctly support values past MAX. For those cases we have to alter the value (see triggers) -->
@@ -8263,13 +8259,13 @@
             </Border>
             <Rectangle Style="{StaticResource tooltipHeaderDividerLine}" />
             <DockPanel x:Name="BaseDescriptionContainer" Width="{StaticResource MaxTooltipContentWidth}">
-                <!-- MOD_AToR: Change icon & margin -->
-                <Image x:Name="BaseIcon" Source="{StaticResource ResistanceVulnerableIcon}" Stretch="None" VerticalAlignment="Center" Margin="0,0,20,0" DockPanel.Dock="Left"/>
+                <!-- MOD_AToR: Change margin -->
+                <Image x:Name="BaseIcon" Source="{StaticResource Vulnerable}" Stretch="None" VerticalAlignment="Center" Margin="0,0,20,0" DockPanel.Dock="Left"/>
                 <TextBlock x:Name="BaseDescription" Style="{StaticResource TooltipBodyStyle}" Margin="0 20" ls:TextBlockFormatter.SourceText="{Binding Tag, ElementName=root, Converter={StaticResource EnumTranslatedStringConverter}, ConverterParameter='h8aa64a61g697ag44eag8025g72455bb15041'}" DockPanel.Dock="Right"/>
             </DockPanel>
             <DockPanel x:Name="AdditionalDescriptionContainer" Visibility="Collapsed" Width="{StaticResource MaxTooltipContentWidth}">
-                <!-- MOD_AToR: Change icon & margin -->
-                <Image x:Name="AdditionalIcon" Source="{StaticResource ResistantNonMagicalShield}" Stretch="None" VerticalAlignment="Center" Margin="0,0,20,0" DockPanel.Dock="Left"/>
+                <!-- MOD_AToR: Change margin -->
+                <Image x:Name="AdditionalIcon" Source="{StaticResource ResistantNonMagical}" Stretch="None" VerticalAlignment="Center" Margin="0,0,20,0" DockPanel.Dock="Left"/>
                 <TextBlock x:Name="AdditionalDescription" Style="{StaticResource TooltipBodyStyle}" Margin="0 20" ls:TextBlockFormatter.SourceText="{Binding Tag, ElementName=root, Converter={StaticResource EnumTranslatedStringConverter}, ConverterParameter='h05322b79g00ecg45c6gbbe0g691acc45fe63'}" DockPanel.Dock="Right"/>
             </DockPanel>
 
@@ -8314,7 +8310,7 @@
             </DataTrigger>
             <DataTrigger Binding="{Binding Magical}" Value="Resistant">
                 <Setter TargetName="BaseDescriptionContainer" Property="Visibility" Value="Visible"/>
-                <Setter TargetName="BaseIcon" Property="Source" Value="{StaticResource ResistantMagicalShield}"/>
+                <Setter TargetName="BaseIcon" Property="Source" Value="{StaticResource ResistantMagical}"/>
                 <Setter TargetName="BaseIcon" Property="Margin" Value="0,10,20,0"/>
                 <Setter TargetName="BaseDescription" Property="ls:TextBlockFormatter.SourceText" Value="{Binding Tag, ElementName=root, Converter={StaticResource EnumTranslatedStringConverter}, ConverterParameter='h613f3ccbgb531g4175ga9cbge4a9ed938a12'}"/>
                 <Setter TargetName="Title" Property="ls:TextBlockFormatter.SourceText" Value="{Binding Tag, ElementName=root, Converter={StaticResource EnumTranslatedStringConverter}, ConverterParameter='h1acad36eg1d2ag46c5g9b98g906b8a17bb70'}"/>
@@ -8328,8 +8324,8 @@
                     <Condition Binding="{Binding Magical}" Value="None"/>
                 </MultiDataTrigger.Conditions>
                 <Setter TargetName="BaseDescriptionContainer" Property="Visibility" Value="Visible"/>
-                <Setter TargetName="BaseDescriptionContainer" Property="Margin" Value="0,4,0,0"/>
                 <Setter TargetName="BaseIcon" Property="Source" Value="{StaticResource NoResistanceIcon}"/>
+                <Setter TargetName="BaseIcon" Property="Margin" Value="8,0,28,0"/>
                 <Setter TargetName="BaseDescription" Property="ls:TextBlockFormatter.SourceText" Value="{Binding Source='h78e41bdfg7ae5g47d5g902cgf32ae25a53de', Converter={StaticResource TranslatedStringConverter}}"/>
                 <Setter TargetName="Title" Property="ls:TextBlockFormatter.SourceText" Value="{Binding Tag, ElementName=root, Converter={StaticResource EnumTranslatedStringConverter}, ConverterParameter='h1acad36eg1d2ag46c5g9b98g906b8a17bb70'}"/>
             </MultiDataTrigger>

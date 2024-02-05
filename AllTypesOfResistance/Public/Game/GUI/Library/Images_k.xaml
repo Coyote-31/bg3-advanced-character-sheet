@@ -17,11 +17,18 @@
     <BitmapImage x:Key="ImmuneShield" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_resistance_immune.png"/>
     <BitmapImage x:Key="ImmuneMagicalShield" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_resistance_immune_magic.png"/>
     <BitmapImage x:Key="ImmuneNonMagicalShield" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_resistance_immune_physical.png"/>
-    <BitmapImage x:Key="ResistantMagical" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_resistance_magical.png"/>
-    <BitmapImage x:Key="ResistantNonMagical" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_resistance_physical.png"/>
-    <BitmapImage x:Key="Vulnerable" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_resistance_vulnerable.png"/>
+    <!-- MOD_AToR <BitmapImage x:Key="ResistantMagical" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_resistance_magical.png"/> -->
+    <BitmapImage x:Key="ResistantMagical" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Resistances/ico_resistance_magic_shield.png"/>
+    <!-- MOD_AToR <BitmapImage x:Key="ResistantNonMagical" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_resistance_physical.png"/> -->
+    <BitmapImage x:Key="ResistantNonMagical" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Resistances/ico_resistance_physical_shield.png"/>
+    <!-- MOD_AToR <BitmapImage x:Key="Vulnerable" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_resistance_vulnerable.png"/> -->
+    <BitmapImage x:Key="Vulnerable" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Resistances/ico_resistance_vulnerable.png"/>
 
     <BitmapImage x:Key="MarkerDialog" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Map/talkNotice_d.png" />
     <BitmapImage x:Key="MarkerDialogHighlight" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Map/talkNotice_h.png" />
+    
+    <!-- MOD_AToR: images -->
+    <BitmapImage x:Key="ResistanceNone" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Resistances/ico_resistance_none.png"/>
+    <BitmapImage x:Key="ResistantMagicalShieldShort" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Resistances/ico_resistance_magic_shield_short.png"/>
 
 </ResourceDictionary>
