@@ -1058,12 +1058,13 @@
             <BitmapImage x:Key="SearchSelector_d" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/selector_listitem_d.png" />
             <BitmapImage x:Key="SearchSelector_h" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/selector_listitem_h.png" />
 
-            <BitmapImage x:Key="Tab_d" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/tab_body_inactive_d.png" />
-            <BitmapImage x:Key="Tab_h" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/tab_body_inactive_h.png" />
-            <BitmapImage x:Key="Tab_p" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/tab_body_inactive_p.png" />
-            <BitmapImage x:Key="TabSelected_d" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/tab_body_active_d.png" />
-            <BitmapImage x:Key="TabSelected_h" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/tab_body_active_h.png" />
-            <BitmapImage x:Key="TabSelected_p" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/tab_body_active_p.png" />
+            <!-- MOD_AToR : Fix tabs artefacts // BG3: .../Assets/CharacterPanel/... --> 
+            <BitmapImage x:Key="Tab_d" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AtoR/CharacterPanel/tab_body_inactive_d.png" />
+            <BitmapImage x:Key="Tab_h" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AtoR/CharacterPanel/tab_body_inactive_h.png" />
+            <BitmapImage x:Key="Tab_p" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AtoR/CharacterPanel/tab_body_inactive_p.png" />
+            <BitmapImage x:Key="TabSelected_d" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AtoR/CharacterPanel/tab_body_active_d.png" />
+            <BitmapImage x:Key="TabSelected_h" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AtoR/CharacterPanel/tab_body_active_h.png" />
+            <BitmapImage x:Key="TabSelected_p" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AtoR/CharacterPanel/tab_body_active_p.png" />
 
             <BitmapImage x:Key="RemoveSpellIcon" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterCreation/remover_spellslot.png" />
             <BitmapImage x:Key="PreparedSpellIcon" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/SpellBook/ico_prepared.png" />
