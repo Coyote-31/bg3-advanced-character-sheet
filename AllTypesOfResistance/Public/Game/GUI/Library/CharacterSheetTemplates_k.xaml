@@ -657,21 +657,21 @@
                 </TextBlock.Text>
             </TextBlock>
             
-            <!-- MOD_BCPP_C: Move margin to 'Reactions' // MOD_BCPP: MaxHeight="1178" // BG3: <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,22"  -->
+            <!-- MOD_MOD_AToR: Move margin to 'Reactions' // MOD_BCPP: MaxHeight="1178" // BG3: <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,22"  -->
             <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top">
-                <!-- MOD_BCPP_C: Add decoration margin -->
+                <!-- MOD_MOD_AToR: Add decoration margin -->
                 <Rectangle x:Name="DecorativeStroke" Margin="0,0,0,0" Width="{Binding ActualWidth, ElementName=ListSectionBackground}" Height="{Binding ActualHeight, ElementName=ListSectionBackground}" StrokeDashArray="5,3" StrokeThickness="2" Stroke="{StaticResource LS_PanelBorder}" RadiusX="{StaticResource CornerRadius}" RadiusY="{StaticResource CornerRadius}" Fill="{StaticResource ContentBGShade}"/>
 
-                <!-- MOD_BCPP_C: Update scroller padding & margin // BG3: Padding="{StaticResource ScrollOffset}" Margin="30" -->
-                <ScrollViewer x:Name="ReactionScrollerViewer" Template="{StaticResource NoForcedStyleScrollViewerTemplate}" Padding="0,-20,-84,-20" HorizontalAlignment="Left" Margin="20">
-                    <ItemsControl x:Name="InterruptList" ItemsSource="{Binding Interrupts}" HorizontalAlignment="Left">
+                <!-- MOD_MOD_AToR: Add Name / Update scroller padding & margin // BG3: Padding="{StaticResource ScrollOffset}" Margin="30"  -->
+                <ScrollViewer x:Name="ReactionScrollerViewer" Template="{StaticResource NoForcedStyleScrollViewerTemplate}" HorizontalAlignment="Left" Margin="20,20,-8,15" Padding="28,0,-28,0">
+                    <ItemsControl x:Name="InterruptList" ItemsSource="{Binding Interrupts}" HorizontalAlignment="Center">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate DataType="ls:VMInterrupt">
                                 <DataTemplate.Resources>
                                     <BitmapImage x:Key="ReactionCheckBoxBGImg" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Reactions/checkbox_d.png"/>
                                 </DataTemplate.Resources>
-                                <Grid>
-                                    <!-- MOD_BCPP_C: Use dynamic template "InterruptToggleBtnTemplateDynamic" // BG3: "InterruptToggleBtnTemplate" -->
+                                <Grid HorizontalAlignment="Center">
+                                    <!-- MOD_AToR: Use dynamic template "InterruptToggleBtnTemplateDynamic" // BG3: "InterruptToggleBtnTemplate" -->
                                     <ls:LSToggleButton x:Name="ToggleEnableButton" IsChecked="{Binding Enabled, Mode=OneWay}" Command="{Binding DataContext.InterruptToggleDisableCommand,RelativeSource={RelativeSource AncestorType=ls:UIWidget}}" CommandParameter="{Binding .}" Template="{StaticResource InterruptToggleBtnTemplateDynamic}" Content ="{Binding .}" IsEnabled="{Binding Available}"/>
 
                                     <ls:LSToggleButton x:Name="ToggleManagementButton" IsChecked="{Binding Ask, Mode=OneWay}" Command="{Binding DataContext.InterruptChangeAskCommand,RelativeSource={RelativeSource AncestorType=ls:UIWidget}}" CommandParameter="{Binding .}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,10,4">
@@ -734,14 +734,9 @@
             <DataTrigger Binding="{Binding ParentState, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel">
                 <Setter TargetName="Description" Property="Margin" Value="24"/>
                 <Setter TargetName="DecorativeStroke" Property="Visibility" Value="Collapsed"/>
-                <!-- MOD_BCPP_C: reactions specific to PartyPanel -->
-                <!-- MOD_BCPP_C: Update scroller padding & margin -->
-                <Setter TargetName="ReactionScrollerViewer" Property="Padding" Value="0,0,-22,-50"/>
-                <Setter TargetName="ReactionScrollerViewer" Property="Margin" Value="20,0,18,59"/>
-                
-                <!-- MOD_BCPP_C: Update scroller padding & margin / Disable for vanilla but work on BCPP -->
-                <!-- <Setter TargetName="ReactionScrollerViewer" Property="Padding" Value="0,0,-22,10"/>
-                <Setter TargetName="ReactionScrollerViewer" Property="Margin" Value="20,0,18,-1"/> -->
+                <!-- MOD_AToR: Add reactions scroller padding & margin when in PartyPanel -->
+                <Setter TargetName="ReactionScrollerViewer" Property="Margin" Value="14,0,-14,35"/>
+                <Setter TargetName="ReactionScrollerViewer" Property="Padding" Value="6,0,-6,0"/>
             </DataTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -1522,7 +1517,7 @@
                 </DataTemplate.Triggers>
             </DataTemplate>
 
-            <!-- MOD_AToR: Search Bar -->
+            <!-- MOD_AToR: Spell Search Bar -->
             <ControlTemplate x:Key="SpellSearchBarTemplate" TargetType="ls:FilteringContainer">
                 <Grid>
                     <ls:LSNineSliceImage x:Name="SearchBarContainer" ImageSource="{StaticResource SearchBarBg_d}" Slices="36,34" Padding="20,10" Height="72" Margin="0,-6">
@@ -1689,7 +1684,7 @@
 
         </ControlTemplate.Resources>
 
-        <!-- MOD_BCPP_C: Spell Book Container -->
+        <!-- MOD_AToR: Spell Book Container -->
         <Grid x:Name="MultiClassSpellbookContainer">
 
             <b:Interaction.Behaviors>
@@ -2058,7 +2053,7 @@
                     </ls:LSButton>
                 </StackPanel>
 
-                <!-- Reactions -->
+                <!-- Reactions --> 
                 <!-- MOD_AToR: Add Margin -->
                 <Control Grid.Row="1" x:Name="Reactions" Margin="0,0,0,20" Template="{StaticResource InterruptPanelTemplate}" Visibility="Collapsed" IsEnabled="{Binding DataContext.CurrentPlayer.UIData.AllowInteraction, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
 
@@ -2265,8 +2260,8 @@
                         <!-- MOD_AToR: Update ScrollBar position // BG3: Margin="50,0,-50,0" Padding="-50,0,50,0"  -->
                         <ScrollViewer x:Name="WholePanelScrollViewer" Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="20,0,-20,10" Padding="-20,0,20,-10">
                             
-                            <!-- MOD_AToR: Add Margin -->
-                            <Grid x:Name="WholePanelScrollViewerRoot" Margin="0,0,0,20">
+                            <!-- MOD_AToR: Add Margin / Margin must be change in ScrollableContent to be correct in both scrollers -->
+                            <Grid x:Name="WholePanelScrollViewerRoot" Margin="0,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
@@ -2477,8 +2472,8 @@
                                 </StackPanel>
 
                                 <!-- MOD_BCPP_C: Footer ScrollBar // BG3: Margin="50,0,-50,0" Padding="-50,0,50,0" -->
-                                <ls:LSScrollViewer x:Name="ClassPanelScrollableContent" Grid.Row="2" VerticalScrollBarVisibility="Auto" Margin="20,0,-20,-12" Padding="-20,0,20,-10">
-                                    <!-- MOD_BCPP_C: Add margin -->
+                                <ls:LSScrollViewer x:Name="ClassPanelScrollableContent" Grid.Row="2" VerticalScrollBarVisibility="Auto" Margin="20,4,-20,-12" Padding="-20,0,20,-10">
+                                    <!-- MOD_BCPP_C: Add margin between top bar & class panel-->
                                     <StackPanel x:Name="ScrollableContent" Margin="6,0,6,20">
                                         <!-- Known spells section -->
                                         <!-- MOD_BCPP_C: Update padding // BG3: Padding="6,2,6,40" -->
@@ -3093,14 +3088,18 @@
                 
                 <!-- MOD_AToR: TODO try to set the ancestor from an other file -->
                 <!-- <Setter TargetName="{RelativeSource FindAncestor, AncestorType=CharacterRoot}" Property="Height" Value="1680"/> -->
-
-                <!-- MOD_AToR: Add Limit height -->
-                <Setter TargetName="MultiClassSpellbookContainer" Property="MaxHeight" Value="{Binding ActualHeight, ElementName=CharacterRoot}"/>
-                <Setter TargetName="ClassPanel" Property="MaxHeight" Value="{Binding ActualHeight, ElementName=MultiClassSpellbookContainer}"/>
-                <Setter TargetName="ClassPanelCentralColumn" Property="MaxHeight" Value="{Binding ActualHeight, ElementName=MultiClassSpellbookContainer}"/>
+                
+                <!-- MOD_AToR: Add Limit height / Maybe useless -->
+                <!-- <Setter TargetName="MultiClassSpellbookContainer" Property="MaxHeight" Value="{Binding ActualHeight, ElementName=CharacterRoot}"/> -->
+                <!-- <Setter TargetName="MultiClassSpellbookContainer" Property="Height" Value="{Binding Height, ElementName=CharacterRoot}"/> -->
+                <!-- <Setter TargetName="ClassPanel" Property="ActualHeight" Value="{Binding ActualHeight, ElementName=MultiClassSpellbookContainer}"/> -->
+                <!-- <Setter TargetName="ClassPanelCentralColumn" Property="Height" Value="{Binding Height, ElementName=MultiClassSpellbookContainer}"/> -->
                                 
                 <!-- MOD_BCPP_C: Add margin to fix artefacts // BG3: Value="0,0,0,0" -->
                 <Setter TargetName="MultiClassSpellbookContainer" Property="Margin" Value="0,-1,0,0"/>
+                                
+                <!-- MOD_AToR: Add margin to view content when 4 rows spells -->
+                <Setter TargetName="ClassPanelRoot" Property="Margin" Value="0,0,0,55"/>
 
                 <Setter TargetName="NavigationLeftButton" Property="Visibility" Value="Visible"/>
                 <Setter TargetName="NavigationRightButton" Property="Visibility" Value="Visible"/>
@@ -3118,16 +3117,24 @@
                 </Setter>
 
                 <!-- MOD_BCPP_C: Update Margin // BG3: Value="0,0,0,20" -->
-                <Setter TargetName="TopBar" Property="Margin" Value="0,0,0,10"/>
+                <Setter TargetName="TopBar" Property="Margin" Value="0,-6,0,10"/>
                 
-                <!-- MOD_BCPP_C: Add ClassPanel scrolls -->
-                <Setter TargetName="WholePanelScrollViewer" Property="Margin" Value="12,0,-12,10"/>
-                <Setter TargetName="WholePanelScrollViewer" Property="Padding" Value="-12,0,12,-10"/>
+                <!-- MOD_AToR: Update ClassPanel to dynamic MaxHeight / See TODO scrolling // BG3: Value="1476"/> -->
+                <Setter TargetName="ClassPanel" Property="MaxHeight" Value="{Binding ActualHeight, ElementName=MultiClassSpellbookContainer}"/>
+                
+                <!-- MOD_BCPP_C: Add FixedContent for WholePanel scroll -->                
+                <Setter TargetName="WholePanelScrollViewer" Property="Margin" Value="13,0,-13,10"/>
+                <Setter TargetName="WholePanelScrollViewer" Property="Padding" Value="-13,0,13,-10"/>
                 <Setter TargetName="ClassPanelFixedContent" Property="Margin" Value="0,0,0,0"/>
                 <Setter TargetName="ClassPanelFixedContent" Property="Padding" Value="0,0,0,0"/>
                 
-                <!-- MOD_BCPP_C: Reactions -->
-                <!-- MOD_BCPP_C: Remove bottom margin -->
+                <!-- MOD_BCPP_C: Add ScrollableContent for ClassPanel scroll -->
+                <Setter TargetName="ClassPanelScrollableContent" Property="Margin" Value="14,8,-14,-12"/>
+                <Setter TargetName="ClassPanelScrollableContent" Property="Padding" Value="-14,-8,14,-10"/>
+                <Setter TargetName="ScrollableContent" Property="Margin" Value="0,0,0,20"/>
+                <Setter TargetName="ScrollableContent" Property="Padding" Value="0,0,0,0"/>
+                
+                <!-- MOD_BCPP_C: Remove Reactions bottom margin -->
                 <Setter TargetName="Reactions" Property="Margin" Value="0,0,0,0"/>
 
                 <!-- MOD_BCPP_C: Disable as it is dynamic now // MOD_BCPP: 6chars Value="634" // BG3: "684"  -->
@@ -3172,10 +3179,8 @@
                 <!-- MOD_BCPP_C: Update margin bg // BG3: Value="-8,-94,-8,-8" -->
                 <Setter TargetName="Background" Property="Margin" Value="-5,-94,-7,-6"/>
 
-                <Setter TargetName="ClassPanel" Property="MaxHeight" Value="1476"/>
-
-                <!-- MOD_BCPP_C: Add ClassSectionDecorativeStroke -->
-                <Setter TargetName="ClassSectionDecorativeStroke" Property="Margin" Value="16,4,17,-10"/>
+                <!-- MOD_BCPP_C: Add ClassSection DecorativeStroke -->
+                <Setter TargetName="ClassSectionDecorativeStroke" Property="Margin" Value="15,4,15,-10"/>
                 <Setter TargetName="ClassSectionDecorativeStroke" Property="Padding" Value="0,-6,0,0"/>
                 <Setter TargetName="ClassSectionDecorativeStroke" Property="StrokeDashArray" Value="5,3"/>
                 <Setter TargetName="ClassSectionDecorativeStroke" Property="StrokeThickness" Value="2"/>
@@ -3215,18 +3220,6 @@
                 <Setter TargetName="PreparedSpellsSectionOpening" Property="Margin" Value="1,6,-1,0"/>
                 <Setter TargetName="PreparedSpellsSectionSmall" Property="Margin" Value="1,0,-1,0"/>
                 <Setter TargetName="PreparedSpellsSectionClosure" Property="Margin" Value="1,0,-1,0"/>
-                
-                <!-- MOD_BCPP_C: Add Margin for Footer Panel -->
-                <Setter TargetName="ClassPanelScrollableContent" Property="Margin" Value="14,7,-12,-1"/>
-                <Setter TargetName="ClassPanelScrollableContent" Property="Padding" Value="-14,-8,12,-11"/>
-                <Setter TargetName="ScrollableContent" Property="Margin" Value="0,0,2,106"/>
-                <Setter TargetName="ScrollableContent" Property="Padding" Value="0,0,0,0"/>
-                
-                <!-- MOD_BCPP_C: Add Margin for footer panel / Disable but works with BCPP ON but not with BG3 Vanilla -->
-                <!-- <Setter TargetName="ClassPanelScrollableContent" Property="Margin" Value="14,7,-14,-91"/>
-                <Setter TargetName="ClassPanelScrollableContent" Property="Padding" Value="-14,-8,14,-11"/>
-                <Setter TargetName="ScrollableContent" Property="Margin" Value="0,0,0,106"/>
-                <Setter TargetName="ScrollableContent" Property="Padding" Value="0,0,0,0"/> -->
 
                 <Setter TargetName="KnownSpellSection" Property="ImageSource" Value="{StaticResource SpellsBorder_Small}"/>
                 <Setter TargetName="KnownSpellSection" Property="Slices" Value="24,20,44,44"/>
@@ -3246,13 +3239,55 @@
                 <Setter TargetName="SearchResultsSectionClosure" Property="Fill" Value="{StaticResource ClassBorderEdges_Small}"/>
             </DataTrigger>
             
-            <!-- MOD_BCPP_C: Add Trigger after PartyPanel for small PreparedSpellsSectionOpening -->
+            <!-- MOD_AToR: Fix dual scroll by Disabled for now see next TODO --> 
+            <!-- MOD_AToR: Add specific to PartyPanel // BG3: Scrolling: If there're spells to prepare, scroll only from the prepared spells section -->
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ParentState, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel"/>
+                    <Condition Binding="{Binding SelectedItem.Class.MustPrepareSpells, ElementName=Tabs, FallbackValue=False}" Value="True"/>
+                </MultiDataTrigger.Conditions>
+                <!-- <Setter TargetName="WholePanelScrollViewerRoot" Property="MaxHeight" Value="1800"/> -->
+                <Setter TargetName="WholePanelScrollViewer" Property="VerticalScrollBarVisibility" Value="Disabled"/>
+            </MultiDataTrigger> 
+            
+            <!-- MOD_AToR: TODO remake previous for dynamic scrolling with prepared spell stack on top -->
+            <!-- 
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ParentState, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel"/>
+                    <Condition Binding="{Binding SelectedItem.Class.MustPrepareSpells, ElementName=Tabs, FallbackValue=False}" Value="True"/>
+                </MultiDataTrigger.Conditions>
+                <Setter TargetName="WholePanelScrollViewerRoot" Property="MaxHeight">
+                    <Setter.Value>
+                        <MultiBinding Converter="{StaticResource AddMultipleConverter}">
+                            <Binding Source="1500"/>
+                            <Binding Path="ActualHeight" ElementName="ClassPanelFixedContent"/>
+                        </MultiBinding>
+                    </Setter.Value>
+                </Setter>
+            </MultiDataTrigger> 
+            -->
+            
+            <!-- MOD_AToR: Add offset to both scrollBars when both are visible /> --> 
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ParentState, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel"/>
+                    <Condition Binding="{Binding ComputedVerticalScrollBarVisibility, ElementName=WholePanelScrollViewer}" Value="Visible"/>
+                    <Condition Binding="{Binding ComputedVerticalScrollBarVisibility, ElementName=ClassPanelScrollableContent}" Value="Visible"/>
+                </MultiDataTrigger.Conditions>
+                <Setter TargetName="WholePanelScrollViewer" Property="Margin" Value="15,0,-15,10"/>
+                <Setter TargetName="WholePanelScrollViewer" Property="Padding" Value="-15,0,15,-10"/>
+                <Setter TargetName="ClassPanelScrollableContent" Property="Margin" Value="-1,0,1,10"/>
+                <Setter TargetName="ClassPanelScrollableContent" Property="Padding" Value="1,0,-1,-10"/>
+            </MultiDataTrigger>
+            
+            <!-- MOD_BCPP_C: Add margin to Decorative Stroke to hide bottom stroke line when PreparedSpellsSection is visible -->
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
                     <Condition Binding="{Binding ParentState, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel"/>
                     <Condition Binding="{Binding Visibility, ElementName=PreparedSpellsSectionOpening}" Value="Visible"/>
                 </MultiDataTrigger.Conditions>
-                <Setter TargetName="ClassSectionDecorativeStroke" Property="Margin" Value="16,4,17,-50"/>
+                <Setter TargetName="ClassSectionDecorativeStroke" Property="Margin" Value="15,4,15,-50"/>
             </MultiDataTrigger>
 
             <!-- MOD_BCPP_C: Hunter lvl 1 // Disable row switch -->
