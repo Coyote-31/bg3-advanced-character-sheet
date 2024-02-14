@@ -3106,6 +3106,7 @@
                 <Setter TargetName="NavigationRightButton" Property="Visibility" Value="Visible"/>
                 
                 <!-- MOD_BCPP_C: Tabs -->
+                <Setter TargetName="TabsContainer" Property="Margin" Value="0,-5,0,0"/>
                 <Setter TargetName="Tabs" Property="MaxWidth">
                     <Setter.Value>
                         <MultiBinding Converter="{StaticResource AddMultipleConverter}">
