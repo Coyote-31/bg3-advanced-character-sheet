@@ -661,10 +661,10 @@
             <!-- MOD_BCPP_C: Move margin to 'Reactions' // MOD_BCPP: MaxHeight="1178" // BG3: <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,22"  -->
             <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top">
                 <!-- MOD_BCPP_C: Add decoration margin -->
-                <Rectangle x:Name="DecorativeStroke" Margin="0,0,0,5" Width="{Binding ActualWidth, ElementName=ListSectionBackground}" Height="{Binding ActualHeight, ElementName=ListSectionBackground}" StrokeDashArray="5,3" StrokeThickness="2" Stroke="{StaticResource LS_PanelBorder}" RadiusX="{StaticResource CornerRadius}" RadiusY="{StaticResource CornerRadius}" Fill="{StaticResource ContentBGShade}"/>
+                <Rectangle x:Name="DecorativeStroke" Margin="0,0,0,0" Width="{Binding ActualWidth, ElementName=ListSectionBackground}" Height="{Binding ActualHeight, ElementName=ListSectionBackground}" StrokeDashArray="5,3" StrokeThickness="2" Stroke="{StaticResource LS_PanelBorder}" RadiusX="{StaticResource CornerRadius}" RadiusY="{StaticResource CornerRadius}" Fill="{StaticResource ContentBGShade}"/>
 
-                <!-- MOD_BCPP_C: Update scroller padding & margin // MOD_BCPP: Margin="20" // BG3: Padding="{StaticResource ScrollOffset}" Margin="30" -->
-                <ScrollViewer x:Name="ReactionScrollerViewer" Template="{StaticResource NoForcedStyleScrollViewerTemplate}" Padding="0,-20,-84,-15" HorizontalAlignment="Left" Margin="20">
+                <!-- MOD_BCPP_C: Update scroller padding & margin // BG3: Padding="{StaticResource ScrollOffset}" Margin="30" -->
+                <ScrollViewer x:Name="ReactionScrollerViewer" Template="{StaticResource NoForcedStyleScrollViewerTemplate}" Padding="0,-20,-84,-20" HorizontalAlignment="Left" Margin="20">
                     <ItemsControl x:Name="InterruptList" ItemsSource="{Binding Interrupts}" HorizontalAlignment="Left">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate DataType="ls:VMInterrupt">
@@ -2060,12 +2060,12 @@
                 </StackPanel>
 
                 <!-- Reactions -->
-                <!-- MOD_BCPP_C: Add margin bottom // MOD_AToR: Margin="0,0,0,54" -->
-                <Control Grid.Row="1" x:Name="Reactions" Margin="0,0,0,54" Template="{StaticResource InterruptPanelTemplate}" Visibility="Collapsed" IsEnabled="{Binding DataContext.CurrentPlayer.UIData.AllowInteraction, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
+                <!-- MOD_AToR: Add Margin -->
+                <Control Grid.Row="1" x:Name="Reactions" Margin="0,0,0,20" Template="{StaticResource InterruptPanelTemplate}" Visibility="Collapsed" IsEnabled="{Binding DataContext.CurrentPlayer.UIData.AllowInteraction, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
 
                 <!-- Panel -->
-                <!-- MOD_BCPP_C: Add Align -->
-                <Grid Grid.Row="1" x:Name="ClassPanel" Margin="0,10,0,0" MaxHeight="1290" HorizontalAlignment="Center">
+                <!-- MOD_AToR: Add Align / Update Margin / Remove MaxHeight // BG3: Margin="0,10,0,0" MaxHeight="1290" -->
+                <Grid Grid.Row="1" x:Name="ClassPanel" Margin="0,16,0,0" HorizontalAlignment="Center">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition x:Name="ClassPanelLeftColumn" Width="*"/>
                         <ColumnDefinition x:Name="ClassPanelCentralColumn" Width="1124"/>
@@ -2263,16 +2263,18 @@
                         </Grid>
 
                         <!-- Class panel content -->
-                        <!-- MOD_BCPP_C: Update scroll bar // BG3: Margin="50,0,-50,0" Padding="-50,0,50,0" -->
-                        <ScrollViewer x:Name="WholePanelScrollViewer" Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="21,0,-21,-2" Padding="-21,0,21,-5">
-                            <Grid x:Name="WholePanelScrollViewerRoot">
+                        <!-- MOD_AToR: Update ScrollBar position // BG3: Margin="50,0,-50,0" Padding="-50,0,50,0"  -->
+                        <ScrollViewer x:Name="WholePanelScrollViewer" Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="20,0,-20,10" Padding="-20,0,20,-10">
+                            
+                            <!-- MOD_AToR: Add Margin -->
+                            <Grid x:Name="WholePanelScrollViewerRoot" Margin="0,0,0,20">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-                                <!-- MOD_BCPP_C: Add ClassPanelFixed Margin -->
-                                <StackPanel x:Name="ClassPanelFixedContent" Grid.Row="0" VerticalAlignment="Top" Margin="0,6,0,0">
+                                <!-- MOD_BCPP_C: Add Margin -->
+                                <StackPanel x:Name="ClassPanelFixedContent" Grid.Row="0" VerticalAlignment="Top" Margin="0,10,0,0">
                                     <!-- Class section -->
                                     <!-- MOD_BCPP_C: Rework ClassSection with dynamic bg -->
                                     <!-- MOD_BCPP_C: Add Grid + Rectangle (bg) -->
@@ -2476,12 +2478,12 @@
                                 </StackPanel>
 
                                 <!-- MOD_BCPP_C: Footer ScrollBar // BG3: Margin="50,0,-50,0" Padding="-50,0,50,0" -->
-                                <ls:LSScrollViewer x:Name="ClassPanelScrollableContent" Grid.Row="2" VerticalScrollBarVisibility="Auto" Margin="21,0,-21,-16" Padding="-21,0,21,-5">
+                                <ls:LSScrollViewer x:Name="ClassPanelScrollableContent" Grid.Row="2" VerticalScrollBarVisibility="Auto" Margin="20,0,-20,-10" Padding="-20,0,20,10">
                                     <!-- MOD_BCPP_C: Add margin -->
-                                    <StackPanel x:Name="ScrollableContent" Margin="6,0,6,40">
+                                    <StackPanel x:Name="ScrollableContent" Margin="6,0,6,0">
                                         <!-- Known spells section -->
                                         <!-- MOD_BCPP_C: Update padding // BG3: Padding="6,2,6,40" -->
-                                        <ls:LSNineSliceImage x:Name="KnownSpellSection" ImageSource="{StaticResource SpellsBorder}" Slices="22,10,22,42" IconWidth="70" Padding="-1,2,0,40" Visibility="{Binding Path=ItemsSource.Count, ElementName=SpellsCategories, Converter={StaticResource CountToVisibilityConverter}}">
+                                        <ls:LSNineSliceImage x:Name="KnownSpellSection" ImageSource="{StaticResource SpellsBorder}" Slices="22,10,22,42" IconWidth="70" Padding="-1,4,0,40" Visibility="{Binding Path=ItemsSource.Count, ElementName=SpellsCategories, Converter={StaticResource CountToVisibilityConverter}}">
                                             <StackPanel>
                                                 <TextBlock x:Name="InnerSpellsTitle" ls:TextBlockFormatter.SourceText="{Binding Source='h062f5cf9gb2e5g4c0dgadc9g68898c250650',Converter={StaticResource TranslatedStringConverter}}" Style="{StaticResource ActionGroupTitleStyle}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="120,22,0,0" Visibility="Collapsed"/>
 
@@ -2966,7 +2968,14 @@
 
             <!-- Scrolling: If there're spells to prepare, scroll only from the prepared spells section -->
             <DataTrigger Binding="{Binding SelectedItem.Class.MustPrepareSpells, ElementName=Tabs, FallbackValue=False}" Value="True">
-                <Setter TargetName="WholePanelScrollViewerRoot" Property="MaxHeight" Value="1200"/>
+                <!-- MOD_AToR: Update MaxHeight 1300 // BG3: MaxHeight="1200"/> -->
+                <Setter TargetName="WholePanelScrollViewerRoot" Property="MaxHeight" Value="1300"/>
+            </DataTrigger>
+            
+            <!-- MOD_AToR: Add offset to inner scrollBar when outter is visible /> -->
+            <DataTrigger Binding="{Binding ComputedVerticalScrollBarVisibility, ElementName=WholePanelScrollViewer}" Value="Visible">
+                <Setter TargetName="ClassPanelScrollableContent" Property="Margin" Value="-7,0,7,-10"/>
+                <Setter TargetName="ClassPanelScrollableContent" Property="Padding" Value="7,0,-7,10"/>
             </DataTrigger>
 
             <!-- Scrolling: If there's no spell to prepare, scroll the whole content instead -->
