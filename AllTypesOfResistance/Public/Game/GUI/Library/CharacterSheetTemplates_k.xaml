@@ -29,8 +29,8 @@
     <System:Double x:Key="EXDollWidth">1050</System:Double>
     
     <System:Double x:Key="CornerRadius">20</System:Double>
-    <!-- MOD_BCPP: TODO Check to fix bottom margin & padding -->
-    <!-- MOD_BCPP: CSContentHeight = 1550 // BG3: CSContentHeight = 1340 CSColumnWidth = 648 -->
+    <!-- MOD_BCPP_C: TODO Check to fix bottom margin & padding  -->
+    <!-- MOD_AToR: Update CSContentHeight // BG3: CSContentHeight = 1340 -->
     <System:Double x:Key="CSContentHeight">1550</System:Double>
     <System:Double x:Key="CSColumnWidth">648</System:Double>
 
@@ -1723,16 +1723,19 @@
                 </b:EventTrigger>
             </b:Interaction.Triggers>
 
-            <Image x:Name="Background" Source="{StaticResource SpellbookBg}" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <!-- MOD_AToR: Update Background Stretch / Add Margin // BG3: Stretch="None" -->
+            <Image x:Name="Background" Source="{StaticResource SpellbookBg}" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="254,0"/>
 
             <!-- Spellbook -->
-            <Grid x:Name="ClassPanelRoot">
+            <!-- MOD_AToR: Add Margin -->
+            <Grid x:Name="ClassPanelRoot" Margin="0,0,0,18">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <!-- Tabs -->
-                <StackPanel Grid.Row="0" x:Name="TabsContainer" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="0,4,0,0">
+                <!-- MOD_AToR: Update Tabs Margin // BG3: Margin="0,4,0,0" -->
+                <StackPanel Grid.Row="0" x:Name="TabsContainer" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="0,8,0,0">
                     <ls:LSButton x:Name="NavigationLeftButton" Template="{StaticResource IconButtonTemplate}" VerticalAlignment="Center"
                                              Visibility="{Binding SpellBooks.Count, Converter={StaticResource CountToVisibilityConverter}, ConverterParameter='5'}"
                                              SoundID="UI_Shared_Panel_Select">
