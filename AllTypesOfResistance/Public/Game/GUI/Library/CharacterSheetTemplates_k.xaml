@@ -140,7 +140,7 @@
     <!-- MOD_AToR: NO RESULTS SEARCH TEMPLATE-->
     <ControlTemplate x:Key="NoResultsFoundSearchTemplate" TargetType="Control">
         <Grid>
-            <Image Source="/GustavNoesisGUI;component/Assets/AToR/CharacterPanel/invSlot_message_bg.png" Stretch="Fill" HorizontalAlignment="Center"/>
+            <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/CharacterPanel/invSlot_message_bg.png" Stretch="Fill" HorizontalAlignment="Center"/>
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource LS_extraspecialTxtColor}" FontSize="{StaticResource SmallFontSize}" ls:TextBlockFormatter.SourceText="{Binding Source='h7f09be65g3d97g45dfg87f1gb70869a7ae24', Converter={StaticResource TranslatedStringConverter}}"/>
         </Grid>
     </ControlTemplate>
@@ -995,7 +995,7 @@
         <ControlTemplate.Resources>
             
             <!-- MOD_AToR: Update source AToR -->
-            <BitmapImage x:Key="SpellbookBg_Small" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/SpellBook/spellbook_bg_small.png"/>
+            <BitmapImage x:Key="SpellbookBg_Small" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/SpellBook/spellbook_bg_small.png" />
 
             <BitmapImage x:Key="SpellsBorder_Small" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/SpellBook/knownSpells_frame_small.png" />
 
@@ -1069,12 +1069,12 @@
             <BitmapImage x:Key="SearchSelector_h" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/selector_listitem_h.png" />
 
             <!-- MOD_AToR : Fix tabs artefacts // BG3: .../Assets/CharacterPanel/... --> 
-            <BitmapImage x:Key="Tab_d" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AtoR/CharacterPanel/tab_body_inactive_d.png" />
-            <BitmapImage x:Key="Tab_h" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AtoR/CharacterPanel/tab_body_inactive_h.png" />
-            <BitmapImage x:Key="Tab_p" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AtoR/CharacterPanel/tab_body_inactive_p.png" />
-            <BitmapImage x:Key="TabSelected_d" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AtoR/CharacterPanel/tab_body_active_d.png" />
-            <BitmapImage x:Key="TabSelected_h" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AtoR/CharacterPanel/tab_body_active_h.png" />
-            <BitmapImage x:Key="TabSelected_p" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AtoR/CharacterPanel/tab_body_active_p.png" />
+            <BitmapImage x:Key="Tab_d" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/CharacterPanel/tab_body_inactive_d.png" />
+            <BitmapImage x:Key="Tab_h" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/CharacterPanel/tab_body_inactive_h.png" />
+            <BitmapImage x:Key="Tab_p" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/CharacterPanel/tab_body_inactive_p.png" />
+            <BitmapImage x:Key="TabSelected_d" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/CharacterPanel/tab_body_active_d.png" />
+            <BitmapImage x:Key="TabSelected_h" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/CharacterPanel/tab_body_active_h.png" />
+            <BitmapImage x:Key="TabSelected_p" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/CharacterPanel/tab_body_active_p.png" />
 
             <BitmapImage x:Key="RemoveSpellIcon" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterCreation/remover_spellslot.png" />
             <BitmapImage x:Key="PreparedSpellIcon" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/SpellBook/ico_prepared.png" />
