@@ -979,7 +979,9 @@
     <ControlTemplate x:Key="MultiClassSpellbookTemplate">
         <!-- DataContext of this should be a VMCharacter -->
         <ControlTemplate.Resources>
-            <BitmapImage x:Key="SpellbookBg_Small" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/SpellBook/spellbook_bg_small.png"/>
+            
+            <!-- MOD_AToR: Update source AToR -->
+            <BitmapImage x:Key="SpellbookBg_Small" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/SpellBook/spellbook_bg_small.png"/>
 
             <BitmapImage x:Key="SpellsBorder_Small" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/SpellBook/knownSpells_frame_small.png" />
 
@@ -3095,9 +3097,6 @@
                 <!-- <Setter TargetName="ClassPanel" Property="ActualHeight" Value="{Binding ActualHeight, ElementName=MultiClassSpellbookContainer}"/> -->
                 <!-- <Setter TargetName="ClassPanelCentralColumn" Property="Height" Value="{Binding Height, ElementName=MultiClassSpellbookContainer}"/> -->
                                 
-                <!-- MOD_BCPP_C: Add margin to fix artefacts // BG3: Value="0,0,0,0" -->
-                <Setter TargetName="MultiClassSpellbookContainer" Property="Margin" Value="0,-1,0,0"/>
-                                
                 <!-- MOD_AToR: Add margin to view content when 4 rows spells -->
                 <Setter TargetName="ClassPanelRoot" Property="Margin" Value="0,0,0,55"/>
 
@@ -3177,7 +3176,7 @@
                 <Setter TargetName="Background" Property="Source" Value="{StaticResource SpellbookBg_Small}"/>
                 <Setter TargetName="Background" Property="Stretch" Value="Fill"/>
                 <!-- MOD_BCPP_C: Update margin bg // BG3: Value="-8,-94,-8,-8" -->
-                <Setter TargetName="Background" Property="Margin" Value="-5,-94,-7,-6"/>
+                <Setter TargetName="Background" Property="Margin" Value="-6,-94,-6,-6"/>
 
                 <!-- MOD_BCPP_C: Add ClassSection DecorativeStroke -->
                 <Setter TargetName="ClassSectionDecorativeStroke" Property="Margin" Value="15,4,15,-10"/>
