@@ -728,9 +728,11 @@
             </b:Interaction.Triggers>
         </Grid>
         <ControlTemplate.Triggers>
+            
             <DataTrigger Binding="{Binding Interrupts.Count}" Value="0">
                 <Setter TargetName="NoReactionsMsg" Property="Visibility" Value="Visible"/>
             </DataTrigger>
+            
             <DataTrigger Binding="{Binding ParentState, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel">
                 <Setter TargetName="Description" Property="Margin" Value="24"/>
                 <Setter TargetName="DecorativeStroke" Property="Visibility" Value="Collapsed"/>
@@ -738,6 +740,18 @@
                 <Setter TargetName="ReactionScrollerViewer" Property="Margin" Value="14,0,-14,35"/>
                 <Setter TargetName="ReactionScrollerViewer" Property="Padding" Value="6,0,-6,0"/>
             </DataTrigger>
+            
+            <!-- MOD_BCPP8C: Add reactions scroller padding & margin when in PartyPanel and BCPP detected -->            
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ParentState, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel"/>
+                    <Condition Binding="{Binding VerticalAlignment, ElementName=CharacterRoot}" Value="Top"/>
+                </MultiDataTrigger.Conditions>
+                <Setter TargetName="ReactionScrollerViewer" Property="Margin" Value="9,0,-9,0"/>
+                <Setter TargetName="ReactionScrollerViewer" Property="Padding" Value="5,0,-5,18"/>
+                <Setter TargetName="InterruptList" Property="Margin" Value="0,0,0,18"/>
+            </MultiDataTrigger> 
+            
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
@@ -2475,7 +2489,7 @@
 
                                 <!-- MOD_BCPP_C: Footer ScrollBar // BG3: Margin="50,0,-50,0" Padding="-50,0,50,0" -->
                                 <ls:LSScrollViewer x:Name="ClassPanelScrollableContent" Grid.Row="2" VerticalScrollBarVisibility="Auto" Margin="20,4,-20,-12" Padding="-20,0,20,-10">
-                                    <!-- MOD_BCPP_C: Add margin between top bar & class panel-->
+                                    <!-- MOD_BCPP_C: Add margin between top bar and class panel & bottom for 2 scrolls -->
                                     <StackPanel x:Name="ScrollableContent" Margin="6,0,6,20">
                                         <!-- Known spells section -->
                                         <!-- MOD_BCPP_C: Update padding // BG3: Padding="6,2,6,40" -->
@@ -3237,6 +3251,33 @@
                 <Setter TargetName="SearchResultsSection" Property="Background" Value="{StaticResource ClassBorderCenter_Small}"/>
                 <Setter TargetName="SearchResultsSectionClosure" Property="Fill" Value="{StaticResource ClassBorderEdges_Small}"/>
             </DataTrigger>
+            
+                        
+            <!-- MOD_BCPP_C: Detect if BCPP is active for character panel -->
+            <DataTrigger Binding="{Binding Height, ElementName=SpellBookPanel}" Value="2000">
+                <Setter TargetName="MultiClassSpellbookContainer" Property="Margin" Value="-18,0,-18,472"/>
+            </DataTrigger>
+            
+            <!-- MOD_BCPP_C: Detect if BCPP is active for party panel -->
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ParentState, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel"/>
+                    <Condition Binding="{Binding VerticalAlignment, ElementName=CharacterRoot}" Value="Top"/>
+                </MultiDataTrigger.Conditions>
+                <!-- MOD_BCPP_C: Update margin for tabs align on bg -->   
+                <Setter TargetName="ClassPanelRoot" Property="Margin" Value="0,9,0,0"/>
+                <!-- MOD_BCPP_C: WholePanel scroll -->                
+                <Setter TargetName="WholePanelScrollViewer" Property="Margin" Value="13,0,-13,20"/>
+                <Setter TargetName="WholePanelScrollViewer" Property="Padding" Value="-13,0,13,-20"/>
+                <Setter TargetName="ClassPanelScrollableContent" Property="Margin" Value="14,8,-14,18"/>
+                <Setter TargetName="ClassPanelScrollableContent" Property="Padding" Value="-14,-8,14,-40"/>
+                <!-- MOD_BCPP_C: Footer margin -->
+                <Setter TargetName="KnownSpellSection" Property="Margin" Value="0,0,0,10"/>
+                <Setter TargetName="SpellsCategories" Property="Margin" Value="6,0,0,10"/>
+                <Setter TargetName="ScrollableContent" Property="Margin" Value="0,0,0,50"/>
+                <!-- MOD_BCPP_C: Text replaceable on lvl up -->
+                <Setter TargetName="NonPreparableReplaceableSpellsNote" Property="Margin" Value="40,4,40,4"/>
+            </MultiDataTrigger> 
             
             <!-- MOD_AToR: Fix dual scroll by Disabled for now see next TODO --> 
             <!-- MOD_AToR: Add specific to PartyPanel // BG3: Scrolling: If there're spells to prepare, scroll only from the prepared spells section -->
