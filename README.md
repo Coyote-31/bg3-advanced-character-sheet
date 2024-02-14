@@ -6,23 +6,31 @@
 
 This is a mod for the game Baldur's Gate 3.
 
-The purpose of this mod is to display **all types of resistance** including ones without any immunity, resistance or weakness.
+The purpose of this mod is to display **All Types of Resistance** including ones without any immunity, resistance or weakness.
 
 ## 🔖 Version
-- 📦 **AToR** mod : `1.1.0`
+- 📦 **AToR** mod : `1.2.0`
 - 🎮 **BG3** compatible : `4.1.1`
 
 ## ✨ Features
 
-- Display all types of resistance including ones without any immunity, resistance or weakness.
-- Resistances are divided into 3 rows and rearranged.
-- Reverse order between Resistances and Conditions.
-- Some icons are reworked for a better visual.
-- Tooltip added for damage type without any immunity, resistance or weakness.
+- Display **all** types of resistance including ones without any immunity, resistance or weakness.
+- Resistances are divided into **3 rows** and **rearranged**.
+- **Reverse order** between Resistances and Conditions.
+- Some icons are reworked for a **better visual**.
+- **Tooltip added** for damage type without any immunity, resistance or weakness.
+
+### 🎁 Bonus :
+
+**BIG** rework of the whole **Spell Book UI** ( Class info / Spells / Reactions ) in Character and Party Panels, it's actually much more than just *All Types of Resistance* now ! 😅
+- The user interface is now *responsive* to be compatible with all variations of **BCPP** mods.
+- Extend the **size** of useful content in Party Panel.
+- **Align** everything in its right place.
+- Replace some backgrounds and sprites to **fix artifacts** in vanilla images ( Party Panel Bg, Tabs, ... ).
 
 ## 🔀 Compatibility
 
-### Files :
+### 📄 Files :
 
 This mod changes the following files of the game :
 
@@ -31,14 +39,24 @@ This mod changes the following files of the game :
   - **Tooltips.xaml**
   - **Images_k.xaml**
   
-### Other mods :
+### 👽 Other mods :
 
-#### 🚫 Not compatible with the following mods :
-- Better Character and Party Panels
-- Better Target Info
-- Better Tooltips
+#### 🟢 **Compatible** with the following mods :
+- **Better Character and Party Panels** ( *BCPP* ) *All variants* : Tested with BCPP v1.5.9
 
-*NB : I am currently working on it to make this possible. Stay tuned !*
+#### 🟡 Compatible with **minor bugs** :
+- **Better Tooltips** ( *BT* ) : Tested with BT v1.0.8
+
+  - **Minor Bug** : Tooltips for no resistance/immunity/vunerable are displayed as *vunerable* 
+  ( **Believe in the icon** and not the tooltip )
+  
+  - **Install** : You **have to** rename `BetterTooltips.pak` file from *BT* mod into `50_BetterTooltips.pak`
+because *BT* needs to overwrite my mod's files and it doesn't work conventionally (Like with BG3MM).
+
+#### 🔴 **Not compatible** with the following mods :
+- **Better Target Info**
+
+*NB : I am currently working on it to make this possible. Stay tuned ❗*
 
 ## 💾 Install
 
