@@ -3122,14 +3122,14 @@
                 <Setter TargetName="ClassPanel" Property="MaxHeight" Value="{Binding ActualHeight, ElementName=MultiClassSpellbookContainer}"/>
                 
                 <!-- MOD_BCPP_C: Add FixedContent for WholePanel scroll -->                
-                <Setter TargetName="WholePanelScrollViewer" Property="Margin" Value="13,0,-13,10"/>
-                <Setter TargetName="WholePanelScrollViewer" Property="Padding" Value="-13,0,13,-10"/>
+                <Setter TargetName="WholePanelScrollViewer" Property="Margin" Value="13,0,-13,0"/>
+                <Setter TargetName="WholePanelScrollViewer" Property="Padding" Value="-13,0,13,0"/>
                 <Setter TargetName="ClassPanelFixedContent" Property="Margin" Value="0,0,0,0"/>
                 <Setter TargetName="ClassPanelFixedContent" Property="Padding" Value="0,0,0,0"/>
                 
                 <!-- MOD_BCPP_C: Add ScrollableContent for ClassPanel scroll -->
-                <Setter TargetName="ClassPanelScrollableContent" Property="Margin" Value="14,8,-14,-12"/>
-                <Setter TargetName="ClassPanelScrollableContent" Property="Padding" Value="-14,-8,14,-10"/>
+                <Setter TargetName="ClassPanelScrollableContent" Property="Margin" Value="14,8,-14,-2"/>
+                <Setter TargetName="ClassPanelScrollableContent" Property="Padding" Value="-14,-8,14,-20"/>
                 <Setter TargetName="ScrollableContent" Property="Margin" Value="0,0,0,20"/>
                 <Setter TargetName="ScrollableContent" Property="Padding" Value="0,0,0,0"/>
                 
