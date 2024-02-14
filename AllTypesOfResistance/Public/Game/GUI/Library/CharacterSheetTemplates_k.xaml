@@ -465,8 +465,8 @@
     </ControlTemplate>
 
     
-    <!-- MOD_BCPP: Custom Interrupt Button Templater -->
-	<ControlTemplate x:Key="InterruptToggleBtnTemplateCustom" TargetType="ToggleButton">
+    <!-- MOD_BCPP_C: Dynamic Interrupt btn / Reactions -->
+	<ControlTemplate x:Key="InterruptToggleBtnTemplateDynamic" TargetType="ToggleButton">
         <ControlTemplate.Resources>
             <Style TargetType="TextBlock" >
                 <Setter Property="FontSize" Value="{DynamicResource ScaledSmallFontSize}" />
@@ -501,7 +501,8 @@
                     </Grid.RowDefinitions>
 
                     <ContentPresenter x:Name="Icon" Grid.Column="0" Grid.RowSpan="2" ContentTemplate="{StaticResource InterruptIcon}" Content="{Binding .}" IsHitTestVisible="False" Margin="0,0,10,0" VerticalAlignment="Center"/>
-                    <!-- MOD_BCPP_C: Add wrapping to reaction title // BG3: <TextBlock x:Name="Name" Grid.Column="1" Text="{Binding Name}" Foreground="{StaticResource LS_tint100}" HorizontalAlignment="Left"/> -->
+                    <!-- MOD_BCPP_C: Add wrapping to reaction title -->
+                    <!-- BG3: <TextBlock x:Name="Name" Grid.Column="1" Text="{Binding Name}" Foreground="{StaticResource LS_tint100}" HorizontalAlignment="Left"/> -->
                     <TextBlock x:Name="Name" Grid.Column="1" Text="{Binding Name}" Foreground="{StaticResource LS_tint100}" HorizontalAlignment="Left" MaxWidth="550" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis">
                         <TextBlock.Width>
                             <MultiBinding Converter="{StaticResource AddMultipleConverter}">
@@ -552,8 +553,6 @@
             </DataTemplate>
         </ControlTemplate.Resources>
 
-        <!-- MOD_BCPP: Width="590" -->
-        <!-- BG3: Width="700" -->
         <Grid x:Name="rootIntTemp" ToolTipService.IsEnabled="False"  ToolTipService.Placement="Right" ToolTipService.VerticalOffset="-74" MaxWidth="700" Margin="0,0,0,6" Background="Transparent">
             <Grid.ToolTip>
                 <ls:LSTooltip x:Name="InterruptTooltip" Content="{Binding Path=Content, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
@@ -672,8 +671,8 @@
                                     <BitmapImage x:Key="ReactionCheckBoxBGImg" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Reactions/checkbox_d.png"/>
                                 </DataTemplate.Resources>
                                 <Grid>
-                                    <!-- MOD_BCPP: Use custom template "InterruptToggleBtnTemplateCustom" // BG3: "InterruptToggleBtnTemplate" -->
-                                    <ls:LSToggleButton x:Name="ToggleEnableButton" IsChecked="{Binding Enabled, Mode=OneWay}" Command="{Binding DataContext.InterruptToggleDisableCommand,RelativeSource={RelativeSource AncestorType=ls:UIWidget}}" CommandParameter="{Binding .}" Template="{StaticResource InterruptToggleBtnTemplateCustom}" Content ="{Binding .}" IsEnabled="{Binding Available}"/>
+                                    <!-- MOD_BCPP_C: Use dynamic template "InterruptToggleBtnTemplateDynamic" // BG3: "InterruptToggleBtnTemplate" -->
+                                    <ls:LSToggleButton x:Name="ToggleEnableButton" IsChecked="{Binding Enabled, Mode=OneWay}" Command="{Binding DataContext.InterruptToggleDisableCommand,RelativeSource={RelativeSource AncestorType=ls:UIWidget}}" CommandParameter="{Binding .}" Template="{StaticResource InterruptToggleBtnTemplateDynamic}" Content ="{Binding .}" IsEnabled="{Binding Available}"/>
 
                                     <ls:LSToggleButton x:Name="ToggleManagementButton" IsChecked="{Binding Ask, Mode=OneWay}" Command="{Binding DataContext.InterruptChangeAskCommand,RelativeSource={RelativeSource AncestorType=ls:UIWidget}}" CommandParameter="{Binding .}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,10,4">
 
