@@ -2477,9 +2477,9 @@
                                 </StackPanel>
 
                                 <!-- MOD_BCPP_C: Footer ScrollBar // BG3: Margin="50,0,-50,0" Padding="-50,0,50,0" -->
-                                <ls:LSScrollViewer x:Name="ClassPanelScrollableContent" Grid.Row="2" VerticalScrollBarVisibility="Auto" Margin="20,0,-20,-10" Padding="-20,0,20,10">
+                                <ls:LSScrollViewer x:Name="ClassPanelScrollableContent" Grid.Row="2" VerticalScrollBarVisibility="Auto" Margin="20,0,-20,-12" Padding="-20,0,20,-10">
                                     <!-- MOD_BCPP_C: Add margin -->
-                                    <StackPanel x:Name="ScrollableContent" Margin="6,0,6,0">
+                                    <StackPanel x:Name="ScrollableContent" Margin="6,0,6,20">
                                         <!-- Known spells section -->
                                         <!-- MOD_BCPP_C: Update padding // BG3: Padding="6,2,6,40" -->
                                         <ls:LSNineSliceImage x:Name="KnownSpellSection" ImageSource="{StaticResource SpellsBorder}" Slices="22,10,22,42" IconWidth="70" Padding="-1,4,0,40" Visibility="{Binding Path=ItemsSource.Count, ElementName=SpellsCategories, Converter={StaticResource CountToVisibilityConverter}}">
@@ -2973,8 +2973,8 @@
             
             <!-- MOD_AToR: Add offset to inner scrollBar when outter is visible /> -->
             <DataTrigger Binding="{Binding ComputedVerticalScrollBarVisibility, ElementName=WholePanelScrollViewer}" Value="Visible">
-                <Setter TargetName="ClassPanelScrollableContent" Property="Margin" Value="-7,0,7,-10"/>
-                <Setter TargetName="ClassPanelScrollableContent" Property="Padding" Value="7,0,-7,10"/>
+                <Setter TargetName="ClassPanelScrollableContent" Property="Margin" Value="-7,0,7,10"/>
+                <Setter TargetName="ClassPanelScrollableContent" Property="Padding" Value="7,0,-7,-10"/>
             </DataTrigger>
 
             <!-- Scrolling: If there's no spell to prepare, scroll the whole content instead -->
