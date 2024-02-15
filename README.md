@@ -8,6 +8,8 @@ This is a mod for the game Baldur's Gate 3.
 
 The purpose of this mod is to display **All Types of Resistance** including ones without any immunity, resistance or weakness.
 
+Also improve Character and Party panel for Spell Book UI in general (Class info / Spell list / Reactions)
+
 ## 🔖 Version
 - 📦 **AToR** mod : `1.2.0`
 - 🎮 **BG3** compatible : `4.1.1`
@@ -47,7 +49,7 @@ This mod changes the following files of the game :
 #### 🟡 Compatible with **minor bugs** :
 - **Better Tooltips** ( *BT* ) : Tested with BT v1.0.8
 
-  - **Minor Bug** : Tooltips for no resistance/immunity/vunerable are displayed as *vunerable* 
+  - **Minor Bug** : Tooltips for no resistance/immunity/vulnerable are displayed as *vulnerable* 
   ( **Believe in the icon** and not the tooltip )
   
   - **Install** : You **have to** rename `BetterTooltips.pak` file from *BT* mod into `50_BetterTooltips.pak`
