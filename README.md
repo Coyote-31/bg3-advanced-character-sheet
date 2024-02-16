@@ -11,7 +11,7 @@ The purpose of this mod is to display **All Types of Resistance** including ones
 Also improve Character and Party panel for Spell Book UI in general (Class info / Spell list / Reactions)
 
 ## 🔖 Version
-- 📦 **AToR** mod : `1.2.0`
+- 📦 **AToR** mod : `1.3.0`
 - 🎮 **BG3** compatible : `4.1.1`
 
 ## ✨ Features
@@ -32,7 +32,28 @@ Also improve Character and Party panel for Spell Book UI in general (Class info 
 
 ## 🔀 Compatibility
 
-### 📄 Files :
+### 🟢 **Compatible** with the following mods :
+- **Better Character and Party Panels** ( *BCPP* ) *All variants* : Tested with BCPP v1.5.9
+- **Better Target Info** ( *BTI* ) : Tested with BTI v1.1.6
+
+    > The icons of resistance work fine. Unfortunately, I can't achieved to display the none ones. But 13 icons on top of the screen all the time is what you really want to anyway ?
+
+### 🟡 Compatible with **minor bugs** :
+- **Better Tooltips** ( *BT* ) : Tested with BT v1.0.8
+
+  - **Minor Bug** : Tooltips for no resistance/immunity/vulnerable are displayed as *vulnerable* 
+  ( **Believe in the icon** and not the tooltip )
+  
+  - **Install** : You **have to** rename `BetterTooltips.pak` file from *BT* mod into `_BetterTooltips.pak`
+    
+    > Any character before 'A' works, like '_' as advice.
+    >
+    > Because *BT* needs to overwrite my mod's files and it doesn't work conventionally (Like with BG3MM) as *AToR* and *BT*. Any character before 'A' works, as does '_' if you follow the instruction to install.
+
+### 🔴 **Not compatible** with the following mods :
+- None -> *Tell me if you find one ❗*
+
+### 📄 Modified Files :
 
 This mod changes the following files of the game :
 
@@ -40,25 +61,6 @@ This mod changes the following files of the game :
   - **CharacterSheetTemplates_k.xaml**
   - **Tooltips.xaml**
   - **Images_k.xaml**
-  
-### 👽 Other mods :
-
-#### 🟢 **Compatible** with the following mods :
-- **Better Character and Party Panels** ( *BCPP* ) *All variants* : Tested with BCPP v1.5.9
-
-#### 🟡 Compatible with **minor bugs** :
-- **Better Tooltips** ( *BT* ) : Tested with BT v1.0.8
-
-  - **Minor Bug** : Tooltips for no resistance/immunity/vulnerable are displayed as *vulnerable* 
-  ( **Believe in the icon** and not the tooltip )
-  
-  - **Install** : You **have to** rename `BetterTooltips.pak` file from *BT* mod into `50_BetterTooltips.pak`
-because *BT* needs to overwrite my mod's files and it doesn't work conventionally (Like with BG3MM).
-
-#### 🔴 **Not compatible** with the following mods :
-- **Better Target Info**
-
-*NB : I am currently working on it to make this possible. Stay tuned ❗*
 
 ## 💾 Install
 
@@ -95,17 +97,16 @@ Remove the mod's `.pak` file from :
   <img src="Docs/Screenshots/Inspect_creature_Mizora.png" alt="Inspect creature Mizora"/>
 </p>
 
+### Reverse Resistances & Conditions order :
+
+<p align="center">
+  <img src="Docs/Screenshots/CharPanel_Karlach.png" alt="Character panel"/>
+</p>
 
 ### Tooltips :
 
 <p align="center">
   <img src="Docs/Screenshots/Tooltips.png" alt="Tooltips"/>
-</p>
-
-### Character panel :
-
-<p align="center">
-  <img src="Docs/Screenshots/CharPanel_Karlach.png" alt="Character panel"/>
 </p>
 
 ### Resistances none :
