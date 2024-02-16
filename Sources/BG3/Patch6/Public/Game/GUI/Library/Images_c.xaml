@@ -1,0 +1,32 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:System="clr-namespace:System;assembly=mscorlib"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+                    xmlns:ls="clr-namespace:ls;assembly=SharedGUI"
+                    xmlns:noesis="clr-namespace:NoesisGUIExtensions;assembly=Noesis.GUI.Extensions"
+					mc:Ignorable="d">
+
+    <!--Keep in mind that anything you add here will be always in memory! Only images that are used globally and are visible most of the time (for controller UI) should be added.-->
+
+    <BitmapImage x:Key="PanelBg" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared_c/c_panel_tooltip.png" />
+    <BitmapImage x:Key="InventoryGridBackground" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel_c/c_inventoryGrid_d.png" />
+    <BitmapImage x:Key="SelectorImage" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel_c/c_equipmentSlotSelector.png" />
+
+    <BitmapImage x:Key="ImmuneShield" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared_c/c_ico_resistance_immune.png"/>
+    <BitmapImage x:Key="ImmuneMagicalShield" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared_c/c_ico_resistance_immune_magic.png"/>
+    <BitmapImage x:Key="ImmuneNonMagicalShield" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared_c/c_ico_resistance_immune_physical.png"/>
+    <BitmapImage x:Key="ResistantMagical" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared_c/c_ico_resistance_magical.png"/>
+    <BitmapImage x:Key="ResistantNonMagical" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared_c/c_ico_resistance_physical.png"/>
+    <BitmapImage x:Key="Vulnerable" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared_c/c_ico_resistance_vulnerable.png"/>
+
+    <BitmapImage x:Key="MarkerDialog" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Map_c/talkNotice_d.png" />
+    <BitmapImage x:Key="MarkerDialogHighlight" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Map_c/talkNotice_h.png" />
+
+    <BitmapImage x:Key="ListArrowCollapsed" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared_c/c_arrowCollapsed_d.png"/>
+    <BitmapImage x:Key="ListArrowCollapsedH" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared_c/c_arrowCollapsed_h.png"/>
+    <BitmapImage x:Key="ListArrowExpanded" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared_c/c_arrowExpanded_d.png"/>
+    <BitmapImage x:Key="ListArrowExpandedH" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared_c/c_arrowExpanded_h.png"/>
+    <BitmapImage x:Key="StatusBackground" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared_c/c_HUD_statusBG.png"/>
+</ResourceDictionary>
