@@ -14,33 +14,37 @@
 
 	<BitmapImage x:Key="ActiveModArrow" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/BottomBar/btn_pil_activemod_arrow.png" />
     
-    <!--=== MOD_BTI_C : Update source images to replace BTI's ones ===-->
-    <!-- MOD_BTI_C : Update UriSource with vanilla // MOD_BTI : pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_resistance_immune1.png -->
+    <!--=== MOD_BTI_C: Update source images to replace BTI's ones ===-->
+    <!-- MOD_BTI_C: Update UriSource with vanilla // MOD_BTI : pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_resistance_immune1.png -->
     <BitmapImage x:Key="ImmuneShield1" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_resistance_immune.png"/>
-    <!-- MOD_BTI_C : Update UriSource with AToR // MOD_BTI : pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_resistance_magical1.png -->
+    <!-- MOD_BTI_C: Update UriSource with AToR // MOD_BTI : pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_resistance_magical1.png -->
     <BitmapImage x:Key="ResistantMagical1" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Resistances/ico_resistance_magic_shield_short_bti.png"/>
-    <!-- MOD_BTI_C : Update UriSource with AToR // MOD_BTI : pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_resistance_physical1.png -->
+    <!-- MOD_BTI_C: Update UriSource with AToR // MOD_BTI : pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_resistance_physical1.png -->
     <BitmapImage x:Key="ResistantNonMagical1" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Resistances/ico_resistance_physical_shield_bti.png"/>
     <!-- MOD_BTI_C: Update UriSource with vanilla // MOD_BTI : pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_resistance_vulnerable_phys.png -->
     <BitmapImage x:Key="Vulnerable_phys" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Resistances/ico_resistance_vulnerable.png"/>
 	<!-- MOD_BTI_C: Remove as its only apply once with Vulnerable_phys -->
-    <!-- MOD_BTI : <BitmapImage x:Key="Vulnerable_magic" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_resistance_vulnerable_magic.png"/> -->
-    <!-- MOD_BTI : <BitmapImage x:Key="Vulnerable_magic" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_resistance_vulnerable_magic.png"/> -->
+    <!-- MOD_BTI: <BitmapImage x:Key="Vulnerable_magic" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_resistance_vulnerable_magic.png"/> -->
+    <!-- MOD_BTI: <BitmapImage x:Key="Vulnerable_magic" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_resistance_vulnerable_magic.png"/> -->
 
-    <BitmapImage x:Key="ImmuneShield" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_resistance_immune.png"/>
-    <BitmapImage x:Key="ImmuneMagicalShield" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_resistance_immune_magic.png"/>
-    <BitmapImage x:Key="ImmuneNonMagicalShield" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_resistance_immune_physical.png"/>
-    <!-- MOD_AToR <BitmapImage x:Key="ResistantMagical" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_resistance_magical.png"/> -->
+    <!--=== MOD_AToR: Update vanilla images ===-->
+    <!-- BG3: pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_resistance_immune.png -->
+    <BitmapImage x:Key="ImmuneShield" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Resistances/ico_resistance_immune.png"/>
+    <!-- BG3: pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_resistance_immune_magic.png -->
+    <BitmapImage x:Key="ImmuneMagicalShield" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Resistances/ico_resistance_immune_magic.png"/>
+    <!-- BG3: pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_resistance_immune_physical.png -->
+    <BitmapImage x:Key="ImmuneNonMagicalShield" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Resistances/ico_resistance_immune_physical.png"/>
+    <!--  BG3: pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_resistance_magical.png -->
     <BitmapImage x:Key="ResistantMagical" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Resistances/ico_resistance_magic_shield.png"/>
-    <!-- MOD_AToR <BitmapImage x:Key="ResistantNonMagical" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_resistance_physical.png"/> -->
+    <!--  BG3: pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_resistance_physical.png -->
     <BitmapImage x:Key="ResistantNonMagical" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Resistances/ico_resistance_physical_shield.png"/>
-    <!-- MOD_AToR <BitmapImage x:Key="Vulnerable" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_resistance_vulnerable.png"/> -->
+    <!--  BG3: pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_resistance_vulnerable.png -->
     <BitmapImage x:Key="Vulnerable" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Resistances/ico_resistance_vulnerable.png"/>
 
     <BitmapImage x:Key="MarkerDialog" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Map/talkNotice_d.png" />
     <BitmapImage x:Key="MarkerDialogHighlight" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Map/talkNotice_h.png" />
     
-    <!-- MOD_AToR: images -->
+    <!--=== MOD_AToR: Add images ===-->
     <BitmapImage x:Key="ResistanceNone" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Resistances/ico_resistance_none.png"/>
     <BitmapImage x:Key="ResistantMagicalShieldShort" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Resistances/ico_resistance_magic_shield_short.png"/>
 
