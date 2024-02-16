@@ -46,9 +46,9 @@ Also improve Character and Party panel for Spell Book UI in general (Class info 
   
   - **Install** : You **have to** rename `BetterTooltips.pak` file from *BT* mod into `_BetterTooltips.pak`
     
-    > Any character before 'A' works, like '_' as advice.
+    > Any character before 'A' works, as does '_' if you follow the instruction to install.
     >
-    > Because *BT* needs to overwrite my mod's files and it doesn't work conventionally (Like with BG3MM) as *AToR* and *BT*. Any character before 'A' works, as does '_' if you follow the instruction to install.
+    > Because *BT* needs to overwrite my mod's files and it doesn't work conventionally (Like with BG3MM). *AToR* and *BT* are UI mods they handle the order differently (Thats why they are in *overrides* in BG3MM).
 
 ### 🔴 **Not compatible** with the following mods :
 - None -> *Tell me if you find one ❗*
