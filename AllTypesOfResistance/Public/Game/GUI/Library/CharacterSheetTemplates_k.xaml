@@ -1424,7 +1424,7 @@
             </b:Interaction.Triggers>
 
             <!-- MOD_AToR: Update Background Stretch / Add Margin // BG3: Stretch="None" -->
-            <Image x:Name="Background" Source="{StaticResource SpellbookBg}" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="254,0"/>
+            <Image x:Name="Background" Source="{StaticResource SpellbookBg}" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="254,14,254,0"/>
 
             <!-- Spellbook -->
             <!-- MOD_AToR: Add Margin -->
@@ -2179,7 +2179,7 @@
                                 </StackPanel>
 
                                 <!-- MOD_AToR: Footer ScrollBar // BG3: Margin="50,0,-50,0" Padding="-50,0,50,0" -->
-                                <ls:LSScrollViewer x:Name="ClassPanelScrollableContent" Grid.Row="2" VerticalScrollBarVisibility="Auto" Margin="20,4,-20,-12" Padding="-20,0,20,-10">
+                                <ls:LSScrollViewer x:Name="ClassPanelScrollableContent" Grid.Row="2" VerticalScrollBarVisibility="Auto" Margin="20,4,-20,-2" Padding="-20,0,20,0">
                                     <!-- MOD_AToR: Add margin between top bar and class panel & bottom for 2 scrolls -->
                                     <StackPanel x:Name="ScrollableContent" Margin="6,0,6,20">
                                         <!-- Known spells section -->
@@ -2671,6 +2671,8 @@
             <DataTrigger Binding="{Binding SelectedItem.Class.MustPrepareSpells, ElementName=Tabs, FallbackValue=False}" Value="True">
                 <!-- MOD_AToR: Update MaxHeight 1300 // BG3: MaxHeight="1200"/> -->
                 <Setter TargetName="WholePanelScrollViewerRoot" Property="MaxHeight" Value="1300"/>
+                <!-- MOD_AToR: Disabled for now until I find a fix see TODOs -->
+                <Setter TargetName="WholePanelScrollViewer" Property="VerticalScrollBarVisibility" Value="Disabled"/>
             </DataTrigger>
             
             <!-- MOD_AToR: Add offset to inner scrollBar when outter is visible /> -->
