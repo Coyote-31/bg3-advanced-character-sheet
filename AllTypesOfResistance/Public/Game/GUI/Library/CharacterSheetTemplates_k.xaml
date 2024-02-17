@@ -425,7 +425,7 @@
 
                 <!-- MOD_AToR: Add reactions scroller padding & margin when in PartyPanel -->
                 <Setter TargetName="ReactionScrollerViewer" Property="Margin" Value="14,0,-14,35"/>
-                <Setter TargetName="ReactionScrollerViewer" Property="Padding" Value="6,0,-6,0"/>
+                <Setter TargetName="ReactionScrollerViewer" Property="Padding" Value="2,0,-2,0"/>
             </DataTrigger>
 
             <!-- MOD_AToR: Add reactions scroller padding & margin when in PartyPanel and BCPP is detected -->            
