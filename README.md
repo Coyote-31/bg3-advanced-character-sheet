@@ -4,15 +4,15 @@
 
 # AToR : All Types of Resistance (BG3 mod)
 
-This is a mod for the game Baldur's Gate 3.
+This is a mod for the game **Baldur's Gate 3**.
 
 The purpose of this mod is to display **All Types of Resistance** including ones without any immunity, resistance or weakness.
 
-Also improve Character and Party panel for Spell Book UI in general (Class info / Spell list / Reactions)
+Also improve Character and Party panel for Spell Book UI in general : Class info, Spell list and Reactions.
 
 ## 🔖 Version
-- 📦 **AToR** mod : `1.3.0`
-- 🎮 **BG3** compatible : `4.1.1`
+- 📦 **AToR** mod : `1.4.0`
+- 🎮 **BG3** compatibility : `4.6.0 - Patch 6`
 
 ## ✨ Features
 
