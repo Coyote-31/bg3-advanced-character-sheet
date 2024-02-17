@@ -176,7 +176,7 @@
             <SolidColorBrush x:Key="RowBG_guest_h" Opacity="0.4" Color="{StaticResource guestAccent100}"/>
 
             <DataTemplate DataType="ls:VMInterrupt">
-                <!-- MOD_BCPP_C: Add dynamic width -->
+                <!-- MOD_AToR: Add dynamic width -->
                 <Grid x:Name="GridVMInterrupt" Width="{Binding ActualWidth, ElementName=Interrupts}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -188,7 +188,7 @@
                     </Grid.RowDefinitions>
 
                     <ContentPresenter x:Name="Icon" Grid.Column="0" Grid.RowSpan="2" ContentTemplate="{StaticResource InterruptIcon}" Content="{Binding .}" IsHitTestVisible="False" Margin="0,0,10,0" VerticalAlignment="Center"/>
-                    <!-- MOD_BCPP_C: Add wrapping to reaction title -->
+                    <!-- MOD_AToR: Add wrapping to reaction title -->
                     <!-- BG3: <TextBlock x:Name="Name" Grid.Column="1" Text="{Binding Name}" Foreground="{StaticResource LS_tint100}" HorizontalAlignment="Left"/> -->
                     <TextBlock x:Name="Name" Grid.Column="1" Text="{Binding Name}" Foreground="{StaticResource LS_tint100}" HorizontalAlignment="Left" MaxWidth="550" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis">
                         <TextBlock.Width>
@@ -214,7 +214,7 @@
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
-                    <!-- MOD_BCPP_C: Add Dynamic Width -->
+                    <!-- MOD_AToR: Add Dynamic Width -->
                     <TextBlock x:Name="AvailableMsg" Grid.Column="1" Grid.Row="1" Text="{Binding Source=h7bb323e1g2294g4f5eg905eg82ae9d71abf0,Converter={StaticResource TranslatedStringConverter}}" FontSize="{StaticResource ScaledMediumFontSize}" Foreground="{StaticResource LS_alertTxtColor}" Visibility="Collapsed" MaxWidth="384" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" HorizontalAlignment="Left">
                     <TextBlock.Width>
                         <MultiBinding Converter="{StaticResource AddMultipleConverter}">
