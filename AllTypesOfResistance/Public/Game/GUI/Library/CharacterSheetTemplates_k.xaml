@@ -151,9 +151,10 @@
             </DataTrigger>
         </DataTemplate.Triggers>
     </DataTemplate>
-    
-    <!--=== MOD_AToR: Extracted template from DataTemplates.xaml / InterruptToggleBtnTemplate // START ===-->
-    <!-- MOD_AToR: Dynamic Interrupt btn / Reactions control -->
+
+    <!-- ========================================================================================= -->
+    <!-- === MOD_AToR: Control dynamic Interrupt / Reactions button - START                    === -->
+    <!-- === MOD_AToR: Extracted template from DataTemplates.xaml / InterruptToggleBtnTemplate === -->
 	<ControlTemplate x:Key="InterruptToggleBtnTemplateDynamic" TargetType="ToggleButton">
         <ControlTemplate.Resources>
             <Style TargetType="TextBlock" >
@@ -312,7 +313,8 @@
             </DataTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
-    <!--=== MOD_AToR: Extracted template from DataTemplates.xaml / InterruptToggleBtnTemplate // END ===-->
+    <!-- === MOD_AToR: Control dynamic Interrupt / Reactions button - END === -->
+    <!-- ==================================================================== -->
 
     <!--===== REACTIONS TEMPLATE =====-->
     <ControlTemplate x:Key="InterruptPanelTemplate" TargetType="Control">
@@ -3335,12 +3337,123 @@ Source="{StaticResource SavingThrowDice}">
             </DataTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
-    
-    
 
-    <!-- ===== MOD_AToR: START ===== -->
+    <!-- ========================================= -->
+    <!-- ===== MOD_AToR: Resistances - START ===== -->
+
+    <!-- ==================================================================================== -->
+    <!-- === MOD_AToR: Tooltips DataTemplate - START                                      === -->
+    <!-- === MOD_AToR: Extracted from Tooltips.xaml / DataType="{x:Type ls:VMResistance}" === -->
+    <DataTemplate DataType="{x:Type ls:VMResistance}">
+        <!-- MOD_AToR: images -->
+        <DataTemplate.Resources>
+            <ImageSource x:Key="NoResistanceIcon">pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/resistance_none_bg.png</ImageSource>
+        </DataTemplate.Resources>
+        <!-- Enum value stored in tag as LocaEnum doesn't correctly support values past MAX. For those cases we have to alter the value (see triggers) -->
+        <StackPanel x:Name="root" Tag="{Binding DamageTypeValue}">
+            <StackPanel.Resources>
+                <Style TargetType="ls:LSSpan" BasedOn="{StaticResource LSSpanStyle}">
+                    <Style.Triggers>
+                        <Trigger Property="TagType" Value="hl">
+                            <Setter Property="Foreground" Value="{StaticResource LS_accent75TxtColor}" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </StackPanel.Resources>
+            <!-- Default values and content is Vulnerable -->
+            <Border Style="{StaticResource TooltipStripTopStyleWithContent}">
+                <StackPanel>
+                    <TextBlock x:Name="Title" Style="{StaticResource TooltipTitleNoCollapseStyle}" ls:TextBlockFormatter.SourceText="{Binding Tag, ElementName=root, Converter={StaticResource EnumTranslatedStringConverter}, ConverterParameter='h060ad079g2abdg43d8g9873gbb5fc58ba0e0'}"/>
+
+                    <TextBlock Style="{StaticResource TooltipDescriptionStyle}" Visibility="{Binding Source, Converter={StaticResource NullToCollapsedConverter}, ConverterParameter='EmptyString'}">
+                         <ls:TextBlockFormatter.SourceText>
+                            <MultiBinding Converter="{StaticResource ParameterizedTranslatedStringConverter}">
+                                <Binding Source="hea17a85cg4aaag4679g9cbdge242e8f3bb9a"/>
+                                <Binding Path="Source"/>
+                            </MultiBinding>
+                         </ls:TextBlockFormatter.SourceText>
+                    </TextBlock>
+                </StackPanel>
+            </Border>
+            <Rectangle Style="{StaticResource tooltipHeaderDividerLine}" />
+            <DockPanel x:Name="BaseDescriptionContainer" Width="{StaticResource MaxTooltipContentWidth}">
+                <!-- MOD_AToR: Change margin -->
+                <Image x:Name="BaseIcon" Source="{StaticResource Vulnerable}" Stretch="None" VerticalAlignment="Center" Margin="0,0,20,0" DockPanel.Dock="Left"/>
+                <TextBlock x:Name="BaseDescription" Style="{StaticResource TooltipBodyStyle}" Margin="0 20" ls:TextBlockFormatter.SourceText="{Binding Tag, ElementName=root, Converter={StaticResource EnumTranslatedStringConverter}, ConverterParameter='h8aa64a61g697ag44eag8025g72455bb15041'}" DockPanel.Dock="Right"/>
+            </DockPanel>
+            <DockPanel x:Name="AdditionalDescriptionContainer" Visibility="Collapsed" Width="{StaticResource MaxTooltipContentWidth}">
+                <!-- MOD_AToR: Change margin -->
+                <Image x:Name="AdditionalIcon" Source="{StaticResource ResistantNonMagical}" Stretch="None" VerticalAlignment="Center" Margin="0,0,20,0" DockPanel.Dock="Left"/>
+                <TextBlock x:Name="AdditionalDescription" Style="{StaticResource TooltipBodyStyle}" Margin="0 20" ls:TextBlockFormatter.SourceText="{Binding Tag, ElementName=root, Converter={StaticResource EnumTranslatedStringConverter}, ConverterParameter='h05322b79g00ecg45c6gbbe0g691acc45fe63'}" DockPanel.Dock="Right"/>
+            </DockPanel>
+
+            <StackPanel x:Name="Duration" Orientation="Horizontal" Margin="{StaticResource DefaultMarginTopBottom}" Visibility="{Binding Duration, Converter={StaticResource CountToVisibilityConverter}}">
+                <Image Source="{StaticResource TTHourglassImage}" Stretch="None" VerticalAlignment="Center" />
+                <TextBlock x:Name="DurationText" FontSize="{StaticResource MediumFontSize}" Margin="28,0,0,0"  VerticalAlignment="Center" Foreground="{StaticResource TooltipColor.Special}">
+                    <TextBlock.Text>
+                        <MultiBinding Converter="{StaticResource ParameterizedTranslatedStringConverter}">
+                            <Binding Source="h2dc60835g9000g440fga70fg330291eda7eb"/>
+                            <Binding Path="Duration"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+            </StackPanel>
+        </StackPanel>
+        <DataTemplate.Triggers>
+            <!-- Adjusting Tag value for enum values past MAX (Only Spell is used currently) -->
+            <DataTrigger Binding="{Binding DamageType}" Value="Spell">
+                <Setter TargetName="root" Property="Tag" Value="{Binding DamageTypeValue, Converter={StaticResource AddConverter}, ConverterParameter=-1}"/>
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding NonMagical}" Value="Immune">
+                <Setter TargetName="BaseIcon" Property="Source" Value="{StaticResource ImmuneNonMagicalShield}"/>
+                <Setter TargetName="BaseDescription" Property="ls:TextBlockFormatter.SourceText" Value="{Binding Tag, ElementName=root, Converter={StaticResource EnumTranslatedStringConverter}, ConverterParameter='h97808b5cgaad5g464dg968eg0c072a28050f'}"/>
+                <Setter TargetName="Title" Property="ls:TextBlockFormatter.SourceText" Value="{Binding Tag, ElementName=root, Converter={StaticResource EnumTranslatedStringConverter}, ConverterParameter='h4c9804e9gee38g479agb4d4g58fb0b82ef4a'}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Magical}" Value="Immune">
+                <Setter TargetName="BaseIcon" Property="Source" Value="{StaticResource ImmuneMagicalShield}"/>
+                <Setter TargetName="BaseDescription" Property="ls:TextBlockFormatter.SourceText" Value="{Binding Tag, ElementName=root, Converter={StaticResource EnumTranslatedStringConverter}, ConverterParameter='h3aae6c8cg0762g42a1g8009g198913051bda'}"/>
+                <Setter TargetName="Title" Property="ls:TextBlockFormatter.SourceText" Value="{Binding Tag, ElementName=root, Converter={StaticResource EnumTranslatedStringConverter}, ConverterParameter='h4c9804e9gee38g479agb4d4g58fb0b82ef4a'}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Full}" Value="Immune">
+                <Setter TargetName="BaseIcon" Property="Source" Value="{StaticResource ImmuneShield}"/>
+                <Setter TargetName="BaseDescription" Property="ls:TextBlockFormatter.SourceText" Value="{Binding Tag, ElementName=root, Converter={StaticResource EnumTranslatedStringConverter}, ConverterParameter='h1a4566fcgb2a0g403bg8290ga38efbb04b46'}"/>
+                <Setter TargetName="Title" Property="ls:TextBlockFormatter.SourceText" Value="{Binding Tag, ElementName=root, Converter={StaticResource EnumTranslatedStringConverter}, ConverterParameter='h4c9804e9gee38g479agb4d4g58fb0b82ef4a'}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding NonMagical}" Value="Resistant">
+                <Setter TargetName="BaseDescriptionContainer" Property="Visibility" Value="Collapsed"/>
+                <Setter TargetName="AdditionalDescriptionContainer" Property="Visibility" Value="Visible"/>
+                <Setter TargetName="AdditionalIcon" Property="Margin" Value="0,15,20,0"/>
+                <Setter TargetName="Title" Property="ls:TextBlockFormatter.SourceText" Value="{Binding Tag, ElementName=root, Converter={StaticResource EnumTranslatedStringConverter}, ConverterParameter='h1acad36eg1d2ag46c5g9b98g906b8a17bb70'}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Magical}" Value="Resistant">
+                <Setter TargetName="BaseDescriptionContainer" Property="Visibility" Value="Visible"/>
+                <Setter TargetName="BaseIcon" Property="Source" Value="{StaticResource ResistantMagical}"/>
+                <Setter TargetName="BaseIcon" Property="Margin" Value="0,15,20,0"/>
+                <Setter TargetName="BaseDescription" Property="ls:TextBlockFormatter.SourceText" Value="{Binding Tag, ElementName=root, Converter={StaticResource EnumTranslatedStringConverter}, ConverterParameter='h613f3ccbgb531g4175ga9cbge4a9ed938a12'}"/>
+                <Setter TargetName="Title" Property="ls:TextBlockFormatter.SourceText" Value="{Binding Tag, ElementName=root, Converter={StaticResource EnumTranslatedStringConverter}, ConverterParameter='h1acad36eg1d2ag46c5g9b98g906b8a17bb70'}"/>
+            </DataTrigger>
+            
+            <!-- MOD_AToR: Add no resistance or vulnerable tooltip -->
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Full}" Value="None"/>
+                    <Condition Binding="{Binding NonMagical}" Value="None"/>
+                    <Condition Binding="{Binding Magical}" Value="None"/>
+                </MultiDataTrigger.Conditions>
+                <Setter TargetName="BaseDescriptionContainer" Property="Visibility" Value="Visible"/>
+                <Setter TargetName="BaseIcon" Property="Source" Value="{StaticResource NoResistanceIcon}"/>
+                <Setter TargetName="BaseIcon" Property="Margin" Value="8,0,28,0"/>
+                <Setter TargetName="BaseDescription" Property="ls:TextBlockFormatter.SourceText" Value="{Binding Source='h78e41bdfg7ae5g47d5g902cgf32ae25a53de', Converter={StaticResource TranslatedStringConverter}}"/>
+                <Setter TargetName="Title" Property="ls:TextBlockFormatter.SourceText" Value="{Binding Tag, ElementName=root, Converter={StaticResource EnumTranslatedStringConverter}, ConverterParameter='h1acad36eg1d2ag46c5g9b98g906b8a17bb70'}"/>
+            </MultiDataTrigger>
+            
+        </DataTemplate.Triggers>
+    </DataTemplate>
+    <!-- === MOD_AToR: Tooltips DataTemplate - END === -->
+    <!-- ============================================= -->
         
-    <!-- MOD_AToR: Control Templates -->
+    <!-- === MOD_AToR: Control Templates === -->
     
     <!-- MOD_AToR: ImmuneShield -->
     <ControlTemplate x:Key="CtrlImmuneShield" TargetType="Control">
@@ -3967,8 +4080,8 @@ Source="{StaticResource SavingThrowDice}">
             
         </StackPanel>
     </ControlTemplate>
-    
-    <!-- ===== MOD_AToR: END ===== -->
+    <!-- ===== MOD_AToR: Resistances - END ===== -->
+    <!-- ======================================= -->
 
     <!-- ===== RESISTANCES LIST TEMPLATE=====-->
     <ControlTemplate x:Key="ResistanceListTemplate">
