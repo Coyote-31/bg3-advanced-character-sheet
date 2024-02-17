@@ -3385,7 +3385,7 @@ Source="{StaticResource SavingThrowDice}">
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Full}" Value="Resistant">
                     <Setter TargetName="MagicalArrow" Property="Source" Value="{StaticResource ResistantMagicalShieldShort}"/>
-                    <Setter TargetName="MagicalArrow" Property="Margin" Value="0,-6,0,0"/>
+                    <Setter TargetName="MagicalArrow" Property="Margin" Value="0,-4,0,0"/>
                 </DataTrigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
