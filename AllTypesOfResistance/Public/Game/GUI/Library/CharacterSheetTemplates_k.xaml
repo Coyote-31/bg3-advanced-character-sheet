@@ -152,6 +152,7 @@
         </DataTemplate.Triggers>
     </DataTemplate>
     
+    <!--=== MOD_AToR: Extracted template from DataTemplates.xaml / InterruptToggleBtnTemplate // START ===-->
     <!-- MOD_AToR: Dynamic Interrupt btn / Reactions control -->
 	<ControlTemplate x:Key="InterruptToggleBtnTemplateDynamic" TargetType="ToggleButton">
         <ControlTemplate.Resources>
@@ -311,7 +312,7 @@
             </DataTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
-    
+    <!--=== MOD_AToR: Extracted template from DataTemplates.xaml / InterruptToggleBtnTemplate // END ===-->
 
     <!--===== REACTIONS TEMPLATE =====-->
     <ControlTemplate x:Key="InterruptPanelTemplate" TargetType="Control">
