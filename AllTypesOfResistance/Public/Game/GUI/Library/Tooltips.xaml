@@ -223,7 +223,7 @@
         </Style.Triggers>
     </Style>
 
-    <ls:LSTooltip x:Key="PlacementParentDCTooltip" IsHitTestVisible="False" Content="{Binding Path=PlacementTarget.DataContext ,RelativeSource={RelativeSource Mode=Self}}" />
+    <ls:LSTooltip x:Key="PlacementParentDCTooltip" IsHitTestVisible="False" Content="{Binding Path=PlacementTarget.DataContext ,RelativeSource={RelativeSource Mode=Self}}" ToolTipService.HorizontalOffset="{Binding (ToolTipService.HorizontalOffset), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
     <ls:LSTooltip x:Key="PlacementParentDCTooltipOffset" IsHitTestVisible="False" Content="{Binding Path=PlacementTarget.DataContext ,RelativeSource={RelativeSource Mode=Self}}" ToolTipService.HorizontalOffset="{Binding (ToolTipService.HorizontalOffset), RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
 
     <Style x:Key="TooltipTitleNoCollapseStyle" TargetType="TextBlock" BasedOn="{StaticResource TooltipBaseTextStyle}">
@@ -278,12 +278,6 @@
     <Style x:Key="TooltipCtxTransStringDescriptionStyle" TargetType="TextBlock" BasedOn="{StaticResource TooltipCtxTransStringBodyStyle}">
         <Setter Property="Width" Value="{StaticResource MaxTooltipContentWidth}"/>
         <Setter Property="Margin" Value="{StaticResource DefaultMarginTop}"/>
-    </Style>
-
-    <Style x:Key="TooltipUnavailableReasonStyle" TargetType="TextBlock" BasedOn="{StaticResource TooltipBaseTextStyle}">
-        <Setter Property="Foreground" Value="{StaticResource TooltipColor.Alert}" />
-        <Setter Property="Width" Value="{StaticResource DetailSectionWidth}" />
-        <Setter Property="TextWrapping" Value="Wrap" />
     </Style>
 
     <Style x:Key="TooltipOverrideTextStyle" TargetType="TextBlock" BasedOn="{StaticResource TooltipBaseTextStyle}">
@@ -706,7 +700,7 @@
     <Style x:Key="PropertyKeyStyle" TargetType="TextBlock" BasedOn="{StaticResource TooltipSectionTextStyle}">
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="MaxWidth" Value="{StaticResource DetailSectionWidth}"/>
+        <Setter Property="MaxWidth" Value="{StaticResource MaxTooltipContentWidth}"/>
         <Style.Triggers>
             <DataTrigger Binding="{Binding TypeId}" Value="Range">
                 <Setter Property="ls:TextBlockFormatter.SourceText" Value="{Binding Source='hb984e30dgab6ag4f54g883fg2f499f03b5f5',Converter={StaticResource TranslatedStringConverter}}" />
@@ -1483,20 +1477,111 @@
                     <ls:LSTooltip.ContentTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <Grid x:Name="KeyValue" Style="{StaticResource SmallTooltipWidth}">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
+                                <Grid x:Name="PropertyTitle" Visibility="Collapsed" Margin="0,0,0,12" VerticalAlignment="Top">
+                                    <Border Style="{StaticResource TooltipStripTopStyleWithContent}" >
+                                        <!-- HEADER -->
+                                        <DockPanel Style="{StaticResource tooltipElementPadOnly}">
+                                            <Image x:Name="PropertyTitleIcon" DockPanel.Dock="Left" Source="{x:Null}" Stretch="None" Margin="-6 -8 18 0" Visibility="Collapsed"/>
+                                            <TextBlock x:Name="TitleText" DockPanel.Dock="Left" Style="{StaticResource TooltipTitleStyle}" Margin="{StaticResource TitleWithoutSubtitleMargin}" VerticalAlignment="Center"/>
+                                        </DockPanel>
+                                    </Border>
 
-                                    <TextBlock Grid.Column="0" Style="{StaticResource PropertyKeyStyle}"/>
-                                    <TextBlock Grid.Column="1" Style="{StaticResource PropertySeparatorStyle}"/>
-                                    <TextBlock Grid.Column="2" Style="{StaticResource PropertyValueStyle}"/>
+                                    <Rectangle VerticalAlignment="Bottom" Style="{StaticResource tooltipHeaderDividerLine}" />
                                 </Grid>
-                                <TextBlock x:Name="AdditionalText" Text="" Style="{StaticResource TooltipSectionTextStyle}" Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+                                <DockPanel>
+                                    <WrapPanel x:Name="KeyValue" DockPanel.Dock="Top" Style="{StaticResource SmallTooltipWidthWrapPanel}" >
+                                        <Image x:Name="PropertyIcon" Source="{x:Null}" Stretch="None" Margin="0 0 11 0" Visibility="Collapsed"/>
+                                        <TextBlock Style="{StaticResource PropertyKeyStyle}" />
+                                        <TextBlock Style="{StaticResource PropertySeparatorStyle}" />
+                                        <TextBlock Style="{StaticResource PropertyValueStyle}"  />
+                                    </WrapPanel>
+                                    <TextBlock x:Name="AdditionalText" DockPanel.Dock="Bottom" Text="" Style="{StaticResource TooltipSectionTextStyle}" Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                </DockPanel>
                             </StackPanel>
                             <DataTemplate.Triggers>
+
+                                <DataTrigger Binding="{Binding TypeId}" Value="Range">
+                                    <Setter TargetName="PropertyIcon" Property="Source" Value="{StaticResource IconRange}" />
+                                    <Setter TargetName="PropertyIcon" Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding TypeId}" Value="ZoneRadius">
+                                    <Setter TargetName="PropertyIcon" Property="Source" Value="{StaticResource IconRadius}" />
+                                    <Setter TargetName="PropertyIcon" Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding TypeId}" Value="Light">
+                                    <Setter TargetName="PropertyIcon" Property="Source" Value="{StaticResource IconLight}" />
+                                    <Setter TargetName="PropertyIcon" Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding TypeId}" Value="Heavy">
+                                    <Setter TargetName="PropertyIcon" Property="Source" Value="{StaticResource IconHeavy}" />
+                                    <Setter TargetName="PropertyIcon" Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding TypeId}" Value="Ammunition">
+                                    <Setter TargetName="PropertyIcon" Property="Source" Value="{StaticResource IconAmmunition}" />
+                                    <Setter TargetName="PropertyIcon" Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding TypeId}" Value="Loading">
+                                    <Setter TargetName="PropertyIcon" Property="Source" Value="{StaticResource IconLoading}" />
+                                    <Setter TargetName="PropertyIcon" Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding TypeId}" Value="Finesse">
+                                    <Setter TargetName="PropertyIcon" Property="Source" Value="{StaticResource IconFinesse}" />
+                                    <Setter TargetName="PropertyIcon" Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding TypeId}" Value="TwoHanded">
+                                    <Setter TargetName="PropertyIcon" Property="Source" Value="{StaticResource IconHanded}" />
+                                    <Setter TargetName="PropertyIcon" Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding TypeId}" Value="Thrown">
+                                    <Setter TargetName="PropertyIcon" Property="Source" Value="{StaticResource IconThrown}" />
+                                    <Setter TargetName="PropertyIcon" Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding TypeId}" Value="Reach">
+                                    <Setter TargetName="PropertyIcon" Property="Source" Value="{StaticResource IconReach}" />
+                                    <Setter TargetName="PropertyIcon" Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding TypeId}" Value="Dippable">
+                                    <Setter TargetName="PropertyIcon" Property="Source" Value="{StaticResource IconDippable}" />
+                                    <Setter TargetName="PropertyIcon" Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding TypeId}" Value="NoDualWield">
+                                    <Setter TargetName="PropertyIcon" Property="Source" Value="{StaticResource IconNoDuelWield}" />
+                                    <Setter TargetName="PropertyIcon" Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding TypeId}" Value="AlwaysPrepared">
+                                    <Setter TargetName="PropertyIcon" Property="Source" Value="{StaticResource IconPreparation}" />
+                                    <Setter TargetName="PropertyIcon" Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding TypeId}" Value="Concentration">
+                                    <Setter TargetName="TitleText" Property="Text" Value="{Binding Source='hccfa6976gd950g49e0g88a3gbb0e8380175f',Converter={StaticResource TranslatedStringConverter}}" />
+                                    <Setter TargetName="PropertyTitleIcon" Property="Source" Value="{StaticResource IconConcentration}" />
+                                    <Setter TargetName="PropertyTitleIcon" Property="Visibility" Value="Visible"/>
+                                    <Setter TargetName="PropertyTitle" Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding TypeId}" Value="CastAbility">
+                                    <Setter TargetName="PropertyIcon" Property="Source" Value="{StaticResource IconPreparation}" />
+                                    <Setter TargetName="PropertyIcon" Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding TypeId}" Value="Cooldown">
+                                    <Setter TargetName="PropertyIcon" Property="Source" Value="{StaticResource IconCooldown}" />
+                                    <Setter TargetName="PropertyIcon" Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
 
                                 <MultiDataTrigger>
                                     <MultiDataTrigger.Conditions>
@@ -2468,7 +2553,7 @@
             </Border>
             <Rectangle Style="{StaticResource tooltipHeaderDividerLine}" />
 
-            <TextBlock Style="{StaticResource TooltipDefaultTextStyle}" TextWrapping="Wrap" Width="{StaticResource MaxTooltipContentWidth}" TextAlignment="Left" ls:TextBlockFormatter.SourceText="{Binding ., Converter={StaticResource TranslatedStringConverter}}"/>
+            <TextBlock Style="{StaticResource TooltipDefaultTextStyle}" Margin="{StaticResource ExtraPadSpaceTop}"  TextWrapping="Wrap" Width="{StaticResource MaxTooltipContentWidth}" TextAlignment="Left" ls:TextBlockFormatter.SourceText="{Binding ., Converter={StaticResource TranslatedStringConverter}}"/>
 
         </StackPanel>
     </DataTemplate>
@@ -3515,31 +3600,6 @@
     </ControlTemplate>
 
     <!-- Section separator -->
-
-    <ImageSource x:Key="TTSepGradLeftImage">pack://application:,,,/GustavNoesisGUI;component/Assets/Tooltips/TT_separatorGradient_left.png</ImageSource>
-    <ImageSource x:Key="TTSepGradMidImage">pack://application:,,,/GustavNoesisGUI;component/Assets/Tooltips/TT_separatorGradient_middle.png</ImageSource>
-    <ImageSource x:Key="TTSepGradRightImage">pack://application:,,,/GustavNoesisGUI;component/Assets/Tooltips/TT_separatorGradient_right.png</ImageSource>
-    <ControlTemplate x:Key="SubSectionTitleTemplate">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-
-            <ContentPresenter Grid.Column="0" x:Name="Content" VerticalAlignment="Center" />
-            <Grid Grid.Column="1" Height="20" Margin="8,0,0,0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-
-                <Image Grid.Column="0" Source="{StaticResource TTSepGradLeftImage}" Stretch="None"/>
-                <Image Grid.Column="1" Source="{StaticResource TTSepGradMidImage}" Stretch="Fill"/>
-                <Image Grid.Column="2" Source="{StaticResource TTSepGradRightImage}" Stretch="None"/>
-            </Grid>
-        </Grid>
-    </ControlTemplate>
 
     <Style x:Key="SubSectionPanelStyle" TargetType="StackPanel">
         <Setter Property="Orientation" Value="Horizontal"/>
@@ -5179,7 +5239,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <DockPanel HorizontalAlignment="Left" Grid.Column="1">
-                            <TextBlock ls:TextBlockFormatter.SourceText="{Binding Description}" Margin="0,0,8,0" DockPanel.Dock="Left">
+                            <TextBlock x:Name="Description" ls:TextBlockFormatter.SourceText="{Binding Description}" Margin="0,0,8,0" DockPanel.Dock="Left">
                                 <TextBlock.Resources>
                                     <Style TargetType="ls:LSSpan" BasedOn="{StaticResource BaseSpanStyle}">
                                         <Style.Triggers>
@@ -5202,6 +5262,9 @@
                         <DataTrigger Binding="{Binding Value}" Value="0">
                             <Setter TargetName="statValue" Property="Visibility" Value="Collapsed"/>
                             <Setter TargetName="additionSign" Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsWeaponEnchantment}" Value="True">
+                            <Setter TargetName="Description" Property="ls:TextBlockFormatter.SourceText" Value="{Binding Source='h0d6e5793g954eg40e4g8941gaf2367d0d939', Converter={StaticResource TranslatedStringConverter}}"/>
                         </DataTrigger>
                     </DataTemplate.Triggers>
                 </DataTemplate>
@@ -5613,9 +5676,9 @@
                     </TextBlock>
                 </StackPanel>
 
-                <ItemsControl x:Name="SavingThrowParams" 
-                              Visibility="{Binding Path=Tag.SavingThrowParameters.Count, ElementName=root, Converter={StaticResource CountToVisibilityConverter}}" 
-                              ItemsSource="{Binding Path=Tag.SavingThrowParameters, ElementName=root}" 
+                <ItemsControl x:Name="SavingThrowParams"
+                              Visibility="{Binding Path=Tag.SavingThrowParameters.Count, ElementName=root, Converter={StaticResource CountToVisibilityConverter}}"
+                              ItemsSource="{Binding Path=Tag.SavingThrowParameters, ElementName=root}"
                               AlternationCount="{Binding Path=Tag.SavingThrowParameters.Count, ElementName=root}"
                               Margin="68,-4,0,0">
                     <ItemsControl.ItemTemplate>
@@ -5646,9 +5709,9 @@
                     </ItemsControl.ItemContainerStyle>
                 </ItemsControl>
 
-                <TextBlock x:Name="AbilityModifiersLabel" Text="{Binding Source='h6d38bfa3gc691g4615ga348g558bba90d805', Converter={StaticResource TranslatedStringConverter}}" 
-                           Style="{StaticResource TooltipSubTitleStyle}" FontSize="{StaticResource SmallishFontSize}" 
-                           Margin="0,24,0,0" 
+                <TextBlock x:Name="AbilityModifiersLabel" Text="{Binding Source='h6d38bfa3gc691g4615ga348g558bba90d805', Converter={StaticResource TranslatedStringConverter}}"
+                           Style="{StaticResource TooltipSubTitleStyle}" FontSize="{StaticResource SmallishFontSize}"
+                           Margin="0,24,0,0"
                            Visibility="{Binding Tag.CalculationParameters.Count, ElementName=root, Converter={StaticResource CountToVisibilityConverter}, ConverterParameter=1}"/>
 
                 <ContentControl x:Name="AbilityStatParams" Content="{Binding Tag, ElementName=root}" ContentTemplate="{StaticResource StatParamsTemplate}" Margin="12,4,0,0"/>
@@ -6591,7 +6654,7 @@
             <DataTrigger Binding="{Binding Item.Rarity}" Value="Legendary">
                 <Setter TargetName="AlchemyResultName" Property="Foreground" Value="{StaticResource ItemRarityColour.Legendary}"/>
             </DataTrigger>
-            <DataTrigger Binding="{Binding Item.Rarity}" Value="True">
+            <DataTrigger Binding="{Binding Item.IsStoryItem}" Value="True">
                 <Setter TargetName="AlchemyResultName" Property="Foreground" Value="{StaticResource LS_storyColor}"/>
             </DataTrigger>
         </DataTemplate.Triggers>
@@ -6882,7 +6945,7 @@
                                 </StackPanel>
 
                                 <StackPanel x:Name="BoostsAndPassivesOffHand" Visibility="Collapsed">
-                                    <TextBlock x:Name="BoostTitleOffHand" Style="{StaticResource TooltipSectionTitleStyle}" ls:TextBlockFormatter.SourceText="{Binding Source='h80276877gd95cg4477ga1a3g85986f4f919b', Converter={StaticResource TranslatedStringConverter}}" 
+                                    <TextBlock x:Name="BoostTitleOffHand" Style="{StaticResource TooltipSectionTitleStyle}" ls:TextBlockFormatter.SourceText="{Binding Source='h80276877gd95cg4477ga1a3g85986f4f919b', Converter={StaticResource TranslatedStringConverter}}"
                                            Margin="0,8,0,4"/>
                                     <ContentPresenter Style="{StaticResource ItemPassivesContentPresenterStyle}" Content="{Binding PassivesOffHand}" DataContext="{Binding .}"/>
                                     <ContentPresenter x:Name="BoostsOffHand" Style="{StaticResource ItemBoostsContentPresenterStyle}" Content="{Binding BoostsOffHand}" DataContext="{Binding .}"/>
@@ -7397,12 +7460,6 @@
         <ContentPresenter x:Name="root" Content="{Binding Item}" ContentTemplate="{StaticResource ItemsTooltip}"/>
     </DataTemplate>
 
-    <Storyboard x:Key="DelayedShowComparisonItem" FillBehavior="Stop">
-        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="EquippedItemPanel" Storyboard.TargetProperty="Visibility" Duration="0:0:0.5" >
-            <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Hidden}"/>
-        </ObjectAnimationUsingKeyFrames>
-    </Storyboard>
-
     <!-- Compare Tooltip Template (without background images or pin message) -->
     <ControlTemplate x:Key="CompareTooltipTemplate" TargetType="ContentControl">
         <DockPanel x:Name="EnclosingPanel" VerticalAlignment="Top">
@@ -7802,6 +7859,24 @@
                         <TextBlock Margin="{StaticResource DefaultMarginBottom}" Style="{StaticResource TooltipOverrideTextStyle}"/>
                     </StackPanel>
 
+                    <!-- CONCENTRATION WILL BREAK WARNING -->
+                    <StackPanel x:Name="ConcentrationWarningPanel" 
+                                Orientation="Horizontal" 
+                                Width="{StaticResource MaxTooltipContentWidth}" 
+                                Visibility="{Binding DataContext.WillBreakConcentration, ElementName=root, Converter={StaticResource BoolToVisibleConverter}}" 
+                                Margin="-10,0,0,0">
+
+                        <Image x:Name="ConcentrationWarningImage" Source="{StaticResource IconWarningSoft}" VerticalAlignment="Center" Stretch="None"/>
+                        <TextBlock x:Name="ConcentrationWarningText" Foreground="{StaticResource LS_alertTxtColor}" FontSize="{StaticResource MediumFontSize}" VerticalAlignment="Center" TextWrapping="Wrap" MaxWidth="{StaticResource DetailSectionWidth}">
+                            <TextBlock.Text>
+                                <MultiBinding Converter="{StaticResource ParameterizedTranslatedStringConverter}">
+                                    <Binding Source="h0604f01ag5d1eg4f62g8dcbg8cad97adbc59"/>
+                                    <Binding Path="OwnerDCWidget.CurrentPlayer.SelectedCharacter.ConcentrationSpell.Name" RelativeSource="{RelativeSource AncestorType={x:Type ls:LSTooltip}}"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </StackPanel>
+
                     <!-- PROPERTIES -->
                     <ItemsControl x:Name="PropertiesList" ItemsSource="{Binding Properties}" ItemTemplate="{StaticResource PropertyTemplate}" Visibility="{Binding Properties.Count, Converter={StaticResource CountToVisibilityConverter}}" Style="{StaticResource ItemsControlHorizontalWrapPanel}"/>
                 </StackPanel>
@@ -7873,18 +7948,7 @@
                             <TextBlock x:Name="RitualText" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource SectionResourceNameStyle}" Text="{Binding Source='hc3fa3d4agb98bg4cceg80a4g4ae437a80850', Converter={StaticResource TranslatedStringConverter}}"/>
                         </StackPanel>
 
-                        <StackPanel x:Name="ConcentrationWarningPanel" Orientation="Horizontal" Width="{StaticResource MaxTooltipContentWidth}" Visibility="Collapsed" Margin="-10,0,0,0">
-                            <Image x:Name="ConcentrationWarningImage" Source="{StaticResource IconWarningSoft}" VerticalAlignment="Center" Stretch="None"/>
-                            <TextBlock x:Name="ConcentrationWarningText" Foreground="{StaticResource LS_alertTxtColor}" FontSize="{StaticResource MediumFontSize}" VerticalAlignment="Center"
-                                       TextWrapping="Wrap" MaxWidth="{StaticResource DetailSectionWidth}">
-                                <TextBlock.Text>
-                                    <MultiBinding Converter="{StaticResource ParameterizedTranslatedStringConverter}">
-                                        <Binding Source="h0604f01ag5d1eg4f62g8dcbg8cad97adbc59"/>
-                                        <Binding Path="OwnerDCWidget.CurrentPlayer.SelectedCharacter.ConcentrationSpell.Name" RelativeSource="{RelativeSource AncestorType={x:Type ls:LSTooltip}}"/>
-                                    </MultiBinding>
-                                </TextBlock.Text>
-                            </TextBlock>
-                        </StackPanel>
+                        
                     </WrapPanel>
                 </ls:LSNineSliceImage>
             </Grid>
@@ -7938,19 +8002,11 @@
                 <Setter TargetName="PropertiesList" Property="Margin" Value="{StaticResource DefaultMarginBottom}"/>
             </DataTrigger>
 
-            <!--Active concentration warning-->
-            <DataTrigger Binding="{Binding DataContext.WillBreakConcentration, ElementName=root}" Value="True">
-                <Setter TargetName="ConcentrationWarningPanel" Property="Visibility" Value="Visible"/>
-            </DataTrigger>
+            <!-- Active concentration warning (Pinned) -->
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding DataContext.WillBreakConcentration, ElementName=root}" Value="True"/>
                     <Condition Binding="{Binding OwnerDCWidget.CurrentPlayer.UIOptions.ExtraTooltipDescriptions, RelativeSource={RelativeSource AncestorType={x:Type ls:LSElementCopy}}}" Value="WhenPinned"/>
                 </MultiDataTrigger.Conditions>
-                <Setter TargetName="ConcentrationWarningPanel" Property="Visibility" Value="Visible"/>
-            </MultiDataTrigger>
-
-            <DataTrigger Binding="{Binding Path=OwnerDCWidget.CurrentPlayer.UIOptions.ExtraTooltipDescriptions, RelativeSource={RelativeSource AncestorType={x:Type ls:LSElementCopy}}}" Value="WhenPinned">
                 <Setter TargetName="ConcentrationWarningText" Property="Text">
                     <Setter.Value>
                         <MultiBinding Converter="{StaticResource ParameterizedTranslatedStringConverter}">
@@ -7959,7 +8015,8 @@
                         </MultiBinding>
                     </Setter.Value>
                 </Setter>
-            </DataTrigger>
+            </MultiDataTrigger>
+
         </DataTemplate.Triggers>
     </DataTemplate>
 
@@ -8182,48 +8239,6 @@
     <DataTemplate DataType="{x:Type ls:VMLearnableScroll}">
         <ContentPresenter x:Name="root" Content="{Binding .}" ContentTemplate="{StaticResource SpellsTooltip}"/>
     </DataTemplate>
-
-    <!-- Resistance Tooltips -->
-    <ControlTemplate x:Key="ResistanceTypesTemplate">
-        <StackPanel>
-            <StackPanel.Resources>
-                <Style TargetType="TextBlock" BasedOn="{StaticResource TooltipDescriptionStyle}">
-                    <Setter Property="VerticalAlignment" Value="Center"/>
-                </Style>
-                <Style TargetType="Image">
-                    <Setter Property="VerticalAlignment" Value="Center"/>
-                    <Setter Property="Stretch" Value="None"/>
-                </Style>
-                <Style TargetType="ls:LSSpan" BasedOn="{StaticResource LSSpanStyle}">
-                    <Style.Triggers>
-                        <Trigger Property="TagType" Value="hl">
-                            <Setter Property="Foreground" Value="{StaticResource TooltipColor.Secondary}" />
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </StackPanel.Resources>
-
-            <StackPanel x:Name="ResistanceType" Orientation="Horizontal" Visibility="Collapsed">
-                <Image x:Name="Icon"  Source="{StaticResource IconResistanceVulnerable}"/>
-                <TextBlock x:Name="Txt" ls:TextBlockFormatter.SourceText="{Binding Source='h0c3f8279g8a3cg4482g9520g3d8dea6b638a',Converter={StaticResource TranslatedStringConverter}}"/>
-            </StackPanel>
-        </StackPanel>
-        <ControlTemplate.Triggers>
-            <DataTrigger Binding="{Binding Path=Tag, RelativeSource={RelativeSource Mode=Self}}" Value="Vulnerable">
-                <Setter TargetName="ResistanceType" Property="Visibility" Value="Visible"/>
-            </DataTrigger>
-            <DataTrigger Binding="{Binding Path=Tag, RelativeSource={RelativeSource Mode=Self}}" Value="Resistant">
-                <Setter TargetName="ResistanceType" Property="Visibility" Value="Visible"/>
-                <Setter TargetName="Icon" Property="Source" Value="{StaticResource IconResistanceResistant}"/>
-                <Setter TargetName="Txt" Property="ls:TextBlockFormatter.SourceText" Value="{Binding Source='h4aef1a30g1e36g45d0gb2c8g418b5910ecae',Converter={StaticResource TranslatedStringConverter}}"/>
-            </DataTrigger>
-            <DataTrigger Binding="{Binding Path=Tag, RelativeSource={RelativeSource Mode=Self}}" Value="Immune">
-                <Setter TargetName="ResistanceType" Property="Visibility" Value="Visible"/>
-                <Setter TargetName="Icon" Property="Source" Value="{StaticResource IconResistanceImmune}"/>
-                <Setter TargetName="Txt" Property="ls:TextBlockFormatter.SourceText" Value="{Binding Source='hccec68aeg14fbg43f6ga35cg40da5c109da7',Converter={StaticResource TranslatedStringConverter}}"/>
-            </DataTrigger>
-        </ControlTemplate.Triggers>
-    </ControlTemplate>
     
     <!--===== MOD_AToR: START =====-->
     
@@ -8337,24 +8352,6 @@
 
     <DataTemplate DataType="{x:Type ls:VMTag}">
         <TextBlock Style="{StaticResource TooltipDescriptionStyle}" Margin="0,10,0,10" Text="{Binding Tooltip}"/>
-    </DataTemplate>
-
-    <!-- Resistance Tooltip Nonmagical -->
-    <DataTemplate x:Key="ResistanceTooltipNonmagicalTemplate" DataType="{x:Type ls:VMResistance}">
-        <StackPanel>
-            <TextBlock Style="{StaticResource TooltipTitleNoCollapseStyle}" ls:TextBlockFormatter.SourceText="{Binding Source='h8a6537cdg4967g472bg9bbfg64a000c6359b',Converter={StaticResource TranslatedStringConverter}}"/>
-            <TextBlock Style="{StaticResource TooltipDescriptionStyle}" Margin="0 20" ls:TextBlockFormatter.SourceText="{Binding Source='h8d033c84g7d23g479ag801cg89e8eba46ff4',Converter={StaticResource TranslatedStringConverter}}"/>
-            <Control Template="{StaticResource ResistanceTypesTemplate}" Tag="{Binding .}"/>
-        </StackPanel>
-    </DataTemplate>
-
-    <!-- Resistance Tooltip Magical -->
-    <DataTemplate x:Key="ResistanceTooltipMagicalTemplate" DataType="{x:Type ls:VMResistance}">
-        <StackPanel>
-            <TextBlock Style="{StaticResource TooltipTitleNoCollapseStyle}" ls:TextBlockFormatter.SourceText="{Binding Source='ha413cc41g130eg473eg88acg712effb701be',Converter={StaticResource TranslatedStringConverter}}"/>
-            <TextBlock Style="{StaticResource TooltipDescriptionStyle}" Margin="0 20" ls:TextBlockFormatter.SourceText="{Binding Source='h3ac6b87ag09c5g4c49gb469gacceb1f1f6d9',Converter={StaticResource TranslatedStringConverter}}"/>
-            <Control Template="{StaticResource ResistanceTypesTemplate}" Tag="{Binding .}"/>
-        </StackPanel>
     </DataTemplate>
 
     <!-- List of resistances -->
@@ -9578,7 +9575,7 @@
                     <Binding Path="StatusParam"/>
                 </MultiBinding>
             </ls:CtxTransStringHelper.ParamList>
-                
+
             <b:Interaction.Behaviors>
                 <ls:CtxTransStringRunGeneratorBehavior x:Name="EntryBehavior" LocaSource="{Binding (ls:CtxTransStringHelper.LocaSource), ElementName=LogEntry}" ParamRunStyle="{StaticResource CombatLog.Entry.ParamRun}" ParamList="{Binding (ls:CtxTransStringHelper.ParamList), ElementName=LogEntry}"/>
             </b:Interaction.Behaviors>
