@@ -524,6 +524,9 @@
         <!-- DataContext of this should be a VMCharacter -->
         <ControlTemplate.Resources>
             
+            <!-- MOD_AToR: Add images -->
+            <BitmapImage x:Key="AToR_SeparatorThin" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Separators/separator_thin.png"/>
+            
             <!-- MOD_AToR: Update source AToR -->
             <BitmapImage x:Key="SpellbookBg_Small" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/SpellBook/spellbook_bg_small.png"/>
 
@@ -727,8 +730,9 @@
                     </DataTrigger>
 
                     <!-- Passives -->
+                    <!-- MOD_AToR: Change txt from 'Passives' to 'Toggleable Passive Feature' // BG3: Source='hccb74959ga789g46f6g8cc2g73edf1536b6a'-->
                     <DataTrigger Binding="{Binding Path=(ls:AttachedProperties.InheritedTag), RelativeSource={RelativeSource Mode=Self}}" Value="Passives">
-                        <Setter TargetName="GroupName" Property="ls:TextBlockFormatter.SourceText" Value="{Binding Source='hccb74959ga789g46f6g8cc2g73edf1536b6a', Converter={StaticResource TranslatedStringConverter}}"/>
+                        <Setter TargetName="GroupName" Property="ls:TextBlockFormatter.SourceText" Value="{Binding Source='he8ad7cd6g0ffag472ega526g52c8ef0560f1', Converter={StaticResource TranslatedStringConverter}}"/>
                     </DataTrigger>
                     <DataTrigger Binding="{Binding Path=(ls:AttachedProperties.InheritedTag), RelativeSource={RelativeSource Mode=Self}}" Value="TadpolePassives">
                         <Setter TargetName="GroupName" Property="ls:TextBlockFormatter.SourceText" Value="{Binding Source='hb34891acg5c1dg4c00gbdffg28f4611d661a', Converter={StaticResource TranslatedStringConverter}}"/>
@@ -2037,21 +2041,7 @@
                                                 <TextBlock x:Name="ReplaceableSpellsNote" ls:TextBlockFormatter.SourceText="{Binding Source=h6cbb2d29g46c1g4b0agb271gcb95f4e4b3f0, Converter={StaticResource TranslatedStringConverter}}" Style="{StaticResource ActionGroupTitleStyle}" HorizontalAlignment="Center" Visibility="Collapsed" FontStyle="Italic" Margin="0,-10,0,0"/>
                                             </StackPanel>
                                         </ls:LSNineSliceImage>
-
-                                        <!-- Feats -->
-                                        <ItemsControl x:Name="FeatsList" VerticalAlignment="Top" HorizontalAlignment="Stretch"
-                                                          Style="{StaticResource PassiveCellItemsControlStyle}"
-                                                          ItemsSource="{Binding FilteredItems, ElementName=ClassFeatsFilter}" 
-                                                          ls:AttachedProperties.InheritedTag="ClassFeats" 
-                                                          Visibility="{Binding Path=ItemsSource.Count, RelativeSource={RelativeSource Self}, Converter={StaticResource CountToVisibilityConverter}}"/>
-
-                                        <!-- MOD_AToR: Enable tadpole feats // BG3: Visibility="Collapsed" -->
-                                        <ItemsControl x:Name="TadpoleFeatsList" VerticalAlignment="Top" HorizontalAlignment="Stretch"
-                                                          Style="{StaticResource PassiveCellItemsControlStyle}"
-                                                          ItemsSource="{Binding FilteredItems, ElementName=TadpoleFeatsFilter}" 
-                                                          ls:AttachedProperties.InheritedTag="TadpoleFeats" 
-                                                          Visibility="{Binding Path=ItemsSource.Count, RelativeSource={RelativeSource Self}, Converter={StaticResource CountToVisibilityConverter}}"/>
-
+                                        
                                         <!-- Initiations -->
                                         <ItemsControl x:Name="InitiationsList" 
                                                               ItemsSource="{Binding Initiations}" 
@@ -2200,6 +2190,33 @@
                                                       ItemsSource="{Binding FilteredItems, ElementName=TadpolePassivesFilter}" 
                                                       ls:AttachedProperties.InheritedTag="TadpolePassives" 
                                                       Visibility="Collapsed"/>
+                                                      
+                                        <!-- ============================================================ -->
+                                        <!-- === MOD_AToR: Move from before "InitiationsList" - START === -->
+                                        
+                                        <!-- MOD_AToR: Add separator -->
+                                        <Image x:Name="FeatsSeparator" Source="{StaticResource AToR_SeparatorThin}" 
+                                               HorizontalAlignment="Center" VerticalAlignment="center" Stretch="Uniform" 
+                                               Margin="90,14,90,-10"
+                                               Visibility="{Binding Visibility, ElementName=TadpoleFeatsList}"/>
+                                        
+                                        <!-- MOD_AToR: Switch order with "FeatsList" / Enable tadpole feats only in base tab, see trigger "TadpoleFeatsList"-->
+                                        <!-- MOD_BCPP: Visibility="{Binding Path=ItemsSource.Count, RelativeSource={RelativeSource Self}, Converter={StaticResource CountToVisibilityConverter}}" -->
+                                        <!-- BG3: Visibility="Collapsed" -->
+                                        <ItemsControl x:Name="TadpoleFeatsList" VerticalAlignment="Top" HorizontalAlignment="Stretch"
+                                                          Style="{StaticResource PassiveCellItemsControlStyle}"
+                                                          ItemsSource="{Binding FilteredItems, ElementName=TadpoleFeatsFilter}" 
+                                                          ls:AttachedProperties.InheritedTag="TadpoleFeats" 
+                                                          Visibility="Collapsed"/>
+                                                          
+                                        <!-- Feats -->
+                                        <ItemsControl x:Name="FeatsList" VerticalAlignment="Top" HorizontalAlignment="Stretch"
+                                                          Style="{StaticResource PassiveCellItemsControlStyle}"
+                                                          ItemsSource="{Binding FilteredItems, ElementName=ClassFeatsFilter}" 
+                                                          ls:AttachedProperties.InheritedTag="ClassFeats" 
+                                                          Visibility="{Binding Path=ItemsSource.Count, RelativeSource={RelativeSource Self}, Converter={StaticResource CountToVisibilityConverter}}"/>
+                                        <!-- === MOD_AToR: Move from before "InitiationsList" - END === -->
+                                        <!-- ========================================================== -->
 
                                         <!-- Search results -->
                                         <Rectangle x:Name="SearchResultsSectionOpening" Fill="{StaticResource ClassBorderEdges}" Visibility="Collapsed" Margin="6,0,0,0" Width="{Binding Fill.Viewbox.Width, RelativeSource={RelativeSource Self}}" Height="{Binding Fill.Viewbox.Height, RelativeSource={RelativeSource Self}}"/>
