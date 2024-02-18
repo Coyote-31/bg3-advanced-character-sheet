@@ -1,0 +1,639 @@
+<ls:UIWidget x:Name="PartyPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ls="clr-namespace:ls;assembly=SharedGUI"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
+             xmlns:noesis="clr-namespace:NoesisGUIExtensions;assembly=Noesis.GUI.Extensions"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance {x:Type ls:Widget}, IsDesignTimeCreatable=True}"
+             d:DesignHeight="2160" d:DesignWidth="3840">
+    <b:Interaction.Triggers>
+        <b:EventTrigger EventName="Loaded">
+            <ls:LSPlaySound Sound="UI_HUD_PartyPanel_Open"/>
+            <!-- Tutorial UI Event - Party Panel Opened-->
+            <b:InvokeCommandAction Command="{Binding TutorialEvent}" CommandParameter="b3c925a4-6317-45f8-99c0-4ca42e3ef36b"/>
+            <b:ChangePropertyAction TargetName="PartyHolder" PropertyName="Tag" Value="Inventory"/>
+
+        </b:EventTrigger>
+        <b:EventTrigger EventName="Unloaded">
+            <ls:LSPlaySound Sound="UI_HUD_Shared_Close"/>
+        </b:EventTrigger>
+        <b:StoryboardCompletedTrigger Storyboard="{Binding ElementName=CloseAnimation,Path=Storyboard}">
+            <b:InvokeCommandAction Command="{Binding CustomEvent}" CommandParameter="RemovePanelState"/>
+        </b:StoryboardCompletedTrigger>
+    </b:Interaction.Triggers>
+
+    <ls:UIWidget.Resources>
+        <!-- ==== INVENTORY/EQUIP TEMPLATE==== -->
+        <ControlTemplate x:Key="PartyCharacterInventoryTemplate" TargetType="Control">
+            <Grid HorizontalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <!--PAPERDOLL-->
+                <!-- Width="828" Height="1080" Margin="0,-50,0,12 HorizontalAlignment="Center" -->
+                <ls:LSPaperdoll Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Top" x:Name="CSPaperdoll" EntityRef="{Binding EntityHandle}" Width="745" Height="973" Margin="0,-50,0,12" VerticalAlignment="Top" ClipToBounds="True" UseCombatPose="True" MouseRotate="True" MouseRotateMultiplier="10" RenderScale="{Binding DataContext.Data.RenderScale, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
+                
+                
+                <!--EQUIP Height="1020" - margin 36,0-->
+                <Control x:Name="EquipmentHolder" Grid.Row="0" Margin="6,-12" Template="{StaticResource CharacterEquipmentTemplate}" Height="1033"/>
+                <!--INVENTORY there was no Width="650" -->
+                <Control x:Name="InventoryTemplateHolder" Grid.Row="1" Margin="6,0,0,0" Template="{StaticResource CharacterInventoryTemplate}" Width="948"/>
+                <!--Weight bar-->
+                <Control Grid.Row="2" Template="{StaticResource WeightBarTemplate}" Margin="0,2,0,14"  HorizontalAlignment="Center"/>
+            </Grid>
+        </ControlTemplate>
+    </ls:UIWidget.Resources>
+
+	<!-- MAIN PANEL GRID-->
+    <Grid x:Name="PanelRoot" Background="{StaticResource LS_PanelBackground}" ls:TooltipExtender.Owner="{Binding CurrentPlayer.SelectedCharacter}" noesis:Element.PPAAMode="Disabled" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+			<!--460 use to easily make versions for higher hotbar, 536 best for 16:9, 100% scale 4 rows-->
+            <RowDefinition Height="536"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0"  VerticalAlignment="Top" Margin="44,8">
+		
+            <!-- Top Panel-->
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+			
+				<!-- Inspiration, Gold-->
+                <Control Template="{StaticResource HeaderInspirationPointsGold}" DataContext="{Binding CurrentPlayer}" Panel.ZIndex="1" VerticalAlignment="Center" Margin="0,0,22,0">
+                </Control>
+				
+                <!-- Close button -->
+                <ls:LSButton BoundEvent="UICancel" Style="{StaticResource SmallCloseButton}" VerticalAlignment="Center">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:InvokeCommandAction Command="{Binding ClearFilterCommand}"/>
+                            <b:InvokeCommandAction Command="{Binding CustomEvent}" CommandParameter="ClosePartyPanel"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </ls:LSButton>
+				
+            </StackPanel>
+			
+			
+            <!-- Global Filters -->
+            <StackPanel x:Name="FiltersControl" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" ZIndex="1">
+                <b:Interaction.Behaviors>
+                    <ls:InventoriesMergerBehavior x:Name="PartyInventoriesMerger" Inventories="{Binding DataContext.CurrentPlayer.PartyInventory, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
+                </b:Interaction.Behaviors>
+				<ls:LSComboBox x:Name="PartyInventorySortListHolder" VerticalAlignment="Top" Margin="16,4,0,0"
+                                   Template="{StaticResource SortListTemplate}"
+                                   DataContext="{Binding CurrentPlayer}"
+                                   ItemsSource="{Binding UIData.InventorySortOptions}"
+                                   Text="{Binding CurrentInventorySortOption.Name, Mode=OneWay}"
+                                   AllowRepeatedSelection="True">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="SelectionChanged">
+                            <b:InvokeCommandAction Command="{Binding DataContext.SelectSortCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}">
+                                <b:InvokeCommandAction.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource PassThroughConverter}">
+                                        <Binding Path="SelectedItem"  ElementName="PartyInventorySortListHolder"/>
+                                        <Binding Path="DataContext" ElementName="PartyInventorySortListHolder"/>
+                                    </MultiBinding>
+                                </b:InvokeCommandAction.CommandParameter>
+                            </b:InvokeCommandAction>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </ls:LSComboBox>
+				<!--My changes-->
+               <ls:FilteringContainer x:Name="GlobalFilteringContainerHolder" FilterPredicate="{Binding CurrentPlayer.UIData.PartyCharacterInventoryPredicate}" Template="{StaticResource FilterHolderTemplate}" VerticalAlignment="Top" Margin="46,0,0,0"
+                                   CurrentFilter="{Binding CurrentPlayer.UIData.GlobalSelectedFilter, Mode=TwoWay}" ItemsList="{Binding InventoriesSlots, ElementName=PartyInventoriesMerger}" MaxDisplayedFilters="12">
+                    <ls:FilteringContainer.EnumFiltersList>
+                        <ls:EnumFilterItem EnumId="gui::EPopularFilters" Label="h977af483ga6d9g4334g9ee0g3b85b94c67db" AlwaysVisible="True" />
+                        <ls:EnumFilterItem EnumId="eoc::EProficiencyGroup" Label="ha4c5f0cfg93ebg47ecg8eecg6524ad70aee0" />
+                    </ls:FilteringContainer.EnumFiltersList>
+
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="FilterCleared">
+                            <b:InvokeCommandAction Command="{Binding DataContext.ClearFilterCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
+                        </b:EventTrigger>
+
+                        <b:PropertyChangedTrigger Binding="{Binding DataContext.CurrentPlayer.UIData.GlobalSelectedFilter, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}">
+                            <b:ChangePropertyAction TargetName="GlobalFilteringContainerHolder" PropertyName="CurrentFilter" Value="{Binding DataContext.CurrentPlayer.UIData.GlobalSelectedFilter, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}, Mode=OneWay}"/>
+                        </b:PropertyChangedTrigger>
+                    </b:Interaction.Triggers>
+                </ls:FilteringContainer>
+            </StackPanel>
+
+            <!-- PAGE TABS -->
+            <StackPanel x:Name="SwitchButtonsPanel" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Panel.ZIndex="1">
+                <StackPanel.Resources>
+                    <Style TargetType="ls:LSRadioButton">
+                        <Setter Property="Template" Value="{StaticResource LabeledRadioButtonTemplate}"/>
+                        <Setter Property="ToolTipService.Placement" Value="Top"/>
+                        <Setter Property="GroupName" Value="PartyPanelModeSelect"/>
+                    </Style>
+                </StackPanel.Resources>
+
+                <ls:LSInputBinding BoundEvent="ToggleInventory" IsEnabled="{Binding IsChecked, ElementName=InventoryToggleButton}">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:InvokeCommandAction Command="{Binding ClearFilterCommand}"/>
+                            <b:InvokeCommandAction Command="{Binding CustomEvent}" CommandParameter="ClosePartyPanel"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </ls:LSInputBinding>
+
+                <ls:LSInputBinding BoundEvent="ToggleSpells" IsEnabled="{Binding IsChecked, ElementName=SpellbookToggleButton}">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:InvokeCommandAction Command="{Binding ClearFilterCommand}"/>
+                            <b:InvokeCommandAction Command="{Binding CustomEvent}" CommandParameter="ClosePartyPanel"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </ls:LSInputBinding>
+                <ls:LSInputBinding BoundEvent="ToggleCharacterOverview" IsEnabled="{Binding IsChecked, ElementName=SheetToggleButton}">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:InvokeCommandAction Command="{Binding ClearFilterCommand}"/>
+                            <b:InvokeCommandAction Command="{Binding CustomEvent}" CommandParameter="ClosePartyPanel"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </ls:LSInputBinding>
+
+                <ls:LSRadioButton x:Name="InventoryToggleButton" BoundEvent="ToggleInventory" IsChecked="True" Content="{Binding Source='h283ce3cbg6733g4d4fgb15ag88eaac9d99fa',Converter={StaticResource TranslatedStringConverter}}">
+                    <RadioButton.Resources>
+                        <ImageSource x:Key="Icon">pack://application:,,,/GustavNoesisGUI;component/Assets/BottomBar/ico_inventory_d.png</ImageSource>
+                    </RadioButton.Resources>
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:ChangePropertyAction TargetName="PartyHolder" PropertyName="Tag" Value="Inventory"/>
+                            <ls:LSPlaySound Sound="UI_HUD_Inventory_Open"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </ls:LSRadioButton>
+
+                <ls:LSRadioButton x:Name="SpellbookToggleButton" BoundEvent="ToggleSpells" Content="{Binding Source='h15329947gc691g4323gac0fge3fbcecb92d9',Converter={StaticResource TranslatedStringConverter}}">
+                    <RadioButton.Resources>
+                        <ImageSource x:Key="Icon">pack://application:,,,/GustavNoesisGUI;component/Assets/BottomBar/ico_spells_d.png</ImageSource>
+                    </RadioButton.Resources>
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:ChangePropertyAction TargetName="PartyHolder" PropertyName="Tag" Value="Spellbook"/>
+                            <ls:LSPlaySound Sound="UI_HUD_SpellBook_Open"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </ls:LSRadioButton>
+
+                <ls:LSRadioButton x:Name="SheetToggleButton" BoundEvent="ToggleCharacterOverview" Content="{Binding Source='hf76cbcb4g83ddg49d3gb01cgd00359f84713',Converter={StaticResource TranslatedStringConverter}}">
+                    <RadioButton.Resources>
+                        <ImageSource x:Key="Icon">pack://application:,,,/GustavNoesisGUI;component/Assets/BottomBar/ico_identity_d.png</ImageSource>
+                    </RadioButton.Resources>
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:ChangePropertyAction TargetName="PartyHolder" PropertyName="Tag" Value="Sheet"/>
+                            <ls:LSPlaySound Sound="UI_HUD_CharacterSheet_Open"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </ls:LSRadioButton>
+            </StackPanel>
+        </Grid>
+
+
+        <!-- Party panels - Margin added to allow centered scroller fill whole space -->
+        <Viewbox Grid.Row="1" Margin="164,0,0,0" Stretch="Uniform" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+            <ScrollViewer MaxWidth="4020" x:Name="PartyHolder" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Auto" Padding="20">
+                <ScrollViewer.Template>
+                    <!--work around for scrollbar not fitting under the content-->
+                    <ControlTemplate TargetType="ScrollViewer">
+                         <Grid Name="PanelViewContentHolder" Background="Transparent">
+                            <ScrollContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" CanContentScroll="{TemplateBinding CanContentScroll}"/>
+                            <Border Background="{StaticResource LS_PanelBackground}" VerticalAlignment="Bottom" Margin="40,20,40,-20" >
+                                <ScrollBar x:Name="PART_HorizontalScrollBar" Orientation="Horizontal" Margin="0,0,0,0" Value="{TemplateBinding HorizontalOffset}" Maximum="{TemplateBinding ScrollableWidth}" ViewportSize="{TemplateBinding ViewportWidth}"  Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"/>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </ScrollViewer.Template>
+
+				<!--PARTY LIST-->
+                <ItemsControl x:Name="PanelsContainer" ItemsSource="{Binding Data.PartyCharacters}" VerticalAlignment="Top" AlternationCount="{Binding Data.PartyCharacters.Count}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="{x:Type ls:Character}">
+                            <Grid>
+                                <Grid.Resources>
+                                   <!-- <BitmapImage  x:Key="DecorHighlight_corner" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/Selected_Decor_Corners.png" />-->
+                                    <BitmapImage  x:Key="DecorHighlight_straight" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/Selected_Decor_Top.png" />
+                                    <BitmapImage  x:Key="DecorHighlight_hotspot" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Reactions/reactionsPopover_bg_texture.png" />
+                                </Grid.Resources>
+								
+                                <!--INDIVIDUAL PANELS  Width="828" Height="1680" Marging 16,0,16,0-->
+                                <ls:LSNineSliceImage x:Name="CharacterRoot" Style="{StaticResource Generic9SliceBGFaded}" Margin="-10,0,-10,0"  Width="1024" Height="1680" VerticalAlignment="Top">
+                                    <Grid Tag="Inventory" ls:TooltipExtender.Owner="{Binding Path=DataContext,RelativeSource={RelativeSource Mode=Self}}">
+                                        <b:Interaction.Triggers>
+                                            <b:PropertyChangedTrigger Binding="{Binding SelectedItem, ElementName=CharacterPanelSwitcher}">
+                                                <b:ChangePropertyAction TargetName="CharacterRoot" PropertyName="Tag" Value="{Binding SelectedItem.Tag, ElementName=CharacterPanelSwitcher}"/>
+                                            </b:PropertyChangedTrigger>
+                                            <b:PropertyChangedTrigger Binding="{Binding SelectedItem, ElementName=CharacterPanelSwitcher}">
+                                                <b:Interaction.Behaviors>
+                                                    <b:ConditionBehavior>
+                                                        <b:ConditionalExpression>
+                                                            <b:ComparisonCondition LeftOperand="{Binding SelectedItem.Tag, ElementName=CharacterPanelSwitcher}" Operator="NotEqual" RightOperand="Inventory"/>
+                                                        </b:ConditionalExpression>
+                                                    </b:ConditionBehavior>
+                                                </b:Interaction.Behaviors>
+                                                <b:InvokeCommandAction Command="{Binding DataContext.HideAvailableEquipmentCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="{Binding DataContext.CurrentPlayer.SelectedCharacter.Equipment, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
+                                            </b:PropertyChangedTrigger>
+
+                                            <b:PropertyChangedTrigger Binding="{Binding Tag, ElementName=PartyHolder}">
+                                                    <b:ChangePropertyAction TargetName="CharacterPanelSwitcher" PropertyName="SelectedItem" Value="{Binding Tag, ElementName=PartyHolder}"/>
+                                                </b:PropertyChangedTrigger>
+
+                                            <b:PropertyChangedTrigger Binding="{Binding Tag, ElementName=PartyHolder}">
+                                                    <b:Interaction.Behaviors>
+                                                        <b:ConditionBehavior>
+                                                            <b:ConditionalExpression>
+                                                                <b:ComparisonCondition LeftOperand="{Binding Tag, ElementName=PartyHolder}" Operator="Equal" RightOperand="Inventory"/>
+                                                            </b:ConditionalExpression>
+                                                        </b:ConditionBehavior>
+                                                    </b:Interaction.Behaviors>
+                                                    <b:ChangePropertyAction TargetName="CharacterPanelSwitcher" PropertyName="SelectedIndex" Value="0"/>
+                                                </b:PropertyChangedTrigger>
+                                                <b:PropertyChangedTrigger Binding="{Binding Tag, ElementName=PartyHolder}">
+                                                    <b:Interaction.Behaviors>
+                                                        <b:ConditionBehavior>
+                                                            <b:ConditionalExpression>
+                                                                <b:ComparisonCondition LeftOperand="{Binding Tag, ElementName=PartyHolder}" Operator="Equal" RightOperand="Spellbook"/>
+                                                            </b:ConditionalExpression>
+                                                        </b:ConditionBehavior>
+                                                    </b:Interaction.Behaviors>
+                                                    <b:ChangePropertyAction TargetName="CharacterPanelSwitcher" PropertyName="SelectedIndex" Value="1"/>
+                                                </b:PropertyChangedTrigger>
+                                                <b:PropertyChangedTrigger Binding="{Binding Tag, ElementName=PartyHolder}">
+                                                    <b:Interaction.Behaviors>
+                                                        <b:ConditionBehavior>
+                                                            <b:ConditionalExpression>
+                                                                <b:ComparisonCondition LeftOperand="{Binding Tag, ElementName=PartyHolder}" Operator="Equal" RightOperand="Sheet"/>
+                                                            </b:ConditionalExpression>
+                                                        </b:ConditionBehavior>
+                                                    </b:Interaction.Behaviors>
+                                                    <b:ChangePropertyAction TargetName="CharacterPanelSwitcher" PropertyName="SelectedIndex" Value="2"/>
+                                                </b:PropertyChangedTrigger>
+                                            </b:Interaction.Triggers>
+
+                                            <ls:LSInputBinding x:Name="CharacterSwitchBinding" PlayerId="{Binding DataContext.CurrentPlayer.PlayerId, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" 
+                                                   Command="{Binding DataContext.SelectCharacter, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"  
+                                                   CommandParameter="{Binding}">
+                                                <ls:LSInputBinding.Style>
+                                                    <Style TargetType="ls:LSInputBinding">
+                                                        <Setter Property="BoundEvent" Value =""/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding ="{Binding Path='(ItemsControl.AlternationIndex)', RelativeSource={RelativeSource TemplatedParent}}" Value="0">
+                                                                <Setter Property="BoundEvent" Value ="UISelectChar1"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding ="{Binding Path='(ItemsControl.AlternationIndex)', RelativeSource={RelativeSource TemplatedParent}}" Value="1">
+                                                                <Setter Property="BoundEvent" Value ="UISelectChar2"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding ="{Binding Path='(ItemsControl.AlternationIndex)', RelativeSource={RelativeSource TemplatedParent}}" Value="2">
+                                                                <Setter Property="BoundEvent" Value ="UISelectChar3"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding ="{Binding Path='(ItemsControl.AlternationIndex)', RelativeSource={RelativeSource TemplatedParent}}" Value="3">
+                                                                <Setter Property="BoundEvent" Value ="UISelectChar4"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </ls:LSInputBinding.Style>
+                                                <b:Interaction.Triggers>
+                                                    <b:EventTrigger EventName="LSInputBindingPressed">
+                                                        <ls:LSPlaySound Sound="UI_HUD_Controller_PartyMenu_CharacterSelect" />
+                                                    </b:EventTrigger>
+                                                </b:Interaction.Triggers>
+                                            </ls:LSInputBinding>
+
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="*"/>
+                                                </Grid.RowDefinitions>
+
+                                            <!--PANEL HEADER-->
+                                                <Grid Grid.Row="0" x:Name="Header" Panel.ZIndex="1">
+                                                    <b:Interaction.Triggers>
+                                                        <b:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                                            <ls:LSPlaySound Sound="UI_Shared_Press"/>
+                                                        </b:EventTrigger>
+
+                                                        <b:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                                                            <ls:LSPlaySound Sound="UI_HUD_Controller_PartyMenu_CharacterSelect"/>
+                                                        </b:EventTrigger>
+
+                                                        <b:EventTrigger EventName="MouseEnter">
+                                                            <ls:LSPlaySound Sound="UI_Shared_Hover"/>
+                                                        </b:EventTrigger>
+                                                    </b:Interaction.Triggers>
+
+                                                    <Button x:Name="CharacterSelectArea" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="100" Command="{Binding DataContext.SelectCharacter, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="{Binding}" Background="Transparent" Margin="0,0,0,-200"/>
+
+
+                                                <!-- GOLD -->
+                                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                                        <StackPanel x:Name="IndividualGold" Orientation="Horizontal" VerticalAlignment="Center" Background="Transparent"  Visibility="Collapsed">
+                                                            <StackPanel.ToolTip>
+                                                                <ls:LSTooltip>
+                                                                    <ls:LSTooltip.Content>
+                                                                        <StackPanel>
+                                                                            <TextBlock ls:TextBlockFormatter.SourceText="{Binding Source=h55e5ec72g331dg4dc9g9532g4a68ba0bc2a3, Converter={StaticResource TranslatedStringConverter}}" Style="{StaticResource TooltipTitleStyle}"/>
+                                                                            <TextBlock ls:TextBlockFormatter.SourceText="{Binding Source=h1e646e86g3c05g4c96g9fd8g9c521871d554, Converter={StaticResource TranslatedStringConverter}}" Style="{StaticResource TooltipDefaultTextStyle}"/>
+                                                                        </StackPanel>
+                                                                    </ls:LSTooltip.Content>
+                                                                </ls:LSTooltip>
+                                                            </StackPanel.ToolTip>
+                                                            <StackPanel.Resources>
+                                                                <Style TargetType="TextBlock">
+                                                                    <Setter Property="Foreground" Value="{StaticResource LS_baseTxtColor}"/>
+                                                                    <Style.Triggers>
+                                                                        <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType={x:Type StackPanel}}}" Value="True">
+                                                                            <Setter Property="Foreground" Value="{StaticResource LS_accent100TxtColor}" />
+                                                                        </DataTrigger>
+                                                                    </Style.Triggers>
+                                                                </Style>
+                                                            </StackPanel.Resources>
+                                                            <TextBlock x:Name="CharacterGoldValue" VerticalAlignment="Center" Margin="0,0,4,0" Text="{Binding Inventory.Gold, StringFormat={}{0:N0}}"/>
+                                                            <Image Source="{StaticResource GoldIconImg}" Stretch="Uniform" Width="40" VerticalAlignment="Center" Margin="0,-6" />
+                                                        </StackPanel>
+                                                        <!--PADLOCK-->
+                                                        <Control Template="{StaticResource InventoryLock}" Margin="14,0" VerticalAlignment="Center"/>
+                                                    </StackPanel>
+
+
+                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,8,0,0" IsHitTestVisible="False">
+                                                        <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_avatar.png" VerticalAlignment="Center" Stretch="None">
+                                                            <Image.Style>
+                                                                <Style TargetType="Image">
+                                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                                    <Style.Triggers>
+                                                                        <DataTrigger Binding="{Binding CharacterType}" Value="Avatar">
+                                                                            <Setter Property="Visibility" Value="Visible"/>
+                                                                        </DataTrigger>
+                                                                    </Style.Triggers>
+                                                                </Style>
+                                                            </Image.Style>
+                                                        </Image>
+                                                        <TextBlock x:Name="CharacterName" Foreground="{DynamicResource LS_accent25TxtColor}" TextAlignment="Center" FontSize="{DynamicResource BigFontSize}" Text="{Binding Name}" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center"/>
+                                                    </StackPanel>
+
+                                               <!--INDIVIDUAL MENUS-->
+                                                    <ComboBox x:Name="CharacterPanelSwitcher" VerticalAlignment="Top" HorizontalAlignment="Left">
+                                                        <ComboBox.Template>
+                                                            <ControlTemplate TargetType="ComboBox">
+                                                                <Grid>
+                                                                    <ls:LSToggleButton x:Name="ToggleBtn" HorizontalAlignment="Left" VerticalAlignment="Top" ToolTipService.Placement="Top" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
+                                                                        <ls:LSToggleButton.Template>
+                                                                            <ControlTemplate TargetType="ls:LSToggleButton">
+                                                                                <Grid>
+                                                                                    <Image x:Name="bg" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterSheet/btn_round_medium_d.png" Stretch="None"/>
+                                                                                    <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/BottomBar/ico_identity_d.png" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None"/>
+                                                                                </Grid>
+
+                                                                                <ControlTemplate.Triggers>
+                                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                                        <Setter TargetName="bg" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterSheet/btn_round_medium_h.png"/>
+                                                                                    </Trigger>
+                                                                                    <Trigger Property="IsPressed" Value="True">
+                                                                                        <Setter TargetName="bg" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterSheet/btn_round_medium_p.png"/>
+                                                                                    </Trigger>
+                                                                                    <Trigger Property="IsChecked" Value="True">
+                                                                                        <Setter TargetName="bg" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterSheet/btn_round_medium_p.png"/>
+                                                                                    </Trigger>
+                                                                                </ControlTemplate.Triggers>
+                                                                            </ControlTemplate>
+                                                                        </ls:LSToggleButton.Template>
+                                                                    </ls:LSToggleButton>
+
+                                                                    <Popup IsOpen="{Binding IsChecked, ElementName=ToggleBtn}" Placement="Bottom" StaysOpen="False" HorizontalOffset="-40">
+                                                                        <ls:LSNineSliceImage x:Name="PopularFiltersHolder" Margin="0,-12,0,0"  HorizontalAlignment="Stretch" ImageSource="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/sorting_bg.png" Slices="60" Padding="10,40">
+                                                                            <StackPanel Margin="30,0,40,0" IsItemsHost="True" MinWidth="200" MinHeight="200"/>
+                                                                        </ls:LSNineSliceImage>
+                                                                    </Popup>
+                                                                </Grid>
+                                                            </ControlTemplate>
+                                                        </ComboBox.Template>
+                                                        <ComboBox.ItemContainerStyle>
+                                                            <Style TargetType="ComboBoxItem">
+                                                                <Setter Property="Template">
+                                                                    <Setter.Value>
+                                                                        <ControlTemplate TargetType="ComboBoxItem">
+                                                                            <Grid x:Name="ButtonRoot" Background="Transparent">
+                                                                                <Image x:Name="HLBG" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/selector_listitem_d.png" Stretch="None"/>
+                                                                                <StackPanel Orientation="Horizontal" Margin="12,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                                                                    <Image Source="{DynamicResource CategoryIcon}"  HorizontalAlignment="Left" VerticalAlignment="Center" Stretch="None"/>
+                                                                                    <TextBlock x:Name="txt" Margin="4,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{TemplateBinding Content}" TextWrapping="Wrap" MaxWidth="800" Foreground="{StaticResource LS_baseTxtColor}" FontSize="{StaticResource MediumFontSize}"/>
+                                                                                </StackPanel>
+
+                                                                                <b:Interaction.Triggers>
+                                                                                    <b:EventTrigger EventName="MouseDown">
+                                                                                        <ls:LSPlaySound Sound="{DynamicResource CategorySound}"/>
+                                                                                    </b:EventTrigger>
+
+                                                                                    <b:EventTrigger EventName="MouseEnter">
+                                                                                        <ls:LSPlaySound Sound="UI_Shared_Hover"/>
+                                                                                    </b:EventTrigger>
+                                                                                </b:Interaction.Triggers>
+                                                                            </Grid>
+
+                                                                            <ControlTemplate.Triggers>
+                                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                                    <Setter TargetName="HLBG" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/selector_listitem_h.png"/>
+                                                                                    <Setter TargetName="txt" Property="Foreground" Value="{StaticResource LS_accent100TxtColor}"/>
+                                                                                </Trigger>
+                                                                            </ControlTemplate.Triggers>
+                                                                        </ControlTemplate>
+                                                                    </Setter.Value>
+                                                                </Setter>
+                                                            </Style>
+                                                        </ComboBox.ItemContainerStyle>
+
+                                                        <ComboBoxItem Content="{Binding Source='h466539fbg61aeg40adga77dgfe28110cbe78',Converter={StaticResource TranslatedStringConverter}}" Tag="Inventory">
+                                                            <ComboBoxItem.Resources>
+                                                                <ImageSource x:Key="CategoryIcon">pack://application:,,,/GustavNoesisGUI;component/Assets/BottomBar/ico_inventory_d.png</ImageSource>
+                                                                <System:String x:Key="CategorySound">UI_HUD_Inventory_Open</System:String>
+                                                            </ComboBoxItem.Resources>
+                                                        </ComboBoxItem>
+                                                        <ComboBoxItem Content="{Binding Source='h15329947gc691g4323gac0fge3fbcecb92d9',Converter={StaticResource TranslatedStringConverter}}" Tag="Spellbook">
+                                                            <ComboBoxItem.Resources>
+                                                                <ImageSource x:Key="CategoryIcon">pack://application:,,,/GustavNoesisGUI;component/Assets/BottomBar/ico_spells_d.png</ImageSource>
+                                                                <System:String x:Key="CategorySound">UI_HUD_SpellBook_Open</System:String>
+                                                            </ComboBoxItem.Resources>
+                                                        </ComboBoxItem>
+                                                        <ComboBoxItem Content="{Binding Source='hf76cbcb4g83ddg49d3gb01cgd00359f84713',Converter={StaticResource TranslatedStringConverter}}" Tag="Sheet">
+                                                            <ComboBoxItem.Resources>
+                                                                <ImageSource x:Key="CategoryIcon">pack://application:,,,/GustavNoesisGUI;component/Assets/BottomBar/ico_identity_d.png</ImageSource>
+                                                                <System:String x:Key="CategorySound">UI_HUD_CharacterSheet_Open</System:String>
+                                                            </ComboBoxItem.Resources>
+                                                        </ComboBoxItem>
+                                                    </ComboBox>
+
+                                                    <Control x:Name="HPBar" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,44,0,-44" Template="{DynamicResource XPBarTemplate}" Panel.ZIndex="100">
+                                                        <Control.ToolTip>
+                                                            <ls:LSTooltip>
+                                                                <ls:LSTooltip.Resources>
+                                                                    <System:Double x:Key="MaxTooltipContentWidth">720</System:Double>
+                                                                </ls:LSTooltip.Resources>
+                                                                <TextBlock TextWrapping="Wrap" MaxWidth="700" HorizontalAlignment="Center" Foreground="{DynamicResource TooltipColor.Primary}" >
+					                        	<b:Interaction.Behaviors>
+					                        		<ls:CtxTransStringRunGeneratorBehavior Source="{Binding Path=DataContext.Stats.Level.Description, ElementName=HPBar}" ParamRunStyle="{StaticResource TooltipUnitParamRun}"/>
+					                	        </b:Interaction.Behaviors>
+                                                             </TextBlock>
+                                                            </ls:LSTooltip>
+                                                        </Control.ToolTip>
+                                                    </Control>
+                                                </Grid>
+
+                                                <!--PANEL BODY-->
+                                                <Control Grid.Row="1" x:Name="PanelTemplateHolder" Template="{StaticResource PartyCharacterInventoryTemplate}"/>
+                                            </Grid>
+                                        </Grid>
+
+                                    </ls:LSNineSliceImage>
+                                <!--FILTERS-->
+                                <Control x:Name="PopoutFilters"  Template="{StaticResource PopOutInventoryTemplate}" DataContext="{Binding DataContext.CurrentPlayer.SelectedCharacter, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,120" RenderTransformOrigin="0.5,0.2" />
+
+                                <!--HIGHLIGHTED FRAME-->
+                                    <Grid x:Name="SelectedDecor" Visibility="Collapsed" IsHitTestVisible="False" Margin="4">
+                                        <Image VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,-8" Source="{StaticResource DecorHighlight_straight}" Stretch="None" RenderTransformOrigin="0.5,0.5">
+                                            <Image.RenderTransform>
+                                                <ScaleTransform ScaleY="-1"/>
+                                            </Image.RenderTransform>
+                                        </Image>
+                                        <Image VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,-8,0,0" Source="{StaticResource DecorHighlight_straight}" Stretch="None"/>
+                                        <Image VerticalAlignment="Top" HorizontalAlignment="Left" Source="{StaticResource DecorHighlight_corner}" Stretch="None"/>
+                                        <Image VerticalAlignment="Top" HorizontalAlignment="Right" Source="{StaticResource DecorHighlight_corner}" RenderTransformOrigin="0.5,0.5" Stretch="None">
+                                            <Image.RenderTransform>
+                                                <ScaleTransform ScaleX="-1"/>
+                                            </Image.RenderTransform>
+                                        </Image>
+                                        <Image VerticalAlignment="Bottom" HorizontalAlignment="Right" Source="{StaticResource DecorHighlight_corner}" RenderTransformOrigin="0.5,0.5" Stretch="None">
+                                            <Image.RenderTransform>
+                                                <ScaleTransform ScaleY="-1" ScaleX="-1"/>
+                                            </Image.RenderTransform>
+                                        </Image>
+                                        <Image VerticalAlignment="Bottom" HorizontalAlignment="Left" Source="{StaticResource DecorHighlight_corner}" RenderTransformOrigin="0.5,0.5" Stretch="None">
+                                            <Image.RenderTransform>
+                                                <ScaleTransform ScaleY="-1"/>
+                                            </Image.RenderTransform>
+                                        </Image>
+                                    </Grid>
+                                </Grid>
+
+                            <DataTemplate.Triggers>
+                                    <!--MOUSEOVER CHARACTER-->
+                                    <DataTrigger Binding="{Binding ElementName=CharacterSelectArea, Path=IsMouseOver}" Value="True">
+                                        <Setter Property="Style" Value="{StaticResource Generic9SliceBGHighlighted}" TargetName="CharacterRoot"/>
+                                        <Setter Property="Foreground" Value="{StaticResource LS_accent100TxtColor}" TargetName="CharacterName"/>
+                                    </DataTrigger>
+                                    <!--SELECTED CHARACTER-->
+                                    <DataTrigger Binding="{Binding IsSelectedCharacter}" Value="True">
+                                        <Setter TargetName="CharacterRoot" Property="Style" Value="{StaticResource Generic9SliceBGFaded}"/>
+                                        <Setter TargetName="CharacterName" Property="Foreground" Value="{StaticResource LS_extraspecialTxtColor}"/>
+                                        <Setter TargetName="SelectedDecor" Property="Visibility" Value="Visible"/>
+                                        <Setter Property="Panel.ZIndex" Value="99"/>
+                                    </DataTrigger>
+                                <!--open pop out filter if character selected-->
+                                <DataTrigger Binding="{Binding IsSelectedCharacter}" Value="True">
+                                    <Setter TargetName="PopoutFilters" Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                                <!--close pop out filter if no filter selected-->
+                                <MultiDataTrigger >
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding IsSelectedCharacter}" Value="True"/>
+                                        <Condition Binding="{Binding ActiveEquipmentSlot}" Value="{x:Null}"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter TargetName="PopoutFilters" Property="Visibility" Value="Collapsed"/>
+                                </MultiDataTrigger>
+                                    
+                                <DataTrigger Value="False">
+                                        <DataTrigger.Binding>
+                                            <MultiBinding Converter="{StaticResource EqualConverter}">
+                                                <Binding RelativeSource="{RelativeSource AncestorType={x:Type ls:UIWidget}}" Path="DataContext.CurrentPlayer.UserId"/>
+                                                <Binding Path="OwnerUserID"/>
+                                            </MultiBinding>
+                                        </DataTrigger.Binding>
+                                        <Setter TargetName="CharacterName" Property="Foreground" Value="{StaticResource LS_guestTxtColor}"/>
+                                    </DataTrigger>
+
+                                    <!-- Switching panel template -->
+
+                                    <DataTrigger Binding="{Binding Tag, ElementName=CharacterRoot}" Value="Inventory">
+                                        <Setter TargetName="IndividualGold" Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+
+                                    <DataTrigger Binding="{Binding Tag, ElementName=CharacterRoot}" Value="Spellbook">
+                                        <Setter TargetName="PanelTemplateHolder" Property="Template" Value="{StaticResource MultiClassSpellbookTemplate}"/>
+                                        <Setter TargetName="PanelTemplateHolder" Property="DataContext" Value="{Binding .}"/>
+                                        <Setter TargetName="HPBar" Property="Visibility" Value="Hidden"/>
+                                    </DataTrigger>
+
+                                    <DataTrigger Binding="{Binding Tag, ElementName=CharacterRoot}" Value="Sheet">
+                                        <Setter TargetName="PanelTemplateHolder" Property="Template" Value="{StaticResource CharSheetTabController}"/>
+                                        <Setter TargetName="HPBar" Property="Visibility" Value="Hidden"/>
+                                    </DataTrigger>
+
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+
+                </ItemsControl>
+            </ScrollViewer>
+        </Viewbox>
+
+    </Grid>
+
+    <ls:UIWidget.Triggers>
+        <EventTrigger RoutedEvent="ls:UIWidget.CloseRequested">
+            <BeginStoryboard x:Name="CloseAnimation">
+                <BeginStoryboard.Storyboard>
+                    <Storyboard Duration="0:0:0.32" >
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="PanelRoot">
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.30" Value="0">
+                                <EasingDoubleKeyFrame.EasingFunction>
+                                    <CubicEase EasingMode="EaseIn"/>
+                                </EasingDoubleKeyFrame.EasingFunction>
+                            </EasingDoubleKeyFrame>
+                        </DoubleAnimationUsingKeyFrames>
+
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsHitTestVisible)" Storyboard.TargetName="PanelRoot">
+                            <DiscreteBooleanKeyFrame  KeyTime="0:0:0.0" Value="False" />
+                        </BooleanAnimationUsingKeyFrames>
+                    </Storyboard>
+                </BeginStoryboard.Storyboard>
+            </BeginStoryboard>
+            <StopStoryboard BeginStoryboardName="CancelAnimation"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ls:UIWidget.CancelCloseRequested" >
+            <BeginStoryboard x:Name="CancelAnimation">
+                <BeginStoryboard.Storyboard>
+                    <Storyboard FillBehavior="Stop">
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="PanelRoot">
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.30" Value="1">
+                                <EasingDoubleKeyFrame.EasingFunction>
+                                    <CubicEase EasingMode="EaseIn"/>
+                                </EasingDoubleKeyFrame.EasingFunction>
+                            </EasingDoubleKeyFrame>
+                        </DoubleAnimationUsingKeyFrames>
+
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsHitTestVisible)" Storyboard.TargetName="PanelRoot">
+                            <DiscreteBooleanKeyFrame  KeyTime="0:0:0.0" Value="False" />
+                        </BooleanAnimationUsingKeyFrames>
+                    </Storyboard>
+                </BeginStoryboard.Storyboard>
+            </BeginStoryboard>
+            <StopStoryboard BeginStoryboardName="CloseAnimation"/>
+        </EventTrigger>
+    </ls:UIWidget.Triggers>
+</ls:UIWidget>
