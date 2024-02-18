@@ -22,10 +22,10 @@
           <attribute id="Tags" type="LSString" value="GUI UI All Types Resistance Immunity Weakness Character Party Panel" />
           <attribute id="Type" type="FixedString" value="Add-on" />
           <attribute id="UUID" type="FixedString" value="e18f5765-4901-463d-8dae-7e7bff779f2c" />
-          <attribute id="Version64" type="int64" value="36591746972385280" />
+          <attribute id="Version64" type="int64" value="36732484460740608" />
           <children>
             <node id="PublishVersion">
-              <attribute id="Version64" type="int64" value="36591746972385280" />
+              <attribute id="Version64" type="int64" value="36732484460740608" />
             </node>
             <node id="Scripts" />
             <node id="TargetModes">
