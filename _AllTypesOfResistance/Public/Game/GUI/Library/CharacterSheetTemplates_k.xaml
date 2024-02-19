@@ -30,10 +30,12 @@
     
     <System:Double x:Key="CornerRadius">20</System:Double>
 
+    <!-- MOD_AToR: Update InventoryColumnWidth // BG3: 676 -->
     <System:Double x:Key="InventoryColumnWidth">676</System:Double>
-    <System:Double x:Key="InventoryColumnHeight">1468</System:Double>
+    <!-- MOD_AToR: Update InventoryColumnHeight // MOD_BCPP: 1620 // BG3: 1468 -->
+    <System:Double x:Key="InventoryColumnHeight">1618</System:Double>
 
-    <!-- MOD_AToR: Update CSContentHeight // BG3: CSContentHeight = 1340 -->
+    <!-- MOD_AToR: Update CSContentHeight 1550 // MOD_BCPP: 1550 // BG3: 1340 -->
     <System:Double x:Key="CSContentHeight">1550</System:Double>
     <System:Double x:Key="CSColumnWidth">648</System:Double>
 
@@ -111,7 +113,8 @@
     <!--NO RESULTS TEMPLATE-->
     <ControlTemplate x:Key="NoResultsFoundTemplate" TargetType="Control">
         <Grid>
-            <Image Source="/GustavNoesisGUI;component/Assets/CharacterPanel/invSlot_message_bg.png" Stretch="None" HorizontalAlignment="Center"/>
+            <!-- MOD_AToR: Update source // BG3: .../Assets/CharacterPanel/..." -->
+            <Image Source="/GustavNoesisGUI;component/Assets/AToR/CharacterPanel/invSlot_message_bg.png" Stretch="None" HorizontalAlignment="Center"/>
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource LS_extraspecialTxtColor}" FontSize="{StaticResource SmallFontSize}" ls:TextBlockFormatter.SourceText="{Binding Source='h7f09be65g3d97g45dfg87f1gb70869a7ae24', Converter={StaticResource TranslatedStringConverter}}"/>
         </Grid>
     </ControlTemplate>
@@ -7795,8 +7798,8 @@ Source="{StaticResource SavingThrowDice}">
 
             </b:Interaction.Triggers>
 
-
-            <Grid x:Name="InventoryColumnHolder" Tag="JustCreated" HorizontalAlignment="Stretch" >
+            <!-- MOD_AToR: Add margin -->
+            <Grid x:Name="InventoryColumnHolder" Tag="JustCreated" HorizontalAlignment="Stretch" Margin="0,-7,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
@@ -7837,16 +7840,21 @@ Source="{StaticResource SavingThrowDice}">
                     <ListBox.Template>
                         <ControlTemplate TargetType="ListBox">
                             <Grid x:Name="TemplateRoot" >
-                                <Border x:Name="InventoryTint" Background="{StaticResource InventoryBGShade}" Margin="-6,-4,20,-6" BorderBrush="Transparent" BorderThickness="2"/>
-                                <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalContentAlignment="Right" Template="{StaticResource NoForcedStyleScrollViewerTemplate}" HorizontalScrollBarVisibility="Disabled" Padding="0,0,0,0" >
+                                <!-- MOD_AToR: Inventory Border - Update margin // BG3: Margin="-6,-4,20,-6" -->
+                                <Border x:Name="InventoryTint" Background="{StaticResource InventoryBGShade}" Margin="-27,-8,16,-7" BorderBrush="Transparent" BorderThickness="2"/>
+                                <!-- MOD_AToR: Add name / Update padding & align // BG3: Padding="0,0,0,0" // HorizontalContentAlignment="Right" -->
+                                <ScrollViewer x:Name="InventoryScrolling" VerticalScrollBarVisibility="Visible"  HorizontalContentAlignment="Center" Template="{StaticResource NoForcedStyleScrollViewerTemplate}" HorizontalScrollBarVisibility="Disabled" Padding="6,0,-6,0">
                                     <b:Interaction.Behaviors>
                                         <ls:DragScrollingBehavior/>
                                     </b:Interaction.Behaviors>
-                                    <ItemsPresenter x:Name="itemsContainer"/>
+                                    <!-- MOD_AToR: Inventory contain - Add margin to equalize top gap -->
+                                    <ItemsPresenter x:Name="itemsContainer" Margin="0,0,-4,1"/>
                                 </ScrollViewer>
                                 <Grid x:Name="NoItemsFoundOverlay" Visibility="Collapsed">
-                                    <Rectangle Fill="{StaticResource LS_DisabledPanelColor}"/>
-                                    <Control Template="{StaticResource NoResultsFoundTemplate}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,40,0,0"/>
+                                    <!-- MOD_AToR: Add margin to search bg shading -->
+                                    <Rectangle x:Name="NoItemsFoundBg" Fill="{StaticResource LS_DisabledPanelColor}" Margin="7,0,24,1"/>
+                                    <!-- MOD_AToR: Update margin & align // BG3: Margin="0,40,0,0" VerticalAlignment="Top" -->
+                                    <Control  x:Name="NoItemsFoundControl" Template="{StaticResource NoResultsFoundTemplate}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8,0,26,0"/>
                                 </Grid>
                             </Grid>
                             <ControlTemplate.Triggers>
@@ -7856,6 +7864,9 @@ Source="{StaticResource SavingThrowDice}">
                                         <Condition Binding="{Binding ItemsSource.Count, RelativeSource={RelativeSource Self}}" Value="0"/>
                                     </MultiDataTrigger.Conditions>
                                     <Setter TargetName="NoItemsFoundOverlay" Property="Visibility" Value="Visible"/>
+                                    <!-- Mod_AToR: Add to Recenter on search -->
+                                    <Setter TargetName="itemsContainer" Property="Margin" Value="0,0,-10,1"/>
+                                    <Setter TargetName="InventoryTint" Property="Margin" Value="0,-6,19,-5"/>
                                 </MultiDataTrigger>
 
                                 <!--Hide the no items found overlay if we're attempting to drag-->
@@ -7868,6 +7879,69 @@ Source="{StaticResource SavingThrowDice}">
                                     <Setter TargetName="InventoryTint" Property="Background" Value="{StaticResource InventoryBGShadeFilter}"/>
                                     <Setter TargetName="InventoryTint" Property="BorderBrush" Value="{StaticResource InventoryBGShadeFilterBorder}"/>
                                 </DataTrigger>
+                                
+                                <!-- MOD_AToR: Add triggers for BCPP Character panel-->
+                                <DataTrigger Binding="{Binding VerticalAlignment, ElementName=Panel}" Value="Top">
+                                    <Setter TargetName="InventoryTint" Property="Margin" Value="-8,-8,28,-7"/>
+                                    <Setter TargetName="InventoryScrolling" Property="Padding" Value="13,0,-1,0"/>
+                                    <Setter TargetName="itemsContainer" Property="Margin" Value="0,0,-4,1"/>
+                                    <Setter TargetName="NoItemsFoundBg" Property="Margin" Value="15,0,36,1"/>
+                                    <Setter TargetName="NoItemsFoundControl" Property="Margin" Value="16,0,38,0"/>
+                                </DataTrigger>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding CurrentFilter, ElementName=FilteringContainerHolder, Converter={StaticResource NullToBoolTrueConverter}}" Value="False"/>
+                                        <Condition Binding="{Binding ItemsSource.Count, RelativeSource={RelativeSource Self}}" Value="0"/>
+                                        <Condition Binding="{Binding VerticalAlignment, ElementName=Panel}" Value="Top"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <!-- Mod_AToR: Add recenter -->
+                                    <Setter TargetName="itemsContainer" Property="Margin" Value="0,0,-19,1"/>
+                                    <Setter TargetName="InventoryTint" Property="Margin" Value="6,-8,28,-7"/>
+                                </MultiDataTrigger>
+                                
+                                <!-- MOD_AToR: Add trigger for Party Panel context -->
+                                <DataTrigger Binding="{Binding Name, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel" >
+                                    <Setter TargetName="InventoryTint" Property="Margin" Value="-7,-6,18,-5"/>
+                                    <Setter TargetName="InventoryScrolling" Property="Padding" Value="19,0,-19,0"/>
+                                    <Setter TargetName="itemsContainer" Property="Margin" Value="0,0,-3,1"/>
+                                    <Setter TargetName="NoItemsFoundBg" Property="Margin" Value="9,0,25,1"/>
+                                    <Setter TargetName="NoItemsFoundControl" Property="Margin" Value="11,0,27,0"/>
+                                </DataTrigger>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding Name, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel" />
+                                        <Condition Binding="{Binding CurrentFilter, ElementName=FilteringContainerHolder, Converter={StaticResource NullToBoolTrueConverter}}" Value="False"/>
+                                        <Condition Binding="{Binding ItemsSource.Count, RelativeSource={RelativeSource Self}}" Value="0"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <!-- Mod_AToR: Add recenter -->
+                                    <Setter TargetName="itemsContainer" Property="Margin" Value="0,0,-12,1"/>
+                                    <Setter TargetName="InventoryTint" Property="Margin" Value="0,-8,17,-7"/>
+                                </MultiDataTrigger>
+                                
+                                <!-- MOD_AToR: Add triggers for BCPP Party panel-->
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding Name, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel" />
+                                        <Condition Binding="{Binding VerticalAlignment, ElementName=PanelsContainer}" Value="Top"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter TargetName="InventoryTint" Property="Margin" Value="-7,-7,21,-7"/>
+                                    <Setter TargetName="InventoryScrolling" Property="Padding" Value="4,0,-4,0"/>
+                                    <Setter TargetName="itemsContainer" Property="Margin" Value="0,0,0,0"/>
+                                    <Setter TargetName="NoItemsFoundBg" Property="Margin" Value="0,0,28,0"/>
+                                    <Setter TargetName="NoItemsFoundControl" Property="Margin" Value="2,0,30,0"/>
+                                </MultiDataTrigger>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding Name, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel" />
+                                        <Condition Binding="{Binding CurrentFilter, ElementName=FilteringContainerHolder, Converter={StaticResource NullToBoolTrueConverter}}" Value="False"/>
+                                        <Condition Binding="{Binding ItemsSource.Count, RelativeSource={RelativeSource Self}}" Value="0"/>
+                                        <Condition Binding="{Binding VerticalAlignment, ElementName=PanelsContainer}" Value="Top"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <!-- Mod_AToR: Add recenter -->
+                                    <Setter TargetName="itemsContainer" Property="Margin" Value="0,0,0,0"/>
+                                    <Setter TargetName="InventoryTint" Property="Margin" Value="-7,-7,21,-7"/>
+                                </MultiDataTrigger>
+                                
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
                     </ListBox.Template>
@@ -7947,9 +8021,32 @@ Source="{StaticResource SavingThrowDice}">
             <DataTrigger Binding="{Binding SelectedItems.Count,ElementName=InventoryHolder,Converter={StaticResource GreaterThanConverter},ConverterParameter=1}" Value="True">
                 <Setter TargetName="InventoryHolder" Property="ls:MultiSelect.IsEnabled" Value="True"/>
             </DataTrigger>
+            
+            <!-- MOD_AToR: Add trigger for BCPP Character panel-->
+            <DataTrigger Binding="{Binding VerticalAlignment, ElementName=Panel}" Value="Top">
+                <Setter TargetName="InventoryColumnHolder" Property="Margin" Value="-10,-4,-10,-4"/>                   
+            </DataTrigger>
+            
             <DataTrigger Binding="{Binding Name, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel" >
                 <Setter TargetName="FiltersControl" Property="Visibility" Value="Collapsed"/>
+                
+                <!-- MOD_AToR: Add setters for inventory Party Panel context -->
+                <!-- MOD_AToR: Get width from widget -->
+                <Setter TargetName="InventoryColumnHolder" Property="Width" Value="{Binding ActualWidth, ElementName=InventoryTemplateHolder}"/>
+                <Setter TargetName="InventoryColumnHolder" Property="Height" Value="Auto"/>
+                <Setter TargetName="InventoryColumnHolder" Property="HorizontalAlignment" Value="Center"/>
+                <Setter TargetName="InventoryColumnHolder" Property="Margin" Value="10,-4,-10,0"/>
             </DataTrigger>
+            
+            <!-- MOD_AToR: Add triggers for BCPP Party panel-->
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Name, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel" />
+                    <Condition Binding="{Binding VerticalAlignment, ElementName=PanelsContainer}" Value="Top"/>
+                </MultiDataTrigger.Conditions>
+                <Setter TargetName="InventoryColumnHolder" Property="Margin" Value="10,-4,-10,1"/>
+            </MultiDataTrigger>
+            
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
