@@ -1282,7 +1282,7 @@
                 </Grid.RowDefinitions>
                 <!-- Tabs -->
                 <!-- MOD_AToR: Update Tabs Margin // BG3: Margin="0,4,0,0" -->
-                <StackPanel Grid.Row="0" x:Name="TabsContainer" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="0,8,0,0">
+                <StackPanel Grid.Row="0" x:Name="TabsContainer" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="0,18,0,-10">
                     <ls:LSButton x:Name="NavigationLeftButton" Template="{StaticResource IconButtonTemplate}" VerticalAlignment="Center"
                                              Visibility="{Binding SpellBooks.Count, Converter={StaticResource CountToVisibilityConverter}, ConverterParameter='5'}"
                                              SoundID="UI_Shared_Panel_Select">
@@ -2808,7 +2808,7 @@
 
             <!-- MOD_AToR: Detect if BCPP is active for character panel -->
             <DataTrigger Binding="{Binding Height, ElementName=SpellBookPanel}" Value="2000">
-                <Setter TargetName="MultiClassSpellbookContainer" Property="Margin" Value="-18,0,-18,472"/>
+                <Setter TargetName="MultiClassSpellbookContainer" Property="Margin" Value="-18,0,-18,532"/>
             </DataTrigger>
 
             <!-- MOD_AToR: Detect if BCPP is active for party panel -->
@@ -6321,7 +6321,7 @@ Source="{StaticResource SavingThrowDice}">
                 </ScrollViewer>
 
                 <!-- Extract All Ingredients Button -->
-                <!-- MOD_AToR: Update margin // BG3: Margin="0,0,0,28" -->
+                <!-- MOD_AToR: Update margin // BG3: Margin="0,0,0,28" --> 
                 <ls:LSButton Grid.Row="2" x:Name="ExtractAllIngredients"
                                  HorizontalAlignment="Center"
                                  Style="{StaticResource BigBrownButtonStyle}"
