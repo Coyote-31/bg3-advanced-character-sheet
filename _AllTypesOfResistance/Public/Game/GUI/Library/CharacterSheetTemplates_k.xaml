@@ -2653,7 +2653,7 @@
 
             <!-- Party Panel view -->
             <!-- MOD_AToR: Party Panel specific changes -->
-            <DataTrigger Binding="{Binding ParentState, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel">
+            <DataTrigger Binding="{Binding ParentState, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel"> 
                 
                 <!-- MOD_AToR: TODO try to set the ancestor from an other file -->
                 <!-- <Setter TargetName="{RelativeSource FindAncestor, AncestorType=CharacterRoot}" Property="Height" Value="1680"/> -->
@@ -7785,7 +7785,7 @@ Source="{StaticResource SavingThrowDice}">
 
     <!--INVENTORY TEMPLATE WITH FILTERS-->
     <ControlTemplate x:Key="CharacterInventoryTemplate" TargetType="Control">
-        <Grid x:Name="CharacterPanelHolder" Tag="{Binding IsContentEditable}">
+        <Grid x:Name="CharacterPanelHolder" Tag="{Binding IsContentEditable}" Margin="0,0,0,0">
             <b:Interaction.Triggers>
                 <b:DataTrigger Binding="{Binding IsVisible, ElementName=CharacterPanelHolder}" Value="True">
                     <!-- Tutorial UI Event - Inventory Opened-->
@@ -8385,7 +8385,8 @@ Source="{StaticResource SavingThrowDice}">
                 </b:DataTrigger>
 
             </b:Interaction.Triggers>
-            <Grid x:Name="EquipmentHolder" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <!-- MOD_AToR: Add margin -->
+            <Grid x:Name="EquipmentHolder" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="-34,0,-24,0">
                 <Grid.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -8413,7 +8414,8 @@ Source="{StaticResource SavingThrowDice}">
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.Resources>
-                        <Thickness x:Key="EquipMargin">0,72,0,0</Thickness>
+                        <!-- MOD_AToR: Update margin // BG3: 0,72,0,0 -->
+                        <Thickness x:Key="EquipMargin">0,26,0,0</Thickness>
                         <!-- MOD_AToR: TODO I may delete this if its useless for now -->
                         <!-- MOD_BCPP: 172 margin for left side of equipment for the future -->
 						<Thickness x:Key="EquipMargin1">0,346,0,0</Thickness>
@@ -8436,18 +8438,21 @@ Source="{StaticResource SavingThrowDice}">
                                     </Border.Effect>
                                 </Border>
 
-                                <ls:LSButton Grid.Row="0" Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.VanityBody}"/>
+                                <!-- MOD_AToR: Add margin -->
+                                <ls:LSButton Grid.Row="0" Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.VanityBody}" Margin="0,0,0,2"/>
                                 <ls:LSButton Grid.Row="1" Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.VanityBoots}"/>
-                                <ls:LSButton Grid.RowSpan="2" VerticalAlignment="Top" Command="{Binding DataContext.ToggleArmorSetVisibility, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="{Binding .}" Template="{StaticResource VanityButtonTemplate}" HorizontalAlignment="Right" Margin="0,-40,-6,0">
+                                <!-- MOD_AToR: Update margin // BG3: Margin="0,-40,-6,0" -->
+                                <ls:LSButton Grid.RowSpan="2" VerticalAlignment="Top" Command="{Binding DataContext.ToggleArmorSetVisibility, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="{Binding .}" Template="{StaticResource VanityButtonTemplate}" HorizontalAlignment="Right" Margin="0,-41,-5,0">
                                     <ls:LSButton.ToolTip>
                                         <ls:LSTooltip Content="{Binding Source='had94b224g2d0eg43a9g96a7g27311c05ef99',Converter={StaticResource TranslatedStringConverter}}" x:Name="TooltipContent"/>
                                     </ls:LSButton.ToolTip>
                                 </ls:LSButton>
                             </Grid>
-                            <!-- MOD_BCPP: EQ margin - Margin="0,8" // BG3: Margin="0,24" -->
-                            <ls:LSButton Margin="0,8" Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Underwear}"/>
-                            <ls:LSButton Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Amulet}"/>
-                            <ls:LSButton Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Ring}"/>
+                            <!-- MOD_AToR: Update margin // MOD_BCPP: Margin="0,8" // BG3: Margin="0,24" -->
+                            <ls:LSButton Margin="0,16" Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Underwear}"/>
+                            <!-- MOD_AToR: Add marginS -->
+                            <ls:LSButton Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Amulet}" Margin="0,0,0,2"/>
+                            <ls:LSButton Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Ring}" Margin="0,0,0,2"/>
                             <ls:LSButton Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Ring2}"/>
                         </StackPanel>
                     </DockPanel>
@@ -8462,11 +8467,20 @@ Source="{StaticResource SavingThrowDice}">
 
                         <StackPanel DockPanel.Dock="Top">
 
-                            <Control Template="{StaticResource HelmetEQTemplate}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Helmet}" ToolTipService.Placement="Left"/>
-                            <ls:LSButton Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Cloak}" ToolTipService.Placement="Left"/>
-                            <ls:LSButton Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Breast}" ToolTipService.Placement="Left"/>
-                            <ls:LSButton Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Gloves}" ToolTipService.Placement="Left"/>
+                            <!-- MOD_AToR: Add marginS -->
+                            <Control Template="{StaticResource HelmetEQTemplate}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Helmet}" ToolTipService.Placement="Left" Margin="0,0,0,2"/>
+                            <ls:LSButton Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Cloak}" ToolTipService.Placement="Left" Margin="0,0,0,2"/>
+                            <ls:LSButton Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Breast}" ToolTipService.Placement="Left" Margin="0,0,0,2"/>
+                            <ls:LSButton Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Gloves}" ToolTipService.Placement="Left" Margin="0,0,0,2"/>
                             <ls:LSButton Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Boots}" ToolTipService.Placement="Left"/>
+                        </StackPanel>
+
+                        <!-- MOD_AToR: Move Armor Class to left panel RenderTransformOrigin="0.5,0.5" -->
+                        <StackPanel x:Name="ArmorClassLeft"  DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="-7,14,-40,-40">
+                            <Control Template="{StaticResource ACHolder}"/>
+                            <Control.RenderTransform>
+                                <ScaleTransform ScaleX="0.92" ScaleY="0.92"/>
+                            </Control.RenderTransform>
                         </StackPanel>
 
                     </DockPanel>
@@ -8499,7 +8513,14 @@ Source="{StaticResource SavingThrowDice}">
                     </StackPanel>
 
                     <!--ArmorClass-->
-                    <Control Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Template="{StaticResource ACHolder}" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+                    <!-- MOD_AToR: Moved to left side but still here for BCPP compatibility-->
+                    <!-- <Control Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Template="{StaticResource ACHolder}" VerticalAlignment="Bottom" HorizontalAlignment="Center" Visibility="Collapsed"/> -->
+                    <StackPanel x:Name="ArmorClassBottom" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Bottom" HorizontalAlignment="Center" Visibility="Collapsed" Margin="0,0,0,-20">
+                        <Control Template="{StaticResource ACHolder}"/>
+                        <Control.RenderTransform>
+                            <ScaleTransform ScaleX="0.92" ScaleY="0.92"/>
+                        </Control.RenderTransform>
+                    </StackPanel>
                 </Grid>
 
                 <Control Grid.Row="2" Template="{StaticResource WeaponAttackBonusTemplate}" VerticalAlignment="Bottom" Margin="0,8,0,20"/>
@@ -8511,6 +8532,31 @@ Source="{StaticResource SavingThrowDice}">
             <DataTrigger Binding="{Binding ArmorSetVisibility}" Value="Vanity">
                 <Setter TargetName="VanityToggleHighlight" Property="Visibility" Value="Visible"/>
             </DataTrigger>
+            
+            <!-- MOD_AToR: Add triggers for BCPP Character panel-->
+            <DataTrigger Binding="{Binding VerticalAlignment, ElementName=Panel}" Value="Top">
+                <Setter TargetName="EquipmentHolder" Property="Margin" Value="-36,0,-30,0"/>
+                <Setter TargetName="ArmorClassLeft" Property="Visibility" Value="Collapsed"/>
+                <Setter TargetName="ArmorClassBottom" Property="Visibility" Value="Visible"/>
+            </DataTrigger>
+            
+            <!-- MOD_AToR: Add triggers for Party Panel context -->
+            <DataTrigger Binding="{Binding ParentState, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel">
+                <Setter TargetName="EquipmentHolder" Property="Margin" Value="-25,70,-25,0"/>
+            </DataTrigger>
+            
+            <!-- MOD_AToR: Add triggers for BCPP Party panel-->
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Name, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel" />
+                    <Condition Binding="{Binding VerticalAlignment, ElementName=PanelsContainer}" Value="Top"/>
+                </MultiDataTrigger.Conditions>
+                <Setter TargetName="EquipmentHolder" Property="Margin" Value="8,70,8,0"/>
+                <Setter TargetName="ArmorClassLeft" Property="Visibility" Value="Collapsed"/>
+                <Setter TargetName="ArmorClassBottom" Property="Visibility" Value="Visible"/>
+                <Setter TargetName="ArmorClassBottom" Property="Margin" Value="0,0,0,-18"/>
+            </MultiDataTrigger>
+            
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
