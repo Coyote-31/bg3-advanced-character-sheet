@@ -6321,11 +6321,12 @@ Source="{StaticResource SavingThrowDice}">
                 </ScrollViewer>
 
                 <!-- Extract All Ingredients Button -->
+                <!-- MOD_AToR: Update margin // BG3: Margin="0,0,0,28" -->
                 <ls:LSButton Grid.Row="2" x:Name="ExtractAllIngredients"
                                  HorizontalAlignment="Center"
                                  Style="{StaticResource BigBrownButtonStyle}"
                                  Command="{Binding CreateExtracts}"
-                                 Margin="0,0,0,28"
+                                 Margin="0,0,0,128"
                                  Width="600"
                                  OverwriteClickSound="UI_HUD_Alchemy_CreateExtracts_Click">
                     <ls:LSButton.Content>
