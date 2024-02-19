@@ -11,7 +11,7 @@ The purpose of this mod is to display **All Types of Resistance** including ones
 Also improve Character and Party panel for Spell Book UI in general : Class info, Spell list and Reactions.
 
 ## 🔖 Version
-- 📦 **AToR** mod : `1.5.0`
+- 📦 **AToR** mod : `1.6.0`
 - 🎮 **BG3** compatibility : `4.6.0 - Patch 6`
 
 ## ✨ Features
@@ -29,13 +29,15 @@ Also improve Character and Party panel for Spell Book UI in general : Class info
 - Extend the **size** of useful content in Party Panel.
 - **Align** everything in its right place.
 - Replace some backgrounds and sprites to **fix artifacts** in vanilla images ( Party Panel Bg, Tabs, ... ).
+- Full review of the **Inventory** for Character and Party Panels.
+- Full review of the **Equipment** for Character and Party Panels.
 
 ## 🔀 Compatibility
 
 ### 🟢 **Compatible** with the following mods :
-- **Better Character and Party Panels** ( *BCPP* ) *All variants* : Tested with BCPP v1.5.9
-- **Better Tooltips** ( *BT* ) : Tested with BT v1.1.1
-- **Better Target Info** ( *BTI* ) : Tested with BTI v1.1.8
+- **Better Character and Party Panels** ( *BCPP* ) *All variants* : Tested with BCPP v1.6.0 ( Alias 1.6 )
+- **Better Tooltips** ( *BT* ) : Tested with BT v1.1.1 ( Alias 1.11 )
+- **Better Target Info** ( *BTI* ) : Tested with BTI v1.2.0.1 ( Alias 1.2 )
 
     > The icons of resistance work fine. Unfortunately, I can't achieved to display the none ones. But 13 icons on top of the screen all the time is what you really want to anyway ?
 
