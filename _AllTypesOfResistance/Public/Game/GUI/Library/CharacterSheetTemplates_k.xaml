@@ -44,6 +44,11 @@
 
     <GridLength x:Key="CSSlotSize">88</GridLength>
 
+    <!-- MOD_AToR: Add colors -->
+    <Color x:Key="AToR_bonusColor">#43BC66</Color>
+    <SolidColorBrush x:Key="AToR_LS_bonusTxtColor" Color="{StaticResource AToR_bonusColor}"/>
+    <Color x:Key="AToR_alertColor">#E53262</Color>
+    <SolidColorBrush x:Key="AToR_LS_alertTxtColor" Color="{StaticResource AToR_alertColor}"/>
 
       <!--ROW STYLES-->
     <Style x:Key="RowBG_d" TargetType="Border">
@@ -4556,13 +4561,25 @@ Source="{StaticResource SavingThrowDice}">
                                     <Style TargetType="TextBlock"  BasedOn="{StaticResource DetailedListText}"></Style>
                                 </Control.Resources>
                             </Control>
-                            <TextBlock x:Name="value" Text="{Binding SavingThrow.AdditionalValue, StringFormat={}{0: +#; -#; 0}}" Style="{StaticResource DetailedListValue}" HorizontalAlignment="Center" Margin="0,-12,0,0"/>
+                            <!-- MOD_AToR: Update StringFormat - remove space // BG3: StringFormat={}{0: +#; -#; 0}} -->
+                            <TextBlock x:Name="value" Text="{Binding SavingThrow.AdditionalValue, StringFormat={}{0:+#;-#;0}}" Style="{StaticResource DetailedListValue}" HorizontalAlignment="Center" Margin="0,-12,0,0"/>
                         </StackPanel>
                     </Grid>
                     <DataTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True" SourceName="base">
                             <Setter TargetName="base" Property="Background" Value="{StaticResource RowBG_h}"/>
                         </Trigger>
+                        
+                        <!-- MOD_AToR: Add if positive color green -->
+                        <DataTrigger Binding="{Binding SavingThrow.AdditionalValue, Converter={StaticResource GreaterThanConverter}, ConverterParameter=0}" Value="True">
+                            <Setter TargetName="value" Property="Foreground" Value="{StaticResource AToR_LS_bonusTxtColor}"/>
+                        </DataTrigger>
+
+                        <!-- MOD_AToR: Add if negative color red -->
+                        <DataTrigger Binding="{Binding SavingThrow.AdditionalValue, Converter={StaticResource LessThanConverter}, ConverterParameter=0}" Value="True">
+                            <Setter TargetName="value" Property="Foreground" Value="{StaticResource AToR_LS_alertTxtColor}"/>
+                        </DataTrigger>
+                        
                     </DataTemplate.Triggers>
                 </DataTemplate>
             </Setter.Value>
@@ -4783,12 +4800,12 @@ Source="{StaticResource SavingThrowDice}">
                                                         
                                                         <!-- MOD_AToR: Add if positive color green -->
                                                         <DataTrigger Binding="{Binding Value, Converter={StaticResource GreaterThanConverter}, ConverterParameter=0}" Value="True">
-                                                            <Setter TargetName="SkillModifier" Property="Foreground" Value="{StaticResource LS_bonusTxtColor}"/>
+                                                            <Setter TargetName="SkillModifier" Property="Foreground" Value="{StaticResource AToR_LS_bonusTxtColor}"/>
                                                         </DataTrigger>
 
                                                         <!-- MOD_AToR: Add if negative color red -->
                                                         <DataTrigger Binding="{Binding Value, Converter={StaticResource LessThanConverter}, ConverterParameter=0}" Value="True">
-                                                            <Setter TargetName="SkillModifier" Property="Foreground" Value="{StaticResource LS_alertTxtColor}"/>
+                                                            <Setter TargetName="SkillModifier" Property="Foreground" Value="{StaticResource AToR_LS_alertTxtColor}"/>
                                                         </DataTrigger>
                                                         
                                                         <!-- MOD_AToR: Detect if BCPP is active for party panel -->
@@ -4833,12 +4850,12 @@ Source="{StaticResource SavingThrowDice}">
 
                                     <!-- MOD_AToR: Add if positive color green -->
                                     <DataTrigger Binding="{Binding Modifier, Converter={StaticResource GreaterThanConverter}, ConverterParameter=0}" Value="True">
-                                        <Setter TargetName="TitleValue" Property="Foreground" Value="{StaticResource LS_bonusTxtColor}"/>
+                                        <Setter TargetName="TitleValue" Property="Foreground" Value="{StaticResource AToR_LS_bonusTxtColor}"/>
                                     </DataTrigger>
 
                                     <!-- MOD_AToR: Add if negative color red -->
                                     <DataTrigger Binding="{Binding Modifier, Converter={StaticResource LessThanConverter}, ConverterParameter=0}" Value="True">
-                                        <Setter TargetName="TitleValue" Property="Foreground" Value="{StaticResource LS_alertTxtColor}"/>
+                                        <Setter TargetName="TitleValue" Property="Foreground" Value="{StaticResource AToR_LS_alertTxtColor}"/>
                                     </DataTrigger>
 
                                 </DataTemplate.Triggers>
