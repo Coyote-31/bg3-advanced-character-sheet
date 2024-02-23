@@ -4616,7 +4616,12 @@ Source="{StaticResource SavingThrowDice}">
                                         <Border x:Name="SkillTitle" Background="Transparent" ToolTip="{StaticResource ManagedTooltip}" ToolTipService.Placement="Right">
                                             <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center">
                                                 <TextBlock x:Name="TitleName" Text="{Binding AbilityValue, Converter={StaticResource EnumTranslatedStringConverter}, ConverterParameter='hec30ce0dgb76bg45cagaf40gad771ff7902b'}" Style="{StaticResource SkillTitleTextStyle}"/>
-                                                <TextBlock x:Name="TitleValue" Style="{StaticResource SkillTitleTextStyle}" Text="{Binding Modifier, StringFormat=' ({0:+#;-#;0})'}"/>
+                                                <!-- MOD_AToR: Add prepend -->
+                                                <TextBlock x:Name="TitleValuePrepend" Style="{StaticResource SkillTitleTextStyle}" Text=" ("/>
+                                                <!-- MOD_AToR: Update StringFormat // BG3: StringFormat=' ({0:+#;-#;0})' -->
+                                                <TextBlock x:Name="TitleValue" Style="{StaticResource SkillTitleTextStyle}" Text="{Binding Modifier, StringFormat={}{0:+#;-#;0}}"/>
+                                                <!-- MOD_AToR: Add append -->
+                                                <TextBlock x:Name="TitleValueAppend" Style="{StaticResource SkillTitleTextStyle}" Text=")"/>
                                             </StackPanel>
                                         </Border>
                                         
@@ -4776,6 +4781,16 @@ Source="{StaticResource SavingThrowDice}">
 
                                                         </DataTrigger>
                                                         
+                                                        <!-- MOD_AToR: Add if positive color green -->
+                                                        <DataTrigger Binding="{Binding Value, Converter={StaticResource GreaterThanConverter}, ConverterParameter=0}" Value="True">
+                                                            <Setter TargetName="SkillModifier" Property="Foreground" Value="{StaticResource LS_bonusTxtColor}"/>
+                                                        </DataTrigger>
+
+                                                        <!-- MOD_AToR: Add if negative color red -->
+                                                        <DataTrigger Binding="{Binding Value, Converter={StaticResource LessThanConverter}, ConverterParameter=0}" Value="True">
+                                                            <Setter TargetName="SkillModifier" Property="Foreground" Value="{StaticResource LS_alertTxtColor}"/>
+                                                        </DataTrigger>
+                                                        
                                                         <!-- MOD_AToR: Detect if BCPP is active for party panel -->
                                                         <MultiDataTrigger>
                                                             <MultiDataTrigger.Conditions>
@@ -4801,11 +4816,31 @@ Source="{StaticResource SavingThrowDice}">
                                         <Setter TargetName="AbillitySkillSection" Property="Background" Value="{StaticResource RowBG_h}"/>
                                         <Setter TargetName="TitleName" Property="Foreground" Value="{StaticResource LS_accent100TxtColor}"/>
                                         <Setter TargetName="TitleValue" Property="Foreground" Value="{StaticResource LS_accent100TxtColor}"/>
+                                        <!-- MOD_AToR: Add prepend -->
+                                        <Setter TargetName="TitleValuePrepend" Property="Foreground" Value="{StaticResource LS_accent100TxtColor}"/>
+                                        <!-- MOD_AToR: Add Append -->
+                                        <Setter TargetName="TitleValueAppend" Property="Foreground" Value="{StaticResource LS_accent100TxtColor}"/>
+                                        
                                     </Trigger>
                                     <Trigger Property="IsMouseOver" Value="True" SourceName="SkillTitle">
                                         <Setter TargetName="TitleName" Property="Foreground" Value="{StaticResource LS_tint100}"/>
                                         <Setter TargetName="TitleValue" Property="Foreground" Value="{StaticResource LS_tint100}"/>
+                                        <!-- MOD_AToR: Add prepend -->
+                                        <Setter TargetName="TitleValuePrepend" Property="Foreground" Value="{StaticResource LS_tint100}"/>
+                                        <!-- MOD_AToR: Add Append -->
+                                        <Setter TargetName="TitleValueAppend" Property="Foreground" Value="{StaticResource LS_tint100}"/>
                                     </Trigger>
+
+                                    <!-- MOD_AToR: Add if positive color green -->
+                                    <DataTrigger Binding="{Binding Modifier, Converter={StaticResource GreaterThanConverter}, ConverterParameter=0}" Value="True">
+                                        <Setter TargetName="TitleValue" Property="Foreground" Value="{StaticResource LS_bonusTxtColor}"/>
+                                    </DataTrigger>
+
+                                    <!-- MOD_AToR: Add if negative color red -->
+                                    <DataTrigger Binding="{Binding Modifier, Converter={StaticResource LessThanConverter}, ConverterParameter=0}" Value="True">
+                                        <Setter TargetName="TitleValue" Property="Foreground" Value="{StaticResource LS_alertTxtColor}"/>
+                                    </DataTrigger>
+
                                 </DataTemplate.Triggers>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
