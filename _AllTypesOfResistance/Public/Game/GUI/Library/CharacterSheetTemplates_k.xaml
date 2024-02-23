@@ -4924,7 +4924,8 @@ Source="{StaticResource SavingThrowDice}">
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource DetailedListText}" Text="{Binding Character.Name}"/>
                         <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Style="{StaticResource DetailedListValue}">
                                 <Run Text="{Binding Rating, Converter={StaticResource ApprovalRatingToStringConverter}}"/>
-                                <Run Text="{Binding Rating, StringFormat='({0})'}"/>
+                                <!-- MOD_AToR: Update StringFormat // BG3: StringFormat='({0})' -->
+                                <Run Text="{Binding Rating, StringFormat='({0}/100)'}"/>
                         </TextBlock>
                     </Grid>
                 </ContentControl>
