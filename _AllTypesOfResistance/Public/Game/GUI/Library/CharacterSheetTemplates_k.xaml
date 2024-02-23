@@ -839,6 +839,64 @@
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
+
+                    <!-- MOD_AToR: Add ClassSectionGridToggle button -->
+                    <ls:LSToggleButton x:Name="ClassSectionGridToggle" Grid.Column="2" Grid.Row="1" Template="{StaticResource AToR_ToggleIconButtonTemplate}" IsChecked="False" 
+                                       VerticalAlignment="Top" HorizontalAlignment="Left" Visibility="Collapsed" Margin="0,8,0,-8">
+                        <ls:LSToggleButton.Resources>
+                            <ImageSource x:Key="ButtonUncheckedNormal">pack://application:,,,/GustavNoesisGUI;component/Assets/Container/container_roundBtn_d.png</ImageSource>
+                            <ImageSource x:Key="ButtonUncheckedHighlight">pack://application:,,,/GustavNoesisGUI;component/Assets/Container/container_roundBtn_h.png</ImageSource>
+                            <ImageSource x:Key="ButtonUncheckedPressed">pack://application:,,,/GustavNoesisGUI;component/Assets/Container/container_roundBtn_p.png</ImageSource>
+                            <ImageSource x:Key="ButtonUncheckedDisabled">pack://application:,,,/GustavNoesisGUI;component/Assets/Container/container_roundBtn_disabled.png</ImageSource>
+                            
+                            <ImageSource x:Key="ButtonCheckedNormal">pack://application:,,,/GustavNoesisGUI;component/Assets/Container/container_roundBtn_d.png</ImageSource>
+                            <ImageSource x:Key="ButtonCheckedHighlight">pack://application:,,,/GustavNoesisGUI;component/Assets/Container/container_roundBtn_h.png</ImageSource>
+                            <ImageSource x:Key="ButtonCheckedPressed">pack://application:,,,/GustavNoesisGUI;component/Assets/Container/container_roundBtn_p.png</ImageSource>
+                            <ImageSource x:Key="ButtonCheckedDisabled">pack://application:,,,/GustavNoesisGUI;component/Assets/Container/container_roundBtn_disabled.png</ImageSource>
+                            
+                            <ImageSource x:Key="IconUncheckedNormal">pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Arrows/doubleArrow_up_d.png</ImageSource>
+                            <ImageSource x:Key="IconUncheckedHighlight">pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Arrows/doubleArrow_up_h.png</ImageSource>
+                            <ImageSource x:Key="IconUncheckedPressed">pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Arrows/doubleArrow_up_h.png</ImageSource>
+                            <ImageSource x:Key="IconUncheckedDisabled">pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Arrows/doubleArrow_up_disabled.png</ImageSource>
+                            
+                            <ImageSource x:Key="IconCheckedNormal">pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Arrows/doubleArrow_down_d.png</ImageSource>
+                            <ImageSource x:Key="IconCheckedHighlight">pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Arrows/doubleArrow_down_h.png</ImageSource>
+                            <ImageSource x:Key="IconCheckedPressed">pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Arrows/doubleArrow_down_h.png</ImageSource>
+                            <ImageSource x:Key="IconCheckedDisabled">pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Arrows/doubleArrow_down_disabled.png</ImageSource>
+                            
+                            <System:Double x:Key="ImgWidth">54</System:Double>
+                            <System:Double x:Key="ImgHeight">54</System:Double>
+                            <System:Double x:Key="IconWidth">54</System:Double>
+                            <System:Double x:Key="IconHeight">54</System:Double>
+                        </ls:LSToggleButton.Resources>
+                        
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="Click">
+                                <b:Interaction.Behaviors>
+                                    <b:ConditionBehavior>
+                                        <b:ConditionalExpression ForwardChaining="And">
+                                            <b:ComparisonCondition LeftOperand="{Binding IsChecked, ElementName=ClassSectionGridToggle}" Operator="Equal" RightOperand="True"/>
+                                            <b:ComparisonCondition LeftOperand="{Binding Visibility, ElementName=ClassSectionGrid}" Operator="Equal" RightOperand="Visible"/>
+                                        </b:ConditionalExpression>
+                                    </b:ConditionBehavior>
+                                </b:Interaction.Behaviors>
+                                <b:ChangePropertyAction TargetName="ClassSectionGrid" PropertyName="Visibility" Value="Collapsed"/>
+                            </b:EventTrigger>
+                            
+                            <b:EventTrigger EventName="Click">
+                                <b:Interaction.Behaviors>
+                                    <b:ConditionBehavior>
+                                        <b:ConditionalExpression ForwardChaining="And">
+                                            <b:ComparisonCondition LeftOperand="{Binding IsChecked, ElementName=ClassSectionGridToggle}" Operator="Equal" RightOperand="False"/>
+                                            <b:ComparisonCondition LeftOperand="{Binding Visibility, ElementName=ClassSectionGrid}" Operator="Equal" RightOperand="Collapsed"/>
+                                        </b:ConditionalExpression>
+                                    </b:ConditionBehavior>
+                                </b:Interaction.Behaviors>
+                                <b:ChangePropertyAction TargetName="ClassSectionGrid" PropertyName="Visibility" Value="Visible"/>
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </ls:LSToggleButton>
+
                 </Grid>
 
                 <ControlTemplate.Triggers>
@@ -866,6 +924,8 @@
                     <!-- Prepared -->
                     <DataTrigger Binding="{Binding Path=(ls:AttachedProperties.InheritedTag), RelativeSource={RelativeSource Mode=Self}}" Value="Prepared">
                         <Setter TargetName="Icon" Property="Source" Value="{StaticResource PreparedSpellsIcon}"/>
+                        <!-- MOD_AToR: Add ClassSectionGridToggle btn visibility -->
+                        <Setter TargetName="ClassSectionGridToggle" Property="Visibility" Value="Visible"/>
                     </DataTrigger>
 
                     <!-- MOD_AToR: Add trigger for LearnBtnContainer -->
@@ -2005,7 +2065,7 @@
                                                 <!-- MOD_AToR: Add x:Name / Update margin // BG3 Margin="120,22,0,0" -->
                                                 <TextBlock x:Name="SpellsTitleText" ls:TextBlockFormatter.SourceText="{Binding Source='h062f5cf9gb2e5g4c0dgadc9g68898c250650',Converter={StaticResource TranslatedStringConverter}}" Style="{StaticResource ActionGroupTitleStyle}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="120,10,0,0"/>
 
-                                                <!-- MOD_AToR: Update LearnSpellsButton // BG3: HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,26,0" MinWidth="150" -->
+                                                <!-- MOD_AToR: Update LearnSpellsButton - Moved to SpellbookActionGroup// BG3: HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,26,0" MinWidth="150" -->
                                                 <ls:LSButton x:Name="LearnSpellsButton" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" Margin="-1,10,1,-12" Command="{Binding DataContext.OpenLearnSpellsCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" MinWidth="150">
                                                     <ls:LSButton.Template>
                                                         <ControlTemplate TargetType="ls:LSButton">

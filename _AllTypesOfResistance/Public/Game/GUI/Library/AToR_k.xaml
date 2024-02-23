@@ -287,5 +287,66 @@
     </DataTemplate>
     <!-- === MOD_AToR: Tooltips DataTemplate - END === -->
     <!-- ============================================= -->
+    
+    <!-- =========================================== -->
+    <!-- === MOD_AToR: Buttons templates - START === -->
+    <ControlTemplate x:Key="AToR_ToggleIconButtonTemplate" TargetType="ToggleButton">
+        <Grid>
+            <Image x:Name="img" Source="{DynamicResource ButtonUncheckedNormal}" Stretch="Uniform" Width="{DynamicResource ImgWidth}" Height="{DynamicResource ImgHeight}"/>
+            <Image x:Name="icon" Source="{DynamicResource IconUncheckedNormal}" Stretch="Uniform" Width="{DynamicResource IconWidth}" Height="{DynamicResource IconHeight}"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <!-- Unchecked -->
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Source" Value="{DynamicResource ButtonUncheckedHighlight}" TargetName="img"/>
+                <Setter Property="Source" Value="{DynamicResource IconUncheckedHighlight}" TargetName="icon"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Source" Value="{DynamicResource ButtonUncheckedPressed}" TargetName="img"/>
+                <Setter Property="Source" Value="{DynamicResource IconUncheckedPressed}" TargetName="icon"/>
+                <Setter Property="Margin" Value="0,2,0,-2" TargetName="icon"/>
+            </Trigger>
+
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Source" Value="{DynamicResource ButtonUncheckedDisabled}" TargetName="img"/>
+                <Setter Property="Source" Value="{DynamicResource IconUncheckedDisabled}" TargetName="icon"/>
+            </Trigger>
+
+            <!-- Checked variants -->
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Source" Value="{DynamicResource ButtonCheckedNormal}" TargetName="img"/>
+                <Setter Property="Source" Value="{DynamicResource IconCheckedNormal}" TargetName="icon"/>
+            </Trigger>
+
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver" Value="True"/>
+                    <Condition Property="IsChecked" Value="True"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="Source" Value="{DynamicResource ButtonCheckedHighlight}" TargetName="img"/>
+                <Setter Property="Source" Value="{DynamicResource IconCheckedHighlight}" TargetName="icon"/>
+            </MultiTrigger>
+
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsPressed" Value="True"/>
+                    <Condition Property="IsChecked" Value="True"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="Source" Value="{DynamicResource ButtonCheckedPressed}" TargetName="img"/>
+                <Setter Property="Source" Value="{DynamicResource IconCheckedPressed}" TargetName="icon"/>
+            </MultiTrigger>
+
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsEnabled" Value="False"/>
+                    <Condition Property="IsChecked" Value="True"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="Source" Value="{DynamicResource ButtonCheckedDisabled}" TargetName="img"/>
+                <Setter Property="Source" Value="{DynamicResource IconCheckedDisabled}" TargetName="icon"/>
+            </MultiTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <!-- === MOD_AToR: Buttons templates - END === -->
+    <!-- ========================================= -->
 
 </ResourceDictionary>
