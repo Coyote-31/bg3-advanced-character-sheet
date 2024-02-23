@@ -4580,8 +4580,9 @@ Source="{StaticResource SavingThrowDice}">
             <!-- Proficiency Bonus-->
             <Border Name="ProficiencyBonusLegend" Grid.Row="0" Background="Transparent" ToolTip="{StaticResource PlacementParentDCTooltip}" DataContext="{Binding Stats.ProficiencyBonus}" ToolTipService.Placement="Right" ToolTipService.VerticalOffset="-40">
                 <!-- MOD_AToR: Add name / Update margin // BG3:  Margin="0,0,0,12" -->
-                <StackPanel x:Name="ProficiencyBonusLegendPanel" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,-25,0,4">
-                    <Image Source="{StaticResource ProficientDice}" Stretch="None" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                <StackPanel x:Name="ProficiencyBonusLegendPanel" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,-22,0,11">
+                    <!-- MOD_AToR: Update margin // BG3:  Margin="0,0,6,0" -->
+                    <Image Source="{StaticResource ProficientDice}" Stretch="None" Margin="0,-2,6,2" VerticalAlignment="Center"/>
                     <TextBlock Name="ProficiencyBonusLabel" Foreground="{StaticResource LS_accent75TxtColor}" FontSize="{StaticResource ScaledSmallFontSize}" VerticalAlignment="Center">
                                 <Run Text="{Binding Source='h65b46ad4g2eacg47d5gb4b4g124ca3b8aaef', Converter={StaticResource TranslatedStringConverter}}"/>
                                 <Run Text="{Binding Value, StringFormat='(+{0})'}"/>
@@ -4613,8 +4614,7 @@ Source="{StaticResource SavingThrowDice}">
                                 <Border x:Name="AbillitySkillSection" Visibility="{Binding Skills.Count, Converter={StaticResource CountToVisibilityConverter}, ConverterParameter=0}" Style="{StaticResource RowBG_d}" BorderBrush="{StaticResource LS_accent00TxtColor}" BorderThickness="2" Margin="0,4">
                                     <StackPanel Orientation="Vertical" Margin="0,8,0,0">
                                         <Border x:Name="SkillTitle" Background="Transparent" ToolTip="{StaticResource ManagedTooltip}" ToolTipService.Placement="Right">
-                                            <!-- MOD_AToR: Add name / Add margin -->
-                                            <StackPanel x:Name="SkillTitlePanel" Orientation="Horizontal"  HorizontalAlignment="Center" Margin="0,0,0,-12">
+                                            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center">
                                                 <TextBlock x:Name="TitleName" Text="{Binding AbilityValue, Converter={StaticResource EnumTranslatedStringConverter}, ConverterParameter='hec30ce0dgb76bg45cagaf40gad771ff7902b'}" Style="{StaticResource SkillTitleTextStyle}"/>
                                                 <TextBlock x:Name="TitleValue" Style="{StaticResource SkillTitleTextStyle}" Text="{Binding Modifier, StringFormat=' ({0:+#;-#;0})'}"/>
                                             </StackPanel>
@@ -4625,8 +4625,9 @@ Source="{StaticResource SavingThrowDice}">
                                             <ItemsControl.ItemTemplate>
                                                 <DataTemplate DataType="ls:VMSkill">
                                                     <Border Name="GridRow" Style="{StaticResource RowBG_d}" ToolTip="{StaticResource ManagedTooltip}" ToolTipService.Placement="Right">
-                                                        <Grid HorizontalAlignment="Stretch" Height="56" >
-                                                            <Grid.ColumnDefinitions>
+                                                        <!-- MOD_AToR: Add Name / Update Height // BG3: Height="56" -->
+                                                        <Grid x:Name="SkillGrid" HorizontalAlignment="Stretch" Height="52" >
+                                                        <Grid.ColumnDefinitions>
                                                                 <ColumnDefinition Width="Auto"/>
                                                                 <ColumnDefinition Width="*"/>
                                                                 <ColumnDefinition Width="44"/>
@@ -4774,6 +4775,15 @@ Source="{StaticResource SavingThrowDice}">
                                                             <Setter TargetName="SkillIcon" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared_c/c_SkillsIcons/skills_persuasion.png"/>
 
                                                         </DataTrigger>
+                                                        
+                                                        <!-- MOD_AToR: Detect if BCPP is active for party panel -->
+                                                        <MultiDataTrigger>
+                                                            <MultiDataTrigger.Conditions>
+                                                                <Condition Binding="{Binding ParentState, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel"/>
+                                                                <Condition Binding="{Binding VerticalAlignment, ElementName=CharacterRoot}" Value="Top"/>
+                                                            </MultiDataTrigger.Conditions>
+                                                            <Setter TargetName="SkillGrid" Property="Height" Value="56"/>
+                                                        </MultiDataTrigger> 
 
                                                     </DataTemplate.Triggers>
                                                 </DataTemplate>
@@ -4796,17 +4806,6 @@ Source="{StaticResource SavingThrowDice}">
                                         <Setter TargetName="TitleName" Property="Foreground" Value="{StaticResource LS_tint100}"/>
                                         <Setter TargetName="TitleValue" Property="Foreground" Value="{StaticResource LS_tint100}"/>
                                     </Trigger>
-                                    
-                                    <!-- MOD_AToR: Detect if BCPP is active for party panel -->
-                                    <MultiDataTrigger>
-                                        <MultiDataTrigger.Conditions>
-                                            <Condition Binding="{Binding ParentState, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel"/>
-                                            <Condition Binding="{Binding VerticalAlignment, ElementName=CharacterRoot}" Value="Top"/>
-                                        </MultiDataTrigger.Conditions>
-                                        <!-- MOD_AToR: Update margin -->   
-                                        <Setter TargetName="SkillTitlePanel" Property="Margin" Value="0,0,0,-2"/>
-                                    </MultiDataTrigger> 
-                                    
                                 </DataTemplate.Triggers>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
@@ -4831,8 +4830,7 @@ Source="{StaticResource SavingThrowDice}">
                     <Condition Binding="{Binding ParentState, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel"/>
                     <Condition Binding="{Binding VerticalAlignment, ElementName=CharacterRoot}" Value="Top"/>
                 </MultiDataTrigger.Conditions>
-                <!-- MOD_AToR: Update margin -->   
-                <Setter TargetName="ProficiencyBonusLegendPanel" Property="Margin" Value="0,0,0,22"/>
+                <Setter TargetName="ProficiencyBonusLegendPanel" Property="Margin" Value="0,-9,0,18"/>
             </MultiDataTrigger> 
             
         </ControlTemplate.Triggers>
