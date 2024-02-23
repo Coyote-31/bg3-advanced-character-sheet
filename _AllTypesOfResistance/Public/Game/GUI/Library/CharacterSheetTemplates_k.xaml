@@ -727,6 +727,72 @@
                         <Image x:Name="Icon" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="None" />
                     </Border>
 
+                    <!-- MOD_AToR: Add LearnBtnContainer -->
+                    <Border x:Name="LearnBtnContainer" Grid.Column="0" Grid.Row="1" Height="72" VerticalAlignment="Top" Margin="12,0,-12,0" Visibility="Collapsed">
+                        <!-- MOD_AToR: Add LearnSpellsButton // BG3: HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,26,0" MinWidth="150" -->
+                        <ls:LSButton x:Name="LearnSpellsButton" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" Command="{Binding DataContext.OpenLearnSpellsCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" MinWidth="0">
+                            <ls:LSButton.Template>
+                                <ControlTemplate TargetType="ls:LSButton">
+                                    <ControlTemplate.Resources>
+                                        <BitmapImage x:Key="Icon_d" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/SpellBook/ico_learnSpells_d.png" />
+                                        <BitmapImage x:Key="Icon_h" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/SpellBook/ico_learnSpells_h.png" />
+                                        <BitmapImage x:Key="Icon_p" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/SpellBook/ico_learnSpells_p.png" />
+                                        <BitmapImage x:Key="Icon_disabled" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/SpellBook/ico_learnSpells_disabled.png" />
+                                    </ControlTemplate.Resources>
+
+                                    <!-- BG3: Slices="36,34" Padding="20,10" Height="72" -->
+                                    <ls:LSNineSliceImage x:Name="SearchBarContainer" ImageSource="{StaticResource SearchBarBg_d}" Slices="36,34" Padding="16,8,16,12" Height="72">
+                                        <Image x:Name="Icon" Source="{StaticResource Icon_d}" Stretch="None" VerticalAlignment="Center"/>
+                                    </ls:LSNineSliceImage>
+
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="SearchBarContainer" Property="ImageSource" Value="{StaticResource SearchBarBg_h}"/>
+                                            <Setter TargetName="Icon" Property="Source" Value="{StaticResource Icon_h}"/>
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter TargetName="SearchBarContainer" Property="ImageSource" Value="{StaticResource SearchBarBg_h}"/>
+                                            <Setter TargetName="Icon" Property="Source" Value="{StaticResource Icon_p}"/>
+                                            <Setter TargetName="Icon" Property="Margin" Value="0,4,0,-4"/>
+                                        </Trigger>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter TargetName="SearchBarContainer" Property="ImageSource" Value="{StaticResource SearchBarBg_d}"/>
+                                            <Setter TargetName="Icon" Property="Source" Value="{StaticResource Icon_disabled}"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </ls:LSButton.Template>
+                            <ls:LSButton.CommandParameter>
+                                <MultiBinding Converter="{StaticResource PassThroughConverter}">
+                                    <Binding Path="DataContext" ElementName="ClassPanelRoot"/>
+                                    <Binding ElementName="ClassPanelRoot"/>
+                                    <Binding Path="ActualWidth" ElementName="ClassPanelRoot" Converter="{StaticResource MultiplierConverter}" ConverterParameter="0.8"/>
+                                </MultiBinding>
+                            </ls:LSButton.CommandParameter>
+                            <ls:LSButton.ToolTip>
+                                <ls:LSTooltip DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource TemplatedParent}}">
+                                    <ls:LSTooltip.ContentTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Vertical" MaxWidth="{StaticResource MaxTooltipContentWidth}">
+                                                <StackPanel.Resources>
+                                                    <Style TargetType="TextBlock">
+                                                        <Setter Property="TextWrapping" Value="Wrap"/>
+                                                        <Setter Property="FontSize" Value="{DynamicResource ScaledMediumFontSize}"/>
+                                                        <Setter Property="Foreground" Value="{StaticResource LS_baseTxtColor}"/>
+                                                    </Style>
+                                                </StackPanel.Resources>
+
+                                                <TextBlock ls:TextBlockFormatter.SourceText="{Binding Source='h9784a948g9d80g41d8gbb18ga9c838b90edd',Converter={StaticResource TranslatedStringConverter}}" Style="{StaticResource TooltipTitleStyle}"/>
+
+                                                <TextBlock ls:TextBlockFormatter.SourceText="{Binding Source='h1be7e965gcf8dg4a81gb85dga1fbc01a9f08',Converter={StaticResource TranslatedStringConverter}}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ls:LSTooltip.ContentTemplate>
+                                </ls:LSTooltip>
+                            </ls:LSButton.ToolTip>
+                        </ls:LSButton>
+                    </Border>
+
                     <Border x:Name="Actions" Grid.Column="1" Grid.Row="1">
                         <ItemsPresenter x:Name="Presenter" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left">
                             <ItemsPresenter.Width>
@@ -801,6 +867,15 @@
                     <DataTrigger Binding="{Binding Path=(ls:AttachedProperties.InheritedTag), RelativeSource={RelativeSource Mode=Self}}" Value="Prepared">
                         <Setter TargetName="Icon" Property="Source" Value="{StaticResource PreparedSpellsIcon}"/>
                     </DataTrigger>
+
+                    <!-- MOD_AToR: Add trigger for LearnBtnContainer -->
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding SelectedItem.Class.CanLearnSpells, ElementName=Tabs}" Value="True"/>
+                            <Condition Binding="{Binding Path=(ls:AttachedProperties.InheritedTag), RelativeSource={RelativeSource Mode=Self}}" Value="Prepared"/>
+                        </MultiDataTrigger.Conditions>
+                        <Setter TargetName="LearnBtnContainer" Property="Visibility" Value="Visible"/>
+                    </MultiDataTrigger>
 
                     <!-- Feats -->
                     <DataTrigger Binding="{Binding Path=(ls:AttachedProperties.InheritedTag), RelativeSource={RelativeSource Mode=Self}}" Value="CharacterFeats">
@@ -973,7 +1048,7 @@
                 </ControlTemplate.Triggers>
             </ControlTemplate>
 
-            <DataTemplate x:Key="PreparedSpellCellTemplate" DataType="ls:VMCharacterAction">
+            <DataTemplate x:Key="PreparedSpellCellTemplate" DataType="ls:VMCharacterAction"> 
                 <ContentControl x:Name="Container" IsEnabled="{Binding DataContext.CurrentPlayer.UIData.AllowInteraction, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" ToolTipService.Placement="Right" ToolTipService.ShowOnDisabled="True" ls:DragAndDropProperties.DropTargetOwner="{Binding Path=(ls:TooltipExtender.Owner), RelativeSource={RelativeSource Mode=Self}}">
                     <ContentControl.ToolTip>
                         <ls:LSTooltip Content="{Binding DataContext, RelativeSource={RelativeSource TemplatedParent}}" IsHitTestVisible="False"/>
@@ -2470,12 +2545,15 @@
                 <Setter TargetName="ClassActionsList" Property="ls:AttachedProperties.InheritedTag" Value="HideResources"/>
             </MultiDataTrigger>
 
+            <!-- MOD_AToR: Disable LearnSpellsButton here - Btn moved to SpellbookActionGroup -->
             <DataTrigger Binding="{Binding SelectedItem.Class.CanLearnSpells, ElementName=Tabs}" Value="True">
-                <Setter TargetName="LearnSpellsButton" Property="Visibility" Value="Visible"/>
-                <Setter TargetName="SpellsTitle" Property="Visibility" Value="Visible"/>
-                <!-- MOD_AToR: Add SpellsTitleText for learn btn / Disable for now TODO check in CS if visible & check SpellsTitle & finalise text or visibility-->
+                <!-- MOD_AToR: Disable // BG3: Value="Visible" -->
+                <Setter TargetName="LearnSpellsButton" Property="Visibility" Value="Collapsed"/>
+                <!-- MOD_AToR: Disable // BG3: Value="Visible" -->
+                <Setter TargetName="SpellsTitle" Property="Visibility" Value="Collapsed"/>
+                <!-- MOD_AToR: Add SpellsTitleText for learn btn / Disable for now -->
                 <!-- <Setter TargetName="SpellsTitleText" Property="ls:TextBlockFormatter.SourceText" Value="{Binding Source=h82b57884g9542g4415gac97g16a53810d331, Converter={StaticResource TranslatedStringConverter}}"/> -->
-                <!-- MOD_AToR: Disable SpellsTitleText for learn btn -->
+                <!-- MOD_AToR: Disable // BG3: Value="Visible" -->
                 <Setter TargetName="SpellsTitleText" Property="Visibility" Value="Collapsed"/>
             </DataTrigger>
 
