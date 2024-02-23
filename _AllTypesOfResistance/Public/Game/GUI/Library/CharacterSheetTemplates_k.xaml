@@ -545,6 +545,34 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
+    <!-- MOD_AToR: Add ControlTemplate decoratedHeader -->
+    <ControlTemplate x:Key="AToR_decoratedHeader">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel.Resources>
+                <BitmapImage x:Key="decor_header">pack://application:,,,/GustavNoesisGUI;component/Assets/CC/decor_header.png</BitmapImage>
+            </StackPanel.Resources>
+            <Image Source="{StaticResource decor_header}" Stretch="None"/>
+            <ContentPresenter Margin="30,0,30,0"/>
+            <Image Source="{StaticResource decor_header}" Stretch="None">
+                <Image.RenderTransform>
+                    <ScaleTransform ScaleX="-1" CenterX="42"/>
+                </Image.RenderTransform>
+            </Image>
+        </StackPanel>
+    </ControlTemplate>
+
+    <!-- MOD_AToR: Add Style BaseTitleStyle -->
+    <Style x:Key="AToR_BaseTitleStyle" TargetType="ContentControl">
+        <Style.Resources>
+            <Style TargetType="TextBlock" >
+                <Setter Property="FontSize" Value="{DynamicResource ScaledMediumFontSize}"/>
+                <Setter Property="Foreground" Value="{StaticResource LS_accent100TxtColor}"/>
+            </Style>
+        </Style.Resources>
+        <Setter Property="Margin" Value="0,20,0,0"/>
+        <Setter Property="Template" Value="{StaticResource AToR_decoratedHeader}"/>
+    </Style>
+
     <!--===== MULTICLASS SPELLBOOK TEMPLATE =====-->
     <ControlTemplate x:Key="MultiClassSpellbookTemplate">
         <!-- DataContext of this should be a VMCharacter -->
@@ -2219,12 +2247,10 @@
                                                       
                                         <!-- ============================================================ -->
                                         <!-- === MOD_AToR: Move from before "InitiationsList" - START === -->
-                                        
-                                        <!-- MOD_AToR: Add separator -->
-                                        <Image x:Name="FeatsSeparator" Source="{StaticResource AToR_SeparatorThin}" 
-                                               HorizontalAlignment="Center" VerticalAlignment="center" Stretch="Uniform" 
-                                               Margin="90,14,90,-10"
-                                               Visibility="{Binding Visibility, ElementName=TadpoleFeatsList}"/>
+                                        <!-- MOD_AToR: Add title for passive feats -->
+                                        <ContentControl Style="{StaticResource AToR_BaseTitleStyle}" Visibility="{Binding Visibility, ElementName=FeatsList}">
+                                            <TextBlock Text="{Binding Source='h74d1322ag4c4dg42eag9272g066b84d0d374', Converter={StaticResource TranslatedStringConverter}}"/>
+                                        </ContentControl>
                                         
                                         <!-- MOD_AToR: Switch order with "FeatsList" / Enable tadpole feats only in base tab, see trigger "TadpoleFeatsList"-->
                                         <!-- MOD_BCPP: Visibility="{Binding Path=ItemsSource.Count, RelativeSource={RelativeSource Self}, Converter={StaticResource CountToVisibilityConverter}}" -->
