@@ -74,9 +74,27 @@
         <Setter Property="Margin" Value="8,0"/>
     </Style>
 
+    <!-- MOD_AToR: Add style for conditions & passive features -->
+    <Style x:Key="SummaryListTextConditionsAndFeats" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="{StaticResource ScaledSmallFontSize}"/>
+        <Setter Property="Foreground" Value="{StaticResource LS_baseTxtColor}"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="8,0"/>
+    </Style>
+
     <Style x:Key="SummaryRoundIcons" TargetType="Rectangle">
         <Setter Property="Width" Value="48"/>
         <Setter Property="Height" Value="48"/>
+        <Setter Property="RadiusX" Value="24"/>
+        <Setter Property="RadiusY" Value="24"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+    </Style>
+
+    <!-- MOD_AToR: Add style for conditions & passive features -->
+    <Style x:Key="SummaryRoundIconsConditionsAndFeats" TargetType="Rectangle">
+        <Setter Property="Width" Value="42"/>
+        <Setter Property="Height" Value="42"/>
         <Setter Property="RadiusX" Value="24"/>
         <Setter Property="RadiusY" Value="24"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
@@ -3110,32 +3128,37 @@ Source="{StaticResource SavingThrowDice}">
         </Grid>
     </ControlTemplate>
 
-    <!-- ===== CONDITIONS LIST TEMPLATE =====-->
+    <!-- ===== CONDITIONS LIST TEMPLATE =====--> 
     <DataTemplate x:Key="StatusListItemTemplate" DataType="{x:Type ls:VMStatus}">
         <DataTemplate.Resources>
             <BitmapImage x:Key="statusBG" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/TargetInfo/statusBG.png"/>
             <BitmapImage x:Key="statusBG_fill" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/TargetInfo/statusBG_fill.png"/>
         </DataTemplate.Resources>
         <Border Name="root" Style="{StaticResource RowBG_d}" ToolTip="{StaticResource ManagedTooltip}">
-            <Grid Height="56">
+            <!-- MOD_AToR: Add Name / Update Height // BG3: Height="56" -->
+            <Grid x:Name="StatusGrid" Height="50">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Grid Margin="8,4,8,4">
+                <!-- MOD_AToR: Add Name / Update Margin // BG3: Margin="8,4,8,4" -->
+                <Grid x:Name="StatusIconGrid" Margin="8,2,8,2">
                     <Image Source="{StaticResource statusBG}" Stretch="Uniform" VerticalAlignment="Center"/>
 
                     <ls:LSPie Value="{Binding RemainingPercentage}" SweepDirection="Clockwise">
                         <Image Source="{StaticResource statusBG_fill}" Stretch="Uniform"/>
                     </ls:LSPie>
 
-                    <Rectangle Style="{StaticResource SummaryRoundIcons}" Fill="{Binding Icon}"/>
+                    <!-- MOD_AToR: Add Name / Update Style // BG3: SummaryRoundIcons -->
+                    <Rectangle x:Name="IconRectangle" Style="{StaticResource SummaryRoundIconsConditionsAndFeats}" Fill="{Binding Icon}"/>
 
+                    <!-- MOD_AToR: Update FontSize // BG3: FontSize="{DynamicResource ScaledSmallFontSize}" -->
                     <TextBlock Text="{Binding Duration}" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,-12" Foreground="{StaticResource LS_PrimaryColor}"
                                noesis:Text.Stroke="{StaticResource LS_PrimaryColorOutlineColor}" noesis:Text.StrokeThickness="6" Style="{StaticResource NarrowTooltipModifierText}"
-                               Visibility="{Binding Duration, Converter={StaticResource CountToVisibilityConverter}, ConverterParameter=0}" FontSize="{DynamicResource ScaledSmallFontSize}"/>
+                               Visibility="{Binding Duration, Converter={StaticResource CountToVisibilityConverter}, ConverterParameter=0}" FontSize="{DynamicResource ScaledMiniFontSize}"/>
                 </Grid>
-                <TextBlock x:Name="NameLabel" Grid.Column="1" Text="{Binding Name}" Style="{StaticResource SummaryListText}" TextTrimming="CharacterEllipsis"/>
+                <!-- MOD_AToR: Update Style // BG3: SummaryListText -->
+                <TextBlock x:Name="NameLabel" Grid.Column="1" Text="{Binding Name}" Style="{StaticResource SummaryListTextConditionsAndFeats}" TextTrimming="CharacterEllipsis"/>
             </Grid>
         </Border>
         <DataTemplate.Triggers>
@@ -3923,7 +3946,7 @@ Source="{StaticResource SavingThrowDice}">
         </Grid>
     </ControlTemplate>
 
-    <!-- ===== PASSIVE FEATURES TEMPLATE=====-->
+    <!-- ===== PASSIVE FEATURES TEMPLATE=====--> 
     <DataTemplate x:Key="FeaturesListItemTemplate" DataType="{x:Type ls:VMPassive}">
         <Border Name="root" Style="{StaticResource RowBG_d}" ToolTip="{StaticResource ManagedTooltip}" ToolTipService.Placement="Right">
             <Grid>
@@ -3931,8 +3954,10 @@ Source="{StaticResource SavingThrowDice}">
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Rectangle x:Name="Icon" Grid.Column="0" Fill="{Binding Icon}" Style="{StaticResource SummaryRoundIcons}" Margin="8,4,8,4"/>
-                <TextBlock x:Name="NameLabel" Grid.Column="1" Text="{Binding Name}" Style="{StaticResource SummaryListText}" TextTrimming="CharacterEllipsis"/>
+                <!-- MOD_AToR: Update Style // BG3: SummaryRoundIcons -->
+                <Rectangle x:Name="Icon" Grid.Column="0" Fill="{Binding Icon}" Style="{StaticResource SummaryRoundIconsConditionsAndFeats}" Margin="8,4,8,4"/>
+                <!-- MOD_AToR: Update Style // BG3: SummaryListText -->
+                <TextBlock x:Name="NameLabel" Grid.Column="1" Text="{Binding Name}" Style="{StaticResource SummaryListTextConditionsAndFeats}" TextTrimming="CharacterEllipsis"/>
             </Grid>
         </Border>
         <DataTemplate.Triggers>
@@ -3978,7 +4003,8 @@ Source="{StaticResource SavingThrowDice}">
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>
-                        <TextBlock x:Name="separator" Text="{Binding Source='hd64bfe4cgadadg4468g8b0ag70330ffc717c', Converter={StaticResource TranslatedStringConverter}}"/>
+                        <!-- MOD_AToR: Add space & change separator / Add StringFormat / Update Source // BG3: Source='hd64bfe4cgadadg4468g8b0ag70330ffc717c' -->
+                        <TextBlock x:Name="separator" Text="{Binding Source='hb3046cd8g05b3g4e6ag9396gd17b80fa6737', StringFormat=' {0} ', Converter={StaticResource TranslatedStringConverter}}"/> 
                     </StackPanel>
                     <DataTemplate.Triggers>
                         <DataTrigger Binding="{Binding Tag, ElementName=class}" Value="True">
@@ -5264,7 +5290,8 @@ Source="{StaticResource SavingThrowDice}">
                                     <StackPanel Name="ResistancesSection">
                                         <Grid>
                                             <ContentControl Style="{StaticResource BaseTitleStyle}">
-                                                <TextBlock Text="{Binding Source='h98a4ccfbg20f4g4294g9bf7g624c95711539', Converter={StaticResource TranslatedStringConverter}}"/>
+                                                <!-- MOD_AToR: Add Margin -->
+                                                <TextBlock Text="{Binding Source='h98a4ccfbg20f4g4294g9bf7g624c95711539', Converter={StaticResource TranslatedStringConverter}}" Margin="0,8,0,8"/>
                                             </ContentControl>
                                         </Grid>
                                         <Control x:Name="ResistanceContainer" HorizontalAlignment="Center" Template="{StaticResource ResistancesGridTemplate}"/>
@@ -5274,7 +5301,8 @@ Source="{StaticResource SavingThrowDice}">
                                     <!-- ======== CONDITIONS ======== -->
                                     <StackPanel Visibility="{Binding StatusEffects.Count, Converter={StaticResource CountToVisibilityConverter}}">
                                         <ContentControl Style="{StaticResource BaseTitleStyle}">
-                                            <TextBlock Text="{Binding Source='h3baf1fe2g7d16g4d77gbc35gc17a90fb27d6', Converter={StaticResource TranslatedStringConverter}}"/>
+                                            <!-- MOD_AToR: Add Margin -->
+                                            <TextBlock Text="{Binding Source='h3baf1fe2g7d16g4d77gbc35gc17a90fb27d6', Converter={StaticResource TranslatedStringConverter}}" Margin="0,8,0,8"/>
                                         </ContentControl>
                                         <Border Style="{StaticResource ListSectionBackground}" Visibility="{Binding StatusEffects.Count, Converter={StaticResource CountToVisibilityConverter}}">
                                             <ItemsControl x:Name="StatusHolder" ItemsSource="{Binding StatusEffects}" ItemTemplate="{StaticResource StatusListItemTemplate}" Background="Transparent" Margin="12"/>
@@ -5284,7 +5312,8 @@ Source="{StaticResource SavingThrowDice}">
                                     <!-- ======== FEATURES ======== -->
 
                                     <ContentControl Style="{StaticResource BaseTitleStyle}">
-                                        <TextBlock Text="{Binding Source='h9f9bfc7dgf4cdg4198g83e3gcb974dd2e949', Converter={StaticResource TranslatedStringConverter}}"/>
+                                        <!-- MOD_AToR: Add Margin -->
+                                        <TextBlock Text="{Binding Source='h9f9bfc7dgf4cdg4198g83e3gcb974dd2e949', Converter={StaticResource TranslatedStringConverter}}" Margin="0,8,0,8"/>
                                     </ContentControl>
 
                                 </StackPanel>
