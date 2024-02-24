@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <save>
-  <version major="4" minor="6" revision="0" build="1" />
+  <version major="4" minor="6" revision="0" build="100" />
   <region id="Config">
     <node id="root">
       <children>
@@ -8,24 +8,24 @@
         <node id="ModuleInfo">
           <attribute id="Author" type="LSString" value="Coyote31" />
           <attribute id="CharacterCreationLevelName" type="FixedString" value="" />
-          <attribute id="Description" type="LSString" value="Display all damage types including ones without resistances or weakness. And improve Character and Party panel for Spell Book UI in general (Class info / Spell list / Reactions)." />
-          <attribute id="Folder" type="LSString" value="AllTypesOfResistance" />
+          <attribute id="Description" type="LSString" value="Improve Character and Party panel. Display all damage types including ones without resistances or weakness." />
+          <attribute id="Folder" type="LSString" value="AdvancedCharacterSheet" />
           <attribute id="GMTemplate" type="FixedString" value="" />
           <attribute id="LobbyLevelName" type="FixedString" value="" />
           <attribute id="MD5" type="LSString" value="" />
           <attribute id="MainMenuBackgroundVideo" type="FixedString" value="" />
           <attribute id="MenuLevelName" type="FixedString" value="" />
-          <attribute id="Name" type="FixedString" value="AllTypesOfResistance" />
+          <attribute id="Name" type="FixedString" value="AdvancedCharacterSheet" />
           <attribute id="NumPlayers" type="uint8" value="4" />
           <attribute id="PhotoBooth" type="FixedString" value="" />
           <attribute id="StartupLevelName" type="FixedString" value="" />
-          <attribute id="Tags" type="LSString" value="GUI UI All Types Resistance Immunity Weakness Character Party Panel" />
+          <attribute id="Tags" type="LSString" value="GUI UI Advanced Character Sheet Party Panel All Types Resistance" />
           <attribute id="Type" type="FixedString" value="Add-on" />
           <attribute id="UUID" type="FixedString" value="e18f5765-4901-463d-8dae-7e7bff779f2c" />
-          <attribute id="Version64" type="int64" value="36873221949095936" />
+          <attribute id="Version64" type="int64" value="72057594037927936" />
           <children>
             <node id="PublishVersion">
-              <attribute id="Version64" type="int64" value="36873221949095936" />
+              <attribute id="Version64" type="int64" value="72057594037927936" />
             </node>
             <node id="Scripts" />
             <node id="TargetModes">

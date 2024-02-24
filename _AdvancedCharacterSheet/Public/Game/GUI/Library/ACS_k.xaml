@@ -9,12 +9,12 @@
                     mc:Ignorable="d">
 
     <!-- =================================================== -->
-    <!-- === AToR keyboard library : All extracted parts === -->
+    <!-- === ACS keyboard library : All extracted parts === -->
     <!-- =================================================== -->
 
     <!-- ========================================================================================= -->
-    <!-- === MOD_AToR: Control dynamic Interrupt / Reactions button - START                    === -->
-    <!-- === MOD_AToR: Extracted template from DataTemplates.xaml / InterruptToggleBtnTemplate === -->
+    <!-- === MOD_ACS: Control dynamic Interrupt / Reactions button - START                    === -->
+    <!-- === MOD_ACS: Extracted template from DataTemplates.xaml / InterruptToggleBtnTemplate === -->
 	<ControlTemplate x:Key="InterruptToggleBtnTemplateDynamic" TargetType="ToggleButton">
         <ControlTemplate.Resources>
             <Style TargetType="TextBlock" >
@@ -38,7 +38,7 @@
             <SolidColorBrush x:Key="RowBG_guest_h" Opacity="0.4" Color="{StaticResource guestAccent100}"/>
 
             <DataTemplate DataType="ls:VMInterrupt">
-                <!-- MOD_AToR: Add dynamic width -->
+                <!-- MOD_ACS: Add dynamic width -->
                 <Grid x:Name="GridVMInterrupt" Width="{Binding ActualWidth, ElementName=Interrupts}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -50,7 +50,7 @@
                     </Grid.RowDefinitions>
 
                     <ContentPresenter x:Name="Icon" Grid.Column="0" Grid.RowSpan="2" ContentTemplate="{StaticResource InterruptIcon}" Content="{Binding .}" IsHitTestVisible="False" Margin="0,0,10,0" VerticalAlignment="Center"/>
-                    <!-- MOD_AToR: Add wrapping to reaction title -->
+                    <!-- MOD_ACS: Add wrapping to reaction title -->
                     <!-- BG3: <TextBlock x:Name="Name" Grid.Column="1" Text="{Binding Name}" Foreground="{StaticResource LS_tint100}" HorizontalAlignment="Left"/> -->
                     <TextBlock x:Name="Name" Grid.Column="1" Text="{Binding Name}" Foreground="{StaticResource LS_tint100}" HorizontalAlignment="Left" MaxWidth="550" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis">
                         <TextBlock.Width>
@@ -76,7 +76,7 @@
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
-                    <!-- MOD_AToR: Add Dynamic Width -->
+                    <!-- MOD_ACS: Add Dynamic Width -->
                     <TextBlock x:Name="AvailableMsg" Grid.Column="1" Grid.Row="1" Text="{Binding Source=h7bb323e1g2294g4f5eg905eg82ae9d71abf0,Converter={StaticResource TranslatedStringConverter}}" FontSize="{StaticResource ScaledMediumFontSize}" Foreground="{StaticResource LS_alertTxtColor}" Visibility="Collapsed" MaxWidth="384" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" HorizontalAlignment="Left">
                     <TextBlock.Width>
                         <MultiBinding Converter="{StaticResource AddMultipleConverter}">
@@ -173,14 +173,14 @@
             </DataTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
-    <!-- === MOD_AToR: Control dynamic Interrupt / Reactions button - END === -->
+    <!-- === MOD_ACS: Control dynamic Interrupt / Reactions button - END === -->
     <!-- ==================================================================== -->
     
     <!-- ==================================================================================== -->
-    <!-- === MOD_AToR: Tooltips DataTemplate - START                                      === -->
-    <!-- === MOD_AToR: Extracted from Tooltips.xaml / DataType="{x:Type ls:VMResistance}" === -->
+    <!-- === MOD_ACS: Tooltips DataTemplate - START                                      === -->
+    <!-- === MOD_ACS: Extracted from Tooltips.xaml / DataType="{x:Type ls:VMResistance}" === -->
     <DataTemplate DataType="{x:Type ls:VMResistance}">
-        <!-- MOD_AToR: images -->
+        <!-- MOD_ACS: images -->
         <DataTemplate.Resources>
             <ImageSource x:Key="NoResistanceIcon">pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/resistance_none_bg.png</ImageSource>
         </DataTemplate.Resources>
@@ -212,12 +212,12 @@
             </Border>
             <Rectangle Style="{StaticResource tooltipHeaderDividerLine}" />
             <DockPanel x:Name="BaseDescriptionContainer" Width="{StaticResource MaxTooltipContentWidth}">
-                <!-- MOD_AToR: Change margin -->
+                <!-- MOD_ACS: Change margin -->
                 <Image x:Name="BaseIcon" Source="{StaticResource Vulnerable}" Stretch="None" VerticalAlignment="Center" Margin="0,0,20,0" DockPanel.Dock="Left"/>
                 <TextBlock x:Name="BaseDescription" Style="{StaticResource TooltipBodyStyle}" Margin="0 20" ls:TextBlockFormatter.SourceText="{Binding Tag, ElementName=root, Converter={StaticResource EnumTranslatedStringConverter}, ConverterParameter='h8aa64a61g697ag44eag8025g72455bb15041'}" DockPanel.Dock="Right"/>
             </DockPanel>
             <DockPanel x:Name="AdditionalDescriptionContainer" Visibility="Collapsed" Width="{StaticResource MaxTooltipContentWidth}">
-                <!-- MOD_AToR: Change margin -->
+                <!-- MOD_ACS: Change margin -->
                 <Image x:Name="AdditionalIcon" Source="{StaticResource ResistantNonMagical}" Stretch="None" VerticalAlignment="Center" Margin="0,0,20,0" DockPanel.Dock="Left"/>
                 <TextBlock x:Name="AdditionalDescription" Style="{StaticResource TooltipBodyStyle}" Margin="0 20" ls:TextBlockFormatter.SourceText="{Binding Tag, ElementName=root, Converter={StaticResource EnumTranslatedStringConverter}, ConverterParameter='h05322b79g00ecg45c6gbbe0g691acc45fe63'}" DockPanel.Dock="Right"/>
             </DockPanel>
@@ -269,7 +269,7 @@
                 <Setter TargetName="Title" Property="ls:TextBlockFormatter.SourceText" Value="{Binding Tag, ElementName=root, Converter={StaticResource EnumTranslatedStringConverter}, ConverterParameter='h1acad36eg1d2ag46c5g9b98g906b8a17bb70'}"/>
             </DataTrigger>
             
-            <!-- MOD_AToR: Add no resistance or vulnerable tooltip -->
+            <!-- MOD_ACS: Add no resistance or vulnerable tooltip -->
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
                     <Condition Binding="{Binding Full}" Value="None"/>
@@ -285,12 +285,12 @@
             
         </DataTemplate.Triggers>
     </DataTemplate>
-    <!-- === MOD_AToR: Tooltips DataTemplate - END === -->
+    <!-- === MOD_ACS: Tooltips DataTemplate - END === -->
     <!-- ============================================= -->
     
     <!-- =========================================== -->
-    <!-- === MOD_AToR: Buttons templates - START === -->
-    <ControlTemplate x:Key="AToR_ToggleIconButtonTemplate" TargetType="ToggleButton">
+    <!-- === MOD_ACS: Buttons templates - START === -->
+    <ControlTemplate x:Key="ACS_ToggleIconButtonTemplate" TargetType="ToggleButton">
         <Grid>
             <Image x:Name="img" Source="{DynamicResource ButtonUncheckedNormal}" Stretch="Uniform" Width="{DynamicResource ImgWidth}" Height="{DynamicResource ImgHeight}"/>
             <Image x:Name="icon" Source="{DynamicResource IconUncheckedNormal}" Stretch="Uniform" Width="{DynamicResource IconWidth}" Height="{DynamicResource IconHeight}"/>
@@ -346,7 +346,7 @@
             </MultiTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
-    <!-- === MOD_AToR: Buttons templates - END === -->
+    <!-- === MOD_ACS: Buttons templates - END === -->
     <!-- ========================================= -->
 
 </ResourceDictionary>

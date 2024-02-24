@@ -11,7 +11,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="DataTemplates_k.xaml"/>
         <ResourceDictionary Source="CharacterSheetTemplates.xaml"/>
-        <ResourceDictionary Source="AToR_k.xaml"/>
+        <ResourceDictionary Source="ACS_k.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
     <BitmapImage x:Key="InventorySlotsTileImage" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/invSlot.png"/>
@@ -30,12 +30,12 @@
     
     <System:Double x:Key="CornerRadius">20</System:Double>
 
-    <!-- MOD_AToR: Update InventoryColumnWidth // BG3: 676 -->
+    <!-- MOD_ACS: Update InventoryColumnWidth // BG3: 676 -->
     <System:Double x:Key="InventoryColumnWidth">676</System:Double>
-    <!-- MOD_AToR: Update InventoryColumnHeight // MOD_BCPP: 1620 // BG3: 1468 -->
+    <!-- MOD_ACS: Update InventoryColumnHeight // MOD_BCPP: 1620 // BG3: 1468 -->
     <System:Double x:Key="InventoryColumnHeight">1618</System:Double>
 
-    <!-- MOD_AToR: Update CSContentHeight 1550 // MOD_BCPP: 1550 // BG3: 1340 -->
+    <!-- MOD_ACS: Update CSContentHeight 1550 // MOD_BCPP: 1550 // BG3: 1340 -->
     <System:Double x:Key="CSContentHeight">1550</System:Double>
     <System:Double x:Key="CSColumnWidth">648</System:Double>
 
@@ -44,11 +44,11 @@
 
     <GridLength x:Key="CSSlotSize">88</GridLength>
 
-    <!-- MOD_AToR: Add colors -->
-    <Color x:Key="AToR_bonusColor">#43BC66</Color>
-    <SolidColorBrush x:Key="AToR_LS_bonusTxtColor" Color="{StaticResource AToR_bonusColor}"/>
-    <Color x:Key="AToR_alertColor">#E53262</Color>
-    <SolidColorBrush x:Key="AToR_LS_alertTxtColor" Color="{StaticResource AToR_alertColor}"/>
+    <!-- MOD_ACS: Add colors -->
+    <Color x:Key="ACS_bonusColor">#43BC66</Color>
+    <SolidColorBrush x:Key="ACS_LS_bonusTxtColor" Color="{StaticResource ACS_bonusColor}"/>
+    <Color x:Key="ACS_alertColor">#E53262</Color>
+    <SolidColorBrush x:Key="ACS_LS_alertTxtColor" Color="{StaticResource ACS_alertColor}"/>
 
       <!--ROW STYLES-->
     <Style x:Key="RowBG_d" TargetType="Border">
@@ -79,7 +79,7 @@
         <Setter Property="Margin" Value="8,0"/>
     </Style>
 
-    <!-- MOD_AToR: Add style for conditions & passive features -->
+    <!-- MOD_ACS: Add style for conditions & passive features -->
     <Style x:Key="SummaryListTextConditionsAndFeats" TargetType="TextBlock">
         <Setter Property="FontSize" Value="{StaticResource ScaledSmallFontSize}"/>
         <Setter Property="Foreground" Value="{StaticResource LS_baseTxtColor}"/>
@@ -96,7 +96,7 @@
         <Setter Property="HorizontalAlignment" Value="Center"/>
     </Style>
 
-    <!-- MOD_AToR: Add style for conditions & passive features -->
+    <!-- MOD_ACS: Add style for conditions & passive features -->
     <Style x:Key="SummaryRoundIconsConditionsAndFeats" TargetType="Rectangle">
         <Setter Property="Width" Value="42"/>
         <Setter Property="Height" Value="42"/>
@@ -136,16 +136,16 @@
     <!--NO RESULTS TEMPLATE-->
     <ControlTemplate x:Key="NoResultsFoundTemplate" TargetType="Control">
         <Grid>
-            <!-- MOD_AToR: Update source // BG3: .../Assets/CharacterPanel/..." -->
-            <Image Source="/GustavNoesisGUI;component/Assets/AToR/CharacterPanel/invSlot_message_bg.png" Stretch="None" HorizontalAlignment="Center"/>
+            <!-- MOD_ACS: Update source // BG3: .../Assets/CharacterPanel/..." -->
+            <Image Source="/GustavNoesisGUI;component/Assets/ACS/CharacterPanel/invSlot_message_bg.png" Stretch="None" HorizontalAlignment="Center"/>
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource LS_extraspecialTxtColor}" FontSize="{StaticResource SmallFontSize}" ls:TextBlockFormatter.SourceText="{Binding Source='h7f09be65g3d97g45dfg87f1gb70869a7ae24', Converter={StaticResource TranslatedStringConverter}}"/>
         </Grid>
     </ControlTemplate>
 
-    <!-- MOD_AToR: NO RESULTS SEARCH TEMPLATE-->
+    <!-- MOD_ACS: NO RESULTS SEARCH TEMPLATE-->
     <ControlTemplate x:Key="NoResultsFoundSearchTemplate" TargetType="Control">
         <Grid>
-            <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/CharacterPanel/invSlot_message_bg.png" Stretch="Fill" HorizontalAlignment="Center"/>
+            <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/CharacterPanel/invSlot_message_bg.png" Stretch="Fill" HorizontalAlignment="Center"/>
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource LS_extraspecialTxtColor}" FontSize="{StaticResource SmallFontSize}" ls:TextBlockFormatter.SourceText="{Binding Source='h7f09be65g3d97g45dfg87f1gb70869a7ae24', Converter={StaticResource TranslatedStringConverter}}"/>
         </Grid>
     </ControlTemplate>
@@ -184,7 +184,7 @@
         <ControlTemplate.Resources>
             <BitmapImage x:Key="QuestionMarkIcon" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Reactions_c/c_ico_reactionAsk_active.png"/>
         </ControlTemplate.Resources>
-        <!-- MOD_AToR: Add dynamic height -->
+        <!-- MOD_ACS: Add dynamic height -->
         <Grid x:Name="Interrupts" Height="{Binding ActualHeight, ElementName=Reactions}">
             <Grid.IsEnabled>
                 <MultiBinding Converter="{StaticResource EqualConverter}">
@@ -197,7 +197,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <!-- MOD_AToR: Update margin // BG3: Margin="440,24" -->
+            <!-- MOD_ACS: Update margin // BG3: Margin="440,24" -->
             <TextBlock Grid.Row="0" HorizontalAlignment="Center" x:Name="Description" Text="{Binding Source=h4683b44fg5f66g4001gbc80gbcb307102d8d,Converter={StaticResource TranslatedStringConverter}}" TextAlignment="Center" TextWrapping="Wrap" FontSize="{StaticResource ScaledMediumFontSize}" Foreground="{StaticResource LS_accent100TxtColor}" Margin="440,23,440,13"/>
 
             <TextBlock Grid.Row="1" x:Name="NoReactionsMsg" Foreground="{StaticResource LS_baseTxtColor}" TextWrapping="Wrap" MaxWidth="600" IsHitTestVisible="False" HorizontalAlignment="Center" TextAlignment="Center" FontStyle="Italic" Visibility="Collapsed" Margin="20,368,40,20" noesis:Text.StrokeThickness="6">
@@ -211,22 +211,22 @@
                 </TextBlock.Text>
             </TextBlock>
             
-            <!-- MOD_AToR: Move margin to 'Reactions' // MOD_BCPP: MaxHeight="1178" // BG3: Margin="0,0,0,22" -->
+            <!-- MOD_ACS: Move margin to 'Reactions' // MOD_BCPP: MaxHeight="1178" // BG3: Margin="0,0,0,22" -->
             <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top">
                 <Rectangle x:Name="DecorativeStroke" Width="{Binding ActualWidth, ElementName=ListSectionBackground}" Height="{Binding ActualHeight, ElementName=ListSectionBackground}" StrokeDashArray="5,3" StrokeThickness="2" Stroke="{StaticResource LS_PanelBorder}" RadiusX="{StaticResource CornerRadius}" RadiusY="{StaticResource CornerRadius}" Fill="{StaticResource ContentBGShade}"/>
 
-                <!-- MOD_AToR: Add Name / Update scroller padding & margin // BG3: Padding=ScrollOffset Margin="30" -->
+                <!-- MOD_ACS: Add Name / Update scroller padding & margin // BG3: Padding=ScrollOffset Margin="30" -->
                 <ScrollViewer x:Name="ReactionScrollerViewer" Template="{StaticResource NoForcedStyleScrollViewerTemplate}" Padding="28,0,-28,0" HorizontalAlignment="Left" Margin="20,20,-8,15">
-                    <!-- MOD_AToR: Update HorizontalAlignment // BG3: HorizontalAlignment=Left -->
+                    <!-- MOD_ACS: Update HorizontalAlignment // BG3: HorizontalAlignment=Left -->
                     <ItemsControl x:Name="InterruptList" ItemsSource="{Binding Interrupts}" HorizontalAlignment="Center">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate DataType="ls:VMInterrupt">
                                 <DataTemplate.Resources>
                                     <BitmapImage x:Key="ReactionCheckBoxBGImg" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Reactions/checkbox_d.png"/>
                                 </DataTemplate.Resources>
-                                <!-- MOD_AToR: Add align center -->
+                                <!-- MOD_ACS: Add align center -->
                                 <Grid HorizontalAlignment="Center" >
-                                    <!-- MOD_AToR: Use dynamic template "InterruptToggleBtnTemplateDynamic" // BG3: "InterruptToggleBtnTemplate" -->
+                                    <!-- MOD_ACS: Use dynamic template "InterruptToggleBtnTemplateDynamic" // BG3: "InterruptToggleBtnTemplate" -->
                                     <ls:LSToggleButton x:Name="ToggleEnableButton" IsChecked="{Binding Enabled, Mode=OneWay}" Command="{Binding DataContext.InterruptToggleDisableCommand,RelativeSource={RelativeSource AncestorType=ls:UIWidget}}" CommandParameter="{Binding .}" Template="{StaticResource InterruptToggleBtnTemplateDynamic}" Content ="{Binding .}" IsEnabled="{Binding Available}"/>
 
                                     <ls:LSToggleButton x:Name="ToggleManagementButton" IsChecked="{Binding Ask, Mode=OneWay}" Command="{Binding DataContext.InterruptChangeAskCommand,RelativeSource={RelativeSource AncestorType=ls:UIWidget}}" CommandParameter="{Binding .}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,10,4">
@@ -290,12 +290,12 @@
                 <Setter TargetName="Description" Property="Margin" Value="24"/>
                 <Setter TargetName="DecorativeStroke" Property="Visibility" Value="Collapsed"/>
 
-                <!-- MOD_AToR: Add reactions scroller padding & margin when in PartyPanel -->
+                <!-- MOD_ACS: Add reactions scroller padding & margin when in PartyPanel -->
                 <Setter TargetName="ReactionScrollerViewer" Property="Margin" Value="14,0,-14,35"/>
                 <Setter TargetName="ReactionScrollerViewer" Property="Padding" Value="2,0,-2,0"/>
             </DataTrigger>
 
-            <!-- MOD_AToR: Add reactions scroller padding & margin when in PartyPanel and BCPP is detected -->            
+            <!-- MOD_ACS: Add reactions scroller padding & margin when in PartyPanel and BCPP is detected -->            
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
                     <Condition Binding="{Binding ParentState, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel"/>
@@ -547,8 +547,8 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <!-- MOD_AToR: Add ControlTemplate decoratedHeader -->
-    <ControlTemplate x:Key="AToR_decoratedHeader">
+    <!-- MOD_ACS: Add ControlTemplate decoratedHeader -->
+    <ControlTemplate x:Key="ACS_decoratedHeader">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <StackPanel.Resources>
                 <BitmapImage x:Key="decor_header">pack://application:,,,/GustavNoesisGUI;component/Assets/CC/decor_header.png</BitmapImage>
@@ -563,8 +563,8 @@
         </StackPanel>
     </ControlTemplate>
 
-    <!-- MOD_AToR: Add Style BaseTitleStyle for SpellBook -->
-    <Style x:Key="AToR_SB_BaseTitleStyle" TargetType="ContentControl">
+    <!-- MOD_ACS: Add Style BaseTitleStyle for SpellBook -->
+    <Style x:Key="ACS_SB_BaseTitleStyle" TargetType="ContentControl">
         <Style.Resources>
             <Style TargetType="TextBlock" >
                 <Setter Property="FontSize" Value="{DynamicResource ScaledMediumFontSize}"/>
@@ -572,7 +572,7 @@
             </Style>
         </Style.Resources>
         <Setter Property="Margin" Value="0,20,0,0"/>
-        <Setter Property="Template" Value="{StaticResource AToR_decoratedHeader}"/>
+        <Setter Property="Template" Value="{StaticResource ACS_decoratedHeader}"/>
     </Style>
 
     <!--===== MULTICLASS SPELLBOOK TEMPLATE =====-->
@@ -580,23 +580,23 @@
         <!-- DataContext of this should be a VMCharacter -->
         <ControlTemplate.Resources>
             
-            <!-- MOD_AToR: Add images -->
-            <BitmapImage x:Key="AToR_SeparatorThin" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Separators/separator_thin.png"/>
+            <!-- MOD_ACS: Add images -->
+            <BitmapImage x:Key="ACS_SeparatorThin" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/Separators/separator_thin.png"/>
             
-            <!-- MOD_AToR: Update source AToR -->
-            <BitmapImage x:Key="SpellbookBg_Small" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/SpellBook/spellbook_bg_small.png"/>
+            <!-- MOD_ACS: Update source ACS -->
+            <BitmapImage x:Key="SpellbookBg_Small" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/SpellBook/spellbook_bg_small.png"/>
 
             <BitmapImage x:Key="SpellsBorder_Small" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/SpellBook/knownSpells_frame_small.png" />
 
-            <!-- MOD_AToR: ClassBorderEdges_Small not used -->
+            <!-- MOD_ACS: ClassBorderEdges_Small not used -->
             <BitmapImage x:Key="ClassBorder_Small" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/SpellBook/spellbookTop_frame_small.png" />
             <ImageBrush x:Key="ClassBorderEdges_Small" ImageSource="{StaticResource ClassBorder_Small}" Stretch="None" ViewboxUnits="Absolute" Viewbox="0,0,668,22"/>
             <ImageBrush x:Key="ClassBorderCenter_Small" ImageSource="{StaticResource ClassBorder_Small}" Stretch="Fill" TileMode="Tile" AlignmentY="Top" ViewboxUnits="Absolute" Viewbox="0,22,668,28" ViewportUnits="Absolute" Viewport="0,22,668,28"/>
 
             <BitmapImage x:Key="PreparedSpellsTop_Small" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/SpellBook/preparedBoxTile_small_top.png" />
             <BitmapImage x:Key="PreparedSpellsCenter_Small" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/SpellBook/preparedBoxTile_small_middle.png" />
-            <!-- MOD_AToR: Add square less PreparedSpellsCenter -->
-            <BitmapImage x:Key="PreparedSpellsCenter_Small_SquareLess" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/SpellBook/preparedBoxTile_small_middle.png" />
+            <!-- MOD_ACS: Add square less PreparedSpellsCenter -->
+            <BitmapImage x:Key="PreparedSpellsCenter_Small_SquareLess" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/SpellBook/preparedBoxTile_small_middle.png" />
             <BitmapImage x:Key="PreparedSpellsBottom_Small" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/SpellBook/preparedBoxTile_small_bottom.png" />
 
             <System:Double x:Key="PageIconSize">200</System:Double>
@@ -636,7 +636,7 @@
             <BitmapImage x:Key="MainIconBg" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/SpellBook/spellbook_classFrame.png" />
             <BitmapImage x:Key="HeaderEntryBg" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/SpellBook/spellbook_headerBox.png" />
 
-            <!-- MOD_AToR: ClassBorderEdges not used / Use directly ClassBorder -->
+            <!-- MOD_ACS: ClassBorderEdges not used / Use directly ClassBorder -->
             <BitmapImage x:Key="ClassBorder" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/SpellBook/spellbookTop_frame.png" />
             <ImageBrush x:Key="ClassBorderEdges" ImageSource="{StaticResource ClassBorder}" Stretch="None" ViewboxUnits="Absolute" Viewbox="0,0,1124,23"/>
             <ImageBrush x:Key="ClassBorderCenter" ImageSource="{StaticResource ClassBorder}" Stretch="Fill" TileMode="Tile" AlignmentY="Top" ViewboxUnits="Absolute" Viewbox="0,23,1124,29" ViewportUnits="Absolute" Viewport="0,23,1124,29"/>
@@ -657,13 +657,13 @@
             <BitmapImage x:Key="SearchSelector_d" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/selector_listitem_d.png" />
             <BitmapImage x:Key="SearchSelector_h" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/selector_listitem_h.png" />
 
-            <!-- MOD_AToR: Fix tabs artefacts // BG3: .../Assets/CharacterPanel/... --> 
-            <BitmapImage x:Key="Tab_d" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/CharacterPanel/tab_body_inactive_d.png" />
-            <BitmapImage x:Key="Tab_h" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/CharacterPanel/tab_body_inactive_h.png" />
-            <BitmapImage x:Key="Tab_p" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/CharacterPanel/tab_body_inactive_p.png" />
-            <BitmapImage x:Key="TabSelected_d" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/CharacterPanel/tab_body_active_d.png" />
-            <BitmapImage x:Key="TabSelected_h" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/CharacterPanel/tab_body_active_h.png" />
-            <BitmapImage x:Key="TabSelected_p" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/CharacterPanel/tab_body_active_p.png" />
+            <!-- MOD_ACS: Fix tabs artefacts // BG3: .../Assets/CharacterPanel/... --> 
+            <BitmapImage x:Key="Tab_d" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/CharacterPanel/tab_body_inactive_d.png" />
+            <BitmapImage x:Key="Tab_h" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/CharacterPanel/tab_body_inactive_h.png" />
+            <BitmapImage x:Key="Tab_p" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/CharacterPanel/tab_body_inactive_p.png" />
+            <BitmapImage x:Key="TabSelected_d" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/CharacterPanel/tab_body_active_d.png" />
+            <BitmapImage x:Key="TabSelected_h" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/CharacterPanel/tab_body_active_h.png" />
+            <BitmapImage x:Key="TabSelected_p" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/CharacterPanel/tab_body_active_p.png" />
 
             <BitmapImage x:Key="RemoveSpellIcon" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterCreation/remover_spellslot.png" />
             <BitmapImage x:Key="PreparedSpellIcon" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/SpellBook/ico_prepared.png" />
@@ -708,7 +708,7 @@
                 <WrapPanel HorizontalAlignment="Left"/>
             </ItemsPanelTemplate>
 
-            <!-- MOD_AToR: Update Template Spells // BG3: x:Name="Column2" Width="120"-->
+            <!-- MOD_ACS: Update Template Spells // BG3: x:Name="Column2" Width="120"-->
             <ControlTemplate x:Key="SpellbookActionGroup">
                 <Grid x:Name="ActionGroupRoot">
                     <Grid.ColumnDefinitions>
@@ -724,14 +724,14 @@
 
                     <TextBlock x:Name="GroupName" Grid.Column="1" Grid.Row="0" ls:TextBlockFormatter.SourceText="" Style="{StaticResource ActionGroupTitleStyle}"/>
 
-                    <!-- MOD_AToR: Update Margin // BG3: Margin="0,12,0,0" -->
+                    <!-- MOD_ACS: Update Margin // BG3: Margin="0,12,0,0" -->
                     <Border x:Name="IconContainer" Grid.Column="0" Grid.Row="1" Height="48" VerticalAlignment="Top" Margin="8,12,-8,0">
                         <Image x:Name="Icon" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="None" />
                     </Border>
 
-                    <!-- MOD_AToR: Add LearnBtnContainer -->
+                    <!-- MOD_ACS: Add LearnBtnContainer -->
                     <Border x:Name="LearnBtnContainer" Grid.Column="0" Grid.Row="1" Height="72" VerticalAlignment="Top" Margin="12,0,-12,0" Visibility="Collapsed">
-                        <!-- MOD_AToR: Add LearnSpellsButton // BG3: HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,26,0" MinWidth="150" -->
+                        <!-- MOD_ACS: Add LearnSpellsButton // BG3: HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,26,0" MinWidth="150" -->
                         <ls:LSButton x:Name="LearnSpellsButton" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" Command="{Binding DataContext.OpenLearnSpellsCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" MinWidth="0">
                             <ls:LSButton.Template>
                                 <ControlTemplate TargetType="ls:LSButton">
@@ -772,7 +772,7 @@
                                 </MultiBinding>
                             </ls:LSButton.CommandParameter>
                             
-                            <!-- MOD_AToR: Btn Switcher -->
+                            <!-- MOD_ACS: Btn Switcher -->
                             <b:Interaction.Triggers>
                                 <b:EventTrigger EventName="Click">
                                     <b:ChangePropertyAction TargetName="LearnBtnContainer" PropertyName="Visibility" Value="Collapsed"/>
@@ -805,9 +805,9 @@
                     </Border>
                     
                     
-                    <!-- MOD_AToR: Add LearnBtnContainerCloser -->
+                    <!-- MOD_ACS: Add LearnBtnContainerCloser -->
                     <Border x:Name="LearnBtnContainerCloser" Grid.Column="0" Grid.Row="1" Height="72" VerticalAlignment="Top" Margin="12,0,-12,0" Visibility="Collapsed">
-                        <!-- MOD_AToR: Add LearnSpellsButton // BG3: HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,26,0" MinWidth="150" -->
+                        <!-- MOD_ACS: Add LearnSpellsButton // BG3: HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,26,0" MinWidth="150" -->
                         <ls:LSButton x:Name="LearnSpellsButtonCloser" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" Command="{Binding DataContext.CustomEvent, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="CloseLearnSpells" MinWidth="0">
                             <ls:LSButton.Template>
                                 <ControlTemplate TargetType="ls:LSButton">
@@ -841,7 +841,7 @@
                                 </ControlTemplate>
                             </ls:LSButton.Template>
                             
-                            <!-- MOD_AToR: Btn Switcher -->
+                            <!-- MOD_ACS: Btn Switcher -->
                             <b:Interaction.Triggers>
                                 <b:EventTrigger EventName="Click">
                                     <b:ChangePropertyAction TargetName="LearnBtnContainer" PropertyName="Visibility" Value="Visible"/>
@@ -885,7 +885,7 @@
                         </ItemsPresenter>
                     </Border>
 
-                    <!-- MOD_AToR: Update align & margin // BG3: HorizontalAlignment="Right" Margin="0,0,48,0" -->
+                    <!-- MOD_ACS: Update align & margin // BG3: HorizontalAlignment="Right" Margin="0,0,48,0" -->
                     <ItemsControl x:Name="Resources" Grid.Column="2" Grid.Row="1"
                                                       ItemsSource="{Binding GroupResources}" 
                                                       VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,0,18,0" 
@@ -921,8 +921,8 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
 
-                    <!-- MOD_AToR: Add ClassSectionGridToggle button -->
-                    <ls:LSToggleButton x:Name="ClassSectionGridToggle" Grid.Column="2" Grid.Row="1" Template="{StaticResource AToR_ToggleIconButtonTemplate}" IsChecked="False" 
+                    <!-- MOD_ACS: Add ClassSectionGridToggle button -->
+                    <ls:LSToggleButton x:Name="ClassSectionGridToggle" Grid.Column="2" Grid.Row="1" Template="{StaticResource ACS_ToggleIconButtonTemplate}" IsChecked="False" 
                                        VerticalAlignment="Top" HorizontalAlignment="Left" Visibility="Collapsed" Margin="0,8,0,-8">
                         <ls:LSToggleButton.Resources>
                             <ImageSource x:Key="ButtonUncheckedNormal">pack://application:,,,/GustavNoesisGUI;component/Assets/Container/container_roundBtn_d.png</ImageSource>
@@ -935,15 +935,15 @@
                             <ImageSource x:Key="ButtonCheckedPressed">pack://application:,,,/GustavNoesisGUI;component/Assets/Container/container_roundBtn_p.png</ImageSource>
                             <ImageSource x:Key="ButtonCheckedDisabled">pack://application:,,,/GustavNoesisGUI;component/Assets/Container/container_roundBtn_disabled.png</ImageSource>
                             
-                            <ImageSource x:Key="IconUncheckedNormal">pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Arrows/doubleArrow_up_d.png</ImageSource>
-                            <ImageSource x:Key="IconUncheckedHighlight">pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Arrows/doubleArrow_up_h.png</ImageSource>
-                            <ImageSource x:Key="IconUncheckedPressed">pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Arrows/doubleArrow_up_h.png</ImageSource>
-                            <ImageSource x:Key="IconUncheckedDisabled">pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Arrows/doubleArrow_up_disabled.png</ImageSource>
+                            <ImageSource x:Key="IconUncheckedNormal">pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/Arrows/doubleArrow_up_d.png</ImageSource>
+                            <ImageSource x:Key="IconUncheckedHighlight">pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/Arrows/doubleArrow_up_h.png</ImageSource>
+                            <ImageSource x:Key="IconUncheckedPressed">pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/Arrows/doubleArrow_up_h.png</ImageSource>
+                            <ImageSource x:Key="IconUncheckedDisabled">pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/Arrows/doubleArrow_up_disabled.png</ImageSource>
                             
-                            <ImageSource x:Key="IconCheckedNormal">pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Arrows/doubleArrow_down_d.png</ImageSource>
-                            <ImageSource x:Key="IconCheckedHighlight">pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Arrows/doubleArrow_down_h.png</ImageSource>
-                            <ImageSource x:Key="IconCheckedPressed">pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Arrows/doubleArrow_down_h.png</ImageSource>
-                            <ImageSource x:Key="IconCheckedDisabled">pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/Arrows/doubleArrow_down_disabled.png</ImageSource>
+                            <ImageSource x:Key="IconCheckedNormal">pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/Arrows/doubleArrow_down_d.png</ImageSource>
+                            <ImageSource x:Key="IconCheckedHighlight">pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/Arrows/doubleArrow_down_h.png</ImageSource>
+                            <ImageSource x:Key="IconCheckedPressed">pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/Arrows/doubleArrow_down_h.png</ImageSource>
+                            <ImageSource x:Key="IconCheckedDisabled">pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/Arrows/doubleArrow_down_disabled.png</ImageSource>
                             
                             <System:Double x:Key="ImgWidth">54</System:Double>
                             <System:Double x:Key="ImgHeight">54</System:Double>
@@ -989,7 +989,7 @@
                     </DataTrigger>
 
                     <!-- Passives -->
-                    <!-- MOD_AToR: Change txt from 'Passives' to 'Toggleable Passive Feature' // BG3: Source='hccb74959ga789g46f6g8cc2g73edf1536b6a'-->
+                    <!-- MOD_ACS: Change txt from 'Passives' to 'Toggleable Passive Feature' // BG3: Source='hccb74959ga789g46f6g8cc2g73edf1536b6a'-->
                     <DataTrigger Binding="{Binding Path=(ls:AttachedProperties.InheritedTag), RelativeSource={RelativeSource Mode=Self}}" Value="Passives">
                         <Setter TargetName="GroupName" Property="ls:TextBlockFormatter.SourceText" Value="{Binding Source='he8ad7cd6g0ffag472ega526g52c8ef0560f1', Converter={StaticResource TranslatedStringConverter}}"/>
                     </DataTrigger>
@@ -1005,11 +1005,11 @@
                     <!-- Prepared -->
                     <DataTrigger Binding="{Binding Path=(ls:AttachedProperties.InheritedTag), RelativeSource={RelativeSource Mode=Self}}" Value="Prepared">
                         <Setter TargetName="Icon" Property="Source" Value="{StaticResource PreparedSpellsIcon}"/>
-                        <!-- MOD_AToR: Add ClassSectionGridToggle btn visibility -->
+                        <!-- MOD_ACS: Add ClassSectionGridToggle btn visibility -->
                         <Setter TargetName="ClassSectionGridToggle" Property="Visibility" Value="Visible"/>
                     </DataTrigger>
 
-                    <!-- MOD_AToR: Add trigger for LearnBtnContainer -->
+                    <!-- MOD_ACS: Add trigger for LearnBtnContainer -->
                     <MultiDataTrigger>
                         <MultiDataTrigger.Conditions>
                             <Condition Binding="{Binding SelectedItem.Class.CanLearnSpells, ElementName=Tabs}" Value="True"/>
@@ -1322,7 +1322,7 @@
 
             <DataTemplate DataType="{x:Type ls:VMActionGroup}">
                 <Grid>
-                    <!-- MOD_AToR: Update Margin // BG3: Margin="0,0,12,0" -->
+                    <!-- MOD_ACS: Update Margin // BG3: Margin="0,0,12,0" -->
                     <Image x:Name="AlternateBg" Source="{StaticResource KnownSpellsBg}" Stretch="Fill" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Visibility="Hidden" Margin="0,0,14,0"/>
 
                     <ItemsControl x:Name="ActionsControl" 
@@ -1337,7 +1337,7 @@
                 </DataTemplate.Triggers>
             </DataTemplate>
 
-            <!-- MOD_AToR: Spell Search Bar -->
+            <!-- MOD_ACS: Spell Search Bar -->
             <ControlTemplate x:Key="SpellSearchBarTemplate" TargetType="ls:FilteringContainer">
                 <Grid>
                     <ls:LSNineSliceImage x:Name="SearchBarContainer" ImageSource="{StaticResource SearchBarBg_d}" Slices="36,34" Padding="20,10" Height="72" Margin="0,-6">
@@ -1504,7 +1504,7 @@
 
         </ControlTemplate.Resources>
 
-        <!-- MOD_AToR: Spell Book Container -->
+        <!-- MOD_ACS: Spell Book Container -->
         <Grid x:Name="MultiClassSpellbookContainer">
 
             <b:Interaction.Behaviors>
@@ -1537,18 +1537,18 @@
                 </b:EventTrigger>
             </b:Interaction.Triggers>
 
-            <!-- MOD_AToR: Update Background Stretch / Add Margin // BG3: Stretch="None" -->
+            <!-- MOD_ACS: Update Background Stretch / Add Margin // BG3: Stretch="None" -->
             <Image x:Name="Background" Source="{StaticResource SpellbookBg}" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="254,14,254,0"/>
 
             <!-- Spellbook -->
-            <!-- MOD_AToR: Add Margin -->
+            <!-- MOD_ACS: Add Margin -->
             <Grid x:Name="ClassPanelRoot" Margin="0,0,0,18">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <!-- Tabs -->
-                <!-- MOD_AToR: Update Tabs Margin // BG3: Margin="0,4,0,0" -->
+                <!-- MOD_ACS: Update Tabs Margin // BG3: Margin="0,4,0,0" -->
                 <StackPanel Grid.Row="0" x:Name="TabsContainer" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="0,17,0,-9">
                     <ls:LSButton x:Name="NavigationLeftButton" Template="{StaticResource IconButtonTemplate}" VerticalAlignment="Center"
                                              Visibility="{Binding SpellBooks.Count, Converter={StaticResource CountToVisibilityConverter}, ConverterParameter='5'}"
@@ -1611,9 +1611,9 @@
                     <ListBox x:Name="Tabs" ItemsSource="{Binding SortedItems, ElementName=SpellbooksSortBehavior}" HorizontalAlignment="Center" SelectedIndex="{StaticResource InitialTab}" VerticalAlignment="Bottom" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
                         <ListBox.MaxWidth>
                             <MultiBinding Converter="{StaticResource AddMultipleConverter}">
-                                <!-- MOD_AToR: Update MaxWidth Tabs -->
+                                <!-- MOD_ACS: Update MaxWidth Tabs -->
                                 <Binding Path="ActualWidth" ElementName="Background"/><!-- BG3: ElementName="MultiClassSpellbookContainer" -->
-                                <Binding Source="-40"/><!-- MOD_AToR: Add to MaxWidth -->
+                                <Binding Source="-40"/><!-- MOD_ACS: Add to MaxWidth -->
                                 <Binding Path="ActualWidth" ElementName="NavigationLeftButton" Converter="{StaticResource MultiplierConverter}" ConverterParameter="-1"/>
                                 <Binding Path="ActualWidth" ElementName="NavigationRightButton" Converter="{StaticResource MultiplierConverter}" ConverterParameter="-1"/>
                             </MultiBinding>
@@ -1873,11 +1873,11 @@
                 </StackPanel>
 
                 <!-- Reactions --> 
-                <!-- MOD_AToR: Add Margin -->
+                <!-- MOD_ACS: Add Margin -->
                 <Control Grid.Row="1" x:Name="Reactions" Margin="0,0,0,16" Template="{StaticResource InterruptPanelTemplate}" Visibility="Collapsed" IsEnabled="{Binding DataContext.CurrentPlayer.UIData.AllowInteraction, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
 
                 <!-- Panel -->
-                <!-- MOD_AToR: Update Margin / Remove MaxHeight / Add Align // BG3: Margin="0,10,0,0" MaxHeight="1290" -->
+                <!-- MOD_ACS: Update Margin / Remove MaxHeight / Add Align // BG3: Margin="0,10,0,0" MaxHeight="1290" -->
                 <Grid Grid.Row="1" x:Name="ClassPanel" Margin="0,16,0,0" HorizontalAlignment="Center">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition x:Name="ClassPanelLeftColumn" Width="*"/>
@@ -1886,18 +1886,18 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- Class image and info -->
-                    <!-- MOD_AToR: Update margin // BG3: Margin="0,20,0,0" -->
+                    <!-- MOD_ACS: Update margin // BG3: Margin="0,20,0,0" -->
                     <Grid x:Name="InfoPanel" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Right" Margin="26,20,0,0">
 
                         <Image HorizontalAlignment="Center" VerticalAlignment="Top" Stretch="None" Source="{StaticResource MainIconBg}"/>
 
-                        <!-- MOD_AToR: Update margin // BG3: Margin="0,-34,0,0" -->
+                        <!-- MOD_ACS: Update margin // BG3: Margin="0,-34,0,0" -->
                         <Image x:Name="PageIcon" HorizontalAlignment="Center" VerticalAlignment="Top" Stretch="Uniform" Width="{StaticResource PageIconSize}" Visibility="Collapsed" Margin="0,-36,0,0"/>
 
-                        <!-- MOD_AToR: Update margin // BG3: Margin="-100,-24,-100,0" -->
+                        <!-- MOD_ACS: Update margin // BG3: Margin="-100,-24,-100,0" -->
                         <Rectangle x:Name="RaceIcon" HorizontalAlignment="Center" VerticalAlignment="Top" Fill="{StaticResource LS_tint100}" DataContext="{Binding Stats.Race}" Style="{DynamicResource RaceIconStyle}" Width="{StaticResource PageIconSize}" Height="{StaticResource PageIconSize}" Stretch="Uniform" Visibility="Collapsed" Margin="2,-34,-2,0"/>
 
-                        <!-- MOD_AToR: Add Visibility="Collapsed" to hide LevelText to create a 2 rows one instead -->
+                        <!-- MOD_ACS: Add Visibility="Collapsed" to hide LevelText to create a 2 rows one instead -->
                         <TextBlock x:Name="LevelText" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="8,170,0,0" Visibility="Collapsed">
                             <TextBlock.Text>
                                 <MultiBinding Converter="{StaticResource ParameterizedTranslatedStringConverter}">
@@ -1908,7 +1908,7 @@
                             </TextBlock.Text>
                         </TextBlock>
                         
-                        <!-- MOD_AToR: Add 2 rows LevelText -->
+                        <!-- MOD_ACS: Add 2 rows LevelText -->
                         <TextBlock x:Name="LevelText1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="4,144,0,0" Text="{Binding Source=h8e782babg516fg4d7cgbd57g335de64c94a3, Converter={StaticResource TranslatedStringConverter}}"/>
                         <TextBlock x:Name="LevelText2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="4,178,0,0" Text="{Binding SelectedItem.Class.Level.Value, ElementName=Tabs}"/>
                     </Grid>
@@ -1920,7 +1920,7 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <!-- MOD_AToR: TopBar definition-->
+                        <!-- MOD_ACS: TopBar definition-->
                         <!-- Top bar -->
                         <Grid x:Name="TopBar" Grid.Row="0">
                             <Grid.ColumnDefinitions>
@@ -1939,7 +1939,7 @@
                             </Grid.RowDefinitions>
 
                             <!-- Level -->
-                            <!-- MOD_AToR: Update default visibility // BG3: Visibility="Collapsed" -->
+                            <!-- MOD_ACS: Update default visibility // BG3: Visibility="Collapsed" -->
                             <ContentControl x:Name="BarLevelContainer" Grid.Column="0" Grid.Row="0" Style="{StaticResource CastInfoControlStyle}"
                                             Visibility="Visible">
                                 <TextBlock x:Name="BarLevelText" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Text, ElementName=LevelText}"/>
@@ -2044,7 +2044,7 @@
                             </ls:FilteringContainer>
 
                             <!-- Search inner button -->
-                            <!-- MOD_AToR: Move button search inside search bar // BG3: Grid.Column="6" HorizontalAlignment="Left" -->
+                            <!-- MOD_ACS: Move button search inside search bar // BG3: Grid.Column="6" HorizontalAlignment="Left" -->
                             <ls:LSToggleButton x:Name="InnerSearchToggle" Grid.Column="5" Grid.Row="0"
                                                    VerticalAlignment="Center" HorizontalAlignment="Right"
                                                    Template="{StaticResource ToggleIconButtonTemplate}" 
@@ -2076,29 +2076,29 @@
                         </Grid>
 
                         <!-- Class panel content -->
-                        <!-- MOD_AToR: Update ScrollBar position // BG3: Margin="50,0,-50,0" Padding="-50,0,50,0"  -->
+                        <!-- MOD_ACS: Update ScrollBar position // BG3: Margin="50,0,-50,0" Padding="-50,0,50,0"  -->
                         <ScrollViewer x:Name="WholePanelScrollViewer" Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="20,0,-20,10" Padding="-20,0,20,-10">
                             
-                            <!-- MOD_AToR: Margin must be changed in ScrollableContent instead to be correct in both scrollers -->
+                            <!-- MOD_ACS: Margin must be changed in ScrollableContent instead to be correct in both scrollers -->
                             <Grid x:Name="WholePanelScrollViewerRoot">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-                                <!-- MOD_AToR: Add Margin -->
+                                <!-- MOD_ACS: Add Margin -->
                                 <StackPanel x:Name="ClassPanelFixedContent" Grid.Row="0" VerticalAlignment="Top" Margin="0,10,0,0">
                                     <!-- Class section -->
-                                    <!-- MOD_AToR: Rework ClassSection with dynamic bg -->
-                                    <!-- MOD_AToR: Add Grid + Rectangle (bg) -->
+                                    <!-- MOD_ACS: Rework ClassSection with dynamic bg -->
+                                    <!-- MOD_ACS: Add Grid + Rectangle (bg) -->
                                     <Grid x:Name="ClassSectionGrid">
                                         <Rectangle x:Name="ClassSectionDecorativeStroke" Margin="16,0,17,-7" Width="Binding Width, ElementName=ClassSectionGrid" Height="Binding Height, ElementName=ClassSectionGrid" Visibility="{Binding Visibility, ElementName=ClassSection}"
                                             StrokeDashArray="5,3" StrokeThickness="2" Stroke="{StaticResource LS_PanelBorder}" RadiusX="{StaticResource CornerRadius}" RadiusY="{StaticResource CornerRadius}" Fill="{StaticResource ContentBGShade}"/>   
                              
-                                        <!-- MOD_AToR: Add Collapse visibility ClassSectionOpening -->
+                                        <!-- MOD_ACS: Add Collapse visibility ClassSectionOpening -->
                                         <Image x:Name="ClassSectionOpening" Source="{StaticResource ClassBorder}" Stretch="None" Margin="0,6,0,0" Visibility="Collapsed"/>
                                             
-                                        <!-- MOD_AToR: Update Margin -->
+                                        <!-- MOD_ACS: Update Margin -->
                                         <StackPanel x:Name="ClassSection" Margin="5,20,5,10" Width="{Binding Fill.Viewbox.Width, RelativeSource={RelativeSource Self}}">                                      
                                             
                                             <!-- Cantrips and actions -->
@@ -2139,13 +2139,13 @@
                                                             Visibility="{Binding Path=ItemsSource.Count, RelativeSource={RelativeSource Self}, Converter={StaticResource CountToVisibilityConverter}}"/>
 
                                             <!-- Spells -->
-                                            <!-- Mod_AToR: Add margin -->
+                                            <!-- Mod_ACS: Add margin -->
                                             <Grid x:Name="SpellsTitle" Visibility="Collapsed" HorizontalAlignment="Stretch" Margin="0,0,0,0">
                                                 
-                                                <!-- MOD_AToR: Add x:Name / Update margin // BG3 Margin="120,22,0,0" -->
+                                                <!-- MOD_ACS: Add x:Name / Update margin // BG3 Margin="120,22,0,0" -->
                                                 <TextBlock x:Name="SpellsTitleText" ls:TextBlockFormatter.SourceText="{Binding Source='h062f5cf9gb2e5g4c0dgadc9g68898c250650',Converter={StaticResource TranslatedStringConverter}}" Style="{StaticResource ActionGroupTitleStyle}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="120,10,0,0"/>
 
-                                                <!-- MOD_AToR: Update LearnSpellsButton - Moved to SpellbookActionGroup// BG3: HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,26,0" MinWidth="150" -->
+                                                <!-- MOD_ACS: Update LearnSpellsButton - Moved to SpellbookActionGroup// BG3: HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,26,0" MinWidth="150" -->
                                                 <ls:LSButton x:Name="LearnSpellsButton" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" Margin="-1,10,1,-12" Command="{Binding DataContext.OpenLearnSpellsCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" MinWidth="150">
                                                     <ls:LSButton.Template>
                                                         <ControlTemplate TargetType="ls:LSButton">
@@ -2220,11 +2220,11 @@
                                                                     ls:AttachedProperties.InheritedTag="HideFeats"
                                                                     Visibility="Collapsed"/>
 
-                                            <!-- MOD_AToR: Add text center & wrap / Update margin // BG3: Margin="0,-10,0,0 -->
+                                            <!-- MOD_ACS: Add text center & wrap / Update margin // BG3: Margin="0,-10,0,0 -->
                                             <TextBlock x:Name="NonPreparableReplaceableSpellsNote" Style="{StaticResource ActionGroupTitleStyle}" HorizontalAlignment="Center" Visibility="Collapsed" FontStyle="Italic" TextAlignment="Center" TextWrapping="Wrap" Margin="100,4,100,4" />
                                         </StackPanel>
                                         
-                                        <!-- MOD_AToR: Update bottom section class unused decorator // BG3: Binding Visibility... -->
+                                        <!-- MOD_ACS: Update bottom section class unused decorator // BG3: Binding Visibility... -->
                                         <Rectangle x:Name="ClassSectionClosure" Fill="{StaticResource ClassBorderEdges}" RenderTransformOrigin="0.5, 0.5" Visibility="Collapsed" Margin="{Binding Margin, ElementName=ClassSectionOpening}"
                                                    Width="{Binding Fill.Viewbox.Width, RelativeSource={RelativeSource Self}}" Height="{Binding Fill.Viewbox.Height, RelativeSource={RelativeSource Self}}">
                                             <Rectangle.RenderTransform>
@@ -2234,19 +2234,19 @@
                                     </Grid>
 
                                     <!-- Prepared spells section -->
-                                    <!-- MOD_AToR: Switch visibility binding to Collapsed / Update Strech & Margin / Add MaxWidth // BG3: Stretch="Fill" Visibility="{Binding Visibility, ElementName=PreparedSpellsSection}" Margin="0,6,0,0"-->
+                                    <!-- MOD_ACS: Switch visibility binding to Collapsed / Update Strech & Margin / Add MaxWidth // BG3: Stretch="Fill" Visibility="{Binding Visibility, ElementName=PreparedSpellsSection}" Margin="0,6,0,0"-->
                                     <Image x:Name="PreparedSpellsSectionOpening" Source="{StaticResource PreparedSpellsTop}" MaxWidth="1112" Stretch="Fill" Visibility="Collapsed" Margin="0,4,0,0"/>
 
-                                    <!-- MOD_AToR: Switch visibility binding to PreparedSpellsSectionOpening // BG3:  Visibility="Collapsed" Width="{Binding Source.Width, ElementName=PreparedSpellsSectionOpening}" -->
+                                    <!-- MOD_ACS: Switch visibility binding to PreparedSpellsSectionOpening // BG3:  Visibility="Collapsed" Width="{Binding Source.Width, ElementName=PreparedSpellsSectionOpening}" -->
                                     <Border x:Name="PreparedSpellsSection" Visibility="{Binding Visibility, ElementName=PreparedSpellsSectionOpening}" Width="{Binding ActualWidth, ElementName=PreparedSpellsSectionOpening}">
                                         <Border.Background>
-                                            <!-- MOD_AToR: Add visibility collapsed -->
+                                            <!-- MOD_ACS: Add visibility collapsed -->
                                             <ImageBrush ImageSource="{StaticResource PreparedSpellsCenter}" Stretch="Fill" TileMode="Tile" AlignmentY="Top" ViewportUnits="Absolute" Visibility="Collapsed">
                                                 <ImageBrush.Viewport>
                                                     <MultiBinding Converter="{StaticResource CreateRectConverter}">
                                                         <Binding Source="0"/>
                                                         <Binding Source="0"/>
-                                                        <!-- MOD_AToR: Update width to dynamic // BG3: Path="ImageSource.Width" RelativeSource="{RelativeSource Self}" -->
+                                                        <!-- MOD_ACS: Update width to dynamic // BG3: Path="ImageSource.Width" RelativeSource="{RelativeSource Self}" -->
                                                         <Binding Path="ActualWidth" ElementName="PreparedSpellsSection"/>
                                                         <Binding Path="ImageSource.Height" RelativeSource="{RelativeSource Self}"/>
                                                     </MultiBinding>
@@ -2254,7 +2254,7 @@
                                             </ImageBrush>
                                         </Border.Background>
 
-                                        <!-- MOD_AToR: Add Margin -->
+                                        <!-- MOD_ACS: Add Margin -->
                                         <ItemsControl x:Name="ManuallyPreparedList" VerticalAlignment="Top" HorizontalAlignment="Stretch" 
                                                           Style="{StaticResource ActionCellItemsControlStyle}"
                                                           ItemsSource="{Binding SelectedItem.ManuallyPreparedActions, ElementName=Tabs}" 
@@ -2263,7 +2263,7 @@
                                                           Margin="-1,0,1,0"/>
                                     </Border>
                                     
-                                    <!-- MOD_AToR: Add Smaller PreparedSpellsSection -->
+                                    <!-- MOD_ACS: Add Smaller PreparedSpellsSection -->
                                     <Border x:Name="PreparedSpellsSectionSmall" Visibility="Collapsed" Width="{Binding ActualWidth, ElementName=PreparedSpellsSectionOpening}">
                                         <Border.Background>
                                             <ImageBrush ImageSource="{StaticResource PreparedSpellsCenter_Small_SquareLess}" Stretch="Fill" TileMode="Tile" AlignmentY="Top" ViewportUnits="Absolute" >
@@ -2286,17 +2286,17 @@
                                                           Margin="4,0,-4,0"/>
                                     </Border>
 
-                                    <!-- MOD_AToR: Switch visibility binding to PreparedSpellsSectionOpening // BG3: Binding Visibility, ElementName=PreparedSpellsSection -->
+                                    <!-- MOD_ACS: Switch visibility binding to PreparedSpellsSectionOpening // BG3: Binding Visibility, ElementName=PreparedSpellsSection -->
                                     <Image x:Name="PreparedSpellsSectionClosure" Source="{StaticResource PreparedSpellsBottom}" Width="{Binding ActualWidth, ElementName=PreparedSpellsSectionOpening}" 
                                            Stretch="Fill" Visibility="{Binding Visibility, ElementName=PreparedSpellsSectionOpening}"/>
                                 </StackPanel>
 
-                                <!-- MOD_AToR: Footer ScrollBar // BG3: Margin="50,0,-50,0" Padding="-50,0,50,0" -->
+                                <!-- MOD_ACS: Footer ScrollBar // BG3: Margin="50,0,-50,0" Padding="-50,0,50,0" -->
                                 <ls:LSScrollViewer x:Name="ClassPanelScrollableContent" Grid.Row="2" VerticalScrollBarVisibility="Auto" Margin="20,4,-20,10" Padding="-20,0,20,-11">
-                                    <!-- MOD_AToR: Add margin between top bar and class panel & bottom for 2 scrolls -->
+                                    <!-- MOD_ACS: Add margin between top bar and class panel & bottom for 2 scrolls -->
                                     <StackPanel x:Name="ScrollableContent" Margin="6,0,6,20">
                                         <!-- Known spells section -->
-                                        <!-- MOD_AToR: Update padding // BG3: Padding="6,2,6,40" -->
+                                        <!-- MOD_ACS: Update padding // BG3: Padding="6,2,6,40" -->
                                         <ls:LSNineSliceImage x:Name="KnownSpellSection" ImageSource="{StaticResource SpellsBorder}" Slices="22,10,22,42" IconWidth="70" Padding="-1,4,0,40" Visibility="{Binding Path=ItemsSource.Count, ElementName=SpellsCategories, Converter={StaticResource CountToVisibilityConverter}}">
                                             <StackPanel>
                                                 <TextBlock x:Name="InnerSpellsTitle" ls:TextBlockFormatter.SourceText="{Binding Source='h062f5cf9gb2e5g4c0dgadc9g68898c250650',Converter={StaticResource TranslatedStringConverter}}" Style="{StaticResource ActionGroupTitleStyle}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="120,22,0,0" Visibility="Collapsed"/>
@@ -2461,13 +2461,13 @@
                                                       Visibility="Collapsed"/>
                                                       
                                         <!-- ============================================================ -->
-                                        <!-- === MOD_AToR: Move from before "InitiationsList" - START === -->
-                                        <!-- MOD_AToR: Add title for passive feats -->
-                                        <ContentControl x:Name="PassivesFeatsTitle" Style="{StaticResource AToR_SB_BaseTitleStyle}" Visibility="{Binding Visibility, ElementName=FeatsList}">
+                                        <!-- === MOD_ACS: Move from before "InitiationsList" - START === -->
+                                        <!-- MOD_ACS: Add title for passive feats -->
+                                        <ContentControl x:Name="PassivesFeatsTitle" Style="{StaticResource ACS_SB_BaseTitleStyle}" Visibility="{Binding Visibility, ElementName=FeatsList}">
                                             <TextBlock Text="{Binding Source='h74d1322ag4c4dg42eag9272g066b84d0d374', Converter={StaticResource TranslatedStringConverter}}"/>
                                         </ContentControl>
                                         
-                                        <!-- MOD_AToR: Switch order with "FeatsList" / Enable tadpole feats only in base tab, see trigger "TadpoleFeatsList"-->
+                                        <!-- MOD_ACS: Switch order with "FeatsList" / Enable tadpole feats only in base tab, see trigger "TadpoleFeatsList"-->
                                         <!-- MOD_BCPP: Visibility="{Binding Path=ItemsSource.Count, RelativeSource={RelativeSource Self}, Converter={StaticResource CountToVisibilityConverter}}" -->
                                         <!-- BG3: Visibility="Collapsed" -->
                                         <ItemsControl x:Name="TadpoleFeatsList" VerticalAlignment="Top" HorizontalAlignment="Stretch"
@@ -2482,16 +2482,16 @@
                                                           ItemsSource="{Binding FilteredItems, ElementName=ClassFeatsFilter}" 
                                                           ls:AttachedProperties.InheritedTag="ClassFeats" 
                                                           Visibility="{Binding Path=ItemsSource.Count, RelativeSource={RelativeSource Self}, Converter={StaticResource CountToVisibilityConverter}}"/>
-                                        <!-- === MOD_AToR: Move from before "InitiationsList" - END === -->
+                                        <!-- === MOD_ACS: Move from before "InitiationsList" - END === -->
                                         <!-- ========================================================== -->
 
                                         <!-- Search results -->
                                         <Rectangle x:Name="SearchResultsSectionOpening" Fill="{StaticResource ClassBorderEdges}" Visibility="Collapsed" Margin="6,0,0,0" Width="{Binding Fill.Viewbox.Width, RelativeSource={RelativeSource Self}}" Height="{Binding Fill.Viewbox.Height, RelativeSource={RelativeSource Self}}"/>
 
-                                        <!-- MOD_AToR: Disable old BG3 Search Results Section -->
+                                        <!-- MOD_ACS: Disable old BG3 Search Results Section -->
                                         <!-- <Border x:Name="SearchResultsSection" Visibility="Collapsed" Margin="{Binding Margin, ElementName=SearchResultsSectionOpening}" Width="{Binding Width, ElementName=SearchResultsSectionOpening}" Background="{StaticResource ClassBorderCenter}"> -->
                                         
-                                        <!-- MOD_AToR: Rework Search -->
+                                        <!-- MOD_ACS: Rework Search -->
                                         <ls:LSNineSliceImage x:Name="SearchResultsSection" ImageSource="{StaticResource SpellsBorder}" Slices="22,10,22,42" IconWidth="70" Margin="0,0,0,0" Padding="0,0,0,-9" Visibility="Collapsed">
 
                                             <StackPanel x:Name="SearchResults">
@@ -2511,7 +2511,7 @@
                                                                   ItemTemplate="{StaticResource ActionGroupItemTemplate}"
                                                                   Visibility="{Binding Path=ItemsSource.Count, RelativeSource={RelativeSource Self}, Converter={StaticResource CountToVisibilityConverter}}"/>
 
-                                                <!-- MOD_AToR: Change template & Add H-align // BG3: Template="{StaticResource NoResultsFoundTemplate}" -->
+                                                <!-- MOD_ACS: Change template & Add H-align // BG3: Template="{StaticResource NoResultsFoundTemplate}" -->
                                                 <Control x:Name="NoItemsFoundOverlay" Template="{StaticResource NoResultsFoundSearchTemplate}" HorizontalAlignment="Center" Visibility="Collapsed" Margin="0,40,0,0"/>
 
                                                 <ls:LSButton x:Name="ClearFilter" HorizontalAlignment="Center" BoundEvent="UICancel" Command="ls:FilteringContainer.ClearFilterCommand" CommandTarget="{Binding ElementName=FilteringContainerHolder}" Margin="0,40,0,0">
@@ -2539,7 +2539,7 @@
                                                 </ls:LSButton>
                                             </StackPanel>
                                         </ls:LSNineSliceImage>
-                                        <!-- MOD_AToR: Disable old BG3 Search Results Section -->
+                                        <!-- MOD_ACS: Disable old BG3 Search Results Section -->
                                         <!-- </Border> -->
 
                                         <Rectangle x:Name="SearchResultsSectionClosure" Fill="{StaticResource ClassBorderEdges}" RenderTransformOrigin="0.5, 0.5" Visibility="Collapsed" Margin="{Binding Margin, ElementName=SearchResultsSectionOpening}"
@@ -2600,7 +2600,7 @@
                     </Setter.Value>
                 </Setter>
                 
-                <!-- MOD_AToR: Add 2 rows style LevelText -->
+                <!-- MOD_ACS: Add 2 rows style LevelText -->
                 <Setter TargetName="LevelText1" Property="Text" Value="{Binding Source=h8e782babg516fg4d7cgbd57g335de64c94a3, Converter={StaticResource TranslatedStringConverter}}"/>
                 <Setter TargetName="LevelText2" Property="Text" Value="{Binding Stats.Level.Value}"/>
 
@@ -2619,7 +2619,7 @@
                 <Setter TargetName="NonPreparableSpellsCategories" Property="ItemsSource" Value="{Binding FilteredItems, ElementName=NonFeatSpellLevelsGroupFilter}"/>
             </DataTrigger>
             
-            <!-- MOD_AToR: Add trigger for PassivesFeatsTitle disable in class tab -->
+            <!-- MOD_ACS: Add trigger for PassivesFeatsTitle disable in class tab -->
             <DataTrigger Binding="{Binding SelectedItem.SpellBookType, ElementName=Tabs}" Value="Class">
                 <Setter TargetName="PassivesFeatsTitle" Property="Visibility" Value="Collapsed"/>
             </DataTrigger>
@@ -2637,7 +2637,7 @@
             </DataTrigger>
 
             <DataTrigger Binding="{Binding IsChecked, ElementName=SearchToggle}" Value="True">
-                <!-- MOD_AToR: FIX_SEARCH - Add BarLevelContainer visibility collapsed -->
+                <!-- MOD_ACS: FIX_SEARCH - Add BarLevelContainer visibility collapsed -->
                 <Setter TargetName="BarLevelContainer" Property="Visibility" Value="Collapsed"/>
                 
                 <Setter TargetName="SubClassContainer" Property="Visibility" Value="Collapsed"/>
@@ -2652,7 +2652,7 @@
                 <Setter TargetName="KnownSpellSection" Property="Visibility" Value="Collapsed"/>
                 <Setter TargetName="FeatsList" Property="Visibility" Value="Collapsed"/>
                 <Setter TargetName="TadpoleFeatsList" Property="Visibility" Value="Collapsed"/>
-                <!-- MOD_AToR: Add Collapse TadpolePassivesList -->
+                <!-- MOD_ACS: Add Collapse TadpolePassivesList -->
                 <Setter TargetName="TadpolePassivesList" Property="Visibility" Value="Collapsed"/>
                 <Setter TargetName="PassivesList" Property="Visibility" Value="Collapsed"/>
                 <Setter TargetName="InitiationsList" Property="Visibility" Value="Collapsed"/>
@@ -2660,7 +2660,7 @@
                 <Setter TargetName="TadpoleActionsList" Property="Visibility" Value="Collapsed"/>
             </DataTrigger>
 
-            <!-- MOD_AToR: Disable old BG3 search decorators -->
+            <!-- MOD_ACS: Disable old BG3 search decorators -->
             <DataTrigger Binding="{Binding CurrentFilter, ElementName=FilteringContainerHolder, Converter={StaticResource NullToBoolFalseConverter}}" Value="True">
                 <!-- BG3: <Setter TargetName="SearchResultsSectionOpening" Property="Visibility" Value="Visible"/> -->
                 <Setter TargetName="SearchResultsSection" Property="Visibility" Value="Visible"/>
@@ -2690,15 +2690,15 @@
                 <Setter TargetName="ClassActionsList" Property="ls:AttachedProperties.InheritedTag" Value="HideResources"/>
             </MultiDataTrigger>
 
-            <!-- MOD_AToR: Disable LearnSpellsButton here - Btn moved to SpellbookActionGroup -->
+            <!-- MOD_ACS: Disable LearnSpellsButton here - Btn moved to SpellbookActionGroup -->
             <DataTrigger Binding="{Binding SelectedItem.Class.CanLearnSpells, ElementName=Tabs}" Value="True">
-                <!-- MOD_AToR: Disable // BG3: Value="Visible" -->
+                <!-- MOD_ACS: Disable // BG3: Value="Visible" -->
                 <Setter TargetName="LearnSpellsButton" Property="Visibility" Value="Collapsed"/>
-                <!-- MOD_AToR: Disable // BG3: Value="Visible" -->
+                <!-- MOD_ACS: Disable // BG3: Value="Visible" -->
                 <Setter TargetName="SpellsTitle" Property="Visibility" Value="Collapsed"/>
-                <!-- MOD_AToR: Add SpellsTitleText for learn btn / Disable for now -->
+                <!-- MOD_ACS: Add SpellsTitleText for learn btn / Disable for now -->
                 <!-- <Setter TargetName="SpellsTitleText" Property="ls:TextBlockFormatter.SourceText" Value="{Binding Source=h82b57884g9542g4415gac97g16a53810d331, Converter={StaticResource TranslatedStringConverter}}"/> -->
-                <!-- MOD_AToR: Disable // BG3: Value="Visible" -->
+                <!-- MOD_ACS: Disable // BG3: Value="Visible" -->
                 <Setter TargetName="SpellsTitleText" Property="Visibility" Value="Collapsed"/>
             </DataTrigger>
 
@@ -2710,10 +2710,10 @@
             <DataTrigger Binding="{Binding Visibility, ElementName=AlwaysPreparedList}" Value="Visible">
                 <Setter TargetName="SpellsTitle" Property="Visibility" Value="Visible"/>
             </DataTrigger>
-            <!-- MOD_AToR: Rebind to PreparedSpellsSectionOpening // BG3: ElementName=PreparedSpellsSection -->
+            <!-- MOD_ACS: Rebind to PreparedSpellsSectionOpening // BG3: ElementName=PreparedSpellsSection -->
             <DataTrigger Binding="{Binding Visibility, ElementName=PreparedSpellsSectionOpening}" Value="Visible">
-                <!-- MOD_AToR: Disable SpellsTitle // BG3: <Setter TargetName="SpellsTitle" Property="Visibility" Value="Visible"/> -->
-                <!-- MOD_AToR: Add ClassSection Decorative Stroke margin to hide bottom part -->
+                <!-- MOD_ACS: Disable SpellsTitle // BG3: <Setter TargetName="SpellsTitle" Property="Visibility" Value="Visible"/> -->
+                <!-- MOD_ACS: Add ClassSection Decorative Stroke margin to hide bottom part -->
                 <Setter TargetName="ClassSectionDecorativeStroke" Property="Margin" Value="16,0,17,-50"/>
             </DataTrigger>
             <DataTrigger Binding="{Binding Visibility, ElementName=NonPreparableSpellsCategories}" Value="Visible">
@@ -2721,7 +2721,7 @@
             </DataTrigger>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <!-- MOD_AToR: Rebind to PreparedSpellsSectionOpening // BG3: ElementName=PreparedSpellsSection -->
+                    <!-- MOD_ACS: Rebind to PreparedSpellsSectionOpening // BG3: ElementName=PreparedSpellsSection -->
                     <Condition Binding="{Binding Visibility, ElementName=PreparedSpellsSectionOpening}" Value="Collapsed"/>
                     <Condition Binding="{Binding Visibility, ElementName=KnownSpellSection}" Value="Visible"/>
                 </MultiDataTrigger.Conditions>
@@ -2755,7 +2755,7 @@
                     <Condition Binding="{Binding Path=ItemsSource.Count, ElementName=SpellsCategories, Converter={StaticResource GreaterThanConverter},ConverterParameter=0}" Value="True"/>
                     <Condition Binding="{Binding Path=ItemsSource.Count, ElementName=ManuallyPreparedList, Converter={StaticResource GreaterThanConverter},ConverterParameter=0}" Value="True"/>
                 </MultiDataTrigger.Conditions>
-                <!-- MOD_AToR: Switch visibility to PreparedSpellsSectionOpening // BG3: TargetName="PreparedSpellsSection" -->
+                <!-- MOD_ACS: Switch visibility to PreparedSpellsSectionOpening // BG3: TargetName="PreparedSpellsSection" -->
                 <Setter TargetName="PreparedSpellsSectionOpening" Property="Visibility" Value="Visible"/>
             </MultiDataTrigger>
 
@@ -2801,13 +2801,13 @@
 
             <!-- Scrolling: If there're spells to prepare, scroll only from the prepared spells section -->
             <DataTrigger Binding="{Binding SelectedItem.Class.MustPrepareSpells, ElementName=Tabs, FallbackValue=False}" Value="True">
-                <!-- MOD_AToR: Update MaxHeight 1300 // BG3: MaxHeight="1200"/> -->
+                <!-- MOD_ACS: Update MaxHeight 1300 // BG3: MaxHeight="1200"/> -->
                 <Setter TargetName="WholePanelScrollViewerRoot" Property="MaxHeight" Value="1300"/>
-                <!-- MOD_AToR: Disabled for now until I find a fix see TODOs -->
+                <!-- MOD_ACS: Disabled for now until I find a fix see TODOs -->
                 <Setter TargetName="WholePanelScrollViewer" Property="VerticalScrollBarVisibility" Value="Disabled"/>
             </DataTrigger>
             
-            <!-- MOD_AToR: Add offset to inner scrollBar when outter is visible /> -->
+            <!-- MOD_ACS: Add offset to inner scrollBar when outter is visible /> -->
             <DataTrigger Binding="{Binding ComputedVerticalScrollBarVisibility, ElementName=WholePanelScrollViewer}" Value="Visible">
                 <Setter TargetName="ClassPanelScrollableContent" Property="Margin" Value="-7,0,7,10"/>
                 <Setter TargetName="ClassPanelScrollableContent" Property="Padding" Value="7,0,-7,-10"/>
@@ -2924,16 +2924,16 @@
             </MultiDataTrigger>
 
             <!-- Party Panel view -->
-            <!-- MOD_AToR: Party Panel specific changes -->
+            <!-- MOD_ACS: Party Panel specific changes -->
             <DataTrigger Binding="{Binding ParentState, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel"> 
                                                 
-                <!-- MOD_AToR: Add margin to view content when 4 rows spells -->
+                <!-- MOD_ACS: Add margin to view content when 4 rows spells -->
                 <Setter TargetName="ClassPanelRoot" Property="Margin" Value="0,0,0,55"/>
 
                 <Setter TargetName="NavigationLeftButton" Property="Visibility" Value="Visible"/>
                 <Setter TargetName="NavigationRightButton" Property="Visibility" Value="Visible"/>
                 
-                <!-- MOD_AToR: Tabs -->
+                <!-- MOD_ACS: Tabs -->
                 <Setter TargetName="TabsContainer" Property="Margin" Value="0,-6,0,0"/>
                 <Setter TargetName="Tabs" Property="MaxWidth">
                     <Setter.Value>
@@ -2945,53 +2945,53 @@
                     </Setter.Value>
                 </Setter>
 
-                <!-- MOD_AToR: Update Margin // BG3: Value="0,0,0,20" -->
+                <!-- MOD_ACS: Update Margin // BG3: Value="0,0,0,20" -->
                 <Setter TargetName="TopBar" Property="Margin" Value="0,-6,0,10"/>
                 
-                <!-- MOD_AToR: Update ClassPanel to dynamic MaxHeight // BG3: Value="1476"/> -->
+                <!-- MOD_ACS: Update ClassPanel to dynamic MaxHeight // BG3: Value="1476"/> -->
                 <Setter TargetName="ClassPanel" Property="MaxHeight" Value="{Binding ActualHeight, ElementName=MultiClassSpellbookContainer}"/>
                 
-                <!-- MOD_AToR: Add FixedContent for WholePanel scroll -->                
+                <!-- MOD_ACS: Add FixedContent for WholePanel scroll -->                
                 <Setter TargetName="WholePanelScrollViewer" Property="Margin" Value="13,0,-13,0"/>
                 <Setter TargetName="WholePanelScrollViewer" Property="Padding" Value="-13,0,13,0"/>
                 <Setter TargetName="ClassPanelFixedContent" Property="Margin" Value="0,0,0,0"/>
                 <Setter TargetName="ClassPanelFixedContent" Property="Padding" Value="0,0,0,0"/>
                 
-                <!-- MOD_AToR: Add ScrollableContent for ClassPanel scroll -->
+                <!-- MOD_ACS: Add ScrollableContent for ClassPanel scroll -->
                 <Setter TargetName="ClassPanelScrollableContent" Property="Margin" Value="14,8,-14,-2"/>
                 <Setter TargetName="ClassPanelScrollableContent" Property="Padding" Value="-14,-8,14,-20"/>
                 <Setter TargetName="ScrollableContent" Property="Margin" Value="0,0,0,20"/>
                 <Setter TargetName="ScrollableContent" Property="Padding" Value="0,0,0,0"/>
                 
-                <!-- MOD_AToR: Add Reactions margin -->
+                <!-- MOD_ACS: Add Reactions margin -->
                 <Setter TargetName="Reactions" Property="Margin" Value="0,2,0,0"/>
 
-                <!-- MOD_AToR: Disable as it is dynamic now // MOD_BCPP: 6chars Value="634" // BG3: "684"  -->
+                <!-- MOD_ACS: Disable as it is dynamic now // MOD_BCPP: 6chars Value="634" // BG3: "684"  -->
                 <!-- <Setter TargetName="ClassPanelCentralColumn" Property="Width" Value="684"/> -->
                 
-                <!-- MOD_AToR: Trick to get right width for central column -->
+                <!-- MOD_ACS: Trick to get right width for central column -->
                 <Setter TargetName="ClassPanel" Property="Width" Value="{Binding ActualWidth, ElementName=CharacterRoot}"/>
                 <Setter TargetName="ClassPanelCentralColumn" Property="MaxWidth">
                     <Setter.Value>
                         <MultiBinding Converter="{StaticResource AddMultipleConverter}">
                             <Binding Path="ActualWidth" ElementName="ClassPanel"/>
-                            <!-- MOD_AToR: max remove for 5 spells "-74" // BG3: max remove for 7 spells "-72" -->
+                            <!-- MOD_ACS: max remove for 5 spells "-74" // BG3: max remove for 7 spells "-72" -->
                             <Binding Source="-72"/>
                         </MultiBinding>
                     </Setter.Value>
                 </Setter>                
                 
                 <Setter TargetName="SubClassContainer" Property="Grid.ColumnSpan" Value="5"/>
-                <!-- MOD_AToR: Add right margin for TopBar search btn -->
+                <!-- MOD_ACS: Add right margin for TopBar search btn -->
                 <Setter TargetName="SubClassContainer" Property="Margin" Value="0,0,77,0"/>
-                <!-- MOD_AToR: FIX_SEARCH - Disable Bar Level Container Visibility -->
+                <!-- MOD_ACS: FIX_SEARCH - Disable Bar Level Container Visibility -->
                 <!-- BG3: <Setter TargetName="BarLevelContainer" Property="Visibility" Value="Visible"/> -->
                 
                 <Setter TargetName="ClassResourcesContainer" Property="Grid.Row" Value="1"/>
                 <Setter TargetName="ClassResourcesContainer" Property="Grid.Column" Value="0"/>
-                <Setter TargetName="ClassResourcesContainer" Property="Grid.ColumnSpan" Value="1"/><!-- MOD_AToR: // BG3: Value="3" -->
+                <Setter TargetName="ClassResourcesContainer" Property="Grid.ColumnSpan" Value="1"/><!-- MOD_ACS: // BG3: Value="3" -->
                 <Setter TargetName="CastAbilityContainer" Property="Grid.Row" Value="1"/>
-                <Setter TargetName="CastAbilityContainer" Property="Grid.Column" Value="1"/><!-- MOD_AToR: Add CastAbility as filler in top bar -->
+                <Setter TargetName="CastAbilityContainer" Property="Grid.Column" Value="1"/><!-- MOD_ACS: Add CastAbility as filler in top bar -->
                 <Setter TargetName="SpellDCContainer" Property="Grid.Row" Value="1"/>
                 <Setter TargetName="SpellAttackContainer" Property="Grid.Row" Value="1"/>
 
@@ -3005,16 +3005,16 @@
 
                 <Setter TargetName="Background" Property="Source" Value="{StaticResource SpellbookBg_Small}"/>
                 <Setter TargetName="Background" Property="Stretch" Value="Fill"/>
-                <!-- MOD_AToR: Update margin bg // BG3: Value="-8,-94,-8,-8" -->
+                <!-- MOD_ACS: Update margin bg // BG3: Value="-8,-94,-8,-8" -->
                 <Setter TargetName="Background" Property="Margin" Value="-6,-94,-6,-6"/>
 
-                <!-- MOD_AToR: Add ClassSection DecorativeStroke -->
+                <!-- MOD_ACS: Add ClassSection DecorativeStroke -->
                 <Setter TargetName="ClassSectionDecorativeStroke" Property="Margin" Value="15,4,15,-10"/>
                 <Setter TargetName="ClassSectionDecorativeStroke" Property="Padding" Value="0,-6,0,0"/>
                 <Setter TargetName="ClassSectionDecorativeStroke" Property="StrokeDashArray" Value="5,3"/>
                 <Setter TargetName="ClassSectionDecorativeStroke" Property="StrokeThickness" Value="2"/>
 
-                <!-- MOD_AToR: Disable/unused Setters for ClassSection -->
+                <!-- MOD_ACS: Disable/unused Setters for ClassSection -->
                 <Setter TargetName="ClassSectionOpening" Property="Fill" Value="{StaticResource ClassBorderEdges_Small}"/>
                 <!-- BG3: <Setter TargetName="ClassSectionOpening" Property="Margin" Value="-6 ,0,6,0"/> -->
                 <!-- BG3: <Setter TargetName="ClassSection" Property="Background" Value="{StaticResource ClassBorderCenter_Small}"/> -->
@@ -3022,11 +3022,11 @@
 
                 <Setter TargetName="PreparedSpellsSectionOpening" Property="Source" Value="{StaticResource PreparedSpellsTop_Small}"/>
                 
-                <!-- MOD_AToR: PreparedSpellsSection switch visibility -->
+                <!-- MOD_ACS: PreparedSpellsSection switch visibility -->
                 <Setter TargetName="PreparedSpellsSection" Property="Visibility" Value="Collapsed"/>
                 <Setter TargetName="PreparedSpellsSectionSmall" Property="Visibility" Value="{Binding Visibility, ElementName=PreparedSpellsSectionOpening}"/>              
                 
-                <!-- MOD_AToR: Disable unused Setters for PreparedSpellsSection background -->
+                <!-- MOD_ACS: Disable unused Setters for PreparedSpellsSection background -->
                 <!-- BG3: 
                 <Setter TargetName="PreparedSpellsSection" Property="Background">
                     <Setter.Value>
@@ -3045,7 +3045,7 @@
                 -->                
                 <Setter TargetName="PreparedSpellsSectionClosure" Property="Source" Value="{StaticResource PreparedSpellsBottom_Small}"/>
 
-                <!-- MOD_AToR: Add Margin to Prepared Spells -->
+                <!-- MOD_ACS: Add Margin to Prepared Spells -->
                 <Setter TargetName="PreparedSpellsSectionOpening" Property="Margin" Value="1,6,-1,0"/>
                 <Setter TargetName="PreparedSpellsSectionSmall" Property="Margin" Value="1,0,-1,0"/>
                 <Setter TargetName="PreparedSpellsSectionClosure" Property="Margin" Value="1,0,-1,0"/>
@@ -3053,12 +3053,12 @@
                 <Setter TargetName="KnownSpellSection" Property="ImageSource" Value="{StaticResource SpellsBorder_Small}"/>
                 <Setter TargetName="KnownSpellSection" Property="Slices" Value="24,20,44,44"/>
                 
-                <!-- MOD_AToR: Disable as its dynamic now // MOD_BCPP: 6chars value="640" // BG3: Value="690" -->
+                <!-- MOD_ACS: Disable as its dynamic now // MOD_BCPP: 6chars value="640" // BG3: Value="690" -->
                 <!-- <Setter TargetName="KnownSpellSection" Property="Width" Value="690"/> -->
                 
-                <!-- MOD_AToR: Update know spells margin // BG3: Value="-6,0,6,0" -->
+                <!-- MOD_ACS: Update know spells margin // BG3: Value="-6,0,6,0" -->
                 <Setter TargetName="KnownSpellSection" Property="Margin" Value="0,0,0,0"/>
-                <!-- MOD_AToR: Add footer spells margin -->
+                <!-- MOD_ACS: Add footer spells margin -->
                 <Setter TargetName="SpellsCategories" Property="Margin" Value="6,0,0,0"/>
                 
 
@@ -3069,44 +3069,44 @@
                 <Setter TargetName="SearchResultsSectionClosure" Property="Fill" Value="{StaticResource ClassBorderEdges_Small}"/>
             </DataTrigger>
 
-            <!-- MOD_AToR: Detect if BCPP is active for character panel -->
+            <!-- MOD_ACS: Detect if BCPP is active for character panel -->
             <DataTrigger Binding="{Binding Height, ElementName=SpellBookPanel}" Value="2000">
                 <Setter TargetName="MultiClassSpellbookContainer" Property="Margin" Value="-18,0,-18,532"/>
                 <Setter TargetName="TabsContainer" Property="Margin" Value="0,17,0,-7"/>
             </DataTrigger>
 
-            <!-- MOD_AToR: Detect if BCPP is active for party panel -->
+            <!-- MOD_ACS: Detect if BCPP is active for party panel -->
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
                     <Condition Binding="{Binding ParentState, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel"/>
                     <Condition Binding="{Binding VerticalAlignment, ElementName=CharacterRoot}" Value="Top"/>
                 </MultiDataTrigger.Conditions>
-                <!-- MOD_AToR: Update margin for tabs align on bg -->   
+                <!-- MOD_ACS: Update margin for tabs align on bg -->   
                 <Setter TargetName="ClassPanelRoot" Property="Margin" Value="0,9,0,0"/>
-                <!-- MOD_AToR: WholePanel scroll -->                
+                <!-- MOD_ACS: WholePanel scroll -->                
                 <Setter TargetName="WholePanelScrollViewer" Property="Margin" Value="13,0,-13,20"/>
                 <Setter TargetName="WholePanelScrollViewer" Property="Padding" Value="-13,0,13,-20"/>
                 <Setter TargetName="ClassPanelScrollableContent" Property="Margin" Value="14,8,-14,18"/>
                 <Setter TargetName="ClassPanelScrollableContent" Property="Padding" Value="-14,-8,14,-40"/>
-                <!-- MOD_AToR: Footer margin -->
+                <!-- MOD_ACS: Footer margin -->
                 <Setter TargetName="KnownSpellSection" Property="Margin" Value="0,0,0,10"/>
                 <Setter TargetName="SpellsCategories" Property="Margin" Value="6,0,0,10"/>
                 <Setter TargetName="ScrollableContent" Property="Margin" Value="0,0,0,50"/>
-                <!-- MOD_AToR: Text replaceable on lvl up -->
+                <!-- MOD_ACS: Text replaceable on lvl up -->
                 <Setter TargetName="NonPreparableReplaceableSpellsNote" Property="Margin" Value="40,4,40,4"/>
             </MultiDataTrigger> 
 
-            <!-- MOD_AToR: Add scroll handler specific to PartyPanel // BG3: Scrolling: If there're spells to prepare, scroll only from the prepared spells section -->
+            <!-- MOD_ACS: Add scroll handler specific to PartyPanel // BG3: Scrolling: If there're spells to prepare, scroll only from the prepared spells section -->
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
                     <Condition Binding="{Binding ParentState, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel"/>
                     <Condition Binding="{Binding SelectedItem.Class.MustPrepareSpells, ElementName=Tabs, FallbackValue=False}" Value="True"/>
                 </MultiDataTrigger.Conditions>
-                <!-- MOD_AToR: Disable dual scroll // BG3: <Setter TargetName="WholePanelScrollViewerRoot" Property="MaxHeight" Value="1800"/> -->
+                <!-- MOD_ACS: Disable dual scroll // BG3: <Setter TargetName="WholePanelScrollViewerRoot" Property="MaxHeight" Value="1800"/> -->
                 <Setter TargetName="WholePanelScrollViewer" Property="VerticalScrollBarVisibility" Value="Disabled"/>
             </MultiDataTrigger> 
 
-            <!-- MOD_AToR: Add offset to both scrollBars when both are visible /> --> 
+            <!-- MOD_ACS: Add offset to both scrollBars when both are visible /> --> 
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
                     <Condition Binding="{Binding ParentState, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel"/>
@@ -3119,7 +3119,7 @@
                 <Setter TargetName="ClassPanelScrollableContent" Property="Padding" Value="1,0,-1,-10"/>
             </MultiDataTrigger>
             
-            <!-- MOD_AToR: Add margin to Decorative Stroke to hide bottom stroke line when PreparedSpellsSection is visible -->
+            <!-- MOD_ACS: Add margin to Decorative Stroke to hide bottom stroke line when PreparedSpellsSection is visible -->
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
                     <Condition Binding="{Binding ParentState, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel"/>
@@ -3128,7 +3128,7 @@
                 <Setter TargetName="ClassSectionDecorativeStroke" Property="Margin" Value="15,4,15,-50"/>
             </MultiDataTrigger>
 
-            <!-- MOD_AToR: One line top bar when no subclass or classResources // Disable row switch cause there is not enough width space-->
+            <!-- MOD_ACS: One line top bar when no subclass or classResources // Disable row switch cause there is not enough width space-->
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
                     <Condition Binding="{Binding ParentState, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel"/>
@@ -3151,7 +3151,7 @@
                 <Setter TargetName="ClassResourcesContainer" Property="Grid.Column" Value="1"/>
             </MultiDataTrigger>
 
-            <!-- MOD_AToR: Extends CastAbility when no ClassResources -->
+            <!-- MOD_ACS: Extends CastAbility when no ClassResources -->
             <MultiDataTrigger>
             <MultiDataTrigger.Conditions>
                 <Condition Binding="{Binding ParentState, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel"/>
@@ -3161,7 +3161,7 @@
             <Setter TargetName="CastAbilityContainer" Property="Grid.ColumnSpan" Value="2"/>
             </MultiDataTrigger>
             
-            <!-- MOD_AToR: Extends ClassResources when no spells -->
+            <!-- MOD_ACS: Extends ClassResources when no spells -->
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
                     <Condition Binding="{Binding ParentState, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel"/>
@@ -3172,7 +3172,7 @@
                 <Setter TargetName="ClassResourcesContainer" Property="Grid.ColumnSpan" Value="6"/>
             </MultiDataTrigger>
 
-            <!-- MOD_AToR: RE-ENABLING class and tadpole feats-->
+            <!-- MOD_ACS: RE-ENABLING class and tadpole feats-->
             <!-- JMoya: We still don't know if feats will make it or not, so design asked to hide them for now while they decide -->
             <!-- BG3:
             <DataTrigger Binding="{Binding Source='True'}" Value="True">
@@ -3216,8 +3216,8 @@
         <Setter Property="Template" Value="{StaticResource decoratedHeader}"/>
     </Style>
     
-    <!-- MOD_AToR: Add Style BaseTitleStyle for CS -->
-    <Style x:Key="AToR_CS_BaseTitleStyle" TargetType="ContentControl">
+    <!-- MOD_ACS: Add Style BaseTitleStyle for CS -->
+    <Style x:Key="ACS_CS_BaseTitleStyle" TargetType="ContentControl">
         <Style.Resources>
             <Style TargetType="TextBlock" >
                 <Setter Property="FontSize" Value="{DynamicResource ScaledMediumFontSize}"/>
@@ -3373,13 +3373,13 @@ Source="{StaticResource SavingThrowDice}">
             <BitmapImage x:Key="statusBG_fill" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/TargetInfo/statusBG_fill.png"/>
         </DataTemplate.Resources>
         <Border Name="root" Style="{StaticResource RowBG_d}" ToolTip="{StaticResource ManagedTooltip}">
-            <!-- MOD_AToR: Add Name / Update Height // BG3: Height="56" -->
+            <!-- MOD_ACS: Add Name / Update Height // BG3: Height="56" -->
             <Grid x:Name="StatusGrid" Height="50">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <!-- MOD_AToR: Add Name / Update Margin // BG3: Margin="8,4,8,4" -->
+                <!-- MOD_ACS: Add Name / Update Margin // BG3: Margin="8,4,8,4" -->
                 <Grid x:Name="StatusIconGrid" Margin="8,2,8,2">
                     <Image Source="{StaticResource statusBG}" Stretch="Uniform" VerticalAlignment="Center"/>
 
@@ -3387,15 +3387,15 @@ Source="{StaticResource SavingThrowDice}">
                         <Image Source="{StaticResource statusBG_fill}" Stretch="Uniform"/>
                     </ls:LSPie>
 
-                    <!-- MOD_AToR: Add Name / Update Style // BG3: SummaryRoundIcons -->
+                    <!-- MOD_ACS: Add Name / Update Style // BG3: SummaryRoundIcons -->
                     <Rectangle x:Name="IconRectangle" Style="{StaticResource SummaryRoundIconsConditionsAndFeats}" Fill="{Binding Icon}"/>
 
-                    <!-- MOD_AToR: Update FontSize // BG3: FontSize="{DynamicResource ScaledSmallFontSize}" -->
+                    <!-- MOD_ACS: Update FontSize // BG3: FontSize="{DynamicResource ScaledSmallFontSize}" -->
                     <TextBlock Text="{Binding Duration}" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,-12" Foreground="{StaticResource LS_PrimaryColor}"
                                noesis:Text.Stroke="{StaticResource LS_PrimaryColorOutlineColor}" noesis:Text.StrokeThickness="6" Style="{StaticResource NarrowTooltipModifierText}"
                                Visibility="{Binding Duration, Converter={StaticResource CountToVisibilityConverter}, ConverterParameter=0}" FontSize="{DynamicResource ScaledMiniFontSize}"/>
                 </Grid>
-                <!-- MOD_AToR: Update Style // BG3: SummaryListText -->
+                <!-- MOD_ACS: Update Style // BG3: SummaryListText -->
                 <TextBlock x:Name="NameLabel" Grid.Column="1" Text="{Binding Name}" Style="{StaticResource SummaryListTextConditionsAndFeats}" TextTrimming="CharacterEllipsis"/>
             </Grid>
         </Border>
@@ -3458,11 +3458,11 @@ Source="{StaticResource SavingThrowDice}">
     </ControlTemplate>
 
     <!-- ========================================= -->
-    <!-- ===== MOD_AToR: Resistances - START ===== -->
+    <!-- ===== MOD_ACS: Resistances - START ===== -->
         
-    <!-- === MOD_AToR: Control Templates === -->
+    <!-- === MOD_ACS: Control Templates === -->
     
-    <!-- MOD_AToR: ImmuneShield -->
+    <!-- MOD_ACS: ImmuneShield -->
     <ControlTemplate x:Key="CtrlImmuneShield" TargetType="Control">
         <Image x:Name="ImmuneShield" Source="{StaticResource ImmuneShield}" Stretch="None" Visibility="Hidden"/>
         <ControlTemplate.Triggers>
@@ -3485,7 +3485,7 @@ Source="{StaticResource SavingThrowDice}">
         </ControlTemplate.Triggers>
     </ControlTemplate>
     
-        <!-- MOD_AToR: Resistant NonMagical -->
+        <!-- MOD_ACS: Resistant NonMagical -->
         <ControlTemplate x:Key="CtrlNonMagicalArrow" TargetType="Control">
             <Image x:Name="NonMagicalArrow" HorizontalAlignment="Center" VerticalAlignment="center" Source="{StaticResource ResistantNonMagical}" Stretch="None" Margin="0,8,0,0" Visibility="Collapsed"/>
             <ControlTemplate.Triggers>
@@ -3495,7 +3495,7 @@ Source="{StaticResource SavingThrowDice}">
             </ControlTemplate.Triggers>
         </ControlTemplate>
         
-        <!-- MOD_AToR: Resistant Magical -->
+        <!-- MOD_ACS: Resistant Magical -->
         <ControlTemplate x:Key="CtrlMagicalArrow" TargetType="Control">
             <Image x:Name="MagicalArrow" HorizontalAlignment="Center" VerticalAlignment="center" Source="{StaticResource ResistantMagical}" Stretch="None" Margin="0,10,0,0" Visibility="Collapsed"/>
             <ControlTemplate.Triggers>
@@ -3510,7 +3510,7 @@ Source="{StaticResource SavingThrowDice}">
             </ControlTemplate.Triggers>
         </ControlTemplate>
         
-        <!-- MOD_AToR: NoShield -->
+        <!-- MOD_ACS: NoShield -->
         <ControlTemplate x:Key="CtrlNoShield" TargetType="Control">
             <Image x:Name="NoShield" Source="{StaticResource ResistanceNone}" Stretch="None" Visibility="Hidden"/>
             <ControlTemplate.Triggers>
@@ -3525,7 +3525,7 @@ Source="{StaticResource SavingThrowDice}">
             </ControlTemplate.Triggers>
         </ControlTemplate>
         
-        <!-- MOD_AToR: Hourglass -->
+        <!-- MOD_ACS: Hourglass -->
         <ControlTemplate x:Key="CtrlHourglass" TargetType="Control">
             <ControlTemplate.Resources>
                 <BitmapImage x:Key="hourglass" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/ico_resistance_hourglass.png"/>
@@ -3542,7 +3542,7 @@ Source="{StaticResource SavingThrowDice}">
     <ControlTemplate x:Key="ResistancesGridTemplate">
         
         <ControlTemplate.Resources>
-            <!-- MOD_AToR: StatusEndingStoryboard -->
+            <!-- MOD_ACS: StatusEndingStoryboard -->
             <Storyboard x:Key="ResourceStatusEndingStoryboard">
                 <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Object" Storyboard.TargetProperty="Opacity" AutoReverse="True" RepeatBehavior="Forever">
                     <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
@@ -3575,10 +3575,10 @@ Source="{StaticResource SavingThrowDice}">
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource LS_accent100TxtColor}" Text="{Binding Source='h529efdfdgda98g4ed3g8d1eg46cbf1d0a5e3', Converter={StaticResource TranslatedStringConverter}}"/>
             </Grid>
             
-            <!-- MOD_AToR: Row 1 => Slashing / Bludgeoning / Piercing -->
+            <!-- MOD_ACS: Row 1 => Slashing / Bludgeoning / Piercing -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,-4">
                 
-                <!-- MOD_AToR: Slashing -->
+                <!-- MOD_ACS: Slashing -->
                 <ItemsControl x:Name="ResistancesSlashing" ItemsSource="{Binding Stats.Resistances}" Visibility="{Binding Stats.NumActiveResistances, Converter={StaticResource CountToVisibilityConverter}}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -3596,7 +3596,7 @@ Source="{StaticResource SavingThrowDice}">
 
                             <DataTemplate.Triggers>
                                 
-                                <!-- MOD_AToR: Control physical slashing visibility -->
+                                <!-- MOD_ACS: Control physical slashing visibility -->
                                 <DataTrigger Binding="{Binding DamageType}" Value="Slashing">
                                     <Setter TargetName="Object" Property="Visibility" Value="Visible"/>
                                 </DataTrigger>
@@ -3616,7 +3616,7 @@ Source="{StaticResource SavingThrowDice}">
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
                 
-                <!-- MOD_AToR: Bludgeoning -->
+                <!-- MOD_ACS: Bludgeoning -->
                 <ItemsControl x:Name="ResistanceBludgeoning" ItemsSource="{Binding Stats.Resistances}" Visibility="{Binding Stats.NumActiveResistances, Converter={StaticResource CountToVisibilityConverter}}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -3634,7 +3634,7 @@ Source="{StaticResource SavingThrowDice}">
 
                             <DataTemplate.Triggers>
                                 
-                                <!-- MOD_AToR: Control physical bludgeoning visibility -->
+                                <!-- MOD_ACS: Control physical bludgeoning visibility -->
                                 <DataTrigger Binding="{Binding DamageType}" Value="Bludgeoning">
                                     <Setter TargetName="Object" Property="Visibility" Value="Visible"/>
                                 </DataTrigger>
@@ -3654,7 +3654,7 @@ Source="{StaticResource SavingThrowDice}">
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
                 
-                <!-- MOD_AToR: Piercing -->
+                <!-- MOD_ACS: Piercing -->
                 <ItemsControl x:Name="ResistancePiercing" ItemsSource="{Binding Stats.Resistances}" Visibility="{Binding Stats.NumActiveResistances, Converter={StaticResource CountToVisibilityConverter}}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -3672,7 +3672,7 @@ Source="{StaticResource SavingThrowDice}">
 
                             <DataTemplate.Triggers>
                                 
-                                <!-- MOD_AToR: Control physical piercing visibility -->
+                                <!-- MOD_ACS: Control physical piercing visibility -->
                                 <DataTrigger Binding="{Binding DamageType}" Value="Piercing">
                                     <Setter TargetName="Object" Property="Visibility" Value="Visible"/>
                                 </DataTrigger>
@@ -3694,10 +3694,10 @@ Source="{StaticResource SavingThrowDice}">
                 
             </StackPanel>
 
-            <!-- MOD_AToR: Row 2 => Fire / Cold / Lightning / Thunder / Force -->
+            <!-- MOD_ACS: Row 2 => Fire / Cold / Lightning / Thunder / Force -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,-4">
                 
-                <!-- MOD_AToR: Fire -->
+                <!-- MOD_ACS: Fire -->
                 <ItemsControl x:Name="ResistanceFire" ItemsSource="{Binding Stats.Resistances}" Visibility="{Binding Stats.NumActiveResistances, Converter={StaticResource CountToVisibilityConverter}}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -3715,7 +3715,7 @@ Source="{StaticResource SavingThrowDice}">
 
                             <DataTemplate.Triggers>
                                 
-                                <!-- MOD_AToR: Control fire visibility -->
+                                <!-- MOD_ACS: Control fire visibility -->
                                 <DataTrigger Binding="{Binding DamageType}" Value="Fire">
                                     <Setter TargetName="Object" Property="Visibility" Value="Visible"/>
                                 </DataTrigger>
@@ -3735,7 +3735,7 @@ Source="{StaticResource SavingThrowDice}">
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
                 
-                <!-- MOD_AToR: Cold -->
+                <!-- MOD_ACS: Cold -->
                 <ItemsControl x:Name="ResistanceCold" ItemsSource="{Binding Stats.Resistances}" Visibility="{Binding Stats.NumActiveResistances, Converter={StaticResource CountToVisibilityConverter}}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -3753,7 +3753,7 @@ Source="{StaticResource SavingThrowDice}">
 
                             <DataTemplate.Triggers>
                                 
-                                <!-- MOD_AToR: Control cold visibility -->
+                                <!-- MOD_ACS: Control cold visibility -->
                                 <DataTrigger Binding="{Binding DamageType}" Value="Cold">
                                     <Setter TargetName="Object" Property="Visibility" Value="Visible"/>
                                 </DataTrigger>
@@ -3773,7 +3773,7 @@ Source="{StaticResource SavingThrowDice}">
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
                 
-                <!-- MOD_AToR: Lightning -->
+                <!-- MOD_ACS: Lightning -->
                 <ItemsControl x:Name="ResistanceLightning" ItemsSource="{Binding Stats.Resistances}" Visibility="{Binding Stats.NumActiveResistances, Converter={StaticResource CountToVisibilityConverter}}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -3791,7 +3791,7 @@ Source="{StaticResource SavingThrowDice}">
 
                             <DataTemplate.Triggers>
                                 
-                                <!-- MOD_AToR: Control lightning visibility -->
+                                <!-- MOD_ACS: Control lightning visibility -->
                                 <DataTrigger Binding="{Binding DamageType}" Value="Lightning">
                                     <Setter TargetName="Object" Property="Visibility" Value="Visible"/>
                                 </DataTrigger>
@@ -3811,7 +3811,7 @@ Source="{StaticResource SavingThrowDice}">
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
                 
-                <!-- MOD_AToR: Thunder -->
+                <!-- MOD_ACS: Thunder -->
                 <ItemsControl x:Name="ResistanceThunder" ItemsSource="{Binding Stats.Resistances}" Visibility="{Binding Stats.NumActiveResistances, Converter={StaticResource CountToVisibilityConverter}}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -3829,7 +3829,7 @@ Source="{StaticResource SavingThrowDice}">
 
                             <DataTemplate.Triggers>
                                 
-                                <!-- MOD_AToR: Control thunder visibility -->
+                                <!-- MOD_ACS: Control thunder visibility -->
                                 <DataTrigger Binding="{Binding DamageType}" Value="Thunder">
                                     <Setter TargetName="Object" Property="Visibility" Value="Visible"/>
                                 </DataTrigger>
@@ -3849,7 +3849,7 @@ Source="{StaticResource SavingThrowDice}">
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
                 
-                <!-- MOD_AToR: Force -->
+                <!-- MOD_ACS: Force -->
                 <ItemsControl x:Name="ResistanceForce" ItemsSource="{Binding Stats.Resistances}" Visibility="{Binding Stats.NumActiveResistances, Converter={StaticResource CountToVisibilityConverter}}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -3867,7 +3867,7 @@ Source="{StaticResource SavingThrowDice}">
 
                             <DataTemplate.Triggers>
                                 
-                                <!-- MOD_AToR: Control force visibility -->
+                                <!-- MOD_ACS: Control force visibility -->
                                 <DataTrigger Binding="{Binding DamageType}" Value="Force">
                                     <Setter TargetName="Object" Property="Visibility" Value="Visible"/>
                                 </DataTrigger>
@@ -3890,10 +3890,10 @@ Source="{StaticResource SavingThrowDice}">
             </StackPanel>
             
             
-            <!-- MOD_AToR: Row 3 => Poison / Acid / Necrotic / Radiant / Psychic -->
+            <!-- MOD_ACS: Row 3 => Poison / Acid / Necrotic / Radiant / Psychic -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,-4">
                 
-                <!-- MOD_AToR: Poison -->
+                <!-- MOD_ACS: Poison -->
                 <ItemsControl x:Name="ResistancePoison" ItemsSource="{Binding Stats.Resistances}" Visibility="{Binding Stats.NumActiveResistances, Converter={StaticResource CountToVisibilityConverter}}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -3911,7 +3911,7 @@ Source="{StaticResource SavingThrowDice}">
 
                             <DataTemplate.Triggers>
                                 
-                                <!-- MOD_AToR: Control poison visibility -->
+                                <!-- MOD_ACS: Control poison visibility -->
                                 <DataTrigger Binding="{Binding DamageType}" Value="Poison">
                                     <Setter TargetName="Object" Property="Visibility" Value="Visible"/>
                                 </DataTrigger>
@@ -3931,7 +3931,7 @@ Source="{StaticResource SavingThrowDice}">
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
                 
-                <!-- MOD_AToR: Acid -->
+                <!-- MOD_ACS: Acid -->
                 <ItemsControl x:Name="ResistanceAcid" ItemsSource="{Binding Stats.Resistances}" Visibility="{Binding Stats.NumActiveResistances, Converter={StaticResource CountToVisibilityConverter}}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -3949,7 +3949,7 @@ Source="{StaticResource SavingThrowDice}">
 
                             <DataTemplate.Triggers>
                                 
-                                <!-- MOD_AToR: Control acid visibility -->
+                                <!-- MOD_ACS: Control acid visibility -->
                                 <DataTrigger Binding="{Binding DamageType}" Value="Acid">
                                     <Setter TargetName="Object" Property="Visibility" Value="Visible"/>
                                 </DataTrigger>
@@ -3969,7 +3969,7 @@ Source="{StaticResource SavingThrowDice}">
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
                 
-                <!-- MOD_AToR: Necrotic -->
+                <!-- MOD_ACS: Necrotic -->
                 <ItemsControl x:Name="ResistanceNecrotic" ItemsSource="{Binding Stats.Resistances}" Visibility="{Binding Stats.NumActiveResistances, Converter={StaticResource CountToVisibilityConverter}}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -3987,7 +3987,7 @@ Source="{StaticResource SavingThrowDice}">
 
                             <DataTemplate.Triggers>
                                 
-                                <!-- MOD_AToR: Control necrotic visibility -->
+                                <!-- MOD_ACS: Control necrotic visibility -->
                                 <DataTrigger Binding="{Binding DamageType}" Value="Necrotic">
                                     <Setter TargetName="Object" Property="Visibility" Value="Visible"/>
                                 </DataTrigger>
@@ -4007,7 +4007,7 @@ Source="{StaticResource SavingThrowDice}">
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
                 
-                <!-- MOD_AToR: Radiant -->
+                <!-- MOD_ACS: Radiant -->
                 <ItemsControl x:Name="ResistanceRadiant" ItemsSource="{Binding Stats.Resistances}" Visibility="{Binding Stats.NumActiveResistances, Converter={StaticResource CountToVisibilityConverter}}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -4025,7 +4025,7 @@ Source="{StaticResource SavingThrowDice}">
 
                             <DataTemplate.Triggers>
                                 
-                                <!-- MOD_AToR: Control radiant visibility -->
+                                <!-- MOD_ACS: Control radiant visibility -->
                                 <DataTrigger Binding="{Binding DamageType}" Value="Radiant">
                                     <Setter TargetName="Object" Property="Visibility" Value="Visible"/>
                                 </DataTrigger>
@@ -4045,7 +4045,7 @@ Source="{StaticResource SavingThrowDice}">
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
                 
-                <!-- MOD_AToR: Psychic -->
+                <!-- MOD_ACS: Psychic -->
                 <ItemsControl x:Name="ResistancePsychic" ItemsSource="{Binding Stats.Resistances}" Visibility="{Binding Stats.NumActiveResistances, Converter={StaticResource CountToVisibilityConverter}}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -4063,7 +4063,7 @@ Source="{StaticResource SavingThrowDice}">
 
                             <DataTemplate.Triggers>
                                 
-                                <!-- MOD_AToR: Control psychic visibility -->
+                                <!-- MOD_ACS: Control psychic visibility -->
                                 <DataTrigger Binding="{Binding DamageType}" Value="Psychic">
                                     <Setter TargetName="Object" Property="Visibility" Value="Visible"/>
                                 </DataTrigger>
@@ -4087,7 +4087,7 @@ Source="{StaticResource SavingThrowDice}">
             
         </StackPanel>
     </ControlTemplate>
-    <!-- ===== MOD_AToR: Resistances - END ===== -->
+    <!-- ===== MOD_ACS: Resistances - END ===== -->
     <!-- ======================================= -->
 
     <!-- ===== RESISTANCES LIST TEMPLATE=====-->
@@ -4192,9 +4192,9 @@ Source="{StaticResource SavingThrowDice}">
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <!-- MOD_AToR: Update Style // BG3: SummaryRoundIcons -->
+                <!-- MOD_ACS: Update Style // BG3: SummaryRoundIcons -->
                 <Rectangle x:Name="Icon" Grid.Column="0" Fill="{Binding Icon}" Style="{StaticResource SummaryRoundIconsConditionsAndFeats}" Margin="8,4,8,4"/>
-                <!-- MOD_AToR: Update Style // BG3: SummaryListText -->
+                <!-- MOD_ACS: Update Style // BG3: SummaryListText -->
                 <TextBlock x:Name="NameLabel" Grid.Column="1" Text="{Binding Name}" Style="{StaticResource SummaryListTextConditionsAndFeats}" TextTrimming="CharacterEllipsis"/>
             </Grid>
         </Border>
@@ -4241,7 +4241,7 @@ Source="{StaticResource SavingThrowDice}">
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>
-                        <!-- MOD_AToR: Add space & change separator / Add StringFormat / Update Source // BG3: Source='hd64bfe4cgadadg4468g8b0ag70330ffc717c' -->
+                        <!-- MOD_ACS: Add space & change separator / Add StringFormat / Update Source // BG3: Source='hd64bfe4cgadadg4468g8b0ag70330ffc717c' -->
                         <TextBlock x:Name="separator" Text="{Binding Source='hb3046cd8g05b3g4e6ag9396gd17b80fa6737', StringFormat=' {0} ', Converter={StaticResource TranslatedStringConverter}}"/> 
                     </StackPanel>
                     <DataTemplate.Triggers>
@@ -4794,7 +4794,7 @@ Source="{StaticResource SavingThrowDice}">
                                     <Style TargetType="TextBlock"  BasedOn="{StaticResource DetailedListText}"></Style>
                                 </Control.Resources>
                             </Control>
-                            <!-- MOD_AToR: Update StringFormat - remove space // BG3: StringFormat={}{0: +#; -#; 0}} -->
+                            <!-- MOD_ACS: Update StringFormat - remove space // BG3: StringFormat={}{0: +#; -#; 0}} -->
                             <TextBlock x:Name="value" Text="{Binding SavingThrow.AdditionalValue, StringFormat={}{0:+#;-#;0}}" Style="{StaticResource DetailedListValue}" HorizontalAlignment="Center" Margin="0,-12,0,0"/>
                         </StackPanel>
                     </Grid>
@@ -4803,14 +4803,14 @@ Source="{StaticResource SavingThrowDice}">
                             <Setter TargetName="base" Property="Background" Value="{StaticResource RowBG_h}"/>
                         </Trigger>
                         
-                        <!-- MOD_AToR: Add if positive color green -->
+                        <!-- MOD_ACS: Add if positive color green -->
                         <DataTrigger Binding="{Binding SavingThrow.AdditionalValue, Converter={StaticResource GreaterThanConverter}, ConverterParameter=0}" Value="True">
-                            <Setter TargetName="value" Property="Foreground" Value="{StaticResource AToR_LS_bonusTxtColor}"/>
+                            <Setter TargetName="value" Property="Foreground" Value="{StaticResource ACS_LS_bonusTxtColor}"/>
                         </DataTrigger>
 
-                        <!-- MOD_AToR: Add if negative color red -->
+                        <!-- MOD_ACS: Add if negative color red -->
                         <DataTrigger Binding="{Binding SavingThrow.AdditionalValue, Converter={StaticResource LessThanConverter}, ConverterParameter=0}" Value="True">
-                            <Setter TargetName="value" Property="Foreground" Value="{StaticResource AToR_LS_alertTxtColor}"/>
+                            <Setter TargetName="value" Property="Foreground" Value="{StaticResource ACS_LS_alertTxtColor}"/>
                         </DataTrigger>
                         
                     </DataTemplate.Triggers>
@@ -4829,9 +4829,9 @@ Source="{StaticResource SavingThrowDice}">
 
             <!-- Proficiency Bonus-->
             <Border Name="ProficiencyBonusLegend" Grid.Row="0" Background="Transparent" ToolTip="{StaticResource PlacementParentDCTooltip}" DataContext="{Binding Stats.ProficiencyBonus}" ToolTipService.Placement="Right" ToolTipService.VerticalOffset="-40">
-                <!-- MOD_AToR: Add name / Update margin // BG3:  Margin="0,0,0,12" -->
+                <!-- MOD_ACS: Add name / Update margin // BG3:  Margin="0,0,0,12" -->
                 <StackPanel x:Name="ProficiencyBonusLegendPanel" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,-22,0,11">
-                    <!-- MOD_AToR: Update margin // BG3:  Margin="0,0,6,0" -->
+                    <!-- MOD_ACS: Update margin // BG3:  Margin="0,0,6,0" -->
                     <Image Source="{StaticResource ProficientDice}" Stretch="None" Margin="0,-2,6,2" VerticalAlignment="Center"/>
                     <TextBlock Name="ProficiencyBonusLabel" Foreground="{StaticResource LS_accent75TxtColor}" FontSize="{StaticResource ScaledSmallFontSize}" VerticalAlignment="Center">
                                 <Run Text="{Binding Source='h65b46ad4g2eacg47d5gb4b4g124ca3b8aaef', Converter={StaticResource TranslatedStringConverter}}"/>
@@ -4842,7 +4842,7 @@ Source="{StaticResource SavingThrowDice}">
 
 
             <!--SkillsList-->
-            <!-- MOD_AToR: Add margin -->
+            <!-- MOD_ACS: Add margin -->
             <ScrollViewer Template="{StaticResource NoForcedStyleScrollViewerTemplate}" Grid.Row="1" Padding="{StaticResource ScrollOffset}" Margin="11,0,-10,0">
                 <Grid x:Name="CharacterSkills">
                     <Grid.Resources>
@@ -4866,21 +4866,21 @@ Source="{StaticResource SavingThrowDice}">
                                         <Border x:Name="SkillTitle" Background="Transparent" ToolTip="{StaticResource ManagedTooltip}" ToolTipService.Placement="Right">
                                             <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center">
                                                 <TextBlock x:Name="TitleName" Text="{Binding AbilityValue, Converter={StaticResource EnumTranslatedStringConverter}, ConverterParameter='hec30ce0dgb76bg45cagaf40gad771ff7902b'}" Style="{StaticResource SkillTitleTextStyle}"/>
-                                                <!-- MOD_AToR: Add prepend -->
+                                                <!-- MOD_ACS: Add prepend -->
                                                 <TextBlock x:Name="TitleValuePrepend" Style="{StaticResource SkillTitleTextStyle}" Text=" ("/>
-                                                <!-- MOD_AToR: Update StringFormat // BG3: StringFormat=' ({0:+#;-#;0})' -->
+                                                <!-- MOD_ACS: Update StringFormat // BG3: StringFormat=' ({0:+#;-#;0})' -->
                                                 <TextBlock x:Name="TitleValue" Style="{StaticResource SkillTitleTextStyle}" Text="{Binding Modifier, StringFormat={}{0:+#;-#;0}}"/>
-                                                <!-- MOD_AToR: Add append -->
+                                                <!-- MOD_ACS: Add append -->
                                                 <TextBlock x:Name="TitleValueAppend" Style="{StaticResource SkillTitleTextStyle}" Text=")"/>
                                             </StackPanel>
                                         </Border>
                                         
-                                        <!-- MOD_AToR: Update margin // BG3: Margin="12,4,12,12" -->
+                                        <!-- MOD_ACS: Update margin // BG3: Margin="12,4,12,12" -->
                                         <ItemsControl ItemsSource="{Binding Skills}" Margin="12,0,12,8">
                                             <ItemsControl.ItemTemplate>
                                                 <DataTemplate DataType="ls:VMSkill">
                                                     <Border Name="GridRow" Style="{StaticResource RowBG_d}" ToolTip="{StaticResource ManagedTooltip}" ToolTipService.Placement="Right">
-                                                        <!-- MOD_AToR: Add Name / Update Height // BG3: Height="56" -->
+                                                        <!-- MOD_ACS: Add Name / Update Height // BG3: Height="56" -->
                                                         <Grid x:Name="SkillGrid" HorizontalAlignment="Stretch" Height="52" >
                                                         <Grid.ColumnDefinitions>
                                                                 <ColumnDefinition Width="Auto"/>
@@ -5031,17 +5031,17 @@ Source="{StaticResource SavingThrowDice}">
 
                                                         </DataTrigger>
                                                         
-                                                        <!-- MOD_AToR: Add if positive color green -->
+                                                        <!-- MOD_ACS: Add if positive color green -->
                                                         <DataTrigger Binding="{Binding Value, Converter={StaticResource GreaterThanConverter}, ConverterParameter=0}" Value="True">
-                                                            <Setter TargetName="SkillModifier" Property="Foreground" Value="{StaticResource AToR_LS_bonusTxtColor}"/>
+                                                            <Setter TargetName="SkillModifier" Property="Foreground" Value="{StaticResource ACS_LS_bonusTxtColor}"/>
                                                         </DataTrigger>
 
-                                                        <!-- MOD_AToR: Add if negative color red -->
+                                                        <!-- MOD_ACS: Add if negative color red -->
                                                         <DataTrigger Binding="{Binding Value, Converter={StaticResource LessThanConverter}, ConverterParameter=0}" Value="True">
-                                                            <Setter TargetName="SkillModifier" Property="Foreground" Value="{StaticResource AToR_LS_alertTxtColor}"/>
+                                                            <Setter TargetName="SkillModifier" Property="Foreground" Value="{StaticResource ACS_LS_alertTxtColor}"/>
                                                         </DataTrigger>
                                                         
-                                                        <!-- MOD_AToR: Detect if BCPP is active for party panel -->
+                                                        <!-- MOD_ACS: Detect if BCPP is active for party panel -->
                                                         <MultiDataTrigger>
                                                             <MultiDataTrigger.Conditions>
                                                                 <Condition Binding="{Binding ParentState, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel"/>
@@ -5066,29 +5066,29 @@ Source="{StaticResource SavingThrowDice}">
                                         <Setter TargetName="AbillitySkillSection" Property="Background" Value="{StaticResource RowBG_h}"/>
                                         <Setter TargetName="TitleName" Property="Foreground" Value="{StaticResource LS_accent100TxtColor}"/>
                                         <Setter TargetName="TitleValue" Property="Foreground" Value="{StaticResource LS_accent100TxtColor}"/>
-                                        <!-- MOD_AToR: Add prepend -->
+                                        <!-- MOD_ACS: Add prepend -->
                                         <Setter TargetName="TitleValuePrepend" Property="Foreground" Value="{StaticResource LS_accent100TxtColor}"/>
-                                        <!-- MOD_AToR: Add Append -->
+                                        <!-- MOD_ACS: Add Append -->
                                         <Setter TargetName="TitleValueAppend" Property="Foreground" Value="{StaticResource LS_accent100TxtColor}"/>
                                         
                                     </Trigger>
                                     <Trigger Property="IsMouseOver" Value="True" SourceName="SkillTitle">
                                         <Setter TargetName="TitleName" Property="Foreground" Value="{StaticResource LS_tint100}"/>
                                         <Setter TargetName="TitleValue" Property="Foreground" Value="{StaticResource LS_tint100}"/>
-                                        <!-- MOD_AToR: Add prepend -->
+                                        <!-- MOD_ACS: Add prepend -->
                                         <Setter TargetName="TitleValuePrepend" Property="Foreground" Value="{StaticResource LS_tint100}"/>
-                                        <!-- MOD_AToR: Add Append -->
+                                        <!-- MOD_ACS: Add Append -->
                                         <Setter TargetName="TitleValueAppend" Property="Foreground" Value="{StaticResource LS_tint100}"/>
                                     </Trigger>
 
-                                    <!-- MOD_AToR: Add if positive color green -->
+                                    <!-- MOD_ACS: Add if positive color green -->
                                     <DataTrigger Binding="{Binding Modifier, Converter={StaticResource GreaterThanConverter}, ConverterParameter=0}" Value="True">
-                                        <Setter TargetName="TitleValue" Property="Foreground" Value="{StaticResource AToR_LS_bonusTxtColor}"/>
+                                        <Setter TargetName="TitleValue" Property="Foreground" Value="{StaticResource ACS_LS_bonusTxtColor}"/>
                                     </DataTrigger>
 
-                                    <!-- MOD_AToR: Add if negative color red -->
+                                    <!-- MOD_ACS: Add if negative color red -->
                                     <DataTrigger Binding="{Binding Modifier, Converter={StaticResource LessThanConverter}, ConverterParameter=0}" Value="True">
-                                        <Setter TargetName="TitleValue" Property="Foreground" Value="{StaticResource AToR_LS_alertTxtColor}"/>
+                                        <Setter TargetName="TitleValue" Property="Foreground" Value="{StaticResource ACS_LS_alertTxtColor}"/>
                                     </DataTrigger>
 
                                 </DataTemplate.Triggers>
@@ -5109,7 +5109,7 @@ Source="{StaticResource SavingThrowDice}">
                 <Setter TargetName="ProficiencyBonusLabel" Property="Foreground" Value="{StaticResource LS_tint100}"/>
             </Trigger>
             
-            <!-- MOD_AToR: Detect if BCPP is active for party panel -->
+            <!-- MOD_ACS: Detect if BCPP is active for party panel -->
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
                     <Condition Binding="{Binding ParentState, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel"/>
@@ -5130,7 +5130,7 @@ Source="{StaticResource SavingThrowDice}">
                         <Setter Property="Margin" Value="8,0"/>
                     </Style>
                 </ControlTemplate.Resources>
-                <!-- MOD_AToR: Update minHeight // BG3: MinHeight="48" -->
+                <!-- MOD_ACS: Update minHeight // BG3: MinHeight="48" -->
                 <Border x:Name="Entry" Style="{StaticResource RowBG_d}" MinHeight="0">
                     <ContentPresenter/>
                 </Border>
@@ -5138,13 +5138,13 @@ Source="{StaticResource SavingThrowDice}">
                     <Trigger Property="IsMouseOver" Value="True">
                         <Setter TargetName="Entry" Property="Background" Value="{StaticResource RowBG_h}"/>
                     </Trigger>
-                    <!-- MOD_AToR: Detect if BCPP is active for party panel -->
+                    <!-- MOD_ACS: Detect if BCPP is active for party panel -->
                     <MultiDataTrigger>
                         <MultiDataTrigger.Conditions>
                             <Condition Binding="{Binding ParentState, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel"/>
                             <Condition Binding="{Binding VerticalAlignment, ElementName=CharacterRoot}" Value="Top"/>
                         </MultiDataTrigger.Conditions>
-                        <!-- MOD_AToR: Update MinHeight -->   
+                        <!-- MOD_ACS: Update MinHeight -->   
                         <Setter TargetName="Entry" Property="MinHeight" Value="46"/>
                     </MultiDataTrigger> 
                 </ControlTemplate.Triggers>
@@ -5157,7 +5157,7 @@ Source="{StaticResource SavingThrowDice}">
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource DetailedListText}" Text="{Binding Character.Name}"/>
                         <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Style="{StaticResource DetailedListValue}">
                                 <Run Text="{Binding Rating, Converter={StaticResource ApprovalRatingToStringConverter}}"/>
-                                <!-- MOD_AToR: Update StringFormat // BG3: StringFormat='({0})' -->
+                                <!-- MOD_ACS: Update StringFormat // BG3: StringFormat='({0})' -->
                                 <Run Text="{Binding Rating, StringFormat='({0}/100)'}"/>
                         </TextBlock>
                     </Grid>
@@ -5166,8 +5166,8 @@ Source="{StaticResource SavingThrowDice}">
 
             <ControlTemplate x:Key="ApprovalRatingTemplate" TargetType="ContentControl">
                 <StackPanel x:Name="ApprovalHolder">
-                    <!-- MOD_AToR: Update Style // BG3: BaseTitleStyle -->
-                    <ContentControl Name="ApprovalTitle" Style="{StaticResource AToR_CS_BaseTitleStyle}" Grid.Row="0">
+                    <!-- MOD_ACS: Update Style // BG3: BaseTitleStyle -->
+                    <ContentControl Name="ApprovalTitle" Style="{StaticResource ACS_CS_BaseTitleStyle}" Grid.Row="0">
                         <TextBlock Text="{Binding Source='hab8d8423g3797g4f2ega601g18f13af5add6', Converter={StaticResource TranslatedStringConverter}}"/>
                     </ContentControl>
                     <ItemsControl x:Name="RatingsList" ItemsSource="{Binding ApprovalRatings}" ItemTemplate="{StaticResource ApprovalDataTemplate}"/>
@@ -5270,8 +5270,8 @@ Source="{StaticResource SavingThrowDice}">
                     </ContentControl>
 
                     <!--Attributes-->
-                    <!-- MOD_AToR: Update Style // BG3: BaseTitleStyle -->
-                    <ContentControl Name="AttributesTitle" Style="{StaticResource AToR_CS_BaseTitleStyle}" Grid.Row="0">
+                    <!-- MOD_ACS: Update Style // BG3: BaseTitleStyle -->
+                    <ContentControl Name="AttributesTitle" Style="{StaticResource ACS_CS_BaseTitleStyle}" Grid.Row="0">
                         <TextBlock Text="{Binding Source='h6f7a7018gd5f6g4c32g9386g6df0744d7ecd', Converter={StaticResource TranslatedStringConverter}}"/>
                     </ContentControl>
 
@@ -5342,8 +5342,8 @@ Source="{StaticResource SavingThrowDice}">
 
                     <StackPanel Visibility="{Binding IsPlayableCharacter, Converter={StaticResource BoolToVisibleConverter}}">
                         <!-- Proficiency Bonus-->
-                        <!-- MOD_AToR: Update Style // BG3: BaseTitleStyle -->
-                        <ContentControl Style="{StaticResource AToR_CS_BaseTitleStyle}" ToolTip="{StaticResource PlacementParentDCTooltip}" DataContext="{Binding Stats.ProficiencyBonus}" Margin="0,12">
+                        <!-- MOD_ACS: Update Style // BG3: BaseTitleStyle -->
+                        <ContentControl Style="{StaticResource ACS_CS_BaseTitleStyle}" ToolTip="{StaticResource PlacementParentDCTooltip}" DataContext="{Binding Stats.ProficiencyBonus}" Margin="0,12">
                             <TextBlock>
                                 <Run Text="{Binding Source='h65b46ad4g2eacg47d5gb4b4g124ca3b8aaef', Converter={StaticResource TranslatedStringConverter}}"/>
                                 <Run Text="{Binding Value, StringFormat='(+{0})'}"/>
@@ -5353,8 +5353,8 @@ Source="{StaticResource SavingThrowDice}">
                         <Control x:Name="EquipmentProficienciesBody" Template="{StaticResource WeaponProficienciesTemplate}"/>
 
                         <!-- SavingThrow Bonus-->
-                        <!-- MOD_AToR: Update Style // BG3: BaseTitleStyle -->
-                        <ContentControl Style="{StaticResource AToR_CS_BaseTitleStyle}">
+                        <!-- MOD_ACS: Update Style // BG3: BaseTitleStyle -->
+                        <ContentControl Style="{StaticResource ACS_CS_BaseTitleStyle}">
                             <TextBlock Text="{Binding Source='ha1262989ge5e8g47aegb0begd830dd1a946f', Converter={StaticResource TranslatedStringConverter}}">
                                 <TextBlock.ToolTip>
                                     <ls:LSTooltip IsHitTestVisible="False" Content="hb4ebc93egdb2dg4489g9386ga0b39c71b536" ls:AttachedProperties.InheritedTag="h20f2c1b6g2815g402ag8549gd6042c56c6db" Style="{StaticResource InlineTagTooltip}"/>
@@ -5373,8 +5373,8 @@ Source="{StaticResource SavingThrowDice}">
 
                     <!--TAGS-->
                     <StackPanel Visibility="{Binding Tags.Count, Converter={StaticResource CountToVisibilityConverter}}">
-                        <!-- MOD_AToR: Update Style // BG3: BaseTitleStyle -->
-                        <ContentControl Name="TagTitle" Style="{StaticResource AToR_CS_BaseTitleStyle}">
+                        <!-- MOD_ACS: Update Style // BG3: BaseTitleStyle -->
+                        <ContentControl Name="TagTitle" Style="{StaticResource ACS_CS_BaseTitleStyle}">
                             <TextBlock Text="{Binding Source='hd0bb8a34g4e48g4816g8ca0g234f3f99c934', Converter={StaticResource TranslatedStringConverter}}"/>
                         </ContentControl>
 
@@ -5419,15 +5419,15 @@ Source="{StaticResource SavingThrowDice}">
             <Setter.Value>
                 <ControlTemplate TargetType="TabItem">
                     <ControlTemplate.Resources>
-                        <!-- MOD_AToR: Fix tabs artefacts // BG3: .../Assets/CharacterPanel/... --> 
-                        <BitmapImage x:Key="TabBG_d" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/CharacterPanel/tab_body_inactive_d.png"/>
-                        <BitmapImage x:Key="TabBG_h" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/CharacterPanel/tab_body_inactive_h.png"/>
-                        <BitmapImage x:Key="TabBGSelected_d" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/CharacterPanel/tab_body_active_d.png"/>
+                        <!-- MOD_ACS: Fix tabs artefacts // BG3: .../Assets/CharacterPanel/... --> 
+                        <BitmapImage x:Key="TabBG_d" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/CharacterPanel/tab_body_inactive_d.png"/>
+                        <BitmapImage x:Key="TabBG_h" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/CharacterPanel/tab_body_inactive_h.png"/>
+                        <BitmapImage x:Key="TabBGSelected_d" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/CharacterPanel/tab_body_active_d.png"/>
                     </ControlTemplate.Resources>
 
                     <Grid x:Name="TabRoot" ToolTipService.Placement="Left" >
                         <ls:LSNineSliceImage x:Name="tab" ImageSource="{StaticResource TabBG_d}" Slices="66,36,66, 52" IconWidth="16" Padding="66,10,66,0" Height="88" Width="{Binding ActualWidth, ElementName=SummaryPanelContent, Converter={StaticResource DivideConverter}, ConverterParameter=3}"/>
-                        <!-- MOD_AToR: Update Margin // BG3: Margin="40,12" -->
+                        <!-- MOD_ACS: Update Margin // BG3: Margin="40,12" -->
                         <ContentPresenter ContentSource="Header" Margin="40,16,40,8"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         <b:Interaction.Triggers>
                             <b:EventTrigger EventName="MouseEnter">
@@ -5576,25 +5576,25 @@ Source="{StaticResource SavingThrowDice}">
                                     <!-- ======== ABILITIES INFO ======== -->
                                     <ItemsControl x:Name="Abilities" ItemsSource="{Binding Stats.Abilities}" VerticalAlignment="Center" Style="{StaticResource AbilitiesGridStyle}"/>
                                     
-                                    <!-- MOD_AToR: Switch resistances & conditions order -->
+                                    <!-- MOD_ACS: Switch resistances & conditions order -->
                                     <!-- ======== RESISTANCES ======== -->
                                     <StackPanel Name="ResistancesSection">
                                         <Grid>
-                                            <!-- MOD_AToR: Update Style // BG3: BaseTitleStyle -->
-                                            <ContentControl Style="{StaticResource AToR_CS_BaseTitleStyle}">
-                                                <!-- MOD_AToR: Add Margin -->
+                                            <!-- MOD_ACS: Update Style // BG3: BaseTitleStyle -->
+                                            <ContentControl Style="{StaticResource ACS_CS_BaseTitleStyle}">
+                                                <!-- MOD_ACS: Add Margin -->
                                                 <TextBlock Text="{Binding Source='h98a4ccfbg20f4g4294g9bf7g624c95711539', Converter={StaticResource TranslatedStringConverter}}" Margin="0,8,0,8"/>
                                             </ContentControl>
                                         </Grid>
                                         <Control x:Name="ResistanceContainer" HorizontalAlignment="Center" Template="{StaticResource ResistancesGridTemplate}"/>
                                     </StackPanel>
 
-                                    <!-- MOD_AToR: Switch resistances & conditions order -->
+                                    <!-- MOD_ACS: Switch resistances & conditions order -->
                                     <!-- ======== CONDITIONS ======== -->
                                     <StackPanel Visibility="{Binding StatusEffects.Count, Converter={StaticResource CountToVisibilityConverter}}">
-                                        <!-- MOD_AToR: Update Style // BG3: BaseTitleStyle -->
-                                        <ContentControl Style="{StaticResource AToR_CS_BaseTitleStyle}">
-                                            <!-- MOD_AToR: Add Margin -->
+                                        <!-- MOD_ACS: Update Style // BG3: BaseTitleStyle -->
+                                        <ContentControl Style="{StaticResource ACS_CS_BaseTitleStyle}">
+                                            <!-- MOD_ACS: Add Margin -->
                                             <TextBlock Text="{Binding Source='h3baf1fe2g7d16g4d77gbc35gc17a90fb27d6', Converter={StaticResource TranslatedStringConverter}}" Margin="0,8,0,8"/>
                                         </ContentControl>
                                         <Border Style="{StaticResource ListSectionBackground}" Visibility="{Binding StatusEffects.Count, Converter={StaticResource CountToVisibilityConverter}}">
@@ -5604,9 +5604,9 @@ Source="{StaticResource SavingThrowDice}">
 
                                     <!-- ======== FEATURES ======== -->
 
-                                    <!-- MOD_AToR: Update Style // BG3: BaseTitleStyle -->
-                                    <ContentControl Style="{StaticResource AToR_CS_BaseTitleStyle}">
-                                        <!-- MOD_AToR: Add Margin -->
+                                    <!-- MOD_ACS: Update Style // BG3: BaseTitleStyle -->
+                                    <ContentControl Style="{StaticResource ACS_CS_BaseTitleStyle}">
+                                        <!-- MOD_ACS: Add Margin -->
                                         <TextBlock Text="{Binding Source='h9f9bfc7dgf4cdg4198g83e3gcb974dd2e949', Converter={StaticResource TranslatedStringConverter}}" Margin="0,8,0,8"/>
                                     </ContentControl>
 
@@ -6681,7 +6681,7 @@ Source="{StaticResource SavingThrowDice}">
                 </ScrollViewer>
 
                 <!-- Extract All Ingredients Button -->
-                <!-- MOD_AToR: Update margin // BG3: Margin="0,0,0,28" --> 
+                <!-- MOD_ACS: Update margin // BG3: Margin="0,0,0,28" --> 
                 <ls:LSButton Grid.Row="2" x:Name="ExtractAllIngredients"
                                  HorizontalAlignment="Center"
                                  Style="{StaticResource BigBrownButtonStyle}"
@@ -7399,7 +7399,7 @@ Source="{StaticResource SavingThrowDice}">
                         <BitmapImage  x:Key="SelArrowUri" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/EQSlots_overlaySelected_arrow.png" />
                         <BitmapImage  x:Key="SelOverlayUri" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/EQSlots_overlaySelected.png" />
                     </ControlTemplate.Resources>
-                    <!-- MOD_AToR: Background size from BCPP not needed -->
+                    <!-- MOD_ACS: Background size from BCPP not needed -->
                     <!-- MOD_BCPP: <Grid x:Name="root" Width="98" Height="98" ToolTipService.IsEnabled="{Binding Item,Converter={StaticResource NullToBoolFalseConverter}}" Background="Transparent" ToolTipService.ShowOnDisabled="True" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTipService.Placement="{TemplateBinding ToolTipService.Placement}"> -->
                     <Grid x:Name="root" Width="{StaticResource EquipmentSlotSize}" Height="{StaticResource EquipmentSlotSize}" ToolTipService.IsEnabled="{Binding Item,Converter={StaticResource NullToBoolFalseConverter}}" Background="Transparent" ToolTipService.ShowOnDisabled="True" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTipService.Placement="{TemplateBinding ToolTipService.Placement}">
                         <Grid.ToolTip>
@@ -8159,7 +8159,7 @@ Source="{StaticResource SavingThrowDice}">
 
             </b:Interaction.Triggers>
 
-            <!-- MOD_AToR: Add margin -->
+            <!-- MOD_ACS: Add margin -->
             <Grid x:Name="InventoryColumnHolder" Tag="JustCreated" HorizontalAlignment="Stretch" Margin="0,-7,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -8201,20 +8201,20 @@ Source="{StaticResource SavingThrowDice}">
                     <ListBox.Template>
                         <ControlTemplate TargetType="ListBox">
                             <Grid x:Name="TemplateRoot" >
-                                <!-- MOD_AToR: Inventory Border - Update margin // BG3: Margin="-6,-4,20,-6" -->
+                                <!-- MOD_ACS: Inventory Border - Update margin // BG3: Margin="-6,-4,20,-6" -->
                                 <Border x:Name="InventoryTint" Background="{StaticResource InventoryBGShade}" Margin="-27,-8,16,-7" BorderBrush="Transparent" BorderThickness="2"/>
-                                <!-- MOD_AToR: Add name / Update padding & align // BG3: Padding="0,0,0,0" // HorizontalContentAlignment="Right" -->
+                                <!-- MOD_ACS: Add name / Update padding & align // BG3: Padding="0,0,0,0" // HorizontalContentAlignment="Right" -->
                                 <ScrollViewer x:Name="InventoryScrolling" VerticalScrollBarVisibility="Visible"  HorizontalContentAlignment="Center" Template="{StaticResource NoForcedStyleScrollViewerTemplate}" HorizontalScrollBarVisibility="Disabled" Padding="6,0,-6,0">
                                     <b:Interaction.Behaviors>
                                         <ls:DragScrollingBehavior/>
                                     </b:Interaction.Behaviors>
-                                    <!-- MOD_AToR: Inventory contain - Add margin to equalize top gap -->
+                                    <!-- MOD_ACS: Inventory contain - Add margin to equalize top gap -->
                                     <ItemsPresenter x:Name="itemsContainer" Margin="0,0,-4,1"/>
                                 </ScrollViewer>
                                 <Grid x:Name="NoItemsFoundOverlay" Visibility="Collapsed">
-                                    <!-- MOD_AToR: Add margin to search bg shading -->
+                                    <!-- MOD_ACS: Add margin to search bg shading -->
                                     <Rectangle x:Name="NoItemsFoundBg" Fill="{StaticResource LS_DisabledPanelColor}" Margin="7,0,24,1"/>
-                                    <!-- MOD_AToR: Update margin & align // BG3: Margin="0,40,0,0" VerticalAlignment="Top" -->
+                                    <!-- MOD_ACS: Update margin & align // BG3: Margin="0,40,0,0" VerticalAlignment="Top" -->
                                     <Control  x:Name="NoItemsFoundControl" Template="{StaticResource NoResultsFoundTemplate}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8,0,26,0"/>
                                 </Grid>
                             </Grid>
@@ -8225,7 +8225,7 @@ Source="{StaticResource SavingThrowDice}">
                                         <Condition Binding="{Binding ItemsSource.Count, RelativeSource={RelativeSource Self}}" Value="0"/>
                                     </MultiDataTrigger.Conditions>
                                     <Setter TargetName="NoItemsFoundOverlay" Property="Visibility" Value="Visible"/>
-                                    <!-- Mod_AToR: Add to Recenter on search -->
+                                    <!-- Mod_ACS: Add to Recenter on search -->
                                     <Setter TargetName="itemsContainer" Property="Margin" Value="0,0,-10,1"/>
                                     <Setter TargetName="InventoryTint" Property="Margin" Value="0,-6,19,-5"/>
                                 </MultiDataTrigger>
@@ -8241,7 +8241,7 @@ Source="{StaticResource SavingThrowDice}">
                                     <Setter TargetName="InventoryTint" Property="BorderBrush" Value="{StaticResource InventoryBGShadeFilterBorder}"/>
                                 </DataTrigger>
                                 
-                                <!-- MOD_AToR: Add triggers for BCPP Character panel-->
+                                <!-- MOD_ACS: Add triggers for BCPP Character panel-->
                                 <DataTrigger Binding="{Binding VerticalAlignment, ElementName=Panel}" Value="Top">
                                     <Setter TargetName="InventoryTint" Property="Margin" Value="-8,-8,28,-7"/>
                                     <Setter TargetName="InventoryScrolling" Property="Padding" Value="13,0,-1,0"/>
@@ -8255,12 +8255,12 @@ Source="{StaticResource SavingThrowDice}">
                                         <Condition Binding="{Binding ItemsSource.Count, RelativeSource={RelativeSource Self}}" Value="0"/>
                                         <Condition Binding="{Binding VerticalAlignment, ElementName=Panel}" Value="Top"/>
                                     </MultiDataTrigger.Conditions>
-                                    <!-- Mod_AToR: Add recenter -->
+                                    <!-- Mod_ACS: Add recenter -->
                                     <Setter TargetName="itemsContainer" Property="Margin" Value="0,0,-19,1"/>
                                     <Setter TargetName="InventoryTint" Property="Margin" Value="6,-8,28,-7"/>
                                 </MultiDataTrigger>
                                 
-                                <!-- MOD_AToR: Add trigger for Party Panel context -->
+                                <!-- MOD_ACS: Add trigger for Party Panel context -->
                                 <DataTrigger Binding="{Binding Name, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel" >
                                     <Setter TargetName="InventoryTint" Property="Margin" Value="-7,-6,18,-5"/>
                                     <Setter TargetName="InventoryScrolling" Property="Padding" Value="19,0,-19,0"/>
@@ -8274,12 +8274,12 @@ Source="{StaticResource SavingThrowDice}">
                                         <Condition Binding="{Binding CurrentFilter, ElementName=FilteringContainerHolder, Converter={StaticResource NullToBoolTrueConverter}}" Value="False"/>
                                         <Condition Binding="{Binding ItemsSource.Count, RelativeSource={RelativeSource Self}}" Value="0"/>
                                     </MultiDataTrigger.Conditions>
-                                    <!-- Mod_AToR: Add recenter -->
+                                    <!-- Mod_ACS: Add recenter -->
                                     <Setter TargetName="itemsContainer" Property="Margin" Value="0,0,-12,1"/>
                                     <Setter TargetName="InventoryTint" Property="Margin" Value="0,-8,17,-7"/>
                                 </MultiDataTrigger>
                                 
-                                <!-- MOD_AToR: Add triggers for BCPP Party panel-->
+                                <!-- MOD_ACS: Add triggers for BCPP Party panel-->
                                 <MultiDataTrigger>
                                     <MultiDataTrigger.Conditions>
                                         <Condition Binding="{Binding Name, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel" />
@@ -8298,7 +8298,7 @@ Source="{StaticResource SavingThrowDice}">
                                         <Condition Binding="{Binding ItemsSource.Count, RelativeSource={RelativeSource Self}}" Value="0"/>
                                         <Condition Binding="{Binding VerticalAlignment, ElementName=PanelsContainer}" Value="Top"/>
                                     </MultiDataTrigger.Conditions>
-                                    <!-- Mod_AToR: Add recenter -->
+                                    <!-- Mod_ACS: Add recenter -->
                                     <Setter TargetName="itemsContainer" Property="Margin" Value="0,0,0,0"/>
                                     <Setter TargetName="InventoryTint" Property="Margin" Value="-7,-7,21,-7"/>
                                 </MultiDataTrigger>
@@ -8383,7 +8383,7 @@ Source="{StaticResource SavingThrowDice}">
                 <Setter TargetName="InventoryHolder" Property="ls:MultiSelect.IsEnabled" Value="True"/>
             </DataTrigger>
             
-            <!-- MOD_AToR: Add trigger for BCPP Character panel-->
+            <!-- MOD_ACS: Add trigger for BCPP Character panel-->
             <DataTrigger Binding="{Binding VerticalAlignment, ElementName=Panel}" Value="Top">
                 <Setter TargetName="InventoryColumnHolder" Property="Margin" Value="-10,-4,-10,-4"/>                   
             </DataTrigger>
@@ -8391,15 +8391,15 @@ Source="{StaticResource SavingThrowDice}">
             <DataTrigger Binding="{Binding Name, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel" >
                 <Setter TargetName="FiltersControl" Property="Visibility" Value="Collapsed"/>
                 
-                <!-- MOD_AToR: Add setters for inventory Party Panel context -->
-                <!-- MOD_AToR: Get width from widget -->
+                <!-- MOD_ACS: Add setters for inventory Party Panel context -->
+                <!-- MOD_ACS: Get width from widget -->
                 <Setter TargetName="InventoryColumnHolder" Property="Width" Value="{Binding ActualWidth, ElementName=InventoryTemplateHolder}"/>
                 <Setter TargetName="InventoryColumnHolder" Property="Height" Value="Auto"/>
                 <Setter TargetName="InventoryColumnHolder" Property="HorizontalAlignment" Value="Center"/>
                 <Setter TargetName="InventoryColumnHolder" Property="Margin" Value="10,-4,-10,0"/>
             </DataTrigger>
             
-            <!-- MOD_AToR: Add triggers for BCPP Party panel-->
+            <!-- MOD_ACS: Add triggers for BCPP Party panel-->
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
                     <Condition Binding="{Binding Name, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel" />
@@ -8746,7 +8746,7 @@ Source="{StaticResource SavingThrowDice}">
                 </b:DataTrigger>
 
             </b:Interaction.Triggers>
-            <!-- MOD_AToR: Add margin -->
+            <!-- MOD_ACS: Add margin -->
             <Grid x:Name="EquipmentHolder" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="-34,0,-24,0">
                 <Grid.RenderTransform>
                     <TransformGroup>
@@ -8775,7 +8775,7 @@ Source="{StaticResource SavingThrowDice}">
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.Resources>
-                        <!-- MOD_AToR: Update margin // BG3: 0,72,0,0 -->
+                        <!-- MOD_ACS: Update margin // BG3: 0,72,0,0 -->
                         <Thickness x:Key="EquipMargin">0,26,0,0</Thickness>
                     </Grid.Resources>
 
@@ -8796,19 +8796,19 @@ Source="{StaticResource SavingThrowDice}">
                                     </Border.Effect>
                                 </Border>
 
-                                <!-- MOD_AToR: Add margin -->
+                                <!-- MOD_ACS: Add margin -->
                                 <ls:LSButton Grid.Row="0" Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.VanityBody}" Margin="0,0,0,2"/>
                                 <ls:LSButton Grid.Row="1" Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.VanityBoots}"/>
-                                <!-- MOD_AToR: Update margin // BG3: Margin="0,-40,-6,0" -->
+                                <!-- MOD_ACS: Update margin // BG3: Margin="0,-40,-6,0" -->
                                 <ls:LSButton Grid.RowSpan="2" VerticalAlignment="Top" Command="{Binding DataContext.ToggleArmorSetVisibility, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="{Binding .}" Template="{StaticResource VanityButtonTemplate}" HorizontalAlignment="Right" Margin="0,-41,-5,0">
                                     <ls:LSButton.ToolTip>
                                         <ls:LSTooltip Content="{Binding Source='had94b224g2d0eg43a9g96a7g27311c05ef99',Converter={StaticResource TranslatedStringConverter}}" x:Name="TooltipContent"/>
                                     </ls:LSButton.ToolTip>
                                 </ls:LSButton>
                             </Grid>
-                            <!-- MOD_AToR: Update margin // MOD_BCPP: Margin="0,8" // BG3: Margin="0,24" -->
+                            <!-- MOD_ACS: Update margin // MOD_BCPP: Margin="0,8" // BG3: Margin="0,24" -->
                             <ls:LSButton Margin="0,16" Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Underwear}"/>
-                            <!-- MOD_AToR: Add marginS -->
+                            <!-- MOD_ACS: Add marginS -->
                             <ls:LSButton Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Amulet}" Margin="0,0,0,2"/>
                             <ls:LSButton Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Ring}" Margin="0,0,0,2"/>
                             <ls:LSButton Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Ring2}"/>
@@ -8825,7 +8825,7 @@ Source="{StaticResource SavingThrowDice}">
 
                         <StackPanel DockPanel.Dock="Top">
 
-                            <!-- MOD_AToR: Add marginS -->
+                            <!-- MOD_ACS: Add marginS -->
                             <Control Template="{StaticResource HelmetEQTemplate}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Helmet}" ToolTipService.Placement="Left" Margin="0,0,0,2"/>
                             <ls:LSButton Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Cloak}" ToolTipService.Placement="Left" Margin="0,0,0,2"/>
                             <ls:LSButton Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Breast}" ToolTipService.Placement="Left" Margin="0,0,0,2"/>
@@ -8833,7 +8833,7 @@ Source="{StaticResource SavingThrowDice}">
                             <ls:LSButton Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Boots}" ToolTipService.Placement="Left"/>
                         </StackPanel>
 
-                        <!-- MOD_AToR: Move Armor Class to left panel RenderTransformOrigin="0.5,0.5" -->
+                        <!-- MOD_ACS: Move Armor Class to left panel RenderTransformOrigin="0.5,0.5" -->
                         <StackPanel x:Name="ArmorClassLeft"  DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="-7,14,-40,-40">
                             <Control Template="{StaticResource ACHolder}"/>
                             <Control.RenderTransform>
@@ -8871,7 +8871,7 @@ Source="{StaticResource SavingThrowDice}">
                     </StackPanel>
 
                     <!--ArmorClass-->
-                    <!-- MOD_AToR: Moved to left side but still here for BCPP compatibility-->
+                    <!-- MOD_ACS: Moved to left side but still here for BCPP compatibility-->
                     <!-- BG3: <Control Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Template="{StaticResource ACHolder}" VerticalAlignment="Bottom" HorizontalAlignment="Center" Visibility="Collapsed"/> -->
                     <StackPanel x:Name="ArmorClassBottom" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Bottom" HorizontalAlignment="Center" Visibility="Collapsed" Margin="0,0,0,-20">
                         <Control Template="{StaticResource ACHolder}"/>
@@ -8891,19 +8891,19 @@ Source="{StaticResource SavingThrowDice}">
                 <Setter TargetName="VanityToggleHighlight" Property="Visibility" Value="Visible"/>
             </DataTrigger>
             
-            <!-- MOD_AToR: Add triggers for BCPP Character panel-->
+            <!-- MOD_ACS: Add triggers for BCPP Character panel-->
             <DataTrigger Binding="{Binding VerticalAlignment, ElementName=Panel}" Value="Top">
                 <Setter TargetName="EquipmentHolder" Property="Margin" Value="-36,0,-30,0"/>
                 <Setter TargetName="ArmorClassLeft" Property="Visibility" Value="Collapsed"/>
                 <Setter TargetName="ArmorClassBottom" Property="Visibility" Value="Visible"/>
             </DataTrigger>
             
-            <!-- MOD_AToR: Add triggers for Party Panel context -->
+            <!-- MOD_ACS: Add triggers for Party Panel context -->
             <DataTrigger Binding="{Binding ParentState, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel">
                 <Setter TargetName="EquipmentHolder" Property="Margin" Value="-25,70,-25,0"/>
             </DataTrigger>
             
-            <!-- MOD_AToR: Add triggers for BCPP Party panel-->
+            <!-- MOD_ACS: Add triggers for BCPP Party panel-->
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
                     <Condition Binding="{Binding Name, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel" />

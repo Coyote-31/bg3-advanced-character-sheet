@@ -1,36 +1,38 @@
 <p align="center">
-  <img src="Docs/Banner/AToR_Banner.png" alt="AToR Banner"/>
+  <img src="Docs/Banner/ACS_Banner.png" alt="ACS Banner"/>
 </p>
 
-# AToR : All Types of Resistance (BG3 mod)
+# ACS : Advanced Character Sheet (BG3 mod)
 
 This is a mod for the game **Baldur's Gate 3**.
 
-The purpose of this mod is to display **All Types of Resistance** including ones without any immunity, resistance or weakness.
+The purpose of this mod is to improve Character and Party panel. Also display **All Types of Resistance** including ones without any immunity, resistance or weakness.
 
-Also improve Character and Party panel for Spell Book UI in general : Class info, Spell list and Reactions.
+> [!CAUTION]
+> This mod is renamed !
+> Previously named : All Types of Resistance.
+> Delete manually AToR old mod version.
 
 ## 🔖 Version
-- 📦 **AToR** mod : `1.6.0`
-- 🎮 **BG3** compatibility : `4.6.0 - Patch 6`
+- 📦 **ACS** mod : `2.0.0`
+- 🎮 **BG3** compatibility : `Hotfix #19 [ Patch6_Hotfix2 ]`
 
 ## ✨ Features
 
-- Display **all** types of resistance including ones without any immunity, resistance or weakness.
-- Resistances are divided into **3 rows** and **rearranged**.
-- **Reverse order** between Resistances and Conditions.
-- Some icons are reworked for a **better visual**.
-- **Tooltip added** for damage type without any immunity, resistance or weakness.
-
-### 🎁 Bonus :
-
-**BIG** rework of the whole **Spell Book UI** ( Class info / Spells / Reactions ) in Character and Party Panels, it's actually much more than just *All Types of Resistance* now ! 😅
+**BIG** rework of the whole Character Sheet and Party Panel, it's actually much more than just *All Types of Resistance* now ! 😅
 - The user interface is now *responsive* to be compatible with all variations of **BCPP** mods.
 - Extend the **size** of useful content in Party Panel.
 - **Align** everything in its right place.
 - Replace some backgrounds and sprites to **fix artifacts** in vanilla images ( Party Panel Bg, Tabs, ... ).
 - Full review of the **Inventory** for Character and Party Panels.
 - Full review of the **Equipment** for Character and Party Panels.
+
+*All Types of Resistance*:
+- Display **all** types of resistance including ones without any immunity, resistance or weakness.
+- Resistances are divided into **3 rows** and **rearranged**.
+- **Reverse order** between Resistances and Conditions.
+- Some icons are reworked for a **better visual**.
+- **Tooltip added** for damage type without any immunity, resistance or weakness.
 
 ## 🔀 Compatibility
 
@@ -58,7 +60,7 @@ This mod changes the following files of the game :
 ## 💾 Install
 
 ### Download the mod : 
-- [GitHub](https://github.com/Coyote-31/bg3-all-types-of-resistance/releases)
+- [GitHub](https://github.com/Coyote-31/bg3-advanced-character-sheet/releases)
 - [NexusMods](https://www.nexusmods.com/baldursgate3/mods/6458)
 
 ### Manual :
