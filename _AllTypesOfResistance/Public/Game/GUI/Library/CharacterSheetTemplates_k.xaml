@@ -1549,7 +1549,7 @@
                 </Grid.RowDefinitions>
                 <!-- Tabs -->
                 <!-- MOD_AToR: Update Tabs Margin // BG3: Margin="0,4,0,0" -->
-                <StackPanel Grid.Row="0" x:Name="TabsContainer" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="0,18,0,-10">
+                <StackPanel Grid.Row="0" x:Name="TabsContainer" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="0,17,0,-9">
                     <ls:LSButton x:Name="NavigationLeftButton" Template="{StaticResource IconButtonTemplate}" VerticalAlignment="Center"
                                              Visibility="{Binding SpellBooks.Count, Converter={StaticResource CountToVisibilityConverter}, ConverterParameter='5'}"
                                              SoundID="UI_Shared_Panel_Select">
@@ -2934,7 +2934,7 @@
                 <Setter TargetName="NavigationRightButton" Property="Visibility" Value="Visible"/>
                 
                 <!-- MOD_AToR: Tabs -->
-                <Setter TargetName="TabsContainer" Property="Margin" Value="0,-5,0,0"/>
+                <Setter TargetName="TabsContainer" Property="Margin" Value="0,-6,0,0"/>
                 <Setter TargetName="Tabs" Property="MaxWidth">
                     <Setter.Value>
                         <MultiBinding Converter="{StaticResource AddMultipleConverter}">
@@ -3072,6 +3072,7 @@
             <!-- MOD_AToR: Detect if BCPP is active for character panel -->
             <DataTrigger Binding="{Binding Height, ElementName=SpellBookPanel}" Value="2000">
                 <Setter TargetName="MultiClassSpellbookContainer" Property="Margin" Value="-18,0,-18,532"/>
+                <Setter TargetName="TabsContainer" Property="Margin" Value="0,17,0,-7"/>
             </DataTrigger>
 
             <!-- MOD_AToR: Detect if BCPP is active for party panel -->
@@ -5418,14 +5419,16 @@ Source="{StaticResource SavingThrowDice}">
             <Setter.Value>
                 <ControlTemplate TargetType="TabItem">
                     <ControlTemplate.Resources>
-                        <BitmapImage x:Key="TabBG_d" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/tab_body_inactive_d.png"/>
-                        <BitmapImage x:Key="TabBG_h" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/tab_body_inactive_h.png"/>
-                        <BitmapImage x:Key="TabBGSelected_d" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/tab_body_active_d.png"/>
+                        <!-- MOD_AToR: Fix tabs artefacts // BG3: .../Assets/CharacterPanel/... --> 
+                        <BitmapImage x:Key="TabBG_d" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/CharacterPanel/tab_body_inactive_d.png"/>
+                        <BitmapImage x:Key="TabBG_h" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/CharacterPanel/tab_body_inactive_h.png"/>
+                        <BitmapImage x:Key="TabBGSelected_d" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/AToR/CharacterPanel/tab_body_active_d.png"/>
                     </ControlTemplate.Resources>
 
                     <Grid x:Name="TabRoot" ToolTipService.Placement="Left" >
                         <ls:LSNineSliceImage x:Name="tab" ImageSource="{StaticResource TabBG_d}" Slices="66,36,66, 52" IconWidth="16" Padding="66,10,66,0" Height="88" Width="{Binding ActualWidth, ElementName=SummaryPanelContent, Converter={StaticResource DivideConverter}, ConverterParameter=3}"/>
-                        <ContentPresenter ContentSource="Header" Margin="40,12"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <!-- MOD_AToR: Update Margin // BG3: Margin="40,12" -->
+                        <ContentPresenter ContentSource="Header" Margin="40,16,40,8"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         <b:Interaction.Triggers>
                             <b:EventTrigger EventName="MouseEnter">
                                 <b:Interaction.Behaviors>
