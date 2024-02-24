@@ -1531,9 +1531,8 @@
                         <ListBox.MaxWidth>
                             <MultiBinding Converter="{StaticResource AddMultipleConverter}">
                                 <!-- MOD_AToR: Update MaxWidth Tabs -->
-                                <Binding Path="ActualWidth" ElementName="ClassPanelContent"/><!-- BG3: ElementName="MultiClassSpellbookContainer" -->
-                                <Binding Path="ActualWidth" ElementName="InfoPanel"/><!-- MOD_AToR: Add to MaxWidth -->
-                                <Binding Source="110"/><!-- MOD_AToR: Add to MaxWidth -->
+                                <Binding Path="ActualWidth" ElementName="Background"/><!-- BG3: ElementName="MultiClassSpellbookContainer" -->
+                                <Binding Source="-40"/><!-- MOD_AToR: Add to MaxWidth -->
                                 <Binding Path="ActualWidth" ElementName="NavigationLeftButton" Converter="{StaticResource MultiplierConverter}" ConverterParameter="-1"/>
                                 <Binding Path="ActualWidth" ElementName="NavigationRightButton" Converter="{StaticResource MultiplierConverter}" ConverterParameter="-1"/>
                             </MultiBinding>
