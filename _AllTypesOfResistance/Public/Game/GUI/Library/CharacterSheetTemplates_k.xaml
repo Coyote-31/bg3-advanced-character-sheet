@@ -2841,16 +2841,7 @@
             <!-- Party Panel view -->
             <!-- MOD_AToR: Party Panel specific changes -->
             <DataTrigger Binding="{Binding ParentState, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel"> 
-                
-                <!-- MOD_AToR: TODO try to set the ancestor from an other file -->
-                <!-- <Setter TargetName="{RelativeSource FindAncestor, AncestorType=CharacterRoot}" Property="Height" Value="1680"/> -->
-                
-                <!-- MOD_AToR: Add Limit height / Maybe useless but I let code here as template for now -->
-                <!-- <Setter TargetName="MultiClassSpellbookContainer" Property="MaxHeight" Value="{Binding ActualHeight, ElementName=CharacterRoot}"/> -->
-                <!-- <Setter TargetName="MultiClassSpellbookContainer" Property="Height" Value="{Binding Height, ElementName=CharacterRoot}"/> -->
-                <!-- <Setter TargetName="ClassPanel" Property="ActualHeight" Value="{Binding ActualHeight, ElementName=MultiClassSpellbookContainer}"/> -->
-                <!-- <Setter TargetName="ClassPanelCentralColumn" Property="Height" Value="{Binding Height, ElementName=MultiClassSpellbookContainer}"/> -->
-                                
+                                                
                 <!-- MOD_AToR: Add margin to view content when 4 rows spells -->
                 <Setter TargetName="ClassPanelRoot" Property="Margin" Value="0,0,0,55"/>
 
@@ -2872,7 +2863,7 @@
                 <!-- MOD_AToR: Update Margin // BG3: Value="0,0,0,20" -->
                 <Setter TargetName="TopBar" Property="Margin" Value="0,-6,0,10"/>
                 
-                <!-- MOD_AToR: Update ClassPanel to dynamic MaxHeight / See TODO scrolling // BG3: Value="1476"/> -->
+                <!-- MOD_AToR: Update ClassPanel to dynamic MaxHeight // BG3: Value="1476"/> -->
                 <Setter TargetName="ClassPanel" Property="MaxHeight" Value="{Binding ActualHeight, ElementName=MultiClassSpellbookContainer}"/>
                 
                 <!-- MOD_AToR: Add FixedContent for WholePanel scroll -->                
@@ -2950,7 +2941,7 @@
                 <Setter TargetName="PreparedSpellsSection" Property="Visibility" Value="Collapsed"/>
                 <Setter TargetName="PreparedSpellsSectionSmall" Property="Visibility" Value="{Binding Visibility, ElementName=PreparedSpellsSectionOpening}"/>              
                 
-                <!-- MOD_AToR: Disable/unused Setters for PreparedSpellsSection background -->
+                <!-- MOD_AToR: Disable unused Setters for PreparedSpellsSection background -->
                 <!-- BG3: 
                 <Setter TargetName="PreparedSpellsSection" Property="Background">
                     <Setter.Value>
@@ -3019,34 +3010,15 @@
                 <Setter TargetName="NonPreparableReplaceableSpellsNote" Property="Margin" Value="40,4,40,4"/>
             </MultiDataTrigger> 
 
-            <!-- MOD_AToR: Fix dual scroll by Disabled for now see next TODO --> 
-            <!-- MOD_AToR: Add specific to PartyPanel // BG3: Scrolling: If there're spells to prepare, scroll only from the prepared spells section -->
+            <!-- MOD_AToR: Add scroll handler specific to PartyPanel // BG3: Scrolling: If there're spells to prepare, scroll only from the prepared spells section -->
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
                     <Condition Binding="{Binding ParentState, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel"/>
                     <Condition Binding="{Binding SelectedItem.Class.MustPrepareSpells, ElementName=Tabs, FallbackValue=False}" Value="True"/>
                 </MultiDataTrigger.Conditions>
-                <!-- <Setter TargetName="WholePanelScrollViewerRoot" Property="MaxHeight" Value="1800"/> -->
+                <!-- MOD_AToR: Disable dual scroll // BG3: <Setter TargetName="WholePanelScrollViewerRoot" Property="MaxHeight" Value="1800"/> -->
                 <Setter TargetName="WholePanelScrollViewer" Property="VerticalScrollBarVisibility" Value="Disabled"/>
             </MultiDataTrigger> 
-
-            <!-- MOD_AToR: TODO remake previous for dynamic scrolling with prepared spell stack on top -->
-            <!-- 
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding ParentState, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel"/>
-                    <Condition Binding="{Binding SelectedItem.Class.MustPrepareSpells, ElementName=Tabs, FallbackValue=False}" Value="True"/>
-                </MultiDataTrigger.Conditions>
-                <Setter TargetName="WholePanelScrollViewerRoot" Property="MaxHeight">
-                    <Setter.Value>
-                        <MultiBinding Converter="{StaticResource AddMultipleConverter}">
-                            <Binding Source="1500"/>
-                            <Binding Path="ActualHeight" ElementName="ClassPanelFixedContent"/>
-                        </MultiBinding>
-                    </Setter.Value>
-                </Setter>
-            </MultiDataTrigger> 
-            -->
 
             <!-- MOD_AToR: Add offset to both scrollBars when both are visible /> --> 
             <MultiDataTrigger>
@@ -3116,7 +3088,7 @@
 
             <!-- MOD_AToR: RE-ENABLING class and tadpole feats-->
             <!-- JMoya: We still don't know if feats will make it or not, so design asked to hide them for now while they decide -->
-            <!-- 
+            <!-- BG3:
             <DataTrigger Binding="{Binding Source='True'}" Value="True">
                 <Setter TargetName="FeatsList" Property="Visibility" Value="Collapsed"/>
                 <Setter TargetName="TadpoleFeatsList" Property="Visibility" Value="Collapsed"/>
@@ -8698,9 +8670,6 @@ Source="{StaticResource SavingThrowDice}">
                     <Grid.Resources>
                         <!-- MOD_AToR: Update margin // BG3: 0,72,0,0 -->
                         <Thickness x:Key="EquipMargin">0,26,0,0</Thickness>
-                        <!-- MOD_AToR: TODO I may delete this if its useless for now -->
-                        <!-- MOD_BCPP: 172 margin for left side of equipment for the future -->
-						<Thickness x:Key="EquipMargin1">0,346,0,0</Thickness>
                     </Grid.Resources>
 
                     <DockPanel Name="EquipmentRight" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Right" Margin="{StaticResource EquipMargin}">
@@ -8796,7 +8765,7 @@ Source="{StaticResource SavingThrowDice}">
 
                     <!--ArmorClass-->
                     <!-- MOD_AToR: Moved to left side but still here for BCPP compatibility-->
-                    <!-- <Control Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Template="{StaticResource ACHolder}" VerticalAlignment="Bottom" HorizontalAlignment="Center" Visibility="Collapsed"/> -->
+                    <!-- BG3: <Control Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Template="{StaticResource ACHolder}" VerticalAlignment="Bottom" HorizontalAlignment="Center" Visibility="Collapsed"/> -->
                     <StackPanel x:Name="ArmorClassBottom" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Bottom" HorizontalAlignment="Center" Visibility="Collapsed" Margin="0,0,0,-20">
                         <Control Template="{StaticResource ACHolder}"/>
                         <Control.RenderTransform>
