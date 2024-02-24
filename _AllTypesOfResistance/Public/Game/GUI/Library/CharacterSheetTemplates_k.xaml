@@ -2154,8 +2154,8 @@
                                     </Grid>
 
                                     <!-- Prepared spells section -->
-                                    <!-- MOD_AToR: Switch visibility binding to Collapsed / Update Strech / Add MaxWidth // BG3: Stretch="Fill" Visibility="{Binding Visibility, ElementName=PreparedSpellsSection}" -->
-                                    <Image x:Name="PreparedSpellsSectionOpening" Source="{StaticResource PreparedSpellsTop}" MaxWidth="1112" Stretch="Fill" Visibility="Collapsed" Margin="0,6,0,0"/>
+                                    <!-- MOD_AToR: Switch visibility binding to Collapsed / Update Strech & Margin / Add MaxWidth // BG3: Stretch="Fill" Visibility="{Binding Visibility, ElementName=PreparedSpellsSection}" Margin="0,6,0,0"-->
+                                    <Image x:Name="PreparedSpellsSectionOpening" Source="{StaticResource PreparedSpellsTop}" MaxWidth="1112" Stretch="Fill" Visibility="Collapsed" Margin="0,4,0,0"/>
 
                                     <!-- MOD_AToR: Switch visibility binding to PreparedSpellsSectionOpening // BG3:  Visibility="Collapsed" Width="{Binding Source.Width, ElementName=PreparedSpellsSectionOpening}" -->
                                     <Border x:Name="PreparedSpellsSection" Visibility="{Binding Visibility, ElementName=PreparedSpellsSectionOpening}" Width="{Binding ActualWidth, ElementName=PreparedSpellsSectionOpening}">
