@@ -197,7 +197,8 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" HorizontalAlignment="Center" x:Name="Description" Text="{Binding Source=h4683b44fg5f66g4001gbc80gbcb307102d8d,Converter={StaticResource TranslatedStringConverter}}" TextAlignment="Center" TextWrapping="Wrap" FontSize="{StaticResource ScaledMediumFontSize}" Foreground="{StaticResource LS_accent100TxtColor}" Margin="440,24"/>
+            <!-- MOD_AToR: Update margin // BG3: Margin="440,24" -->
+            <TextBlock Grid.Row="0" HorizontalAlignment="Center" x:Name="Description" Text="{Binding Source=h4683b44fg5f66g4001gbc80gbcb307102d8d,Converter={StaticResource TranslatedStringConverter}}" TextAlignment="Center" TextWrapping="Wrap" FontSize="{StaticResource ScaledMediumFontSize}" Foreground="{StaticResource LS_accent100TxtColor}" Margin="440,23,440,13"/>
 
             <TextBlock Grid.Row="1" x:Name="NoReactionsMsg" Foreground="{StaticResource LS_baseTxtColor}" TextWrapping="Wrap" MaxWidth="600" IsHitTestVisible="False" HorizontalAlignment="Center" TextAlignment="Center" FontStyle="Italic" Visibility="Collapsed" Margin="20,368,40,20" noesis:Text.StrokeThickness="6">
                 <noesis:Text.Stroke>
@@ -300,8 +301,9 @@
                     <Condition Binding="{Binding ParentState, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel"/>
                     <Condition Binding="{Binding VerticalAlignment, ElementName=CharacterRoot}" Value="Top"/>
                 </MultiDataTrigger.Conditions>
-                <Setter TargetName="ReactionScrollerViewer" Property="Margin" Value="9,0,-9,0"/>
-                <Setter TargetName="ReactionScrollerViewer" Property="Padding" Value="5,0,-5,18"/>
+                <Setter TargetName="Description" Property="Margin" Value="16,16,16,17"/>
+                <Setter TargetName="ReactionScrollerViewer" Property="Margin" Value="18,0,-10,0"/>
+                <Setter TargetName="ReactionScrollerViewer" Property="Padding" Value="-2,0,2,18"/>
                 <Setter TargetName="InterruptList" Property="Margin" Value="0,0,0,18"/>
             </MultiDataTrigger> 
             
@@ -1793,7 +1795,7 @@
 
                 <!-- Reactions --> 
                 <!-- MOD_AToR: Add Margin -->
-                <Control Grid.Row="1" x:Name="Reactions" Margin="0,0,0,20" Template="{StaticResource InterruptPanelTemplate}" Visibility="Collapsed" IsEnabled="{Binding DataContext.CurrentPlayer.UIData.AllowInteraction, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
+                <Control Grid.Row="1" x:Name="Reactions" Margin="0,0,0,16" Template="{StaticResource InterruptPanelTemplate}" Visibility="Collapsed" IsEnabled="{Binding DataContext.CurrentPlayer.UIData.AllowInteraction, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
 
                 <!-- Panel -->
                 <!-- MOD_AToR: Update Margin / Remove MaxHeight / Add Align // BG3: Margin="0,10,0,0" MaxHeight="1290" -->
@@ -2882,8 +2884,8 @@
                 <Setter TargetName="ScrollableContent" Property="Margin" Value="0,0,0,20"/>
                 <Setter TargetName="ScrollableContent" Property="Padding" Value="0,0,0,0"/>
                 
-                <!-- MOD_AToR: Remove Reactions bottom margin -->
-                <Setter TargetName="Reactions" Property="Margin" Value="0,0,0,0"/>
+                <!-- MOD_AToR: Add Reactions margin -->
+                <Setter TargetName="Reactions" Property="Margin" Value="0,2,0,0"/>
 
                 <!-- MOD_AToR: Disable as it is dynamic now // MOD_BCPP: 6chars Value="634" // BG3: "684"  -->
                 <!-- <Setter TargetName="ClassPanelCentralColumn" Property="Width" Value="684"/> -->
