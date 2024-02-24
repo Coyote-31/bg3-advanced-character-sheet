@@ -771,6 +771,15 @@
                                     <Binding Path="ActualWidth" ElementName="ClassPanelRoot" Converter="{StaticResource MultiplierConverter}" ConverterParameter="0.8"/>
                                 </MultiBinding>
                             </ls:LSButton.CommandParameter>
+                            
+                            <!-- MOD_AToR: Btn Switcher -->
+                            <b:Interaction.Triggers>
+                                <b:EventTrigger EventName="Click">
+                                    <b:ChangePropertyAction TargetName="LearnBtnContainer" PropertyName="Visibility" Value="Collapsed"/>
+                                    <b:ChangePropertyAction TargetName="LearnBtnContainerCloser" PropertyName="Visibility" Value="Visible"/>
+                                </b:EventTrigger>
+                            </b:Interaction.Triggers>
+                            
                             <ls:LSButton.ToolTip>
                                 <ls:LSTooltip DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource TemplatedParent}}">
                                     <ls:LSTooltip.ContentTemplate>
@@ -794,6 +803,76 @@
                             </ls:LSButton.ToolTip>
                         </ls:LSButton>
                     </Border>
+                    
+                    
+                    <!-- MOD_AToR: Add LearnBtnContainerCloser -->
+                    <Border x:Name="LearnBtnContainerCloser" Grid.Column="0" Grid.Row="1" Height="72" VerticalAlignment="Top" Margin="12,0,-12,0" Visibility="Collapsed">
+                        <!-- MOD_AToR: Add LearnSpellsButton // BG3: HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,26,0" MinWidth="150" -->
+                        <ls:LSButton x:Name="LearnSpellsButtonCloser" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" Command="{Binding DataContext.CustomEvent, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="CloseLearnSpells" MinWidth="0">
+                            <ls:LSButton.Template>
+                                <ControlTemplate TargetType="ls:LSButton">
+                                    <ControlTemplate.Resources>
+                                        <BitmapImage x:Key="Icon_d" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/SpellBook/ico_learnSpells_d.png" />
+                                        <BitmapImage x:Key="Icon_h" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/SpellBook/ico_learnSpells_h.png" />
+                                        <BitmapImage x:Key="Icon_p" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/SpellBook/ico_learnSpells_p.png" />
+                                        <BitmapImage x:Key="Icon_disabled" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/SpellBook/ico_learnSpells_disabled.png" />
+                                    </ControlTemplate.Resources>
+
+                                    <!-- BG3: Slices="36,34" Padding="20,10" Height="72" -->
+                                    <ls:LSNineSliceImage x:Name="SearchBarContainer" ImageSource="{StaticResource SearchBarBg_d}" Slices="36,34" Padding="16,8,16,12" Height="72">
+                                        <Image x:Name="Icon" Source="{StaticResource Icon_d}" Stretch="None" VerticalAlignment="Center"/>
+                                    </ls:LSNineSliceImage>
+
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="SearchBarContainer" Property="ImageSource" Value="{StaticResource SearchBarBg_h}"/>
+                                            <Setter TargetName="Icon" Property="Source" Value="{StaticResource Icon_h}"/>
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter TargetName="SearchBarContainer" Property="ImageSource" Value="{StaticResource SearchBarBg_h}"/>
+                                            <Setter TargetName="Icon" Property="Source" Value="{StaticResource Icon_p}"/>
+                                            <Setter TargetName="Icon" Property="Margin" Value="0,4,0,-4"/>
+                                        </Trigger>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter TargetName="SearchBarContainer" Property="ImageSource" Value="{StaticResource SearchBarBg_d}"/>
+                                            <Setter TargetName="Icon" Property="Source" Value="{StaticResource Icon_disabled}"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </ls:LSButton.Template>
+                            
+                            <!-- MOD_AToR: Btn Switcher -->
+                            <b:Interaction.Triggers>
+                                <b:EventTrigger EventName="Click">
+                                    <b:ChangePropertyAction TargetName="LearnBtnContainer" PropertyName="Visibility" Value="Visible"/>
+                                    <b:ChangePropertyAction TargetName="LearnBtnContainerCloser" PropertyName="Visibility" Value="Collapsed"/>
+                                </b:EventTrigger>
+                            </b:Interaction.Triggers>
+                            
+                            <ls:LSButton.ToolTip>
+                                <ls:LSTooltip DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource TemplatedParent}}">
+                                    <ls:LSTooltip.ContentTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Vertical" MaxWidth="{StaticResource MaxTooltipContentWidth}">
+                                                <StackPanel.Resources>
+                                                    <Style TargetType="TextBlock">
+                                                        <Setter Property="TextWrapping" Value="Wrap"/>
+                                                        <Setter Property="FontSize" Value="{DynamicResource ScaledMediumFontSize}"/>
+                                                        <Setter Property="Foreground" Value="{StaticResource LS_baseTxtColor}"/>
+                                                    </Style>
+                                                </StackPanel.Resources>
+
+                                                <TextBlock ls:TextBlockFormatter.SourceText="{Binding Source='h9784a948g9d80g41d8gbb18ga9c838b90edd',Converter={StaticResource TranslatedStringConverter}}" Style="{StaticResource TooltipTitleStyle}"/>
+
+                                                <TextBlock ls:TextBlockFormatter.SourceText="{Binding Source='h1be7e965gcf8dg4a81gb85dga1fbc01a9f08',Converter={StaticResource TranslatedStringConverter}}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ls:LSTooltip.ContentTemplate>
+                                </ls:LSTooltip>
+                            </ls:LSButton.ToolTip>
+                        </ls:LSButton>
+                    </Border>
+                    
 
                     <Border x:Name="Actions" Grid.Column="1" Grid.Row="1">
                         <ItemsPresenter x:Name="Presenter" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left">
