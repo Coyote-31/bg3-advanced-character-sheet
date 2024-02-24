@@ -561,8 +561,8 @@
         </StackPanel>
     </ControlTemplate>
 
-    <!-- MOD_AToR: Add Style BaseTitleStyle -->
-    <Style x:Key="AToR_BaseTitleStyle" TargetType="ContentControl">
+    <!-- MOD_AToR: Add Style BaseTitleStyle for SpellBook -->
+    <Style x:Key="AToR_SB_BaseTitleStyle" TargetType="ContentControl">
         <Style.Resources>
             <Style TargetType="TextBlock" >
                 <Setter Property="FontSize" Value="{DynamicResource ScaledMediumFontSize}"/>
@@ -2382,7 +2382,7 @@
                                         <!-- ============================================================ -->
                                         <!-- === MOD_AToR: Move from before "InitiationsList" - START === -->
                                         <!-- MOD_AToR: Add title for passive feats -->
-                                        <ContentControl Style="{StaticResource AToR_BaseTitleStyle}" Visibility="{Binding Visibility, ElementName=FeatsList}">
+                                        <ContentControl x:Name="PassivesFeatsTitle" Style="{StaticResource AToR_SB_BaseTitleStyle}" Visibility="{Binding Visibility, ElementName=FeatsList}">
                                             <TextBlock Text="{Binding Source='h74d1322ag4c4dg42eag9272g066b84d0d374', Converter={StaticResource TranslatedStringConverter}}"/>
                                         </ContentControl>
                                         
@@ -2536,6 +2536,11 @@
                 <Setter TargetName="CantripList" Property="ItemsSource" Value="{Binding FilteredItems, ElementName=NonFeatCantripGroupFilter}"/>
                 <Setter TargetName="SpellsCategories" Property="ItemsSource" Value="{Binding FilteredItems, ElementName=NonFeatOrAlwaysPreparedSpellLevelsGroupFilter}"/>
                 <Setter TargetName="NonPreparableSpellsCategories" Property="ItemsSource" Value="{Binding FilteredItems, ElementName=NonFeatSpellLevelsGroupFilter}"/>
+            </DataTrigger>
+            
+            <!-- MOD_AToR: Add trigger for PassivesFeatsTitle disable in class tab -->
+            <DataTrigger Binding="{Binding SelectedItem.SpellBookType, ElementName=Tabs}" Value="Class">
+                <Setter TargetName="PassivesFeatsTitle" Property="Visibility" Value="Collapsed"/>
             </DataTrigger>
 
             <DataTrigger Binding="{Binding SelectedItem.Class, ElementName=Tabs, Converter={StaticResource NullToBoolTrueConverter}}" Value="False">
@@ -3125,7 +3130,18 @@
                 <Setter Property="Foreground" Value="{StaticResource LS_accent100TxtColor}"/>
             </Style>
         </Style.Resources>
-        <!-- MOD_AToR: Update margin of subtitles // BG3: Value="0,20,0,10" -->
+        <Setter Property="Margin" Value="0,20,0,10"/>
+        <Setter Property="Template" Value="{StaticResource decoratedHeader}"/>
+    </Style>
+    
+    <!-- MOD_AToR: Add Style BaseTitleStyle for CS -->
+    <Style x:Key="AToR_CS_BaseTitleStyle" TargetType="ContentControl">
+        <Style.Resources>
+            <Style TargetType="TextBlock" >
+                <Setter Property="FontSize" Value="{DynamicResource ScaledMediumFontSize}"/>
+                <Setter Property="Foreground" Value="{StaticResource LS_accent100TxtColor}"/>
+            </Style>
+        </Style.Resources>
         <Setter Property="Margin" Value="0,-1,0,-1"/>
         <Setter Property="Template" Value="{StaticResource decoratedHeader}"/>
     </Style>
@@ -5068,7 +5084,8 @@ Source="{StaticResource SavingThrowDice}">
 
             <ControlTemplate x:Key="ApprovalRatingTemplate" TargetType="ContentControl">
                 <StackPanel x:Name="ApprovalHolder">
-                    <ContentControl Name="ApprovalTitle" Style="{StaticResource BaseTitleStyle}" Grid.Row="0">
+                    <!-- MOD_AToR: Update Style // BG3: BaseTitleStyle -->
+                    <ContentControl Name="ApprovalTitle" Style="{StaticResource AToR_CS_BaseTitleStyle}" Grid.Row="0">
                         <TextBlock Text="{Binding Source='hab8d8423g3797g4f2ega601g18f13af5add6', Converter={StaticResource TranslatedStringConverter}}"/>
                     </ContentControl>
                     <ItemsControl x:Name="RatingsList" ItemsSource="{Binding ApprovalRatings}" ItemTemplate="{StaticResource ApprovalDataTemplate}"/>
@@ -5171,7 +5188,8 @@ Source="{StaticResource SavingThrowDice}">
                     </ContentControl>
 
                     <!--Attributes-->
-                    <ContentControl Name="AttributesTitle" Style="{StaticResource BaseTitleStyle}" Grid.Row="0">
+                    <!-- MOD_AToR: Update Style // BG3: BaseTitleStyle -->
+                    <ContentControl Name="AttributesTitle" Style="{StaticResource AToR_CS_BaseTitleStyle}" Grid.Row="0">
                         <TextBlock Text="{Binding Source='h6f7a7018gd5f6g4c32g9386g6df0744d7ecd', Converter={StaticResource TranslatedStringConverter}}"/>
                     </ContentControl>
 
@@ -5242,7 +5260,8 @@ Source="{StaticResource SavingThrowDice}">
 
                     <StackPanel Visibility="{Binding IsPlayableCharacter, Converter={StaticResource BoolToVisibleConverter}}">
                         <!-- Proficiency Bonus-->
-                        <ContentControl Style="{StaticResource BaseTitleStyle}" ToolTip="{StaticResource PlacementParentDCTooltip}" DataContext="{Binding Stats.ProficiencyBonus}" Margin="0,12">
+                        <!-- MOD_AToR: Update Style // BG3: BaseTitleStyle -->
+                        <ContentControl Style="{StaticResource AToR_CS_BaseTitleStyle}" ToolTip="{StaticResource PlacementParentDCTooltip}" DataContext="{Binding Stats.ProficiencyBonus}" Margin="0,12">
                             <TextBlock>
                                 <Run Text="{Binding Source='h65b46ad4g2eacg47d5gb4b4g124ca3b8aaef', Converter={StaticResource TranslatedStringConverter}}"/>
                                 <Run Text="{Binding Value, StringFormat='(+{0})'}"/>
@@ -5252,7 +5271,8 @@ Source="{StaticResource SavingThrowDice}">
                         <Control x:Name="EquipmentProficienciesBody" Template="{StaticResource WeaponProficienciesTemplate}"/>
 
                         <!-- SavingThrow Bonus-->
-                        <ContentControl Style="{StaticResource BaseTitleStyle}">
+                        <!-- MOD_AToR: Update Style // BG3: BaseTitleStyle -->
+                        <ContentControl Style="{StaticResource AToR_CS_BaseTitleStyle}">
                             <TextBlock Text="{Binding Source='ha1262989ge5e8g47aegb0begd830dd1a946f', Converter={StaticResource TranslatedStringConverter}}">
                                 <TextBlock.ToolTip>
                                     <ls:LSTooltip IsHitTestVisible="False" Content="hb4ebc93egdb2dg4489g9386ga0b39c71b536" ls:AttachedProperties.InheritedTag="h20f2c1b6g2815g402ag8549gd6042c56c6db" Style="{StaticResource InlineTagTooltip}"/>
@@ -5271,7 +5291,8 @@ Source="{StaticResource SavingThrowDice}">
 
                     <!--TAGS-->
                     <StackPanel Visibility="{Binding Tags.Count, Converter={StaticResource CountToVisibilityConverter}}">
-                        <ContentControl Name="TagTitle" Style="{StaticResource BaseTitleStyle}">
+                        <!-- MOD_AToR: Update Style // BG3: BaseTitleStyle -->
+                        <ContentControl Name="TagTitle" Style="{StaticResource AToR_CS_BaseTitleStyle}">
                             <TextBlock Text="{Binding Source='hd0bb8a34g4e48g4816g8ca0g234f3f99c934', Converter={StaticResource TranslatedStringConverter}}"/>
                         </ContentControl>
 
@@ -5475,7 +5496,8 @@ Source="{StaticResource SavingThrowDice}">
                                     <!-- ======== RESISTANCES ======== -->
                                     <StackPanel Name="ResistancesSection">
                                         <Grid>
-                                            <ContentControl Style="{StaticResource BaseTitleStyle}">
+                                            <!-- MOD_AToR: Update Style // BG3: BaseTitleStyle -->
+                                            <ContentControl Style="{StaticResource AToR_CS_BaseTitleStyle}">
                                                 <!-- MOD_AToR: Add Margin -->
                                                 <TextBlock Text="{Binding Source='h98a4ccfbg20f4g4294g9bf7g624c95711539', Converter={StaticResource TranslatedStringConverter}}" Margin="0,8,0,8"/>
                                             </ContentControl>
@@ -5486,7 +5508,8 @@ Source="{StaticResource SavingThrowDice}">
                                     <!-- MOD_AToR: Switch resistances & conditions order -->
                                     <!-- ======== CONDITIONS ======== -->
                                     <StackPanel Visibility="{Binding StatusEffects.Count, Converter={StaticResource CountToVisibilityConverter}}">
-                                        <ContentControl Style="{StaticResource BaseTitleStyle}">
+                                        <!-- MOD_AToR: Update Style // BG3: BaseTitleStyle -->
+                                        <ContentControl Style="{StaticResource AToR_CS_BaseTitleStyle}">
                                             <!-- MOD_AToR: Add Margin -->
                                             <TextBlock Text="{Binding Source='h3baf1fe2g7d16g4d77gbc35gc17a90fb27d6', Converter={StaticResource TranslatedStringConverter}}" Margin="0,8,0,8"/>
                                         </ContentControl>
@@ -5497,7 +5520,8 @@ Source="{StaticResource SavingThrowDice}">
 
                                     <!-- ======== FEATURES ======== -->
 
-                                    <ContentControl Style="{StaticResource BaseTitleStyle}">
+                                    <!-- MOD_AToR: Update Style // BG3: BaseTitleStyle -->
+                                    <ContentControl Style="{StaticResource AToR_CS_BaseTitleStyle}">
                                         <!-- MOD_AToR: Add Margin -->
                                         <TextBlock Text="{Binding Source='h9f9bfc7dgf4cdg4198g83e3gcb974dd2e949', Converter={StaticResource TranslatedStringConverter}}" Margin="0,8,0,8"/>
                                     </ContentControl>
