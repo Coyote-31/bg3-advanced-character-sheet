@@ -387,9 +387,12 @@
                     <b:StoryboardCompletedTrigger Storyboard="{Binding ElementName=CloseAnimation,Path=Storyboard}">
                         <b:InvokeCommandAction Command="{Binding CustomEvent}" CommandParameter="CloseCompanionsPanel"/>
                     </b:StoryboardCompletedTrigger>
+                    <!-- MOD_ACS: Disable for CPCCE mod compatibility -->
+                    <!-- BG3:
                     <b:DataTrigger Binding="{Binding CurrentPlayer.SelectedCharacter.IsInCamp}" Value="False">
                         <b:InvokeCommandAction Command="{Binding CustomEvent}" CommandParameter="CloseCompanionsPanel"/>
                     </b:DataTrigger>
+                    -->
                 </b:Interaction.Triggers>
                 <Grid.Triggers>
                     <EventTrigger RoutedEvent="FrameworkElement.Loaded">
