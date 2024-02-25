@@ -8303,6 +8303,21 @@ Source="{StaticResource SavingThrowDice}">
                                     <Setter TargetName="InventoryTint" Property="Margin" Value="-7,-7,21,-7"/>
                                 </MultiDataTrigger>
                                 
+                                <!-- MOD_ACS: Add trigger for Companions Panel-->
+                                <DataTrigger Binding="{Binding Name, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Value="CompanionsPanel"> 
+                                    <Setter TargetName="InventoryTint" Property="Margin" Value="-7,-6,18,-5"/>
+                                    <Setter TargetName="NoItemsFoundBg" Property="Margin" Value="6,0,24,1"/>
+                                    <Setter TargetName="NoItemsFoundControl" Property="Margin" Value="8,0,27,0"/>
+                                </DataTrigger>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding Name, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Value="CompanionsPanel" />
+                                        <Condition Binding="{Binding CurrentFilter, ElementName=FilteringContainerHolder, Converter={StaticResource NullToBoolTrueConverter}}" Value="False"/>
+                                        <Condition Binding="{Binding ItemsSource.Count, RelativeSource={RelativeSource Self}}" Value="0"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter TargetName="InventoryTint" Property="Margin" Value="0,-6,19,-5"/>
+                                </MultiDataTrigger>
+                                
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
                     </ListBox.Template>
@@ -8407,6 +8422,11 @@ Source="{StaticResource SavingThrowDice}">
                 </MultiDataTrigger.Conditions>
                 <Setter TargetName="InventoryColumnHolder" Property="Margin" Value="10,-4,-10,1"/>
             </MultiDataTrigger>
+            
+            <!-- MOD_ACS: Add trigger for Companions Panel-->
+            <DataTrigger Binding="{Binding Name, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Value="CompanionsPanel"> 
+                <Setter TargetName="FiltersControl" Property="Margin" Value="0,7,0,0"/>
+            </DataTrigger>
             
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -8914,6 +8934,11 @@ Source="{StaticResource SavingThrowDice}">
                 <Setter TargetName="ArmorClassBottom" Property="Visibility" Value="Visible"/>
                 <Setter TargetName="ArmorClassBottom" Property="Margin" Value="0,0,0,-18"/>
             </MultiDataTrigger>
+            
+            <!-- MOD_ACS: Add trigger for Companions Panel-->
+            <DataTrigger Binding="{Binding Name, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Value="CompanionsPanel"> 
+                <Setter TargetName="EquipmentHolder" Property="Margin" Value="-10,40,-26,0"/>
+            </DataTrigger>
             
         </ControlTemplate.Triggers>
     </ControlTemplate>
