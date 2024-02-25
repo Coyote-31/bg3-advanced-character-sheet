@@ -1,0 +1,447 @@
+<ls:UIWidget x:Name="CompanionsPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:ls="clr-namespace:ls;assembly=SharedGUI"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:noesis="clr-namespace:NoesisGUIExtensions;assembly=Noesis.GUI.Extensions"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d"
+             d:DesignWidth="3840" d:DesignHeight="2160"
+             d:DataContext="{d:DesignInstance {x:Type ls:Widget}, IsDesignTimeCreatable=True}"
+    >
+
+    <b:Interaction.Triggers>
+        <b:EventTrigger EventName="Loaded">
+            <b:InvokeCommandAction Command="{Binding ActionCancelCommand}"/>
+            <ls:LSPlaySound Sound="UI_HUD_Examine_Open"/>
+        </b:EventTrigger>
+    </b:Interaction.Triggers>
+    <ls:UIWidget.Resources>
+
+        <Storyboard x:Key="HideCharacterSelectAnim" FillBehavior="Stop">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="EquipmentColumn">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="PaperdollHolder">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+
+            <DoubleAnimation
+                Storyboard.TargetName="EquipmentColumn"
+                Storyboard.TargetProperty="Opacity"
+                From="1"
+                To="0"
+                Duration="0:0:0.3">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseIn"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+
+            <DoubleAnimation
+                Storyboard.TargetName="PaperdollHolder"
+                Storyboard.TargetProperty="Opacity"
+                From="1"
+                To="0"
+                Duration="0:0:0.3">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseIn"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+
+            <ThicknessAnimation
+                Storyboard.TargetName="CharacterInfoColumn"
+                Storyboard.TargetProperty="Margin"
+                From="-800,0,800,0"
+                To="0,0,0,0"
+                Duration="0:0:0.4">
+                <ThicknessAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </ThicknessAnimation.EasingFunction>
+            </ThicknessAnimation>
+
+        </Storyboard>
+
+        <Storyboard x:Key="ShowCharacterSelectAnim" FillBehavior="Stop">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="CharacterInfoColumn">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            
+            <DoubleAnimation
+                Storyboard.TargetName="EquipmentColumn"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="1"
+                Duration="0:0:0.4">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseIn"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            
+            <DoubleAnimation
+                Storyboard.TargetName="PaperdollHolder"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="1"
+                Duration="0:0:0.4">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseIn"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            
+            <ThicknessAnimation
+                Storyboard.TargetName="CharacterInfoColumn"
+                Storyboard.TargetProperty="Margin"
+                From="0,0,0,0"
+                To="-800,0,800,0"
+                Duration="0:0:0.4">
+                <ThicknessAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseIn"/>
+                </ThicknessAnimation.EasingFunction>
+            </ThicknessAnimation>
+        </Storyboard>
+
+        <Style x:Key="ListBoxPortraits" TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+            <Setter Property="Template" Value="{StaticResource CharacterPortraitFrameTemplate}"/>
+            <Setter Property="Height" Value="168"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="noesis:StyleInteraction.Triggers">
+                <Setter.Value>
+                    <noesis:StyleTriggerCollection>
+                        <b:EventTrigger EventName="MouseLeftButtonUp">
+                            <ls:LSPlaySound Sound="UI_Shared_Click"/>
+                        </b:EventTrigger>
+                        <b:EventTrigger EventName="MouseLeftButtonDown">
+                            <ls:LSPlaySound Sound="UI_Shared_Press"/>
+                        </b:EventTrigger>
+                        <b:EventTrigger EventName="MouseEnter">
+                            <ls:LSPlaySound Sound="UI_Shared_Hover"/>
+                        </b:EventTrigger>
+                    </noesis:StyleTriggerCollection>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+    </ls:UIWidget.Resources>
+
+    <ls:UIWidget.Template>
+        <ControlTemplate>
+            <Grid x:Name="bgFade" Margin="-1000,0,-1000,-1000">
+                <Grid x:Name="Panel" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+               RenderTransformOrigin="0.5,0.5" Margin="0,0,1060,1440" Width="1426">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Grid.RenderTransform>
+                    <b:Interaction.Behaviors>
+                        <ls:LSMouseDragElementBehavior HitArea="{Binding ElementName=DragHit,Mode=OneWay}" />
+                    </b:Interaction.Behaviors>
+                    <!--===== PANEL CONTENTS =====-->
+                    <Grid Grid.Row="1">
+                        <ls:LSNineSliceImage x:Name="BGpanel" Style="{StaticResource Generic9SliceBGFaded}" Height="1468" Margin="22">
+                            <Grid Name="CharacterPanelContents">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition MaxHeight="{StaticResource InventoryColumnHeight}"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Row="0">
+                                    <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterSheet/header_open_faded.png" Stretch="None" VerticalAlignment="Top" Margin="0,-16,0,0"/>
+                                    <!--DRAG AREA-->
+                                    <Border x:Name="DragHit" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" CornerRadius="26,26,0,0" Background="Transparent">
+
+                                        <b:Interaction.Triggers>
+                                            <b:EventTrigger EventName="Loaded">
+                                                <b:InvokeCommandAction Command="{Binding Path=DataContext.DismissNotification, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
+                                            </b:EventTrigger>
+                                            <b:EventTrigger EventName="MouseEnter">
+                                                <b:InvokeCommandAction Command="{Binding DataContext.SetCursorCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="Resize"/>
+                                            </b:EventTrigger>
+                                            <b:EventTrigger EventName="MouseLeave">
+                                                <b:InvokeCommandAction Command="{Binding DataContext.SetCursorCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter=""/>
+                                            </b:EventTrigger>
+                                        </b:Interaction.Triggers>
+                                    </Border>
+                                    <!--CLOSE BUTTON-->
+                                    <ls:LSButton Style="{StaticResource SmallCloseButton}" SoundID="UI_Shared_Cancel" HorizontalAlignment="Right" VerticalAlignment="Top" BoundEvent="UICancel" Margin="0,0,0,0"
+                                                 Command="{Binding DataContext.CloseCampContainersCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}">
+                                        <ls:LSButton.Triggers>
+                                            <EventTrigger RoutedEvent="Button.Click">
+                                                <BeginStoryboard x:Name="CloseAnimation" >
+                                                    <Storyboard Children="{StaticResource ClosePanelAnim}"/>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                        </ls:LSButton.Triggers>
+                                    </ls:LSButton>
+                                </Grid>
+
+                                <!-- ===== PAGES ===== -->
+                                <Grid Grid.Row="1"  Margin="0,22,0,0">
+                                    <!-- ======== COMPANION PAGE ======== -->
+                                    <Grid x:Name="CharacterSheetPage" DataContext="{Binding SelectedItem, ElementName=CompanionPortraits}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ClipToBounds="True" ls:TooltipExtender.Owner="{Binding SelectedItem, ElementName=CompanionPortraits}">
+                                        <!-- PAPERDOLL-->
+                                        <Grid Name="PaperdollHolder" Margin="-208,0,0,4" ClipToBounds="True" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Stretch">
+                                            <ls:LSPaperdoll HorizontalAlignment="Center" x:Name="CSPaperdoll" EntityRef="{Binding EntityHandle}" Width="{StaticResource EXDollWidth}" Height="{StaticResource CSDollHeight}" VerticalAlignment="Bottom" ClipToBounds="True" UseCombatPose="True" MouseRotate="True" MouseRotateMultiplier="10" RenderScale="{Binding DataContext.Data.RenderScale, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
+                                            <!--DOLL CONTROLS-->
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                                                <ls:LSButton  x:Name="rotateRightBtn" Template="{StaticResource RotateRightButton}">
+                                                    <b:Interaction.Triggers>
+                                                        <b:EventTrigger EventName="LSButtonPressed">
+                                                            <b:ChangePropertyAction PropertyName="RotationSpeed" Value="1.2" TargetName="CSPaperdoll" />
+                                                        </b:EventTrigger>
+                                                        <b:EventTrigger EventName="LSButtonReleased" >
+                                                            <b:ChangePropertyAction PropertyName="RotationSpeed" Value="0" TargetName="CSPaperdoll" />
+                                                        </b:EventTrigger>
+                                                    </b:Interaction.Triggers>
+                                                </ls:LSButton>
+
+                                                <ls:LSButton  x:Name="rotateLeftBtn" Template="{StaticResource RotateLeftButton}">
+                                                    <b:Interaction.Triggers>
+                                                        <b:EventTrigger EventName="LSButtonPressed" >
+                                                            <b:ChangePropertyAction PropertyName="RotationSpeed" Value="-1.2" TargetName="CSPaperdoll" />
+                                                        </b:EventTrigger>
+                                                        <b:EventTrigger EventName="LSButtonReleased" >
+                                                            <b:ChangePropertyAction PropertyName="RotationSpeed" Value="0" TargetName="CSPaperdoll" />
+                                                        </b:EventTrigger>
+                                                    </b:Interaction.Triggers>
+                                                </ls:LSButton>
+                                            </StackPanel>
+
+                                        </Grid>
+                                        <Grid ClipToBounds="True">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <!-- EQUIPMENT COLUMN -->
+                                                <Grid Name="EquipmentColumn" Grid.Column="0">
+                                                <!-- EQUIP -->
+                                                <Control x:Name="EquipmentHolder" VerticalAlignment="Stretch" Template="{StaticResource CharacterEquipmentTemplate}" Margin="20,60,40,44"/>
+                                                <Grid Height="88" VerticalAlignment="Top">
+                                                    <!-- NAME -->
+
+                                                    <TextBlock Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontSize="{StaticResource ScaledIntermediateFontSize}" Foreground="{StaticResource LS_accent100TxtColor}" noesis:Text.StrokeThickness="4" noesis:Text.Stroke="{StaticResource LS_PrimaryColorOutlineColor}" TextWrapping="Wrap"/>
+                                                    <!-- TOGGLE VIEW BTN -->
+                                                    <ls:LSToggleButton x:Name="ToggleCSView" SoundID="UI_HUD_Options_ToggleButton" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="True">
+                                                        <ls:LSToggleButton.Template>
+                                                            <ControlTemplate TargetType="ls:LSToggleButton">
+                                                                <Grid ToolTipService.Placement="Top">
+                                                                    <Grid.ToolTip>
+                                                                        <ls:LSTooltip x:Name="Tooltip" Content="{Binding Source='hf76cbcb4g83ddg49d3gb01cgd00359f84713', Converter={StaticResource TranslatedStringConverter}}"/>
+                                                                    </Grid.ToolTip>
+                                                                    <Image x:Name="btn" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterSheet/btn_round_medium_d.png" Stretch="None"/>
+                                                                    <Image x:Name="icon" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/BottomBar/ico_identity_d.png" Stretch="None"/>
+                                                                </Grid>
+                                                                <ControlTemplate.Triggers>
+                                                                    <Trigger Property="IsChecked" Value="False">
+                                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                                    </Trigger>
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Setter TargetName="btn" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterSheet/btn_round_medium_h.png"/>
+                                                                        <Setter TargetName="icon" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/BottomBar/ico_identity_h.png"/>
+                                                                    </Trigger>
+                                                                    <Trigger Property="IsPressed" Value="True">
+                                                                        <Setter TargetName="btn" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterSheet/btn_round_medium_p.png"/>
+                                                                        <Setter TargetName="icon" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/BottomBar/ico_identity_p.png"/>
+                                                                        <Setter TargetName="icon" Property="Margin" Value="0,0,0,-2"/>
+                                                                    </Trigger>
+                                                                </ControlTemplate.Triggers>
+                                                            </ControlTemplate>
+                                                        </ls:LSToggleButton.Template>
+                                                    </ls:LSToggleButton>
+                                                </Grid>
+                                            </Grid>
+
+                                            <!-- INFO COLUMN -->
+                                            <Grid Name="CharacterInfoColumn" Grid.Column="0" Visibility="Collapsed">
+                                                <Control Name="CharacterInfoPanel"  Template="{StaticResource CharSheetTabController}" HorizontalAlignment="Left" VerticalAlignment="Stretch"/>
+                                                <!--Close column-->
+                                                <ls:LSButton Style="{StaticResource SmallCloseButton}" SoundID="UI_Shared_Cancel" HorizontalAlignment="Right" VerticalAlignment="Top">
+                                                    <b:Interaction.Triggers>
+                                                        <b:EventTrigger EventName="Click">
+                                                            <b:ChangePropertyAction TargetName="ToggleCSView" PropertyName="IsChecked" Value="True"/>
+                                                        </b:EventTrigger>
+                                                    </b:Interaction.Triggers>
+                                                </ls:LSButton>
+                                            </Grid>
+
+                                            <!-- INVENTORY COLUMN -->
+                                                <Grid x:Name="InventoryColumn" Grid.Column="1" Opacity="1" VerticalAlignment="Stretch" Width="{StaticResource InventoryColumnWidth}">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+                                                <!-- INVENTORY HOLDER -->
+                                                <Border Grid.Row="0" VerticalAlignment="Stretch" >
+                                                    <Control x:Name="PanelTemplateHolder" Template="{StaticResource CharacterInventoryTemplate}"/>
+                                                </Border>
+                                                <!-- Weight bar -->
+                                                <Control Template="{StaticResource WeightBarTemplate}" Margin="0,16,0,16" Grid.Row="1" HorizontalAlignment="Center"/>
+                                            </Grid>
+
+                                        </Grid>
+                                    </Grid>
+
+                                    <!-- ======== TRAVELLER CHEST PAGE ======== -->
+                                    <Control x:Name="TravellerChestPage" DataContext="{Binding SelectedItem, ElementName=CampPortraits}" ls:TooltipExtender.Owner="{Binding DataContext.CurrentPlayer.SelectedCharacter,RelativeSource={RelativeSource AncestorType=ls:UIWidget}}" Margin="12,0,0,12" VerticalAlignment="Stretch" Template="{StaticResource ContainerInventoryTemplate}"/>
+                                </Grid>
+
+                            </Grid>
+                        </ls:LSNineSliceImage>
+                    </Grid>
+
+                    <!-- ===== HEADER CONTENTS ===== -->
+                    <Grid Grid.Row="0">
+                        <Grid.Resources>
+                            <System:Double x:Key="ClippingWidth">1046</System:Double>
+                        </Grid.Resources>
+                        <!--CHEST & COMPANION LINE-->
+                        <ls:LSNineSliceImage x:Name="CompanionPanelListHolder" Style="{StaticResource DecorBookendHorizontal}" Margin="0,0,0,-112">
+                            <Grid>
+                                <ls:LSScrollViewer x:Name="PART_ScrollViewer" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden"  MaxWidth="{StaticResource ClippingWidth}" Margin="72,0">
+                                    <Grid x:Name="ScrollContent" HorizontalAlignment="Left">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        
+                                        <!--COMPANIONS-->
+                                        <ListBox Grid.Column="1" x:Name="CompanionPortraits" HorizontalAlignment="Center" ItemsSource="{Binding Data.CampNonPartyCharacters}" ItemTemplate="{StaticResource CharacterPortraitTemplate}"  VirtualizingPanel.VirtualizationMode="Recycling" ItemContainerStyle="{StaticResource ListBoxPortraits}" SelectedIndex="0">
+                                            <b:Interaction.Triggers>
+                                                <!--toggle list and page-->
+                                                <b:EventTrigger EventName="Selected">
+                                                    <b:ChangePropertyAction TargetName="CampPortraits" PropertyName="SelectedIndex" Value="-1" />
+                                                    <b:ChangePropertyAction TargetName="CharacterSheetPage" PropertyName="Visibility" Value="Visible" />
+                                                    <b:ChangePropertyAction TargetName="TravellerChestPage" PropertyName="Visibility" Value="Collapsed" />
+                                                </b:EventTrigger>
+                                            </b:Interaction.Triggers>
+                                            <ListBox.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <VirtualizingStackPanel Orientation="Horizontal"/>
+                                                </ItemsPanelTemplate>
+                                            </ListBox.ItemsPanel>
+                                        </ListBox>
+                                        
+                                        <!--CHESTS-->
+                                        <ListBox Grid.Column="0" x:Name="CampPortraits" HorizontalAlignment="Center" ItemsSource="{Binding CurrentPlayer.UIData.CampChests}" ItemTemplate="{StaticResource CharacterPortraitTemplate}"  VirtualizingPanel.VirtualizationMode="Recycling" ItemContainerStyle="{StaticResource ListBoxPortraits}">
+                                            <b:Interaction.Triggers>
+                                                <!--toggle list and page-->
+                                                <b:EventTrigger EventName="Selected">
+                                                    <b:ChangePropertyAction TargetName="CompanionPortraits" PropertyName="SelectedIndex" Value="-1" />
+                                                    <b:ChangePropertyAction TargetName="CharacterSheetPage" PropertyName="Visibility" Value="Collapsed" />
+                                                    <b:ChangePropertyAction TargetName="TravellerChestPage" PropertyName="Visibility" Value="Visible" />
+                                                </b:EventTrigger>
+                                            </b:Interaction.Triggers>
+                                            <ListBox.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <VirtualizingStackPanel Orientation="Horizontal"/>
+                                                </ItemsPanelTemplate>
+                                            </ListBox.ItemsPanel>
+                                        </ListBox>
+                                       
+                                    </Grid>
+                                </ls:LSScrollViewer>
+
+                                <!--ScrollNavigation-->
+                                <Grid Visibility="{Binding ActualWidth, ElementName=ScrollContent, Converter={StaticResource CountToVisibilityConverter}, ConverterParameter={StaticResource ClippingWidth}}"  Margin="24,0,24,20">
+
+                                    <ls:LSButton x:Name="LeftScrollButton" IsEnabled="{Binding HorizontalOffset, ElementName=PART_ScrollViewer, Converter={StaticResource GreaterThanConverter}, ConverterParameter='1'}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Style="{StaticResource SmallRoundButtonStyleArrow}" RenderTransformOrigin="0.5,0.5">
+                                        <b:Interaction.Behaviors>
+                                            <ls:ScrollBehavior Orientation="{x:Static Orientation.Horizontal}" ScrollViewer="{Binding ElementName=PART_ScrollViewer}" Offset="-120" ScrollRate="15"/>
+                                        </b:Interaction.Behaviors>
+                                        <ls:LSButton.RenderTransform>
+                                            <ScaleTransform ScaleX="-1"/>
+                                        </ls:LSButton.RenderTransform>
+                                    </ls:LSButton>
+
+                                    <ls:LSButton x:Name="RightScrollButton" HorizontalAlignment="Right" VerticalAlignment="Bottom" Style="{StaticResource SmallRoundButtonStyleArrow}" IsEnabled="{Binding RelativeSource={RelativeSource Self},Path=Tag, Converter={StaticResource InvertBoolConverter}}">
+                                        <ls:LSButton.Tag>
+                                            <MultiBinding Converter="{StaticResource EqualConverter}">
+                                                <Binding Path="ScrollableWidth" ElementName="PART_ScrollViewer"/>
+                                                <Binding Path="HorizontalOffset" ElementName="PART_ScrollViewer"/>
+                                            </MultiBinding>
+                                        </ls:LSButton.Tag>
+                                        <b:Interaction.Behaviors>
+                                            <ls:ScrollBehavior Orientation="{x:Static Orientation.Horizontal}" ScrollViewer="{Binding ElementName=PART_ScrollViewer}" Offset="120" ScrollRate="15"/>
+                                        </b:Interaction.Behaviors>
+                                    </ls:LSButton>
+                                </Grid>
+                            </Grid>
+
+                        </ls:LSNineSliceImage>
+                    </Grid>
+                </Grid>
+
+                <!-- ===== TRIGGERS & ANIMATIONS ===== -->
+                <b:Interaction.Triggers>
+                    <b:StoryboardCompletedTrigger Storyboard="{Binding ElementName=CloseAnimation,Path=Storyboard}">
+                        <b:InvokeCommandAction Command="{Binding CustomEvent}" CommandParameter="CloseCompanionsPanel"/>
+                    </b:StoryboardCompletedTrigger>
+                    <b:DataTrigger Binding="{Binding CurrentPlayer.SelectedCharacter.IsInCamp}" Value="False">
+                        <b:InvokeCommandAction Command="{Binding CustomEvent}" CommandParameter="CloseCompanionsPanel"/>
+                    </b:DataTrigger>
+                </b:Interaction.Triggers>
+                <Grid.Triggers>
+                    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                        <BeginStoryboard x:Name="OpenPanelAnimation" Storyboard="{StaticResource OpenPanelAnim}" />
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="FrameworkElement.Unloaded">
+                        <StopStoryboard BeginStoryboardName="OpenPanelAnimation" />
+                        <StopStoryboard BeginStoryboardName="CancelAnimation" />
+                        <StopStoryboard BeginStoryboardName="ClosePanelAnimation" />
+                    </EventTrigger>
+                </Grid.Triggers>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <EventTrigger RoutedEvent="ls:UIWidget.CloseRequested">
+                    <BeginStoryboard x:Name="ClosePanelAnimation">
+                        <BeginStoryboard.Storyboard>
+                            <Storyboard Children="{StaticResource ClosePanelAnim}"/>
+                        </BeginStoryboard.Storyboard>
+                    </BeginStoryboard>
+                    <StopStoryboard BeginStoryboardName="CancelAnimation"/>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="ls:UIWidget.CancelCloseRequested" >
+                    <BeginStoryboard x:Name="CancelAnimation">
+                        <BeginStoryboard.Storyboard>
+                            <Storyboard Children="{StaticResource ClosePanelAnimInverted}"/>
+                        </BeginStoryboard.Storyboard>
+                    </BeginStoryboard>
+                    <StopStoryboard BeginStoryboardName="ClosePanelAnimation"/>
+                </EventTrigger>
+
+                <DataTrigger Binding="{Binding Data.CampNonPartyCharacters.Count}" Value="0">
+                    <Setter TargetName="CompanionPortraits" Property="SelectedIndex" Value="-1" />
+                    <Setter TargetName="CampPortraits" Property="SelectedIndex" Value="0" />
+                </DataTrigger>
+                
+                
+                <!--animate character sheet in and equipment out-->
+                <DataTrigger Binding="{Binding IsChecked, ElementName=ToggleCSView}" Value="False">
+                    <Setter TargetName="CharacterInfoColumn" Property="Visibility" Value="Visible"/>
+                    <Setter TargetName="EquipmentColumn" Property="Visibility" Value="Collapsed"/>
+                    <Setter TargetName="PaperdollHolder" Property="Visibility" Value="Collapsed"/>
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard x:Name="StartHideCharactersheet" Storyboard="{StaticResource HideCharacterSelectAnim}"/>
+                    </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                        <BeginStoryboard x:Name="StartShowCharactersheet" Storyboard="{StaticResource ShowCharacterSelectAnim}"/>
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </ls:UIWidget.Template>
+
+
+</ls:UIWidget>
