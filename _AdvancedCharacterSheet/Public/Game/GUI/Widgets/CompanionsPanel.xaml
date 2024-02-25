@@ -316,7 +316,8 @@
                                         </Grid.ColumnDefinitions>
                                         
                                         <!--COMPANIONS-->
-                                        <ListBox Grid.Column="1" x:Name="CompanionPortraits" HorizontalAlignment="Center" ItemsSource="{Binding Data.CampNonPartyCharacters}" ItemTemplate="{StaticResource CharacterPortraitTemplate}"  VirtualizingPanel.VirtualizationMode="Recycling" ItemContainerStyle="{StaticResource ListBoxPortraits}" SelectedIndex="0">
+                                        <!-- MOD_ACS: Switch default tab select to camp chest / Update SelectedIndex // BG3: SelectedIndex="0" -->
+                                        <ListBox Grid.Column="1" x:Name="CompanionPortraits" HorizontalAlignment="Center" ItemsSource="{Binding Data.CampNonPartyCharacters}" ItemTemplate="{StaticResource CharacterPortraitTemplate}"  VirtualizingPanel.VirtualizationMode="Recycling" ItemContainerStyle="{StaticResource ListBoxPortraits}" SelectedIndex="-1">
                                             <b:Interaction.Triggers>
                                                 <!--toggle list and page-->
                                                 <b:EventTrigger EventName="Selected">
@@ -333,7 +334,8 @@
                                         </ListBox>
                                         
                                         <!--CHESTS-->
-                                        <ListBox Grid.Column="0" x:Name="CampPortraits" HorizontalAlignment="Center" ItemsSource="{Binding CurrentPlayer.UIData.CampChests}" ItemTemplate="{StaticResource CharacterPortraitTemplate}"  VirtualizingPanel.VirtualizationMode="Recycling" ItemContainerStyle="{StaticResource ListBoxPortraits}">
+                                        <!-- MOD_ACS: Switch default tab select to camp chest / Add SelectedIndex -->
+                                        <ListBox Grid.Column="0" x:Name="CampPortraits" HorizontalAlignment="Center" ItemsSource="{Binding CurrentPlayer.UIData.CampChests}" ItemTemplate="{StaticResource CharacterPortraitTemplate}"  VirtualizingPanel.VirtualizationMode="Recycling" ItemContainerStyle="{StaticResource ListBoxPortraits}" SelectedIndex="0">
                                             <b:Interaction.Triggers>
                                                 <!--toggle list and page-->
                                                 <b:EventTrigger EventName="Selected">
