@@ -128,8 +128,10 @@
     <ls:UIWidget.Template>
         <ControlTemplate>
             <Grid x:Name="bgFade" Margin="-1000,0,-1000,-1000">
+                <!-- MOD_ACS: Update Margin & Width-->
+                <!-- BG3: <Grid x:Name="Panel" HorizontalAlignment="Right" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5" Margin="0,0,1060,1440" Width="1426"> -->
                 <Grid x:Name="Panel" HorizontalAlignment="Right" VerticalAlignment="Bottom"
-               RenderTransformOrigin="0.5,0.5" Margin="0,0,1060,1440" Width="1426">
+               RenderTransformOrigin="0.5,0.5" Margin="0,0,996,1444" Width="1529">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -147,7 +149,8 @@
                     </b:Interaction.Behaviors>
                     <!--===== PANEL CONTENTS =====-->
                     <Grid Grid.Row="1">
-                        <ls:LSNineSliceImage x:Name="BGpanel" Style="{StaticResource Generic9SliceBGFaded}" Height="1468" Margin="22">
+                        <!-- MOD_ACS: Update Height & Margin // BG3: Height="1468" Margin="22" -->
+                        <ls:LSNineSliceImage x:Name="BGpanel" Style="{StaticResource Generic9SliceBGFaded}" Height="1618" Margin="22,18,22,22">
                             <Grid Name="CharacterPanelContents">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -155,7 +158,8 @@
                                 </Grid.RowDefinitions>
 
                                 <Grid Grid.Row="0">
-                                    <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterSheet/header_open_faded.png" Stretch="None" VerticalAlignment="Top" Margin="0,-16,0,0"/>
+                                    <!-- MOD_ACS: Update Margin // BG3: Margin="0,-16,0,0" -->
+                                    <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterSheet/header_open_faded.png" Stretch="None" VerticalAlignment="Top" Margin="0,6,0,-6"/>
                                     <!--DRAG AREA-->
                                     <Border x:Name="DragHit" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" CornerRadius="26,26,0,0" Background="Transparent">
 
@@ -185,11 +189,13 @@
                                 </Grid>
 
                                 <!-- ===== PAGES ===== -->
-                                <Grid Grid.Row="1"  Margin="0,22,0,0">
+                                <!-- MOD_ACS: Update Margin // BG3: Margin="0,22,0,0" -->
+                                <Grid Grid.Row="1"  Margin="0,35,0,0">
                                     <!-- ======== COMPANION PAGE ======== -->
                                     <Grid x:Name="CharacterSheetPage" DataContext="{Binding SelectedItem, ElementName=CompanionPortraits}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ClipToBounds="True" ls:TooltipExtender.Owner="{Binding SelectedItem, ElementName=CompanionPortraits}">
                                         <!-- PAPERDOLL-->
-                                        <Grid Name="PaperdollHolder" Margin="-208,0,0,4" ClipToBounds="True" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Stretch">
+                                        <!-- MOD_ACS: Update margin // BG3: Margin="-208,0,0,4" -->
+                                        <Grid Name="PaperdollHolder" Margin="-150,0,0,4" ClipToBounds="True" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Stretch">
                                             <ls:LSPaperdoll HorizontalAlignment="Center" x:Name="CSPaperdoll" EntityRef="{Binding EntityHandle}" Width="{StaticResource EXDollWidth}" Height="{StaticResource CSDollHeight}" VerticalAlignment="Bottom" ClipToBounds="True" UseCombatPose="True" MouseRotate="True" MouseRotateMultiplier="10" RenderScale="{Binding DataContext.Data.RenderScale, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
                                             <!--DOLL CONTROLS-->
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
@@ -232,7 +238,8 @@
 
                                                     <TextBlock Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontSize="{StaticResource ScaledIntermediateFontSize}" Foreground="{StaticResource LS_accent100TxtColor}" noesis:Text.StrokeThickness="4" noesis:Text.Stroke="{StaticResource LS_PrimaryColorOutlineColor}" TextWrapping="Wrap"/>
                                                     <!-- TOGGLE VIEW BTN -->
-                                                    <ls:LSToggleButton x:Name="ToggleCSView" SoundID="UI_HUD_Options_ToggleButton" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="True">
+                                                    <!-- MOD_ACS: Add Margin -->
+                                                    <ls:LSToggleButton x:Name="ToggleCSView" SoundID="UI_HUD_Options_ToggleButton" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="True" Margin="18,0,0,0">
                                                         <ls:LSToggleButton.Template>
                                                             <ControlTemplate TargetType="ls:LSToggleButton">
                                                                 <Grid ToolTipService.Placement="Top">
@@ -293,7 +300,8 @@
                                     </Grid>
 
                                     <!-- ======== TRAVELLER CHEST PAGE ======== -->
-                                    <Control x:Name="TravellerChestPage" DataContext="{Binding SelectedItem, ElementName=CampPortraits}" ls:TooltipExtender.Owner="{Binding DataContext.CurrentPlayer.SelectedCharacter,RelativeSource={RelativeSource AncestorType=ls:UIWidget}}" Margin="12,0,0,12" VerticalAlignment="Stretch" Template="{StaticResource ContainerInventoryTemplate}"/>
+                                    <!-- MOD_ACS: Update Margin / 23,0,-4,5 /  // BG3: Margin="12,0,0,12" -->
+                                    <Control x:Name="TravellerChestPage" DataContext="{Binding SelectedItem, ElementName=CampPortraits}" ls:TooltipExtender.Owner="{Binding DataContext.CurrentPlayer.SelectedCharacter,RelativeSource={RelativeSource AncestorType=ls:UIWidget}}" Margin="23,0,-4,97" Padding="0,0,0,0" VerticalAlignment="Stretch" Template="{StaticResource ContainerInventoryTemplate}"/>
                                 </Grid>
 
                             </Grid>
@@ -306,7 +314,8 @@
                             <System:Double x:Key="ClippingWidth">1046</System:Double>
                         </Grid.Resources>
                         <!--CHEST & COMPANION LINE-->
-                        <ls:LSNineSliceImage x:Name="CompanionPanelListHolder" Style="{StaticResource DecorBookendHorizontal}" Margin="0,0,0,-112">
+                        <!-- MOD_ACS: Update Margin // BG3: Margin="0,0,0,-112" -->
+                        <ls:LSNineSliceImage x:Name="CompanionPanelListHolder" Style="{StaticResource DecorBookendHorizontal}" Margin="0,0,0,-122">
                             <Grid>
                                 <ls:LSScrollViewer x:Name="PART_ScrollViewer" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden"  MaxWidth="{StaticResource ClippingWidth}" Margin="72,0">
                                     <Grid x:Name="ScrollContent" HorizontalAlignment="Left">
