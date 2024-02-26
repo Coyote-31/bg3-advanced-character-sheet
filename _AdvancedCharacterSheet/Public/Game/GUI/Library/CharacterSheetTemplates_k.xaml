@@ -2964,7 +2964,7 @@
                 <Setter TargetName="ScrollableContent" Property="Padding" Value="0,0,0,0"/>
                 
                 <!-- MOD_ACS: Add Reactions margin -->
-                <Setter TargetName="Reactions" Property="Margin" Value="0,2,0,0"/>
+                <Setter TargetName="Reactions" Property="Margin" Value="0,0,0,0"/>
 
                 <!-- MOD_ACS: Disable as it is dynamic now // MOD_BCPP: 6chars Value="634" // BG3: "684"  -->
                 <!-- <Setter TargetName="ClassPanelCentralColumn" Property="Width" Value="684"/> -->
