@@ -921,62 +921,68 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
 
-                    <!-- MOD_ACS: Add ClassSectionGridToggle button -->
-                    <ls:LSToggleButton x:Name="ClassSectionGridToggle" Grid.Column="2" Grid.Row="1" Template="{StaticResource ACS_ToggleIconButtonTemplate}" IsChecked="False" 
-                                       VerticalAlignment="Top" HorizontalAlignment="Left" Visibility="Collapsed" Margin="0,8,0,-8">
-                        <ls:LSToggleButton.Resources>
-                            <ImageSource x:Key="ButtonUncheckedNormal">pack://application:,,,/GustavNoesisGUI;component/Assets/Container/container_roundBtn_d.png</ImageSource>
-                            <ImageSource x:Key="ButtonUncheckedHighlight">pack://application:,,,/GustavNoesisGUI;component/Assets/Container/container_roundBtn_h.png</ImageSource>
-                            <ImageSource x:Key="ButtonUncheckedPressed">pack://application:,,,/GustavNoesisGUI;component/Assets/Container/container_roundBtn_p.png</ImageSource>
-                            <ImageSource x:Key="ButtonUncheckedDisabled">pack://application:,,,/GustavNoesisGUI;component/Assets/Container/container_roundBtn_disabled.png</ImageSource>
+                    <!-- MOD_ACS: Add ClassSectionGridClose button -->
+                    <ls:LSButton x:Name="ClassSectionGridClose" Grid.Column="2" Grid.Row="1" Template="{StaticResource ACS_IconButtonTemplate}"
+                                 VerticalAlignment="Top" HorizontalAlignment="Left" Visibility="Collapsed" Margin="0,8,0,-8">
+                        <ls:LSButton.Resources>
+                            <BitmapImage x:Key="ButtonNormal" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Container/container_roundBtn_d.png"/>
+                            <BitmapImage x:Key="ButtonHighlight" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Container/container_roundBtn_h.png"/>
+                            <BitmapImage x:Key="ButtonPressed" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Container/container_roundBtn_p.png"/>
+                            <BitmapImage x:Key="ButtonDisabled" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Container/container_roundBtn_disabled.png"/>
                             
-                            <ImageSource x:Key="ButtonCheckedNormal">pack://application:,,,/GustavNoesisGUI;component/Assets/Container/container_roundBtn_d.png</ImageSource>
-                            <ImageSource x:Key="ButtonCheckedHighlight">pack://application:,,,/GustavNoesisGUI;component/Assets/Container/container_roundBtn_h.png</ImageSource>
-                            <ImageSource x:Key="ButtonCheckedPressed">pack://application:,,,/GustavNoesisGUI;component/Assets/Container/container_roundBtn_p.png</ImageSource>
-                            <ImageSource x:Key="ButtonCheckedDisabled">pack://application:,,,/GustavNoesisGUI;component/Assets/Container/container_roundBtn_disabled.png</ImageSource>
-                            
-                            <ImageSource x:Key="IconUncheckedNormal">pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/Arrows/doubleArrow_up_d.png</ImageSource>
-                            <ImageSource x:Key="IconUncheckedHighlight">pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/Arrows/doubleArrow_up_h.png</ImageSource>
-                            <ImageSource x:Key="IconUncheckedPressed">pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/Arrows/doubleArrow_up_h.png</ImageSource>
-                            <ImageSource x:Key="IconUncheckedDisabled">pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/Arrows/doubleArrow_up_disabled.png</ImageSource>
-                            
-                            <ImageSource x:Key="IconCheckedNormal">pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/Arrows/doubleArrow_down_d.png</ImageSource>
-                            <ImageSource x:Key="IconCheckedHighlight">pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/Arrows/doubleArrow_down_h.png</ImageSource>
-                            <ImageSource x:Key="IconCheckedPressed">pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/Arrows/doubleArrow_down_h.png</ImageSource>
-                            <ImageSource x:Key="IconCheckedDisabled">pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/Arrows/doubleArrow_down_disabled.png</ImageSource>
+                            <BitmapImage x:Key="IconNormal" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/Arrows/doubleArrow_up_d.png"/>
+                            <BitmapImage x:Key="IconHighlight" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/Arrows/doubleArrow_up_h.png"/>
+                            <BitmapImage x:Key="IconPressed" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/Arrows/doubleArrow_up_h.png"/>
+                            <BitmapImage x:Key="IconDisabled" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/Arrows/doubleArrow_up_disabled.png.png"/>
                             
                             <System:Double x:Key="ImgWidth">54</System:Double>
                             <System:Double x:Key="ImgHeight">54</System:Double>
                             <System:Double x:Key="IconWidth">54</System:Double>
                             <System:Double x:Key="IconHeight">54</System:Double>
-                        </ls:LSToggleButton.Resources>
+                            <Thickness x:Key="IconMargin">0,0,0,0</Thickness>
+                            <Thickness x:Key="IconPressedMargin">0,2,0,0</Thickness>
+                        </ls:LSButton.Resources>
                         
                         <b:Interaction.Triggers>
                             <b:EventTrigger EventName="Click">
-                                <b:Interaction.Behaviors>
-                                    <b:ConditionBehavior>
-                                        <b:ConditionalExpression ForwardChaining="And">
-                                            <b:ComparisonCondition LeftOperand="{Binding IsChecked, ElementName=ClassSectionGridToggle}" Operator="Equal" RightOperand="True"/>
-                                            <b:ComparisonCondition LeftOperand="{Binding Visibility, ElementName=ClassSectionGrid}" Operator="Equal" RightOperand="Visible"/>
-                                        </b:ConditionalExpression>
-                                    </b:ConditionBehavior>
-                                </b:Interaction.Behaviors>
                                 <b:ChangePropertyAction TargetName="ClassSectionGrid" PropertyName="Visibility" Value="Collapsed"/>
                             </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </ls:LSButton>
+
+                    <!-- MOD_ACS: Add ClassSectionGridOpen button -->
+                    <ls:LSButton x:Name="ClassSectionGridOpen" Grid.Column="2" Grid.Row="1" Template="{StaticResource ACS_IconButtonTemplate}"
+                                 VerticalAlignment="Top" HorizontalAlignment="Left" Visibility="Collapsed" Margin="0,8,0,-8">
+                        <ls:LSButton.Resources>
+                            <BitmapImage x:Key="ButtonNormal" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Container/container_roundBtn_d.png"/>
+                            <BitmapImage x:Key="ButtonHighlight" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Container/container_roundBtn_h.png"/>
+                            <BitmapImage x:Key="ButtonPressed" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Container/container_roundBtn_p.png"/>
+                            <BitmapImage x:Key="ButtonDisabled" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Container/container_roundBtn_disabled.png"/>
                             
+                            <BitmapImage x:Key="IconNormal" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/Arrows/doubleArrow_down_d.png"/>
+                            <BitmapImage x:Key="IconHighlight" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/Arrows/doubleArrow_down_h.png"/>
+                            <BitmapImage x:Key="IconPressed" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/Arrows/doubleArrow_down_h.png"/>
+                            <BitmapImage x:Key="IconDisabled" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/Arrows/doubleArrow_down_disabled.png.png"/>
+                            
+                            <System:Double x:Key="ImgWidth">54</System:Double>
+                            <System:Double x:Key="ImgHeight">54</System:Double>
+                            <System:Double x:Key="IconWidth">54</System:Double>
+                            <System:Double x:Key="IconHeight">54</System:Double>
+                            <Thickness x:Key="IconMargin">0,0,0,0</Thickness>
+                            <Thickness x:Key="IconPressedMargin">0,2,0,0</Thickness>
+                        </ls:LSButton.Resources>
+                        
+                        <b:Interaction.Triggers>
                             <b:EventTrigger EventName="Click">
-                                <b:Interaction.Behaviors>
-                                    <b:ConditionBehavior>
-                                        <b:ConditionalExpression ForwardChaining="And">
-                                            <b:ComparisonCondition LeftOperand="{Binding IsChecked, ElementName=ClassSectionGridToggle}" Operator="Equal" RightOperand="False"/>
-                                            <b:ComparisonCondition LeftOperand="{Binding Visibility, ElementName=ClassSectionGrid}" Operator="Equal" RightOperand="Collapsed"/>
-                                        </b:ConditionalExpression>
-                                    </b:ConditionBehavior>
-                                </b:Interaction.Behaviors>
+                                <b:ChangePropertyAction TargetName="ClassSectionGrid" PropertyName="Visibility" Value="Visible"/>
+                            </b:EventTrigger>
+                            
+                            <!-- MOD_ACS: Reset ClassSectionGrid Visibility when changing tab -->
+                            <b:EventTrigger EventName="Unloaded">
                                 <b:ChangePropertyAction TargetName="ClassSectionGrid" PropertyName="Visibility" Value="Visible"/>
                             </b:EventTrigger>
                         </b:Interaction.Triggers>
-                    </ls:LSToggleButton>
+                    </ls:LSButton>
 
                 </Grid>
 
@@ -1005,8 +1011,8 @@
                     <!-- Prepared -->
                     <DataTrigger Binding="{Binding Path=(ls:AttachedProperties.InheritedTag), RelativeSource={RelativeSource Mode=Self}}" Value="Prepared">
                         <Setter TargetName="Icon" Property="Source" Value="{StaticResource PreparedSpellsIcon}"/>
-                        <!-- MOD_ACS: Add ClassSectionGridToggle btn visibility -->
-                        <Setter TargetName="ClassSectionGridToggle" Property="Visibility" Value="Visible"/>
+                        <!-- MOD_ACS: Add ClassSectionGridClose btn default visibility -->
+                        <Setter TargetName="ClassSectionGridClose" Property="Visibility" Value="Visible"/>
                     </DataTrigger>
 
                     <!-- MOD_ACS: Add trigger for LearnBtnContainer -->
@@ -1016,6 +1022,24 @@
                             <Condition Binding="{Binding Path=(ls:AttachedProperties.InheritedTag), RelativeSource={RelativeSource Mode=Self}}" Value="Prepared"/>
                         </MultiDataTrigger.Conditions>
                         <Setter TargetName="LearnBtnContainer" Property="Visibility" Value="Visible"/>
+                    </MultiDataTrigger>
+
+                    <!-- MOD_ACS: Add switch for btn ClassSectionGrid Close/Open -->
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding Path=(ls:AttachedProperties.InheritedTag), RelativeSource={RelativeSource Mode=Self}}" Value="Prepared"/>
+                            <Condition Binding="{Binding Visibility, ElementName=ClassSectionGrid}" Value="Visible"/>
+                        </MultiDataTrigger.Conditions>
+                        <Setter TargetName="ClassSectionGridClose" Property="Visibility" Value="Visible"/>
+                        <Setter TargetName="ClassSectionGridOpen" Property="Visibility" Value="Collapsed"/>
+                    </MultiDataTrigger>
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding Path=(ls:AttachedProperties.InheritedTag), RelativeSource={RelativeSource Mode=Self}}" Value="Prepared"/>
+                            <Condition Binding="{Binding Visibility, ElementName=ClassSectionGrid}" Value="Collapsed"/>
+                        </MultiDataTrigger.Conditions>
+                        <Setter TargetName="ClassSectionGridClose" Property="Visibility" Value="Collapsed"/>
+                        <Setter TargetName="ClassSectionGridOpen" Property="Visibility" Value="Visible"/>
                     </MultiDataTrigger>
 
                     <!-- Feats -->
