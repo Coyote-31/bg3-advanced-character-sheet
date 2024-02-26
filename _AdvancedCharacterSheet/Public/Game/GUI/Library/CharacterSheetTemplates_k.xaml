@@ -2139,7 +2139,7 @@
                                                             Visibility="{Binding Path=ItemsSource.Count, RelativeSource={RelativeSource Self}, Converter={StaticResource CountToVisibilityConverter}}"/>
 
                                             <!-- Spells -->
-                                            <!-- Mod_ACS: Add margin -->
+                                            <!-- MOD_ACS: Add margin -->
                                             <Grid x:Name="SpellsTitle" Visibility="Collapsed" HorizontalAlignment="Stretch" Margin="0,0,0,0">
                                                 
                                                 <!-- MOD_ACS: Add x:Name / Update margin // BG3 Margin="120,22,0,0" -->
@@ -8225,7 +8225,7 @@ Source="{StaticResource SavingThrowDice}">
                                         <Condition Binding="{Binding ItemsSource.Count, RelativeSource={RelativeSource Self}}" Value="0"/>
                                     </MultiDataTrigger.Conditions>
                                     <Setter TargetName="NoItemsFoundOverlay" Property="Visibility" Value="Visible"/>
-                                    <!-- Mod_ACS: Add to Recenter on search -->
+                                    <!-- MOD_ACS: Add to Recenter on search -->
                                     <Setter TargetName="itemsContainer" Property="Margin" Value="0,0,-10,1"/>
                                     <Setter TargetName="InventoryTint" Property="Margin" Value="0,-6,19,-5"/>
                                 </MultiDataTrigger>
@@ -8255,7 +8255,7 @@ Source="{StaticResource SavingThrowDice}">
                                         <Condition Binding="{Binding ItemsSource.Count, RelativeSource={RelativeSource Self}}" Value="0"/>
                                         <Condition Binding="{Binding VerticalAlignment, ElementName=Panel}" Value="Top"/>
                                     </MultiDataTrigger.Conditions>
-                                    <!-- Mod_ACS: Add recenter -->
+                                    <!-- MOD_ACS: Add recenter -->
                                     <Setter TargetName="itemsContainer" Property="Margin" Value="0,0,-19,1"/>
                                     <Setter TargetName="InventoryTint" Property="Margin" Value="6,-8,28,-7"/>
                                 </MultiDataTrigger>
@@ -8274,7 +8274,7 @@ Source="{StaticResource SavingThrowDice}">
                                         <Condition Binding="{Binding CurrentFilter, ElementName=FilteringContainerHolder, Converter={StaticResource NullToBoolTrueConverter}}" Value="False"/>
                                         <Condition Binding="{Binding ItemsSource.Count, RelativeSource={RelativeSource Self}}" Value="0"/>
                                     </MultiDataTrigger.Conditions>
-                                    <!-- Mod_ACS: Add recenter -->
+                                    <!-- MOD_ACS: Add recenter -->
                                     <Setter TargetName="itemsContainer" Property="Margin" Value="0,0,-12,1"/>
                                     <Setter TargetName="InventoryTint" Property="Margin" Value="0,-8,17,-7"/>
                                 </MultiDataTrigger>
@@ -8298,7 +8298,7 @@ Source="{StaticResource SavingThrowDice}">
                                         <Condition Binding="{Binding ItemsSource.Count, RelativeSource={RelativeSource Self}}" Value="0"/>
                                         <Condition Binding="{Binding VerticalAlignment, ElementName=PanelsContainer}" Value="Top"/>
                                     </MultiDataTrigger.Conditions>
-                                    <!-- Mod_ACS: Add recenter -->
+                                    <!-- MOD_ACS: Add recenter -->
                                     <Setter TargetName="itemsContainer" Property="Margin" Value="0,0,0,0"/>
                                     <Setter TargetName="InventoryTint" Property="Margin" Value="-7,-7,21,-7"/>
                                 </MultiDataTrigger>
