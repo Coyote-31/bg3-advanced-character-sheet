@@ -14,7 +14,7 @@ The purpose of this mod is to improve Character and Party panel. Also display **
 > Delete manually AToR old mod version.
 
 ## 🔖 Version
-- 📦 **ACS** mod : `2.1.0`
+- 📦 **ACS** mod : `2.1.1`
 - 🎮 **BG3** compatibility : `Hotfix #19 [ Patch6_Hotfix2 ]`
 
 ## ✨ Features
@@ -46,13 +46,10 @@ The purpose of this mod is to improve Character and Party panel. Also display **
     > The icons of resistance work fine. Unfortunately, I can't achieved to display the none ones. But 13 icons on top of the screen all the time is what you really want to anyway ?
     
 - **Companions Panel and Camp Chest Everywhere** ( *CPCCE* ) : Tested with CPCCE v1.2.0 ( Alias 1.2 )
-
-    > My mod doesn't override this one. And if you have DynamicSidebar mod without CPCCE you are still able to open the camp inventory but the doll is buggy (DynamicSidebar bug which mess up that)
-
-### 🟡 Compatible with **minor bugs** :
 - **Dynamic Siderbar** ( *DS* ) : Tested with DS v1.2.9 ( Alias 1.29 )
 
-    > My mod doesn't override this one. But if you have DynamicSidebar mod without CPCCE you are still able to open the camp inventory but the doll is buggy (DynamicSidebar bug which mess up that)
+### 🟡 Compatible with **minor bugs** :
+- None -> *Tell me if you find one ❗*
 
 ### 🔴 **Not compatible** with the following mods :
 - None -> *Tell me if you find one ❗*
