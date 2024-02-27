@@ -14,7 +14,7 @@ The purpose of this mod is to improve Character and Party panel. Also display **
 > Delete manually AToR old mod version.
 
 ## 🔖 Version
-- 📦 **ACS** mod : `2.0.0`
+- 📦 **ACS** mod : `2.1.0`
 - 🎮 **BG3** compatibility : `Hotfix #19 [ Patch6_Hotfix2 ]`
 
 ## ✨ Features
@@ -26,6 +26,8 @@ The purpose of this mod is to improve Character and Party panel. Also display **
 - Replace some backgrounds and sprites to **fix artifacts** in vanilla images ( Party Panel Bg, Tabs, ... ).
 - Full review of the **Inventory** for Character and Party Panels.
 - Full review of the **Equipment** for Character and Party Panels.
+- Add buttons in *Spells Book*
+- Rework Camp/Companions Panels.
 
 *All Types of Resistance*:
 - Display **all** types of resistance including ones without any immunity, resistance or weakness.
@@ -42,9 +44,15 @@ The purpose of this mod is to improve Character and Party panel. Also display **
 - **Better Target Info** ( *BTI* ) : Tested with BTI v1.2.0.1 ( Alias 1.2 )
 
     > The icons of resistance work fine. Unfortunately, I can't achieved to display the none ones. But 13 icons on top of the screen all the time is what you really want to anyway ?
+    
+- **Companions Panel and Camp Chest Everywhere** ( *CPCCE* ) : Tested with CPCCE v1.2.0 ( Alias 1.2 )
+
+    > My mod doesn't override this one. And if you have DynamicSidebar mod without CPCCE you are still able to open the camp inventory but the doll is buggy (DynamicSidebar bug which mess up that)
 
 ### 🟡 Compatible with **minor bugs** :
-- None -> *Tell me if you find one ❗*
+- **Dynamic Siderbar** ( *DS* ) : Tested with DS v1.2.9 ( Alias 1.29 )
+
+    > My mod doesn't override this one. But if you have DynamicSidebar mod without CPCCE you are still able to open the camp inventory but the doll is buggy (DynamicSidebar bug which mess up that)
 
 ### 🔴 **Not compatible** with the following mods :
 - None -> *Tell me if you find one ❗*
@@ -56,6 +64,9 @@ This mod changes the following files of the game :
 - Public\Game\GUI\Library\
   - **CharacterSheetTemplates_k.xaml**
   - **Images_k.xaml**
+  
+- Public\Game\GUI\Widgets\
+  - **CompanionsPanel.xaml**
 
 ## 💾 Install
 
