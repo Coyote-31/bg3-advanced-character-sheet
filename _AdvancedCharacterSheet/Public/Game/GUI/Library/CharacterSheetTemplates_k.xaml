@@ -1327,7 +1327,8 @@
                                 </b:Interaction.Triggers>
 
                                 <ContentControl.Clip>
-                                    <EllipseGeometry Center="34,34" RadiusX="34" RadiusY="34" />
+                                    <!-- MOD_ACS: Update circle geometry // BG3: Center="34,34" RadiusX="34" RadiusY="34" -->
+                                    <EllipseGeometry Center="36,35" RadiusX="33" RadiusY="33" />
                                 </ContentControl.Clip>
                             </ContentControl>
                         </DataTemplate>
