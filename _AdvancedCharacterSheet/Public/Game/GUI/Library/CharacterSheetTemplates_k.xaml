@@ -729,6 +729,9 @@
                         <Image x:Name="Icon" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="None" />
                     </Border>
 
+                    <!-- MOD_ACS: Add switcher spy mirror LearnSpells visibility -->
+                    <Border x:Name="LearnSpellsSpy" Visibility="Collapsed" />
+
                     <!-- MOD_ACS: Add LearnBtnContainer -->
                     <Border x:Name="LearnBtnContainer" Grid.Column="0" Grid.Row="1" Height="72" VerticalAlignment="Top" Margin="12,0,-12,0" Visibility="Collapsed">
                         <!-- MOD_ACS: Add LearnSpellsButton // BG3: HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,26,0" MinWidth="150" -->
@@ -772,11 +775,10 @@
                                 </MultiBinding>
                             </ls:LSButton.CommandParameter>
                             
-                            <!-- MOD_ACS: Btn Switcher -->
                             <b:Interaction.Triggers>
+                                <!-- MOD_ACS: Btn Switcher -->
                                 <b:EventTrigger EventName="Click">
-                                    <b:ChangePropertyAction TargetName="LearnBtnContainer" PropertyName="Visibility" Value="Collapsed"/>
-                                    <b:ChangePropertyAction TargetName="LearnBtnContainerCloser" PropertyName="Visibility" Value="Visible"/>
+                                    <b:ChangePropertyAction TargetName="LearnSpellsSpy" PropertyName="Visibility" Value="Visible"/>
                                 </b:EventTrigger>
                             </b:Interaction.Triggers>
                             
@@ -841,11 +843,10 @@
                                 </ControlTemplate>
                             </ls:LSButton.Template>
                             
-                            <!-- MOD_ACS: Btn Switcher -->
                             <b:Interaction.Triggers>
+                                <!-- MOD_ACS: Btn Switcher -->
                                 <b:EventTrigger EventName="Click">
-                                    <b:ChangePropertyAction TargetName="LearnBtnContainer" PropertyName="Visibility" Value="Visible"/>
-                                    <b:ChangePropertyAction TargetName="LearnBtnContainerCloser" PropertyName="Visibility" Value="Collapsed"/>
+                                    <b:ChangePropertyAction TargetName="LearnSpellsSpy" PropertyName="Visibility" Value="Collapsed"/>
                                 </b:EventTrigger>
                             </b:Interaction.Triggers>
                             
@@ -1011,20 +1012,29 @@
                     <!-- Prepared -->
                     <DataTrigger Binding="{Binding Path=(ls:AttachedProperties.InheritedTag), RelativeSource={RelativeSource Mode=Self}}" Value="Prepared">
                         <Setter TargetName="Icon" Property="Source" Value="{StaticResource PreparedSpellsIcon}"/>
-                        <!-- MOD_ACS: Add ClassSectionGridClose btn default visibility -->
-                        <Setter TargetName="ClassSectionGridClose" Property="Visibility" Value="Visible"/>
                     </DataTrigger>
 
-                    <!-- MOD_ACS: Add trigger for LearnBtnContainer -->
+                    <!-- MOD_ACS: Add switch for LearnBtnContainer/LearnBtnContainerCloser based on LearnSpellsSpy Visibility -->
                     <MultiDataTrigger>
                         <MultiDataTrigger.Conditions>
-                            <Condition Binding="{Binding SelectedItem.Class.CanLearnSpells, ElementName=Tabs}" Value="True"/>
                             <Condition Binding="{Binding Path=(ls:AttachedProperties.InheritedTag), RelativeSource={RelativeSource Mode=Self}}" Value="Prepared"/>
+                            <Condition Binding="{Binding SelectedItem.Class.CanLearnSpells, ElementName=Tabs}" Value="True"/>
+                            <Condition Binding="{Binding Visibility, ElementName=LearnSpellsSpy}" Value="Collapsed"/>
                         </MultiDataTrigger.Conditions>
                         <Setter TargetName="LearnBtnContainer" Property="Visibility" Value="Visible"/>
+                        <Setter TargetName="LearnBtnContainerCloser" Property="Visibility" Value="Collapsed"/>
+                    </MultiDataTrigger>
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding Path=(ls:AttachedProperties.InheritedTag), RelativeSource={RelativeSource Mode=Self}}" Value="Prepared"/>
+                            <Condition Binding="{Binding SelectedItem.Class.CanLearnSpells, ElementName=Tabs}" Value="True"/>
+                            <Condition Binding="{Binding Visibility, ElementName=LearnSpellsSpy}" Value="Visible"/>
+                        </MultiDataTrigger.Conditions>
+                        <Setter TargetName="LearnBtnContainer" Property="Visibility" Value="Collapsed"/>
+                        <Setter TargetName="LearnBtnContainerCloser" Property="Visibility" Value="Visible"/>
                     </MultiDataTrigger>
 
-                    <!-- MOD_ACS: Add switch for btn ClassSectionGrid Close/Open -->
+                    <!-- MOD_ACS: Add switch for btn ClassSectionGrid Close/Open based on ClassSectionGrid Visibility -->
                     <MultiDataTrigger>
                         <MultiDataTrigger.Conditions>
                             <Condition Binding="{Binding Path=(ls:AttachedProperties.InheritedTag), RelativeSource={RelativeSource Mode=Self}}" Value="Prepared"/>
