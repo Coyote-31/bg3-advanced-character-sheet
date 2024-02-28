@@ -320,26 +320,22 @@
     <!--MOD_ACS: CAMP PORTRAIT TEMPLATE-->
     <DataTemplate x:Key="ACS_CampPortraitTemplate">
         <DataTemplate.Resources>
+            <!-- MOD_ACS: Add camp portrait image -->
+            <BitmapImage x:Key="CampPortraitImage" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/CompanionsPanel/campPortrait.png" />
+            <ImageBrush x:Key="CampPortraitImageBrush" ImageSource="{StaticResource CampPortraitImage}" Stretch="UniformToFill" Viewbox="0,0,0.8,1" Margin="0,-4,0,-4" />
+
             <Style TargetType="Border" >
-                <Setter Property="Background" Value="{Binding Icon}"/>
+                <!-- MOD_ACS: Update portrait ImageBrush value // BG3: Value="{Binding Icon}" -->
+                <Setter Property="Background" Value="{StaticResource CampPortraitImageBrush}"/>
                 <Setter Property="HorizontalAlignment" Value="Stretch"/>
                 <Setter Property="VerticalAlignment" Value="Stretch"/>
                 <Setter Property="Margin" Value="4"/>
             </Style>
-            <!-- MOD_ACS: Add resource image -->
-            <BitmapImage x:Key="CampPortraitImage" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/CompanionsPanel/campPortrait.png" />
         </DataTemplate.Resources>
         <Grid>
             <Border Name="Backfill" Background="{StaticResource LS_tint00}"/>
-            <!-- MOD_ACS: Add Height from trigger deleted -->
-            <Border Name="PortraitImage" Height="128"/>
-            <!-- MOD_ACS: Add Image -->
-            <Rectangle Width="100" Height="152">
-                <Rectangle.Fill>
-                    <ImageBrush ImageSource="{StaticResource CampPortraitImage}" Stretch="UniformToFill" Viewbox="0,0,0.8,1" Margin="0,-4,0,-4"/>
-                </Rectangle.Fill>
-            </Rectangle>
-            
+            <Border Name="PortraitImage" />
+
             <ls:LSEntityObject EntityRef="{Binding EntityHandle}" Background="Transparent">
                 <ls:LSEntityObject.ToolTip>
                     <ls:LSTooltip Content="{Binding Path=DataContext.Name,RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
