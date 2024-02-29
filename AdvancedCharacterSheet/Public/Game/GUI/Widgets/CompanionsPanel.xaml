@@ -127,6 +127,20 @@
 
     <ls:UIWidget.Template>
         <ControlTemplate>
+            <ControlTemplate.resources>
+                <!-- MOD_ACS: Add companions static dolls to display when outside of camp -->
+                <BitmapImage x:Key="Astarion_FB" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/DollFullBody/Astarion.png"/>
+                <BitmapImage x:Key="Gale_FB" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/DollFullBody/Gale.png"/>
+                <BitmapImage x:Key="Halsin_FB" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/DollFullBody/Halsin.png"/>
+                <BitmapImage x:Key="Jaheira_FB" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/DollFullBody/Jaheira.png"/>
+                <BitmapImage x:Key="Karlach_FB" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/DollFullBody/Karlach.png"/>
+                <BitmapImage x:Key="Laezel_FB" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/DollFullBody/Laezel.png"/>
+                <BitmapImage x:Key="Minsc_FB" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/DollFullBody/Minsc.png"/>
+                <BitmapImage x:Key="Minthara_FB" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/DollFullBody/Minthara.png"/>
+                <BitmapImage x:Key="Shadowheart_FB" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/DollFullBody/Shadowheart.png"/>
+                <BitmapImage x:Key="Wyll_FB" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/DollFullBody/Wyll.png"/>
+            </ControlTemplate.resources>
+            
             <Grid x:Name="bgFade" Margin="-1000,0,-1000,-1000">
                 <!-- MOD_ACS: Update Margin & Width-->
                 <!-- BG3: <Grid x:Name="Panel" HorizontalAlignment="Right" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5" Margin="0,0,1060,1440" Width="1426"> -->
@@ -223,6 +237,15 @@
                                             </StackPanel>
 
                                         </Grid>
+                                        
+                                        <!-- MOD_ACS: Add PaperDoll replacer because equipments are not loaded for companions when not in camp -->
+                                        <Grid Name="NotInCampPaperdollHolder" Margin="120,0,0,160" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Stretch" Visibility="Collapsed">
+                                            <Image x:Name="NotInCampPaperdoll" Stretch="Uniform" Height="1100" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"/>
+                                            <ls:LSNineSliceImage x:Name="NotInCampPaperdollPortrait" Style="{StaticResource Generic9SliceBGHighlighted}" Margin="26,120,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Visible">
+                                                <Border Background="{Binding Icon}" Width="400" Height="400" CornerRadius="26"/>
+                                            </ls:LSNineSliceImage>
+                                        </Grid>
+                                        
                                         <Grid ClipToBounds="True">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"/>
@@ -236,7 +259,8 @@
                                                 <Grid Height="88" VerticalAlignment="Top">
                                                     <!-- NAME -->
 
-                                                    <TextBlock Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontSize="{StaticResource ScaledIntermediateFontSize}" Foreground="{StaticResource LS_accent100TxtColor}" noesis:Text.StrokeThickness="4" noesis:Text.Stroke="{StaticResource LS_PrimaryColorOutlineColor}" TextWrapping="Wrap"/>
+                                                    <!-- MOD_ACS: Add name -->
+                                                    <TextBlock x:Name="SelectedCompanionName" Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontSize="{StaticResource ScaledIntermediateFontSize}" Foreground="{StaticResource LS_accent100TxtColor}" noesis:Text.StrokeThickness="4" noesis:Text.Stroke="{StaticResource LS_PrimaryColorOutlineColor}" TextWrapping="Wrap"/>
                                                     <!-- TOGGLE VIEW BTN -->
                                                     <!-- MOD_ACS: Add Margin -->
                                                     <ls:LSToggleButton x:Name="ToggleCSView" SoundID="UI_HUD_Options_ToggleButton" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="True" Margin="18,0,0,0">
@@ -451,6 +475,74 @@
                     <DataTrigger.ExitActions>
                         <BeginStoryboard x:Name="StartShowCharactersheet" Storyboard="{StaticResource ShowCharacterSelectAnim}"/>
                     </DataTrigger.ExitActions>
+                </DataTrigger>
+                
+                <!-- MOD_ACS: Add not in camp paperDoll switch -->
+                <DataTrigger Binding="{Binding CurrentPlayer.SelectedCharacter.IsInCamp}" Value="False">
+                    <Setter TargetName="PaperdollHolder" Property="Visibility" Value="Collapsed"/>
+                    <Setter TargetName="NotInCampPaperdollHolder" Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+                
+                <!-- MOD_ACS: Add not in camp switch for origin characters -->
+                <DataTrigger Binding="{Binding Text, ElementName=SelectedCompanionName}" Value="Astarion">
+                    <Setter TargetName="NotInCampPaperdoll" Property="Source" Value="{StaticResource Astarion_FB}"/>
+                    <Setter TargetName="NotInCampPaperdoll" Property="Visibility" Value="Visible"/>
+                    <Setter TargetName="NotInCampPaperdollPortrait" Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Text, ElementName=SelectedCompanionName}" Value="Gale">
+                    <Setter TargetName="NotInCampPaperdoll" Property="Source" Value="{StaticResource Gale_FB}"/>
+                    <Setter TargetName="NotInCampPaperdoll" Property="Visibility" Value="Visible"/>
+                    <Setter TargetName="NotInCampPaperdollPortrait" Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Text, ElementName=SelectedCompanionName}" Value="Gayle">
+                    <Setter TargetName="NotInCampPaperdoll" Property="Source" Value="{StaticResource Gale_FB}"/>
+                    <Setter TargetName="NotInCampPaperdoll" Property="Visibility" Value="Visible"/>
+                    <Setter TargetName="NotInCampPaperdollPortrait" Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Text, ElementName=SelectedCompanionName}" Value="Halsin">
+                    <Setter TargetName="NotInCampPaperdoll" Property="Source" Value="{StaticResource Halsin_FB}"/>
+                    <Setter TargetName="NotInCampPaperdoll" Property="Visibility" Value="Visible"/>
+                    <Setter TargetName="NotInCampPaperdollPortrait" Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Text, ElementName=SelectedCompanionName}" Value="Jaheira">
+                    <Setter TargetName="NotInCampPaperdoll" Property="Source" Value="{StaticResource Jaheira_FB}"/>
+                    <Setter TargetName="NotInCampPaperdoll" Property="Visibility" Value="Visible"/>
+                    <Setter TargetName="NotInCampPaperdollPortrait" Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Text, ElementName=SelectedCompanionName}" Value="Karlach">
+                    <Setter TargetName="NotInCampPaperdoll" Property="Source" Value="{StaticResource Karlach_FB}"/>
+                    <Setter TargetName="NotInCampPaperdoll" Property="Visibility" Value="Visible"/>
+                    <Setter TargetName="NotInCampPaperdollPortrait" Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Text, ElementName=SelectedCompanionName}" Value="Lae'zel">
+                    <Setter TargetName="NotInCampPaperdoll" Property="Source" Value="{StaticResource Laezel_FB}"/>
+                    <Setter TargetName="NotInCampPaperdoll" Property="Visibility" Value="Visible"/>
+                    <Setter TargetName="NotInCampPaperdollPortrait" Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Text, ElementName=SelectedCompanionName}" Value="Minsc">
+                    <Setter TargetName="NotInCampPaperdoll" Property="Source" Value="{StaticResource Minsc_FB}"/>
+                    <Setter TargetName="NotInCampPaperdoll" Property="Visibility" Value="Visible"/>
+                    <Setter TargetName="NotInCampPaperdollPortrait" Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Text, ElementName=SelectedCompanionName}" Value="Minthara">
+                    <Setter TargetName="NotInCampPaperdoll" Property="Source" Value="{StaticResource Minthara_FB}"/>
+                    <Setter TargetName="NotInCampPaperdoll" Property="Visibility" Value="Visible"/>
+                    <Setter TargetName="NotInCampPaperdollPortrait" Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Text, ElementName=SelectedCompanionName}" Value="Shadowheart">
+                    <Setter TargetName="NotInCampPaperdoll" Property="Source" Value="{StaticResource Shadowheart_FB}"/>
+                    <Setter TargetName="NotInCampPaperdoll" Property="Visibility" Value="Visible"/>
+                    <Setter TargetName="NotInCampPaperdollPortrait" Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Text, ElementName=SelectedCompanionName}" Value="Ombrecœur">
+                    <Setter TargetName="NotInCampPaperdoll" Property="Source" Value="{StaticResource Shadowheart_FB}"/>
+                    <Setter TargetName="NotInCampPaperdoll" Property="Visibility" Value="Visible"/>
+                    <Setter TargetName="NotInCampPaperdollPortrait" Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Text, ElementName=SelectedCompanionName}" Value="Wyll">
+                    <Setter TargetName="NotInCampPaperdoll" Property="Source" Value="{StaticResource Wyll_FB}"/>
+                    <Setter TargetName="NotInCampPaperdoll" Property="Visibility" Value="Visible"/>
+                    <Setter TargetName="NotInCampPaperdollPortrait" Property="Visibility" Value="Collapsed"/>
                 </DataTrigger>
 
             </ControlTemplate.Triggers>
