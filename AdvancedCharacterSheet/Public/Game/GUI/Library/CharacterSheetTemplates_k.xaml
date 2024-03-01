@@ -7440,9 +7440,14 @@ Source="{StaticResource SavingThrowDice}">
                         <Grid.ToolTip>
                             <ls:LSTooltip x:Name="tooltip" IsHitTestVisible="False" Content="{Binding Path=DataContext.Item,ElementName=root}"/>
                         </Grid.ToolTip>
-                        <Image x:Name="SlotBg" Style="{StaticResource EquipmentSlogBgImageStyle}"/>
+                        <!-- MOD_ACS: Add IsHitTestVisible to only match inner content on hover -->
+                        <Image x:Name="SlotBg" Style="{StaticResource EquipmentSlogBgImageStyle}" IsHitTestVisible="False"/>
                         <ls:LSEntityObject EntityRef="{Binding EntityHandle}" Context="Inventory" x:Name="IconControl" Background="{StaticResource EquipmentSlotBg}" Opacity="1.0" DataContext="{Binding Item}"
                                            Width="{StaticResource EquipmentIconSlotSize}" Height="{StaticResource EquipmentIconSlotSize}">
+                            <!-- MOD_ACS: Add b:Interaction.Behaviors to enable ContextMenu -->
+                            <b:Interaction.Behaviors>
+                                <ls:ContextMenuFillBehavior Context="Inventory" Player="{Binding DataContext.CurrentPlayer, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" TargetObject="{Binding .}" Source="{Binding SelectedItems,ElementName=InventoryHolder}" Command="{Binding DataContext.ContextActionPressed, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
+                            </b:Interaction.Behaviors>
                             <Image x:Name="RarityBackground" Style="{StaticResource RarityFrameBackgroundImageStyle}"/>
                             <Rectangle Fill="{Binding Icon}" />
                             <Image x:Name="RarityForeground" Style="{StaticResource RarityFrameForegroundImageStyle}"/>
@@ -8666,7 +8671,7 @@ Source="{StaticResource SavingThrowDice}">
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <!--===== CONTAINER INVENTORY TEMPLATE =====-->
+    <!--===== CONTAINER INVENTORY TEMPLATE =====--> 
 
     <ControlTemplate x:Key="ContainerInventoryTemplate" TargetType="Control">
         <Grid x:Name="InventoryPanelHolder">
