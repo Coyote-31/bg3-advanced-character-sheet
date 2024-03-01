@@ -347,27 +347,9 @@
                                             <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
-                                        
-                                        <!--COMPANIONS-->
-                                        <!-- MOD_ACS: Switch default tab select to camp chest - Update SelectedIndex // BG3: SelectedIndex="0" -->
-                                        <ListBox Grid.Column="1" x:Name="CompanionPortraits" HorizontalAlignment="Center" ItemsSource="{Binding Data.CampNonPartyCharacters}" ItemTemplate="{StaticResource CharacterPortraitTemplate}"  VirtualizingPanel.VirtualizationMode="Recycling" ItemContainerStyle="{StaticResource ListBoxPortraits}" SelectedIndex="-1">
-                                            <b:Interaction.Triggers>
-                                                <!--toggle list and page-->
-                                                <b:EventTrigger EventName="Selected">
-                                                    <b:ChangePropertyAction TargetName="CampPortraits" PropertyName="SelectedIndex" Value="-1" />
-                                                    <b:ChangePropertyAction TargetName="CharacterSheetPage" PropertyName="Visibility" Value="Visible" />
-                                                    <b:ChangePropertyAction TargetName="TravellerChestPage" PropertyName="Visibility" Value="Collapsed" />
-                                                </b:EventTrigger>
-                                            </b:Interaction.Triggers>
-                                            <ListBox.ItemsPanel>
-                                                <ItemsPanelTemplate>
-                                                    <VirtualizingStackPanel Orientation="Horizontal"/>
-                                                </ItemsPanelTemplate>
-                                            </ListBox.ItemsPanel>
-                                        </ListBox>
-                                        
+
                                         <!--CHESTS-->
-                                        <!-- MOD_ACS: Switch default tab select to camp chest - Add SelectedIndex / Update ItemTemplate to ACS Lib // BG3: ItemTemplate="{StaticResource CharacterPortraitTemplate}" -->
+                                        <!-- MOD_ACS: Switch default tab by switching order to keep tooltips loaded - Add SelectedIndex / Update ItemTemplate to ACS Lib // BG3: ItemTemplate="{StaticResource CharacterPortraitTemplate}" -->
                                         <ListBox Grid.Column="0" x:Name="CampPortraits" HorizontalAlignment="Center" ItemsSource="{Binding CurrentPlayer.UIData.CampChests}" ItemTemplate="{StaticResource ACS_CampPortraitTemplate}"  VirtualizingPanel.VirtualizationMode="Recycling" ItemContainerStyle="{StaticResource ListBoxPortraits}" SelectedIndex="0">
                                             <b:Interaction.Triggers>
                                                 <!--toggle list and page-->
@@ -383,7 +365,25 @@
                                                 </ItemsPanelTemplate>
                                             </ListBox.ItemsPanel>
                                         </ListBox>
-                                       
+
+                                        <!--COMPANIONS-->
+                                        <!-- MOD_ACS: Switch default tab by switching order to keep tooltips loaded -->
+                                        <ListBox Grid.Column="1" x:Name="CompanionPortraits" HorizontalAlignment="Center" ItemsSource="{Binding Data.CampNonPartyCharacters}" ItemTemplate="{StaticResource CharacterPortraitTemplate}"  VirtualizingPanel.VirtualizationMode="Recycling" ItemContainerStyle="{StaticResource ListBoxPortraits}" SelectedIndex="0">
+                                            <b:Interaction.Triggers>
+                                                <!--toggle list and page-->
+                                                <b:EventTrigger EventName="Selected">
+                                                    <b:ChangePropertyAction TargetName="CampPortraits" PropertyName="SelectedIndex" Value="-1" />
+                                                    <b:ChangePropertyAction TargetName="CharacterSheetPage" PropertyName="Visibility" Value="Visible" />
+                                                    <b:ChangePropertyAction TargetName="TravellerChestPage" PropertyName="Visibility" Value="Collapsed" />
+                                                </b:EventTrigger>
+                                            </b:Interaction.Triggers>
+                                            <ListBox.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <VirtualizingStackPanel Orientation="Horizontal"/>
+                                                </ItemsPanelTemplate>
+                                            </ListBox.ItemsPanel>
+                                        </ListBox>
+
                                     </Grid>
                                 </ls:LSScrollViewer>
 
