@@ -8986,6 +8986,11 @@ Source="{StaticResource SavingThrowDice}">
                 <Setter TargetName="EquipmentHolder" Property="Margin" Value="-10,40,-25,0"/>
             </DataTrigger>
             
+            <!-- MOD_ACS: Add trigger for Trade Panel-->
+            <DataTrigger Binding="{Binding Name, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Value="Trade" >
+                <Setter TargetName="EquipmentHolder" Property="Margin" Value="16,20,16,40"/>
+            </DataTrigger>
+            
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
