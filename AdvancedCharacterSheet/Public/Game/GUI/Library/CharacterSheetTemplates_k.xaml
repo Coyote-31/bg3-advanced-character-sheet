@@ -946,7 +946,7 @@
                         
                         <b:Interaction.Triggers>
                             <b:EventTrigger EventName="Click">
-                                <b:ChangePropertyAction TargetName="ClassSectionGrid" PropertyName="Visibility" Value="Collapsed"/>
+                                <b:ChangePropertyAction TargetName="ClassSectionGridToggleSpy" PropertyName="Visibility" Value="Collapsed"/>
                             </b:EventTrigger>
                         </b:Interaction.Triggers>
                     </ls:LSButton>
@@ -975,12 +975,7 @@
                         
                         <b:Interaction.Triggers>
                             <b:EventTrigger EventName="Click">
-                                <b:ChangePropertyAction TargetName="ClassSectionGrid" PropertyName="Visibility" Value="Visible"/>
-                            </b:EventTrigger>
-                            
-                            <!-- MOD_ACS: Reset ClassSectionGrid Visibility when changing tab -->
-                            <b:EventTrigger EventName="Unloaded">
-                                <b:ChangePropertyAction TargetName="ClassSectionGrid" PropertyName="Visibility" Value="Visible"/>
+                                <b:ChangePropertyAction TargetName="ClassSectionGridToggleSpy" PropertyName="Visibility" Value="Visible"/>
                             </b:EventTrigger>
                         </b:Interaction.Triggers>
                     </ls:LSButton>
@@ -1051,6 +1046,20 @@
                         <Setter TargetName="ClassSectionGridClose" Property="Visibility" Value="Collapsed"/>
                         <Setter TargetName="ClassSectionGridOpen" Property="Visibility" Value="Visible"/>
                     </MultiDataTrigger>
+                    
+                    <!-- <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding SelectedItem.Class.MustPrepareSpells, ElementName=Tabs, FallbackValue=False}" Value="True"/>
+                        </MultiDataTrigger.Conditions>
+                        <Setter TargetName="ClassSectionGrid" Property="Visibility" Value="Collapsed"/>
+                    </MultiDataTrigger>
+                    
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding SelectedItem.Class.MustPrepareSpells, ElementName=Tabs, FallbackValue=False}" Value="False"/>
+                        </MultiDataTrigger.Conditions>
+                        <Setter TargetName="ClassSectionGrid" Property="Visibility" Value="Visible"/>
+                    </MultiDataTrigger> -->
 
                     <!-- Feats -->
                     <DataTrigger Binding="{Binding Path=(ls:AttachedProperties.InheritedTag), RelativeSource={RelativeSource Mode=Self}}" Value="CharacterFeats">
@@ -2269,6 +2278,8 @@
                                     </Grid>
 
                                     <!-- Prepared spells section -->
+                                    <!-- MOD_ACS: Add switcher ToggleSpy to handle ClassSectionGrid Visibility btn -->
+                                    <Border x:Name="ClassSectionGridToggleSpy" Visibility="Visible"/>
                                     <!-- MOD_ACS: Switch visibility binding to Collapsed / Update Strech & Margin / Add MaxWidth // BG3: Stretch="Fill" Visibility="{Binding Visibility, ElementName=PreparedSpellsSection}" Margin="0,6,0,0"-->
                                     <Image x:Name="PreparedSpellsSectionOpening" Source="{StaticResource PreparedSpellsTop}" MaxWidth="1112" Stretch="Fill" Visibility="Collapsed" Margin="0,4,0,0"/>
 
@@ -2853,6 +2864,15 @@
                 <Setter TargetName="ClassPanelScrollableContent" Property="Grid.Row" Value="1"/>
                 <Setter TargetName="ClassPanelScrollableContent" Property="ScrollWheelEnabled" Value="False"/>
             </DataTrigger>
+
+            <!-- MOD_ACS: Add trigger to collapse on ToggleSpy ClassSectionGrid only when PreparedSpellsSection is visible -->
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Visibility, ElementName=PreparedSpellsSectionOpening}" Value="Visible"/>
+                    <Condition Binding="{Binding Visibility, ElementName=ClassSectionGridToggleSpy}" Value="Collapsed"/>
+                </MultiDataTrigger.Conditions>
+                <Setter TargetName="ClassSectionGrid" Property="Visibility" Value="Collapsed"/>
+            </MultiDataTrigger>
 
             <!-- Don't allow drag & drop for summons and followers -->
             <DataTrigger Binding="{Binding CharacterType}" Value="Summon">
