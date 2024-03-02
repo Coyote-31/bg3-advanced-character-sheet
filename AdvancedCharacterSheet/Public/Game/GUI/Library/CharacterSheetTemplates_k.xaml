@@ -3307,33 +3307,42 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Grid x:Name="PrimaryAbillity" Visibility="Hidden" Grid.Row="0" Background="Transparent">
+                        <!-- MOD_ACS: Add CornerRadius / Update type to Border // BG3: Grid -->
+                        <Border x:Name="PrimaryAbillity" Visibility="Hidden" Grid.Row="0" Background="Transparent" CornerRadius="12,12,0,0">
                             <Image Source="{StaticResource ProficientAbility}" Stretch="None"/>
                             <Grid.ToolTip>
                                 <ls:LSTooltip IsHitTestVisible="False" ContentTemplate="{StaticResource PrimaryAbilityTooltipContentTemplate}" Style="{StaticResource ManagedTooltipStyle}"/>
                             </Grid.ToolTip>
-                        </Grid>
-                        <StackPanel x:Name="AbilityBlock" Grid.Row="1" ToolTip="{StaticResource ManagedTooltip}" Background="Transparent">
-                            <Control x:Name="attrName" Template="{StaticResource AbilityShortDisplayName}"  FontSize="{StaticResource ScaledSmallishFontSize}" Foreground="{StaticResource LS_baseTxtColor}" HorizontalAlignment="Center" Margin="4,0,4,-6"/>
-                            <Grid Height="80">
-                                <Image x:Name="SavingThrowIcon" Visibility="{Binding HasSavingThrowProficiency, Converter={StaticResource BoolToVisibleConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center"
-Source="{StaticResource SavingThrowDice}">
-                            <Image.Effect>
-                                <DropShadowEffect BlurRadius="10" ShadowDepth="0" Opacity="1" Color="{StaticResource tint00}"/>
-                            </Image.Effect>
-                        </Image>
-                                <TextBlock x:Name="value" Text="{Binding Value}" FontSize="{StaticResource ScaledDefaultFontSize}" HorizontalAlignment="Center" Foreground="{StaticResource LS_tint100}" VerticalAlignment="Center"/>
-                            </Grid>
-                        </StackPanel>
+                        </Border>
+                        <!-- MOD_ACS: Add Border type container for CornerRadius -->
+                        <Border x:Name="AbilityBlockBorder" Grid.Row="1" ToolTip="{StaticResource ManagedTooltip}" Background="Transparent" CornerRadius="12">
+                            <!-- MOD_ACS: Move attributs to AbilityBlockBorder // BG3: Grid.Row="1" ToolTip="{StaticResource ManagedTooltip}" Background="Transparent" -->
+                            <StackPanel x:Name="AbilityBlock">
+                                <Control x:Name="attrName" Template="{StaticResource AbilityShortDisplayName}"  FontSize="{StaticResource ScaledSmallishFontSize}" Foreground="{StaticResource LS_baseTxtColor}" HorizontalAlignment="Center" Margin="4,0,4,-6"/>
+                                <Grid Height="80">
+                                    <Image x:Name="SavingThrowIcon" Visibility="{Binding HasSavingThrowProficiency, Converter={StaticResource BoolToVisibleConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center" Source="{StaticResource SavingThrowDice}">
+                                        <Image.Effect>
+                                            <DropShadowEffect BlurRadius="10" ShadowDepth="0" Opacity="1" Color="{StaticResource tint00}"/>
+                                        </Image.Effect>
+                                    </Image>
+                                    <TextBlock x:Name="value" Text="{Binding Value}" FontSize="{StaticResource ScaledDefaultFontSize}" HorizontalAlignment="Center" Foreground="{StaticResource LS_tint100}" VerticalAlignment="Center"/>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
                     </Grid>
 
                     <DataTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True" SourceName="PrimaryAbillity">
                             <Setter TargetName="PrimaryAbillity" Property="Background" Value="{StaticResource RowBG_h}"/>
-                            <Setter TargetName="AbilityBlock" Property="Background" Value="{StaticResource RowBG_h}"/>
+                            <!-- MOD_ACS: Update TargetName // BG3: TargetName="AbilityBlock" -->
+                            <Setter TargetName="AbilityBlockBorder" Property="Background" Value="{StaticResource RowBG_h}"/>
+                            <!-- MOD_ACS: Add Setter AbilityBlockBorder to match CornerRadius of bottom PrimaryAbillity -->
+                            <Setter TargetName="AbilityBlockBorder" Property="CornerRadius" Value="0,0,12,12"/>
                         </Trigger>
-                        <Trigger Property="IsMouseOver" Value="True" SourceName="AbilityBlock">
-                            <Setter TargetName="AbilityBlock" Property="Background" Value="{StaticResource RowBG_h}"/>
+                        <!-- MOD_ACS: Update SourceName // BG3: SourceName="AbilityBlock" -->
+                        <Trigger Property="IsMouseOver" Value="True" SourceName="AbilityBlockBorder">
+                            <!-- MOD_ACS: Update TargetName // BG3: TargetName="AbilityBlock" -->
+                            <Setter TargetName="AbilityBlockBorder" Property="Background" Value="{StaticResource RowBG_h}"/>
                         </Trigger>
                         <DataTrigger Binding="{Binding IsPrimary}" Value="True">
                             <Setter TargetName="PrimaryAbillity" Property="Visibility" Value="Visible"/>
@@ -4839,23 +4848,28 @@ Source="{StaticResource SavingThrowDice}">
         <Setter Property="ItemTemplate">
             <Setter.Value>
                 <DataTemplate DataType="ls:VMAbility">
-                    <Grid x:Name="base" Background="Transparent" Height="88" Width="88" ToolTip="{StaticResource ManagedTooltip}" ToolTipService.Placement="Right" ToolTipService.HorizontalOffset="50">
-                        
-                        <Image x:Name="SavingThrowIcon" HorizontalAlignment="Center" VerticalAlignment="Bottom" Source="{StaticResource SavingThrowDice}" Opacity="0.6">
-                        </Image>
-                        <StackPanel>
-                            <Control x:Name="attrName" Template="{StaticResource AbilityShortDisplayName}"  HorizontalAlignment="Center" Margin="0,16,0,0">
-                                <Control.Resources>
-                                    <Style TargetType="TextBlock"  BasedOn="{StaticResource DetailedListText}"></Style>
-                                </Control.Resources>
-                            </Control>
-                            <!-- MOD_ACS: Update StringFormat - remove space // BG3: StringFormat={}{0: +#; -#; 0}} -->
-                            <TextBlock x:Name="value" Text="{Binding SavingThrow.AdditionalValue, StringFormat={}{0:+#;-#;0}}" Style="{StaticResource DetailedListValue}" HorizontalAlignment="Center" Margin="0,-12,0,0"/>
-                        </StackPanel>
-                    </Grid>
+                    <!-- MOD_ACS: Add Border type to Add CornerRadius -->
+                    <Border x:Name="baseBorder" Background="Transparent" Height="88" Width="88" CornerRadius="12" ToolTip="{StaticResource ManagedTooltip}" ToolTipService.Placement="Right" ToolTipService.HorizontalOffset="50">
+                        <!-- MOD_ACS: Move attributs to baseBorder // BG3: Background="Transparent" Height="88" Width="88" CornerRadius="12" ToolTip="{StaticResource ManagedTooltip}" ToolTipService.Placement="Right" ToolTipService.HorizontalOffset="50" -->
+                        <Grid x:Name="base">
+                            
+                            <Image x:Name="SavingThrowIcon" HorizontalAlignment="Center" VerticalAlignment="Bottom" Source="{StaticResource SavingThrowDice}" Opacity="0.6">
+                            </Image>
+                            <StackPanel>
+                                <Control x:Name="attrName" Template="{StaticResource AbilityShortDisplayName}"  HorizontalAlignment="Center" Margin="0,16,0,0">
+                                    <Control.Resources>
+                                        <Style TargetType="TextBlock"  BasedOn="{StaticResource DetailedListText}"></Style>
+                                    </Control.Resources>
+                                </Control>
+                                <!-- MOD_ACS: Update StringFormat - remove space // BG3: StringFormat={}{0: +#; -#; 0}} -->
+                                <TextBlock x:Name="value" Text="{Binding SavingThrow.AdditionalValue, StringFormat={}{0:+#;-#;0}}" Style="{StaticResource DetailedListValue}" HorizontalAlignment="Center" Margin="0,-12,0,0"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
                     <DataTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True" SourceName="base">
-                            <Setter TargetName="base" Property="Background" Value="{StaticResource RowBG_h}"/>
+                            <!-- MOD_ACS: Update TargetName // BG3: TargetName="base" -->
+                            <Setter TargetName="baseBorder" Property="Background" Value="{StaticResource RowBG_h}"/>
                         </Trigger>
                         
                         <!-- MOD_ACS: Add if positive color green -->
