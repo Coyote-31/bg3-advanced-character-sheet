@@ -387,7 +387,8 @@
 
                                     <!--PAPERDOLL-->
                                     <Grid Margin="0,-50,0,12" ClipToBounds="True" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DataContext="{Binding CurrentPlayer.SelectedCharacter}">
-                                        <ls:LSPaperdoll HorizontalAlignment="Center" x:Name="CSPaperdoll" EntityRef="{Binding EntityHandle}" Width="{StaticResource CSDollWidth}" Height="{StaticResource CSDollHeight}" VerticalAlignment="Bottom" ClipToBounds="True" UseCombatPose="True" MouseRotate="True" MouseRotateMultiplier="10" RenderScale="{Binding DataContext.Data.RenderScale, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
+                                        <!-- MOD_ACS: Add Margin -->
+                                        <ls:LSPaperdoll HorizontalAlignment="Center" x:Name="CSPaperdoll" EntityRef="{Binding EntityHandle}" Width="{StaticResource CSDollWidth}" Height="{StaticResource CSDollHeight}" VerticalAlignment="Bottom" Margin="0,0,0,100" ClipToBounds="True" UseCombatPose="True" MouseRotate="True" MouseRotateMultiplier="10" RenderScale="{Binding DataContext.Data.RenderScale, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
                                         <!--DOLL CONTROLS-->
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
                                             <ls:LSButton  x:Name="rotateRightBtn" Template="{StaticResource RotateRightButton}">

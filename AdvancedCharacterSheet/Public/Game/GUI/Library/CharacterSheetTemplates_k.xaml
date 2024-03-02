@@ -3408,17 +3408,30 @@
         <Grid Name="root" DataContext="{Binding Stats.ArmorClass}" Background="Transparent">
             <Grid.Resources>
                 <BitmapImage x:Key="ACShield">pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/EQSlots_AC.png</BitmapImage>
+                <!-- MOD_ACS: Add BitmapImage silver shield -->
+                <BitmapImage x:Key="ACShieldSilver">pack://application:,,,/GustavNoesisGUI;component/Assets/Tooltips/ico_AC_primary.png</BitmapImage>
             </Grid.Resources>
             <Grid.ToolTip>
                 <ls:LSTooltip Content="{Binding Path=DataContext, ElementName=root}" ls:TooltipExtender.Owner="{Binding (ls:TooltipExtender.Owner), ElementName=root}"/>
             </Grid.ToolTip>
-            <Image Stretch="None" Source="{StaticResource ACShield}">
+            <!-- MOD_ACS: Add Width & Height / Update Stretch / Remove Effect // BG3: Stretch="None" -->
+            <Image Stretch="Uniform" Source="{StaticResource ACShield}" Width="112" Height="108">
+                <!-- BG3: 
+                <Image.Effect>
+                    <DropShadowEffect BlurRadius="20" ShadowDepth="0" Opacity="1" Color="{StaticResource tint00}"/>
+                </Image.Effect> 
+                -->
+            </Image>
+            <!-- MOD_ACS: Add Image silver shield -->
+            <Image Stretch="None" Source="{StaticResource ACShieldSilver}">
                 <Image.Effect>
                     <DropShadowEffect BlurRadius="20" ShadowDepth="0" Opacity="1" Color="{StaticResource tint00}"/>
                 </Image.Effect>
             </Image>
-            <StackPanel VerticalAlignment="Center" Margin="0,-18,0,0">
-                <TextBlock Text="{Binding Source='hc2ca2d88gc99cg4361g801fgd34ecdb85f19',Converter={StaticResource TranslatedStringConverter}}" Foreground="{StaticResource LS_tint100}" FontSize="{StaticResource SmallFontSize}" HorizontalAlignment="Center"/>
+            <!-- MOD_ACS: Update Margin // BG3: Margin="0,-18,0,0" -->
+            <StackPanel VerticalAlignment="Center" Margin="0,-10,0,0">
+                <!-- MOD_ACS: Disable TextBlock title 'CA' -->
+                <!-- <TextBlock Text="{Binding Source='hc2ca2d88gc99cg4361g801fgd34ecdb85f19',Converter={StaticResource TranslatedStringConverter}}" Foreground="{StaticResource LS_tint100}" FontSize="{StaticResource SmallFontSize}" HorizontalAlignment="Center"/> -->
                 <TextBlock Foreground="{StaticResource LS_tint100}" FontSize="{StaticResource ScaledTitleFontSize}" Text="{Binding Value}" HorizontalAlignment="Center" Margin="0,-16"/>
             </StackPanel>
         </Grid>
@@ -8962,7 +8975,7 @@
                         </StackPanel>
 
                         <!-- MOD_ACS: Move Armor Class to left panel RenderTransformOrigin="0.5,0.5" -->
-                        <StackPanel x:Name="ArmorClassLeft"  DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="-7,14,-40,-40">
+                        <StackPanel x:Name="ArmorClassLeft"  DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="-10,8,-40,-40">
                             <Control Template="{StaticResource ACHolder}"/>
                             <Control.RenderTransform>
                                 <ScaleTransform ScaleX="0.92" ScaleY="0.92"/>
@@ -8999,7 +9012,7 @@
                     </StackPanel>
 
                     <!--ArmorClass-->
-                    <!-- MOD_ACS: Moved to left side but still here for BCPP compatibility-->
+                    <!-- MOD_ACS: Moved to left side but still here for BCPP compatibility if needed -->
                     <!-- BG3: <Control Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Template="{StaticResource ACHolder}" VerticalAlignment="Bottom" HorizontalAlignment="Center" Visibility="Collapsed"/> -->
                     <StackPanel x:Name="ArmorClassBottom" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Bottom" HorizontalAlignment="Center" Visibility="Collapsed" Margin="0,0,0,-20">
                         <Control Template="{StaticResource ACHolder}"/>
@@ -9031,9 +9044,6 @@
                     <Condition Binding="{Binding VerticalAlignment, ElementName=PanelsContainer}" Value="Top"/>
                 </MultiDataTrigger.Conditions>
                 <Setter TargetName="EquipmentHolder" Property="Margin" Value="8,70,8,0"/>
-                <Setter TargetName="ArmorClassLeft" Property="Visibility" Value="Collapsed"/>
-                <Setter TargetName="ArmorClassBottom" Property="Visibility" Value="Visible"/>
-                <Setter TargetName="ArmorClassBottom" Property="Margin" Value="0,0,0,-18"/>
             </MultiDataTrigger>
             
             <!-- MOD_ACS: Add trigger for Companions Panel-->
