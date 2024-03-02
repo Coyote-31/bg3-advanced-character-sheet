@@ -583,8 +583,7 @@
             <!-- MOD_ACS: Add images -->
             <BitmapImage x:Key="ACS_SeparatorThin" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/Separators/separator_thin.png"/>
             
-            <!-- MOD_ACS: Update source ACS -->
-            <BitmapImage x:Key="SpellbookBg_Small" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/SpellBook/spellbook_bg_small.png"/>
+            <BitmapImage x:Key="SpellbookBg_Small" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/SpellBook/spellbook_bg_small.png"/>
 
             <BitmapImage x:Key="SpellsBorder_Small" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/SpellBook/knownSpells_frame_small.png" />
 
