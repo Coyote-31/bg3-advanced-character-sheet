@@ -2355,7 +2355,7 @@
                                                 <TextBlock x:Name="ReplaceableSpellsNote" ls:TextBlockFormatter.SourceText="{Binding Source=h6cbb2d29g46c1g4b0agb271gcb95f4e4b3f0, Converter={StaticResource TranslatedStringConverter}}" Style="{StaticResource ActionGroupTitleStyle}" HorizontalAlignment="Center" Visibility="Collapsed" FontStyle="Italic" Margin="0,-10,0,0"/>
                                             </StackPanel>
                                         </ls:LSNineSliceImage>
-                                        
+
                                         <!-- Initiations -->
                                         <ItemsControl x:Name="InitiationsList" 
                                                               ItemsSource="{Binding Initiations}" 
@@ -2504,7 +2504,7 @@
                                                       ItemsSource="{Binding FilteredItems, ElementName=TadpolePassivesFilter}" 
                                                       ls:AttachedProperties.InheritedTag="TadpolePassives" 
                                                       Visibility="Collapsed"/>
-                                                      
+                                        
                                         <!-- ============================================================ -->
                                         <!-- === MOD_ACS: Move from before "InitiationsList" - START === -->
                                         <!-- MOD_ACS: Add title for passive feats -->
@@ -3418,8 +3418,7 @@
                 <!-- BG3: 
                 <Image.Effect>
                     <DropShadowEffect BlurRadius="20" ShadowDepth="0" Opacity="1" Color="{StaticResource tint00}"/>
-                </Image.Effect> 
-                -->
+                </Image.Effect> -->
             </Image>
             <!-- MOD_ACS: Add Image silver shield -->
             <Image Stretch="None" Source="{StaticResource ACShieldSilver}">
@@ -4894,7 +4893,7 @@
         </Setter>
     </Style>
 
-    <!--===== SKILLS VIEW TEMPLATE =====--> 
+    <!--===== SKILLS VIEW TEMPLATE =====-->
     <ControlTemplate x:Key="SkillsTemplate">
         <Grid x:Name="SkillsPanelContent" Margin="-22,0,0,0">
             <Grid.RowDefinitions>
@@ -5650,7 +5649,7 @@
 
                                     <!-- ======== ABILITIES INFO ======== -->
                                     <ItemsControl x:Name="Abilities" ItemsSource="{Binding Stats.Abilities}" VerticalAlignment="Center" Style="{StaticResource AbilitiesGridStyle}"/>
-                                    
+
                                     <!-- MOD_ACS: Switch resistances & conditions order -->
                                     <!-- ======== RESISTANCES ======== -->
                                     <StackPanel Name="ResistancesSection">
@@ -7389,6 +7388,7 @@
         <Setter Property="Source"  Value="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/EquipSlots/EQ_torch.png"/>
         <Setter Property="Stretch"  Value="None"/>
         <Setter Property="Margin"  Value="-11"/>
+        <Setter Property="IsHitTestVisible"  Value="False"/>
         <Style.Triggers>
             <!--SLOT BACKGROUNDS-->
             <DataTrigger Binding="{Binding SlotType}" Value="Amulet">
@@ -7451,6 +7451,7 @@
     <Style x:Key="EquipmentSlotBaseStyle" TargetType="ls:LSButton" BasedOn="{StaticResource {x:Type ls:LSButton}}">
         <Setter Property="Command" Value="{Binding DataContext.ShowAvailableEquipmentDelayedCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
         <Setter Property="CommandParameter" Value="{Binding}" />
+        
         <Setter Property="noesis:StyleInteraction.Triggers">
             <Setter.Value>
                 <noesis:StyleTriggerCollection>
@@ -7474,33 +7475,29 @@
                         <BitmapImage  x:Key="SelArrowUri" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/EQSlots_overlaySelected_arrow.png" />
                         <BitmapImage  x:Key="SelOverlayUri" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/EQSlots_overlaySelected.png" />
                     </ControlTemplate.Resources>
-                    <!-- MOD_ACS: Background size from BCPP not needed -->
-                    <!-- MOD_BCPP: <Grid x:Name="root" Width="98" Height="98" ToolTipService.IsEnabled="{Binding Item,Converter={StaticResource NullToBoolFalseConverter}}" Background="Transparent" ToolTipService.ShowOnDisabled="True" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTipService.Placement="{TemplateBinding ToolTipService.Placement}"> -->
-                    <Grid x:Name="root" Width="{StaticResource EquipmentSlotSize}" Height="{StaticResource EquipmentSlotSize}" ToolTipService.IsEnabled="{Binding Item,Converter={StaticResource NullToBoolFalseConverter}}" Background="Transparent" ToolTipService.ShowOnDisabled="True" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTipService.Placement="{TemplateBinding ToolTipService.Placement}">
+
+                    <Grid x:Name="root"  Width="{StaticResource EquipmentSlotSize}" Height="{StaticResource EquipmentSlotSize}" ToolTipService.IsEnabled="{Binding Item,Converter={StaticResource NullToBoolFalseConverter}}" Background="Transparent" ToolTipService.ShowOnDisabled="True" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTipService.Placement="{TemplateBinding ToolTipService.Placement}">
+                        <b:Interaction.Behaviors>
+                            <ls:ContextMenuFillBehavior Context="Equipment" Player="{Binding DataContext.CurrentPlayer, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" TargetObject="{Binding Item}" Command="{Binding DataContext.ContextActionPressed, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
+                        </b:Interaction.Behaviors>
                         <Grid.ToolTip>
                             <ls:LSTooltip x:Name="tooltip" IsHitTestVisible="False" Content="{Binding Path=DataContext.Item,ElementName=root}"/>
                         </Grid.ToolTip>
-                        <!-- MOD_ACS: Add IsHitTestVisible to only match inner content on hover -->
-                        <Image x:Name="SlotBg" Style="{StaticResource EquipmentSlogBgImageStyle}" IsHitTestVisible="False"/>
-                        <ls:LSEntityObject EntityRef="{Binding EntityHandle}" Context="Inventory" x:Name="IconControl" Background="{StaticResource EquipmentSlotBg}" Opacity="1.0" DataContext="{Binding Item}"
-                                           Width="{StaticResource EquipmentIconSlotSize}" Height="{StaticResource EquipmentIconSlotSize}">
-                            <!-- MOD_ACS: Add b:Interaction.Behaviors to enable ContextMenu -->
-                            <b:Interaction.Behaviors>
-                                <ls:ContextMenuFillBehavior Context="Inventory" Player="{Binding DataContext.CurrentPlayer, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" TargetObject="{Binding .}" Source="{Binding SelectedItems,ElementName=InventoryHolder}" Command="{Binding DataContext.ContextActionPressed, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
-                            </b:Interaction.Behaviors>
+                        <Image x:Name="SlotBg" Style="{StaticResource EquipmentSlogBgImageStyle}"/>
+                        <Grid x:Name="IconControl" Background="{StaticResource EquipmentSlotBg}" Opacity="1.0" DataContext="{Binding Item}" IsHitTestVisible="False">
                             <Image x:Name="RarityBackground" Style="{StaticResource RarityFrameBackgroundImageStyle}"/>
                             <Rectangle Fill="{Binding Icon}" />
                             <Image x:Name="RarityForeground" Style="{StaticResource RarityFrameForegroundImageStyle}"/>
-                        </ls:LSEntityObject>
+                        </Grid>
                         <Rectangle x:Name="greyscaleImg"  Opacity="0.5" Fill="#17000a" Visibility="Collapsed"/>
                         <!-- Highlight slot when hovered -->
                         <Image x:Name="hoverImg" IsHitTestVisible="False" Visibility="Collapsed" Stretch="Uniform" Source="{StaticResource ActiveSlot_h_img}"/>
                         <Rectangle x:Name="DisableLayer" Opacity="0" Fill="Black" IsHitTestVisible="False"/>
-
                         <!-- Selected slot indicator -->
                         <Image x:Name="SelOverlay" Source="{StaticResource SelOverlayUri}" Visibility="Collapsed" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center" IsHitTestVisible="False"/>
                         <Image x:Name="SelArrow" Source="{StaticResource SelArrowUri}" Visibility="Collapsed" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Top" IsHitTestVisible="False" Margin="0,-12,0,0"/>
                     </Grid>
+
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="hoverImg" Property="Visibility" Value="Visible"/>
@@ -8222,6 +8219,9 @@
         </Setter>
     </Style>
 
+    <Style x:Key="InvWorldContainerItemStyle" TargetType="ListBoxItem" BasedOn="{StaticResource InvContainerItemStyle}">
+        <Setter Property="ls:ContextMenuService.Context" Value="WorldContainer"/>
+    </Style>
 
 
     <!--INVENTORY TEMPLATE WITH FILTERS-->
@@ -8850,6 +8850,9 @@
         <ControlTemplate.Triggers>
             <DataTrigger Binding="{Binding SelectedItems.Count,ElementName=InventoryHolder,Converter={StaticResource GreaterThanConverter},ConverterParameter=1}" Value="True">
                 <Setter TargetName="InventoryHolder" Property="ls:MultiSelect.IsEnabled" Value="True"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Inventory.IsCampChestInventory}" Value="True">
+                <Setter TargetName="InventoryHolder" Property="ItemContainerStyle" Value="{StaticResource InvWorldContainerItemStyle}"/>
             </DataTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
