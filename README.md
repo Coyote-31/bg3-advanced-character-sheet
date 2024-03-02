@@ -6,7 +6,7 @@
 
 This is a mod for the game **Baldur's Gate 3**.
 
-The purpose of this mod is to improve Character and Party panel. Also display **All Types of Resistance** including ones without any immunity, resistance or weakness.
+The purpose of this mod is to improve Improve Character Party and Companions Panels. Also display **All Types of Resistance** including ones without any immunity, resistance or weakness.
 
 > [!CAUTION]
 > This mod is renamed !
@@ -14,8 +14,8 @@ The purpose of this mod is to improve Character and Party panel. Also display **
 > Delete manually AToR old mod version.
 
 ## 🔖 Version
-- 📦 **ACS** mod : `2.1.1`
-- 🎮 **BG3** compatibility : `Hotfix #19 [ Patch6_Hotfix2 ]`
+- 📦 **ACS** mod : `2.2.0`
+- 🎮 **BG3** compatibility : `Hotfix #20 [Patch6_Hotfix3]`
 
 ## ✨ Features
 
@@ -27,7 +27,7 @@ The purpose of this mod is to improve Character and Party panel. Also display **
 - Full review of the **Inventory** for Character and Party Panels.
 - Full review of the **Equipment** for Character and Party Panels.
 - Add buttons in *Spells Book*
-- Rework Camp/Companions Panels.
+- Rework *Camp/Companions* Panels.
 
 *All Types of Resistance*:
 - Display **all** types of resistance including ones without any immunity, resistance or weakness.
@@ -39,7 +39,7 @@ The purpose of this mod is to improve Character and Party panel. Also display **
 ## 🔀 Compatibility
 
 ### 🟢 **Compatible** with the following mods :
-- **Better Character and Party Panels** ( *BCPP* ) *All variants* : Tested with BCPP v1.6.0 ( Alias 1.6 )
+- **Better Character and Party Panels** ( *BCPP* ) *All variants* : Tested with BCPP v1.6.1 ( Alias 1.61 )
 - **Better Tooltips** ( *BT* ) : Tested with BT v1.1.1 ( Alias 1.11 )
 - **Better Target Info** ( *BTI* ) : Tested with BTI v1.2.0.1 ( Alias 1.2 )
 
@@ -63,6 +63,7 @@ This mod changes the following files of the game :
   - **Images_k.xaml**
   
 - Public\Game\GUI\Widgets\
+  - **CharacterPanel.xaml**
   - **CompanionsPanel.xaml**
 
 ## 💾 Install
