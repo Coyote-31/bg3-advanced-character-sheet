@@ -8,9 +8,9 @@
                     xmlns:System="clr-namespace:System;assembly=mscorlib"
                     mc:Ignorable="d">
 
-    <!-- =================================================== -->
+    <!-- ================================================== -->
     <!-- === ACS keyboard library : All extracted parts === -->
-    <!-- =================================================== -->
+    <!-- ================================================== -->
 
     <!-- ========================================================================================= -->
     <!-- === MOD_ACS: Control dynamic Interrupt / Reactions button - START                    === -->
@@ -345,5 +345,35 @@
     </DataTemplate>
     <!-- === MOD_ACS: CampPortraitTemplate // BG3: From CharacterPortraitTemplate in DataTemplates.xaml - END === -->
     <!-- ======================================================================================================== -->
+
+    
+    <!-- ============================================ -->
+    <!-- === ACS keyboard library : New ACS parts === -->
+    <!-- ============================================ -->
+
+    <!-- === MOD_ACS: Add mouse over style === -->
+    <Style x:Key="ACS_MouseOverStyle" TargetType="StackPanel">
+        <Style.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="Foreground" Value="{StaticResource LS_baseTxtColor}"/>
+                <Setter Property="FontSize" Value="{StaticResource ScaledMediumFontSize}"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="24,0,6,0"/>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType={x:Type StackPanel}}}" Value="True">
+                        <Setter Property="Foreground" Value="{StaticResource LS_accent100TxtColor}" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Style.Resources>
+    </Style>
+    
+    <!-- === MOD_ACS: Add compact tooltip template === -->
+    <DataTemplate x:Key="ACS_CompactTooltipTemplate">
+        <StackPanel>
+            <TextBlock x:Name="Title" Style="{StaticResource TooltipTitleStyle}" ls:TextBlockFormatter.SourceText="{Binding Path=(ls:AttachedProperties.InheritedTag), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource TranslatedStringConverter}}"/>
+            <TextBlock x:Name="Content" Style="{StaticResource TooltipDefaultTextStyle}" ls:TextBlockFormatter.SourceText="{Binding ., Converter={StaticResource TranslatedStringConverter}}"/>
+        </StackPanel>
+    </DataTemplate>
 
 </ResourceDictionary>

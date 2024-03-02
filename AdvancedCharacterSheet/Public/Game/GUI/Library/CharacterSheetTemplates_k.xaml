@@ -8691,13 +8691,15 @@ Source="{StaticResource SavingThrowDice}">
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <!--===== CONTAINER INVENTORY TEMPLATE =====--> 
+    <!--===== CONTAINER INVENTORY TEMPLATE =====-->
 
     <ControlTemplate x:Key="ContainerInventoryTemplate" TargetType="Control">
         <Grid x:Name="InventoryPanelHolder">
             
             <Grid x:Name="InventoryColumnHolder">
                 <Grid.RowDefinitions>
+                    <!-- MOD_ACS: Add Row -->
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
@@ -8726,8 +8728,8 @@ Source="{StaticResource SavingThrowDice}">
                 </ls:LSInputBinding>
 
                 <!-- Inventory -->
-
-                <ListBox Grid.Row="1" x:Name="InventoryHolder" ItemsSource="{Binding Inventories[0].Slots}" ItemsPanel="{StaticResource InventoryGridTemplate}" SelectionMode="Extended" ls:MultiSelect.IsEnabled="False" ItemTemplate="{StaticResource Template.InventorySlot}" ls:AttachedProperties.InheritedNumber="{Binding ActualWidth, ElementName=InventoryColumnHolder}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Stretch" ItemContainerStyle="{StaticResource InvContainerItemStyle}">
+                <!-- MOD_ACS: Add Height -->
+                <ListBox Grid.Row="1" x:Name="InventoryHolder" Height="1290" ItemsSource="{Binding Inventories[0].Slots}" ItemsPanel="{StaticResource InventoryGridTemplate}" SelectionMode="Extended" ls:MultiSelect.IsEnabled="False" ItemTemplate="{StaticResource Template.InventorySlot}" ls:AttachedProperties.InheritedNumber="{Binding ActualWidth, ElementName=InventoryColumnHolder}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Stretch" ItemContainerStyle="{StaticResource InvContainerItemStyle}">
 
                     <b:Interaction.Behaviors>
                         <ls:DragGenericBehavior StartDragCommand="{Binding DataContext.DragInventoryCommand , RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
@@ -8750,6 +8752,62 @@ Source="{StaticResource SavingThrowDice}">
                         </ControlTemplate>
                     </ListBox.Template>
                 </ListBox>
+
+                <!-- MOD_ACS: Add CampChest footer informations - PartySupplies, Inspiration & Gold / CampChest Gold & ItemsNumber / CampInventory Weight & TotalGoldValue -->
+                <Grid x:Name="CampChestFooterInfo" Grid.Row="2" VerticalAlignment="Center" Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <!-- MOD_ACS: Party ressources -->
+                    <Control Grid.Column="0" Template="{StaticResource HeaderInspirationPointsGold}" DataContext="{Binding DataContext.CurrentPlayer, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Panel.ZIndex="1" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                    
+                    <!-- MOD_ACS: CampChest Gold & ItemsNumber -->
+                    <DockPanel Grid.Column="1" Margin="0,0,0,0">
+                        <!-- MOD_ACS: Gold -->
+                        <StackPanel x:Name="GoldContainer" DockPanel.Dock="Center" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" Style="{StaticResource ACS_MouseOverStyle}">
+                            <TextBlock Text="{Binding Inventories[0].Gold, StringFormat={}{0:N0}}"/>
+                            <Image Source="{StaticResource GoldIconImg}" Stretch="Uniform" Width="40" VerticalAlignment="Center" Margin="0,-6,-4,-6"/>
+                            <StackPanel.ToolTip>
+                                <ls:LSTooltip IsHitTestVisible="False" ls:AttachedProperties.InheritedTag="ha05da9d3gb54ag4c42g96feg553ca035d918" Content="h1e646e86g3c05g4c96g9fd8g9c521871d554" ContentTemplate="{StaticResource ACS_CompactTooltipTemplate}"/>
+                            </StackPanel.ToolTip>
+                        </StackPanel>
+                        <!-- MOD_ACS: Number of items -->
+                        <StackPanel x:Name="ItemsCount"  DockPanel.Dock="Center" Orientation="Horizontal" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource ACS_MouseOverStyle}">
+                            <b:Interaction.Behaviors>
+                                <ls:InventoriesMergerBehavior x:Name="CampInventoriesMerged" Inventories="{Binding Inventories}"/>
+                            </b:Interaction.Behaviors>
+                            <TextBlock Text="{Binding InventoriesSlots.Count, ElementName=CampInventoriesMerged}"/>
+                            <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Tutorial/TutIcons/tutorial_concertina.png" Stretch="None" Margin="-10,-6" VerticalAlignment="Center"/>
+                            <StackPanel.ToolTip>
+                                <ls:LSTooltip IsHitTestVisible="False" ls:AttachedProperties.InheritedTag="h364ef14dg5963g48abg84e0gc5f0d33c9955" Content="he6f95c33g7ad7g49c8gbf8dg4133dc34d096" ContentTemplate="{StaticResource ACS_CompactTooltipTemplate}"/>
+                            </StackPanel.ToolTip>
+                        </StackPanel>
+                    </DockPanel>
+                    
+                    <!-- MOD_ACS: Camp Chest Weight & TotalGoldValue -->
+                    <DockPanel Grid.Column="2" Margin="0,0,30,0">
+                        <!-- MOD_ACS: Total Gold Value -->
+                        <StackPanel x:Name="TotalValue" DockPanel.Dock="Right" Orientation="Horizontal" Background="Transparent" HorizontalAlignment="Right" VerticalAlignment="Center" Style="{StaticResource ACS_MouseOverStyle}">
+                            <TextBlock Text="{Binding Gold, StringFormat={}{0:N0}}"/>
+                            <Image Source="{StaticResource IconGold}" Stretch="Uniform" Width="40" Margin="0,-6" VerticalAlignment="Center"/>
+                            <StackPanel.ToolTip>
+                                <ls:LSTooltip IsHitTestVisible="False" ls:AttachedProperties.InheritedTag="hf9b209b9g3745g41a1g85dfg129065b9b215" Content="hcea50cc0gbeebg4aaeg992bgdb79cbfef7e8" ContentTemplate="{StaticResource HeaderBodyTemplate}"/>
+                            </StackPanel.ToolTip>
+                        </StackPanel>                        
+                        <!-- MOD_ACS: Weight -->
+                        <StackPanel x:Name="WeightContainer" DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,0,0" Style="{StaticResource ACS_MouseOverStyle}">
+                            <TextBlock ls:TextBlockFormatter.SourceText="{Binding Inventories[0].Weight, Converter={StaticResource UnitConverter}, ConverterParameter='Weight N2'}"/>
+                            <Image Source="{StaticResource IconWeight}" Stretch="None" Margin="-10,0,-16,6" VerticalAlignment="Center"/>
+                            <StackPanel.ToolTip>
+                                <ls:LSTooltip IsHitTestVisible="False" ls:AttachedProperties.InheritedTag="hd4969285gc8d8g41afg8e2cg12d5444acbe2" Content="h9b3f757dgbe75g41a6gae52g0c2b1a5e49f2" ContentTemplate="{StaticResource HeaderBodyTemplate}"/>
+                            </StackPanel.ToolTip>
+                        </StackPanel>
+                    </DockPanel>
+                    
+                </Grid>
 
                 <!-- Filter -->
                 <Grid x:Name="FiltersControl" Grid.Row="0" VerticalAlignment="Top" Height="88">
