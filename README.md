@@ -6,7 +6,7 @@
 
 This is a mod for the game **Baldur's Gate 3**.
 
-The purpose of this mod is to improve Improve Character Party and Companions Panels. Also display **All Types of Resistance** including ones without any immunity, resistance or weakness.
+The purpose of this mod is to improve Character, Party and Companions Panels. Also display **All Types of Resistance** including ones without any immunity, resistance or weakness.
 
 > [!CAUTION]
 > This mod is renamed !
