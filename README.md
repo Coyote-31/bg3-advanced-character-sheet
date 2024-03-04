@@ -14,7 +14,7 @@ The purpose of this mod is to improve Character, Party and Companions Panels. Al
 > Delete manually AToR old mod version.
 
 ## 🔖 Version
-- 📦 **ACS** mod : `2.2.0`
+- 📦 **ACS** mod : `2.3.0`
 - 🎮 **BG3** compatibility : `Hotfix #20 [Patch6_Hotfix3]`
 
 ## ✨ Features
