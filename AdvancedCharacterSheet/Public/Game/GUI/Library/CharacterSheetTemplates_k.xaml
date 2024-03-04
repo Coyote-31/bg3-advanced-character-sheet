@@ -7386,8 +7386,10 @@
 
     <Style x:Key="EquipmentSlogBgImageStyle" TargetType="Image">
         <Setter Property="Source"  Value="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/EquipSlots/EQ_torch.png"/>
-        <Setter Property="Stretch"  Value="None"/>
-        <Setter Property="Margin"  Value="-11"/>
+        <!-- MOD_ACS: Update Stretch // BG3: None -->
+        <Setter Property="Stretch"  Value="Uniform"/>
+        <!-- MOD_ACS: Update Margin // BG3: -11 -->
+        <Setter Property="Margin"  Value="-5"/>
         <Setter Property="IsHitTestVisible"  Value="False"/>
         <Style.Triggers>
             <!--SLOT BACKGROUNDS-->
@@ -7470,7 +7472,8 @@
             <Setter.Value>
                 <ControlTemplate TargetType="ls:LSButton">
                     <ControlTemplate.Resources>
-                        <System:Double x:Key="EquipmentSlotSize">88</System:Double>
+                        <!-- MOD_ACS: Update Slot size // BG3: 88 -->
+                        <System:Double x:Key="EquipmentSlotSize">77</System:Double>
                         <System:Double x:Key="EquipmentIconSlotSize">80</System:Double>
                         <BitmapImage  x:Key="SelArrowUri" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/EQSlots_overlaySelected_arrow.png" />
                         <BitmapImage  x:Key="SelOverlayUri" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/EQSlots_overlaySelected.png" />
@@ -7491,10 +7494,12 @@
                         </Grid>
                         <Rectangle x:Name="greyscaleImg"  Opacity="0.5" Fill="#17000a" Visibility="Collapsed"/>
                         <!-- Highlight slot when hovered -->
-                        <Image x:Name="hoverImg" IsHitTestVisible="False" Visibility="Collapsed" Stretch="Uniform" Source="{StaticResource ActiveSlot_h_img}"/>
+                        <!-- MOD_ACS: Add Margin -->
+                        <Image x:Name="hoverImg" IsHitTestVisible="False" Visibility="Collapsed" Stretch="Uniform" Source="{StaticResource ActiveSlot_h_img}" Margin="-1"/>
                         <Rectangle x:Name="DisableLayer" Opacity="0" Fill="Black" IsHitTestVisible="False"/>
                         <!-- Selected slot indicator -->
-                        <Image x:Name="SelOverlay" Source="{StaticResource SelOverlayUri}" Visibility="Collapsed" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center" IsHitTestVisible="False"/>
+                        <!-- MOD_ACS: Update Stretch // BG3: None -->
+                        <Image x:Name="SelOverlay" Source="{StaticResource SelOverlayUri}" Visibility="Collapsed" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center" IsHitTestVisible="False"/>
                         <Image x:Name="SelArrow" Source="{StaticResource SelArrowUri}" Visibility="Collapsed" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Top" IsHitTestVisible="False" Margin="0,-12,0,0"/>
                     </Grid>
 
@@ -7607,6 +7612,15 @@
                             <Setter TargetName="DisableLayer" Property="Fill" Value="{StaticResource LS_DisabledPanelColor}"/>
                         </DataTrigger>
 
+                        <!-- MOD_ACS: Add triggers for BCPP Party panel-->
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Name, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel" />
+                                <Condition Binding="{Binding VerticalAlignment, ElementName=PanelsContainer}" Value="Top"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="root" Property="Width" Value="88"/>
+                            <Setter TargetName="root" Property="Height" Value="88"/>
+                        </MultiDataTrigger>
 
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -8935,7 +8949,7 @@
                                 </Border>
 
                                 <!-- MOD_ACS: Add margin -->
-                                <ls:LSButton Grid.Row="0" Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.VanityBody}" Margin="0,0,0,2"/>
+                                <ls:LSButton Grid.Row="0" Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.VanityBody}" Margin="0,0,0,4"/>
                                 <ls:LSButton Grid.Row="1" Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.VanityBoots}"/>
                                 <!-- MOD_ACS: Update margin // BG3: Margin="0,-40,-6,0" -->
                                 <ls:LSButton Grid.RowSpan="2" VerticalAlignment="Top" Command="{Binding DataContext.ToggleArmorSetVisibility, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="{Binding .}" Template="{StaticResource VanityButtonTemplate}" HorizontalAlignment="Right" Margin="0,-41,-5,0">
@@ -8947,8 +8961,8 @@
                             <!-- MOD_ACS: Update margin // MOD_BCPP: Margin="0,8" // BG3: Margin="0,24" -->
                             <ls:LSButton Margin="0,16" Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Underwear}"/>
                             <!-- MOD_ACS: Add marginS -->
-                            <ls:LSButton Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Amulet}" Margin="0,0,0,2"/>
-                            <ls:LSButton Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Ring}" Margin="0,0,0,2"/>
+                            <ls:LSButton Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Amulet}" Margin="0,0,0,4"/>
+                            <ls:LSButton Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Ring}" Margin="0,0,0,4"/>
                             <ls:LSButton Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Ring2}"/>
                         </StackPanel>
                     </DockPanel>
@@ -8964,15 +8978,15 @@
                         <StackPanel DockPanel.Dock="Top">
 
                             <!-- MOD_ACS: Add marginS -->
-                            <Control Template="{StaticResource HelmetEQTemplate}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Helmet}" ToolTipService.Placement="Left" Margin="0,0,0,2"/>
-                            <ls:LSButton Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Cloak}" ToolTipService.Placement="Left" Margin="0,0,0,2"/>
-                            <ls:LSButton Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Breast}" ToolTipService.Placement="Left" Margin="0,0,0,2"/>
-                            <ls:LSButton Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Gloves}" ToolTipService.Placement="Left" Margin="0,0,0,2"/>
+                            <Control Template="{StaticResource HelmetEQTemplate}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Helmet}" ToolTipService.Placement="Left" Margin="0,0,0,4"/>
+                            <ls:LSButton Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Cloak}" ToolTipService.Placement="Left" Margin="0,0,0,4"/>
+                            <ls:LSButton Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Breast}" ToolTipService.Placement="Left" Margin="0,0,0,4"/>
+                            <ls:LSButton Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Gloves}" ToolTipService.Placement="Left" Margin="0,0,0,4"/>
                             <ls:LSButton Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Boots}" ToolTipService.Placement="Left"/>
                         </StackPanel>
 
                         <!-- MOD_ACS: Move Armor Class to left panel RenderTransformOrigin="0.5,0.5" -->
-                        <StackPanel x:Name="ArmorClassLeft"  DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="-10,8,-40,-40">
+                        <StackPanel x:Name="ArmorClassLeft"  DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="-16,8,-40,-40">
                             <Control Template="{StaticResource ACHolder}"/>
                             <Control.RenderTransform>
                                 <ScaleTransform ScaleX="0.92" ScaleY="0.92"/>
@@ -8989,7 +9003,8 @@
                             </TextBlock.Effect>
                         </TextBlock>
                         <StackPanel Orientation="Horizontal">
-                            <ls:LSButton Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.MeleeMainHand}" ToolTipService.Placement="Left"/>
+                            <!-- MOD_ACS: Add Margin -->
+                            <ls:LSButton Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.MeleeMainHand}" ToolTipService.Placement="Left" Margin="0,0,4,0"/>
                             <ls:LSButton Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.MeleeOffHand}" ToolTipService.Placement="Left"/>
                         </StackPanel>
                     </StackPanel>
@@ -9003,7 +9018,8 @@
                             </TextBlock.Effect>
                         </TextBlock>
                         <StackPanel Orientation="Horizontal">
-                            <ls:LSButton Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.RangedMainHand}"/>
+                            <!-- MOD_ACS: Add Margin -->
+                            <ls:LSButton Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.RangedMainHand}" Margin="0,0,4,0"/>
                             <ls:LSButton Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.RangedOffHand}"/>
                         </StackPanel>
                     </StackPanel>
@@ -9018,8 +9034,8 @@
                         </Control.RenderTransform>
                     </StackPanel>
                 </Grid>
-
-                <Control Grid.Row="2" Template="{StaticResource WeaponAttackBonusTemplate}" VerticalAlignment="Bottom" Margin="0,8,0,20"/>
+                <!-- MOD_ACS: Add Name / Update Margin // BG3: Margin="0,8,0,20" -->
+                <Control x:Name="WeaponAttackBonus" Grid.Row="2" Template="{StaticResource WeaponAttackBonusTemplate}" VerticalAlignment="Bottom" Margin="-9,8,-9,20"/>
 
             </Grid>
         </Grid>
@@ -9041,6 +9057,8 @@
                     <Condition Binding="{Binding VerticalAlignment, ElementName=PanelsContainer}" Value="Top"/>
                 </MultiDataTrigger.Conditions>
                 <Setter TargetName="EquipmentHolder" Property="Margin" Value="8,70,8,0"/>
+                <Setter TargetName="ArmorClassLeft" Property="Margin" Value="-10,8,-40,-40"/>
+                <Setter TargetName="WeaponAttackBonus" Property="Margin" Value="0,8,0,20"/>
             </MultiDataTrigger>
             
             <!-- MOD_ACS: Add trigger for Companions Panel-->
