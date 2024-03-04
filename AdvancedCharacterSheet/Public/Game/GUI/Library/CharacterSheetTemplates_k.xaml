@@ -4285,10 +4285,12 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate DataType="ls:VMClass">
-                    <StackPanel x:Name="class" Orientation="Horizontal" >
+                    <!-- MOD_ACS: Add HorizontalAlignment to center each Class -->
+                    <StackPanel x:Name="class" Orientation="Horizontal" HorizontalAlignment="Center">
                         <StackPanel.Resources>
                             <Style TargetType="TextBlock">
-                                <Setter Property="FontSize" Value="{DynamicResource ScaledDefaultFontSize}"/>
+                                <!-- MOD_ACS: Update FontSize Value // BG3: Value="{DynamicResource ScaledDefaultFontSize}" -->
+                                <Setter Property="FontSize" Value="{DynamicResource ScaledMediumFontSize}"/>
                             </Style>
                         </StackPanel.Resources>
                         <StackPanel.Tag>
@@ -4298,6 +4300,8 @@
                             </MultiBinding>
                         </StackPanel.Tag>
 
+                        <!-- MOD_ACS: Add prepend spacer to force CR & center -->
+                        <TextBlock Text="                                                            "/>
                         <TextBlock x:Name="classInfo">
                             <TextBlock.ToolTip>
                                 <ls:LSTooltip IsHitTestVisible="False" Content="{Binding Path=DataContext.ClassDescription, RelativeSource={RelativeSource TemplatedParent}}" ls:AttachedProperties.InheritedTag="{Binding Path=DataContext.ClassDisplayName, RelativeSource={RelativeSource TemplatedParent}}" ContentTemplate="{StaticResource HeaderBodyLocaStringTemplate}"/>
@@ -4310,8 +4314,10 @@
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>
-                        <!-- MOD_ACS: Add space & change separator / Add StringFormat / Update Source // BG3: Source='hd64bfe4cgadadg4468g8b0ag70330ffc717c' -->
-                        <TextBlock x:Name="separator" Text="{Binding Source='hb3046cd8g05b3g4e6ag9396gd17b80fa6737', StringFormat=' {0} ', Converter={StaticResource TranslatedStringConverter}}"/> 
+                        <!-- MOD_ACS: Add append spacer to force CR & center -->
+                        <TextBlock Text="                                                            "/>
+                        <!-- MOD_ACS: Disable by collapsed, use spacer instead to force CR / Add space & change separator / Add StringFormat / Update Source // BG3: Source='hd64bfe4cgadadg4468g8b0ag70330ffc717c' -->
+                        <TextBlock x:Name="separator" Text="{Binding Source='hb3046cd8g05b3g4e6ag9396gd17b80fa6737', StringFormat=' {0} ', Converter={StaticResource TranslatedStringConverter}}" Visibility="Collapsed"/>
                     </StackPanel>
                     <DataTemplate.Triggers>
                         <DataTrigger Binding="{Binding Tag, ElementName=class}" Value="True">
