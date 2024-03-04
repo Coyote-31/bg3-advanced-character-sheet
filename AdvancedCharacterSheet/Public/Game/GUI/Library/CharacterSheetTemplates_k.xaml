@@ -8323,24 +8323,19 @@
                                 
                                 <!-- MOD_ACS: Add trigger for Party Panel context -->
                                 <DataTrigger Binding="{Binding Name, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel" >
-                                    <Setter TargetName="InventoryTint" Property="Margin" Value="-7,-6,18,-5"/>
-                                    <Setter TargetName="InventoryScrolling" Property="Padding" Value="19,0,-19,0"/>
-                                    <Setter TargetName="itemsContainer" Property="Margin" Value="0,0,-3,1"/>
-                                    <Setter TargetName="NoItemsFoundBg" Property="Margin" Value="9,0,25,1"/>
-                                    <Setter TargetName="NoItemsFoundControl" Property="Margin" Value="11,0,27,0"/>
+                                    <Setter TargetName="InventoryTint" Property="Margin" Value="0,0,19,0"/>
+                                    <Setter TargetName="InventoryScrolling" Property="Padding" Value="17,8,-17,8"/>
+                                    <Setter TargetName="itemsContainer" Property="Margin" Value="9,10,0,8"/>
+                                    <Setter TargetName="NoItemsFoundBg" Property="Margin" Value="9,10,28,8"/>
+                                    <Setter TargetName="NoItemsFoundControl" Property="Margin" Value="-10,1,10,0"/>
+                                    <Setter TargetName="TemplateRoot" Property="RenderTransform">
+                                        <Setter.Value>
+                                            <ScaleTransform ScaleX="0.9" ScaleY="0.9"/>
+                                        </Setter.Value>
+                                    </Setter>
                                 </DataTrigger>
-                                <MultiDataTrigger>
-                                    <MultiDataTrigger.Conditions>
-                                        <Condition Binding="{Binding Name, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel" />
-                                        <Condition Binding="{Binding CurrentFilter, ElementName=FilteringContainerHolder, Converter={StaticResource NullToBoolTrueConverter}}" Value="False"/>
-                                        <Condition Binding="{Binding ItemsSource.Count, RelativeSource={RelativeSource Self}}" Value="0"/>
-                                    </MultiDataTrigger.Conditions>
-                                    <!-- MOD_ACS: Add recenter -->
-                                    <Setter TargetName="itemsContainer" Property="Margin" Value="0,0,-12,1"/>
-                                    <Setter TargetName="InventoryTint" Property="Margin" Value="0,-8,17,-7"/>
-                                </MultiDataTrigger>
                                 
-                                <!-- MOD_ACS: Add triggers for BCPP Party panel-->
+                                <!-- MOD_ACS: Add triggers for BCPP Party panel -->
                                 <MultiDataTrigger>
                                     <MultiDataTrigger.Conditions>
                                         <Condition Binding="{Binding Name, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel" />
@@ -8351,17 +8346,11 @@
                                     <Setter TargetName="itemsContainer" Property="Margin" Value="0,0,0,0"/>
                                     <Setter TargetName="NoItemsFoundBg" Property="Margin" Value="0,0,28,0"/>
                                     <Setter TargetName="NoItemsFoundControl" Property="Margin" Value="2,0,30,0"/>
-                                </MultiDataTrigger>
-                                <MultiDataTrigger>
-                                    <MultiDataTrigger.Conditions>
-                                        <Condition Binding="{Binding Name, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel" />
-                                        <Condition Binding="{Binding CurrentFilter, ElementName=FilteringContainerHolder, Converter={StaticResource NullToBoolTrueConverter}}" Value="False"/>
-                                        <Condition Binding="{Binding ItemsSource.Count, RelativeSource={RelativeSource Self}}" Value="0"/>
-                                        <Condition Binding="{Binding VerticalAlignment, ElementName=PanelsContainer}" Value="Top"/>
-                                    </MultiDataTrigger.Conditions>
-                                    <!-- MOD_ACS: Add recenter -->
-                                    <Setter TargetName="itemsContainer" Property="Margin" Value="0,0,0,0"/>
-                                    <Setter TargetName="InventoryTint" Property="Margin" Value="-7,-7,21,-7"/>
+                                    <Setter TargetName="TemplateRoot" Property="RenderTransform">
+                                        <Setter.Value>
+                                            <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                        </Setter.Value>
+                                    </Setter>
                                 </MultiDataTrigger>
                                 
                                 <!-- MOD_ACS: Add trigger for Companions Panel-->
@@ -8464,11 +8453,12 @@
                 <Setter TargetName="FiltersControl" Property="Visibility" Value="Collapsed"/>
                 
                 <!-- MOD_ACS: Add setters for inventory Party Panel context -->
-                <!-- MOD_ACS: Get width from widget -->
-                <Setter TargetName="InventoryColumnHolder" Property="Width" Value="{Binding ActualWidth, ElementName=InventoryTemplateHolder}"/>
-                <Setter TargetName="InventoryColumnHolder" Property="Height" Value="Auto"/>
-                <Setter TargetName="InventoryColumnHolder" Property="HorizontalAlignment" Value="Center"/>
-                <Setter TargetName="InventoryColumnHolder" Property="Margin" Value="10,-4,-10,0"/>
+                <!-- MOD_ACS:  720-820 = 8 items by line (Scale=0.9) -->
+                <Setter TargetName="InventoryColumnHolder" Property="Width" Value="780"/>
+                <Setter TargetName="InventoryColumnHolder" Property="Height" Value="388"/>
+                <Setter TargetName="InventoryColumnHolder" Property="HorizontalAlignment" Value="Left"/>
+                <Setter TargetName="InventoryColumnHolder" Property="Margin" Value="-1,-9,-40,-20"/>
+                <Setter TargetName="InventoryHolder" Property="HorizontalAlignment" Value="Left"/>
             </DataTrigger>
             
             <!-- MOD_ACS: Add triggers for BCPP Party panel-->
@@ -8477,7 +8467,12 @@
                     <Condition Binding="{Binding Name, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Value="PartyPanel" />
                     <Condition Binding="{Binding VerticalAlignment, ElementName=PanelsContainer}" Value="Top"/>
                 </MultiDataTrigger.Conditions>
+                <!-- MOD_ACS: Get width from widget -->
+                <Setter TargetName="InventoryColumnHolder" Property="Width" Value="{Binding ActualWidth, ElementName=InventoryTemplateHolder}"/>
+                <Setter TargetName="InventoryColumnHolder" Property="Height" Value="Auto"/>
+                <Setter TargetName="InventoryColumnHolder" Property="HorizontalAlignment" Value="Center"/>
                 <Setter TargetName="InventoryColumnHolder" Property="Margin" Value="10,-4,-10,1"/>
+                <Setter TargetName="InventoryHolder" Property="HorizontalAlignment" Value="Right"/>
             </MultiDataTrigger>
             
             <!-- MOD_ACS: Add trigger for Companions Panel-->
