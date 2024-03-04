@@ -142,10 +142,8 @@
             </ControlTemplate.resources>
             
             <Grid x:Name="bgFade" Margin="-1000,0,-1000,-1000">
-                <!-- MOD_ACS: Update Margin & Width-->
-                <!-- BG3: <Grid x:Name="Panel" HorizontalAlignment="Right" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5" Margin="0,0,1060,1440" Width="1426"> -->
-                <Grid x:Name="Panel" HorizontalAlignment="Right" VerticalAlignment="Bottom"
-               RenderTransformOrigin="0.5,0.5" Margin="0,0,996,1444" Width="1529">
+                <!-- MOD_ACS: Update Margin & Width // BG3: Margin="0,0,1060,1440" Width="1426" -->
+                <Grid x:Name="Panel" HorizontalAlignment="Right" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5" Margin="0,0,986,1444" Width="1539">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -213,7 +211,8 @@
                                             <!-- MOD_ACS: Add Margin -->
                                             <ls:LSPaperdoll HorizontalAlignment="Center" x:Name="CSPaperdoll" EntityRef="{Binding EntityHandle}" Width="{StaticResource EXDollWidth}" Height="{StaticResource CSDollHeight}" VerticalAlignment="Bottom" Margin="0,0,0,100" ClipToBounds="True" UseCombatPose="True" MouseRotate="True" MouseRotateMultiplier="10" RenderScale="{Binding DataContext.Data.RenderScale, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
                                             <!--DOLL CONTROLS-->
-                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                                            <!-- MOD_ACS: Add Margin -->
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="2,0,0,8">
                                                 <ls:LSButton  x:Name="rotateRightBtn" Template="{StaticResource RotateRightButton}">
                                                     <b:Interaction.Triggers>
                                                         <b:EventTrigger EventName="LSButtonPressed">
@@ -264,7 +263,7 @@
                                                     <TextBlock x:Name="SelectedCompanionName" Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontSize="{StaticResource ScaledIntermediateFontSize}" Foreground="{StaticResource LS_accent100TxtColor}" noesis:Text.StrokeThickness="4" noesis:Text.Stroke="{StaticResource LS_PrimaryColorOutlineColor}" TextWrapping="Wrap"/>
                                                     <!-- TOGGLE VIEW BTN -->
                                                     <!-- MOD_ACS: Add Margin -->
-                                                    <ls:LSToggleButton x:Name="ToggleCSView" SoundID="UI_HUD_Options_ToggleButton" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="True" Margin="18,0,0,0">
+                                                    <ls:LSToggleButton x:Name="ToggleCSView" SoundID="UI_HUD_Options_ToggleButton" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="True" Margin="11,0,0,6">
                                                         <ls:LSToggleButton.Template>
                                                             <ControlTemplate TargetType="ls:LSToggleButton">
                                                                 <Grid ToolTipService.Placement="Top">
@@ -318,7 +317,8 @@
                                                     <Control x:Name="PanelTemplateHolder" Template="{StaticResource CharacterInventoryTemplate}"/>
                                                 </Border>
                                                 <!-- Weight bar -->
-                                                <Control Template="{StaticResource WeightBarTemplate}" Margin="0,16,0,16" Grid.Row="1" HorizontalAlignment="Center"/>
+                                                <!-- MOD_ACS: Update Margin // BG3: Margin="0,16,0,16" -->
+                                                <Control Template="{StaticResource WeightBarTemplate}" Margin="-12,16,12,16" Grid.Row="1" HorizontalAlignment="Center"/>
                                             </Grid>
 
                                         </Grid>
@@ -326,7 +326,7 @@
 
                                     <!-- ======== TRAVELLER CHEST PAGE ======== -->
                                     <!-- MOD_ACS: Update Margin // BG3: Margin="12,0,0,12" -->
-                                    <Control x:Name="TravellerChestPage" DataContext="{Binding SelectedItem, ElementName=CampPortraits}" ls:TooltipExtender.Owner="{Binding DataContext.CurrentPlayer.SelectedCharacter,RelativeSource={RelativeSource AncestorType=ls:UIWidget}}"  Margin="23,0,-4,0" Padding="0,0,0,0" VerticalAlignment="Stretch" Template="{StaticResource ContainerInventoryTemplate}"/>
+                                    <Control x:Name="TravellerChestPage" DataContext="{Binding SelectedItem, ElementName=CampPortraits}" ls:TooltipExtender.Owner="{Binding DataContext.CurrentPlayer.SelectedCharacter,RelativeSource={RelativeSource AncestorType=ls:UIWidget}}"  Margin="16,0,0,0" Padding="0,0,0,0" VerticalAlignment="Stretch" Template="{StaticResource ContainerInventoryTemplate}"/>
                                 </Grid>
 
                             </Grid>

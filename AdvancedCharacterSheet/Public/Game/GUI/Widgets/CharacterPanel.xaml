@@ -312,7 +312,8 @@
     <ls:UIWidget.Template>
         <ControlTemplate>
             <Grid x:Name="bgFade" Margin="-1400,0,-1400,-1000">
-                <Grid x:Name="Panel" HorizontalAlignment="Left" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5" Margin="1672,0,0,1460">
+                <!-- MOD_ACS: Update Margin // BG3: Margin="1672,0,0,1460" -->
+                <Grid x:Name="Panel" HorizontalAlignment="Left" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5" Margin="1550,0,0,1460">
                     <Grid.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -329,7 +330,8 @@
                             <b:ControlStoryboardAction Storyboard="{StaticResource SimpleFadeIn}"/>
                         </b:DataTrigger>
                     </b:Interaction.Triggers>
-                    <ls:LSNineSliceImage x:Name="BGpanel" Style="{StaticResource Generic9SliceBGFaded}" Width="2080" Height="{StaticResource InventoryColumnHeight}" ls:TooltipExtender.Owner="{Binding CurrentPlayer.SelectedCharacter}" Tag="{Binding CurrentPlayer.SelectedCharacter.Inventory}" Margin="6">
+                    <!-- MOD_ACS: Update Width // BG3: Width="2080" -->
+                    <ls:LSNineSliceImage x:Name="BGpanel" Style="{StaticResource Generic9SliceBGFaded}" Width="2202" Height="{StaticResource InventoryColumnHeight}" ls:TooltipExtender.Owner="{Binding CurrentPlayer.SelectedCharacter}" Tag="{Binding CurrentPlayer.SelectedCharacter.Inventory}" Margin="6">
                         <Grid Name="CharacterPanelContents" >
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -390,7 +392,8 @@
                                         <!-- MOD_ACS: Add Margin -->
                                         <ls:LSPaperdoll HorizontalAlignment="Center" x:Name="CSPaperdoll" EntityRef="{Binding EntityHandle}" Width="{StaticResource CSDollWidth}" Height="{StaticResource CSDollHeight}" VerticalAlignment="Bottom" Margin="0,0,0,100" ClipToBounds="True" UseCombatPose="True" MouseRotate="True" MouseRotateMultiplier="10" RenderScale="{Binding DataContext.Data.RenderScale, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
                                         <!--DOLL CONTROLS-->
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                                        <!-- MOD_ACS: Add Margin -->
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,10,0">
                                             <ls:LSButton  x:Name="rotateRightBtn" Template="{StaticResource RotateRightButton}">
                                                 <b:Interaction.Triggers>
                                                     <b:EventTrigger EventName="LSButtonPressed">
@@ -426,7 +429,8 @@
                                     <Grid ClipToBounds="True">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="1*"/>
-                                            <ColumnDefinition Width="1*"/>
+                                            <!-- MOD_ACS: Update Width // Width="1*" -->
+                                            <ColumnDefinition Width="1.15*"/>
                                             <ColumnDefinition Width="1*"/>
                                         </Grid.ColumnDefinitions>
                                         <!--  INFO  -->
@@ -448,7 +452,8 @@
                                             </Grid>
 
                                             <!-- Weight bar -->
-                                            <Control Template="{StaticResource WeightBarTemplate}" Margin="0,16,0,16" Grid.Row="1" HorizontalAlignment="Center" DataContext="{Binding CurrentPlayer.SelectedCharacter}"/>
+                                            <!-- MOD_ACS: Update Margin // BG3: Margin="0,16,0,16" -->
+                                            <Control Template="{StaticResource WeightBarTemplate}" Margin="-11,16,11,16" Grid.Row="1" HorizontalAlignment="Center" DataContext="{Binding CurrentPlayer.SelectedCharacter}"/>
 
                                         </Grid>
 
@@ -591,7 +596,8 @@
                                 </StackPanel>
 
                                 <!--NAME STACK-->
-                                <StackPanel x:Name="NameStack" DataContext="{Binding CurrentPlayer.SelectedCharacter}" Margin="22,0,0,0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Stretch" >
+                                <!-- MOD_ACS: Update Margin // BG3: Margin="22,0,0,0" -->
+                                <StackPanel x:Name="NameStack" DataContext="{Binding CurrentPlayer.SelectedCharacter}" Margin="36,16,0,-16" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Stretch" >
                                     <Image x:Name="AvatarIcon" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_avatar.png" VerticalAlignment="Center" Stretch="None" Visibility="Collapsed"/>
                                     <TextBlock TextAlignment="Center" FontSize="{StaticResource ScaledIntermediateFontSize}" Foreground="{StaticResource LS_accent100TxtColor}" Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
                                 </StackPanel>
@@ -600,7 +606,8 @@
                                 <StackPanel Panel.ZIndex="2" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
                                     <!--GOLD AND INSPIRATION-->
 
-                                    <Control Template="{StaticResource HeaderInspirationPointsGold}" DataContext="{Binding CurrentPlayer}" Panel.ZIndex="1" VerticalAlignment="Center" Margin="0,0,22,0">
+                                    <!-- MOD_ACS: Update Margin // BG3: Margin="0,0,22,0" -->
+                                    <Control Template="{StaticResource HeaderInspirationPointsGold}" DataContext="{Binding CurrentPlayer}" Panel.ZIndex="1" VerticalAlignment="Center" Margin="0,18,22,-18">
                                     </Control>
 
                                     <Control Template="{StaticResource InventoryLock}" DataContext="{Binding CurrentPlayer.SelectedCharacter}" VerticalAlignment="Center"/>
@@ -890,6 +897,11 @@
                     <Setter TargetName="AlchemyToggleButton" Property="Visibility" Value="Collapsed"/>
                     <Setter TargetName="AlchemyInputOverride" Property="IsEnabled" Value="False"/>
                     <Setter TargetName="HeaderDecor" Property="Source" Value="{StaticResource decorated_header_2}"/>
+                </DataTrigger>
+                
+                <!-- MOD_ACS: Add AvatarIcon activator -->
+                <DataTrigger Binding="{Binding CurrentPlayer.SelectedCharacter.CharacterType}" Value="Avatar">
+                    <Setter TargetName="AvatarIcon" Property="Visibility" Value="Visible"/>
                 </DataTrigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
