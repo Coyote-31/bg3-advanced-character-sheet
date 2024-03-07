@@ -14,8 +14,8 @@ The purpose of this mod is to improve Character, Party and Companions Panels. Al
 > Delete manually AToR old mod version.
 
 ## 🔖 Version
-- 📦 **ACS** mod : `2.3.0`
-- 🎮 **BG3** compatibility : `Hotfix #20 [Patch6_Hotfix3]`
+- 📦 **ACS** mod : `2.4.0`
+- 🎮 **BG3** compatibility : `Hotfix #21 [Patch6_Hotfix4]`
 
 ## ✨ Features
 
@@ -113,25 +113,52 @@ Remove the mod's `.pak` file from :
   <img src="Docs/Screenshots/Tooltips.png" alt="Tooltips"/>
 </p>
 
-### Resistances none :
-
-<p align="center">
-  <img src="Docs/Screenshots/Resistances_none.png" alt="Resistances none"/>
-</p>
-
-
 ### Inspect items :
 
 <p align="center">
   <img src="Docs/Screenshots/Inspect_item_books.png" alt="Inspect item books"/>
 </p>
 
-### Party tab :
+### Character & Camp/Companions Panel :
 
 <p align="center">
-  <img src="Docs/Screenshots/Party_tab_vanilla.png" alt="Party tab vanilla"/>
+  <img src="Docs/Screenshots/CS_and_Camp.png" alt="Character and Camp panels"/>
 </p>
 
 <p align="center">
-  <img src="Docs/Screenshots/Party_tab_modded.png" alt="Party tab modded"/>
+  <img src="Docs/Screenshots/CS_and_Companion.png" alt="Character and Companions panels"/>
+</p>
+
+<p align="center">
+  <img src="Docs/Screenshots/SpellBook_and_CompanionSheet.png" alt="SpellBook and Companions panel #1"/>
+</p>
+
+<p align="center">
+  <img src="Docs/Screenshots/SpellBook_and_CompanionSheet2.png" alt="SpellBook and Companions panel #2"/>
+</p>
+
+<p align="center">
+  <img src="Docs/Screenshots/SpellBook_and_CompanionSheet3.png" alt="SpellBook and Companions panel #3"/>
+</p>
+
+### Party Panel :
+
+<p align="center">
+  <img src="Docs/Screenshots/Party_Inventory.png" alt="Party Inventory panel"/>
+</p>
+
+<p align="center">
+  <img src="Docs/Screenshots/Party_SpellBook.png" alt="Party SpellBook panel"/>
+</p>
+
+<p align="center">
+  <img src="Docs/Screenshots/Party_CS.png" alt="Party CharacterSheet panel #1"/>
+</p>
+
+<p align="center">
+  <img src="Docs/Screenshots/Party_CS2.png" alt="Party CharacterSheet panel #2"/>
+</p>
+
+<p align="center">
+  <img src="Docs/Screenshots/Party_CS3.png" alt="Party CharacterSheet panel #3"/>
 </p>
