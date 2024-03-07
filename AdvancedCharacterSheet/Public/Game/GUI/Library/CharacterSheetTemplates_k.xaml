@@ -8411,8 +8411,6 @@
                     <ls:LSComboBox x:Name="InventorySortListHolder"
                                    Template="{StaticResource SortListTemplate}"
                                    ItemsSource="{Binding DataContext.CurrentPlayer.UIData.InventorySortOptions, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"       
-                                   Text="{Binding CurrentInventorySortOption.Name, Mode=OneWay}"
-                                   AllowRepeatedSelection="True"
                                    VerticalAlignment="Center"
                                    Margin="0,-6,0,0"
                                    Grid.Column="0">
@@ -8426,6 +8424,8 @@
                                         </MultiBinding>
                                     </b:InvokeCommandAction.CommandParameter>
                                 </b:InvokeCommandAction>
+                                <!-- Clear selecting to allow re-selecting -->
+                                <b:ChangePropertyAction PropertyName="SelectedIndex" Value="-1"/>
                             </b:EventTrigger>
                         </b:Interaction.Triggers>
                     </ls:LSComboBox>
@@ -8835,11 +8835,8 @@
                     <!-- MOD_ACS: Add Margin -->
                     <Border HorizontalAlignment="Left" Margin="-1,0,0,6">
                         <ls:LSComboBox x:Name="ContainerSortList" SoundID="UI_HUD_Inventory_Sort"
-                                                                               Template="{StaticResource SortListTemplate}"
-                                                                               SelectedItem="{Binding LootInventory.ContainerSortOption, Mode=OneWay}"
-                                                                               ItemsSource="{Binding DataContext.CurrentPlayer.UIData.InventorySortOptions, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"
-                                                                               Text="{Binding LootInventory.ContainerSortOption.Name, Mode=OneWay}"
-                                                                               AllowRepeatedSelection="True">
+                                        Template="{StaticResource SortListTemplate}"
+                                        ItemsSource="{Binding DataContext.CurrentPlayer.UIData.InventorySortOptions, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}">
                             <b:Interaction.Triggers>
                                 <b:EventTrigger EventName="SelectionChanged">
                                     <b:InvokeCommandAction Command="{Binding DataContext.SortContainerInventoryCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}">
@@ -8850,6 +8847,8 @@
                                             </MultiBinding>
                                         </b:InvokeCommandAction.CommandParameter>
                                     </b:InvokeCommandAction>
+                                    <!-- Clear selecting to allow re-selecting -->
+                                    <b:ChangePropertyAction PropertyName="SelectedIndex" Value="-1"/>
                                 </b:EventTrigger>
                             </b:Interaction.Triggers>
                         </ls:LSComboBox>
@@ -9346,14 +9345,15 @@
                      ItemContainerStyle="{DynamicResource ListItemStyle}"
                      Template="{StaticResource MinimalItemsControlTemplate}"
                      ItemsPanel="{DynamicResource CharacterInventoryPanelTemplate}"
-                     SelectionMode="Single"/>
+                     SelectionMode="Extended"
+                     ls:MultiSelect.IsEnabled="{Binding SelectedItems.Count, RelativeSource={RelativeSource Self}, Converter={StaticResource GreaterThanConverter},ConverterParameter=1}">
+                <b:Interaction.Triggers>
+                    <b:EventTrigger EventName="SelectionChanged">
+                        <b:InvokeCommandAction Command="{Binding DataContext.UpdateSelectionCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="{Binding SelectedItems, ElementName=Items}"/>
+                    </b:EventTrigger>
+                </b:Interaction.Triggers>
+            </ListBox>
         </Grid>
-
-        <ControlTemplate.Triggers>
-            <DataTrigger Binding="{Binding SelectedItems.Count, ElementName=Items, Converter={StaticResource GreaterThanConverter},ConverterParameter=1}" Value="True">
-                <Setter TargetName="Items" Property="ls:MultiSelect.IsEnabled" Value="True"/>
-            </DataTrigger>
-        </ControlTemplate.Triggers>
     </ControlTemplate>
 
     <Style x:Key="PartyCharacterExpanderStyle" TargetType="Expander">
