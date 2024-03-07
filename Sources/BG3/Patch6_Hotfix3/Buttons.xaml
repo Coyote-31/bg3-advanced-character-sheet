@@ -1,0 +1,1024 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:ls="clr-namespace:ls;assembly=SharedGUI"
+                    xmlns:System="clr-namespace:System;assembly=mscorlib"
+                    xmlns:noesis="clr-namespace:NoesisGUIExtensions;assembly=Noesis.GUI.Extensions"
+					mc:Ignorable="d">
+    <System:Double x:Key="IconDisabledOpacity">1</System:Double>
+    <!-- Generic Button -->
+    <ControlTemplate x:Key="ButtonTemplate" TargetType="ls:LSButton">
+        <Image x:Name="img" Source="{DynamicResource ButtonNormal}" Stretch="None"/>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Source" Value="{DynamicResource ButtonHighlight}" TargetName="img"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Source" Value="{DynamicResource ButtonPressed}" TargetName="img"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Source" Value="{DynamicResource ButtonDisabled}" TargetName="img"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!-- Base Button -->
+    <ControlTemplate x:Key="BaseButtonTemplate" TargetType="ls:LSButton">
+	    <ControlTemplate.Resources>
+		    <Thickness x:Key="Slices">68,0</Thickness>
+	    </ControlTemplate.Resources>
+        <ls:LSNineSliceImage x:Name="img" ImageSource="{TemplateBinding ls:ButtonHelper.ImageSource}" Slices="{DynamicResource Slices}" MinHeight="{TemplateBinding MinHeight}" MinWidth="{TemplateBinding MinWidth}" Width="{TemplateBinding Width}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" Padding="{TemplateBinding Padding}">
+		    <ContentPresenter x:Name="cnt"  />
+	    </ls:LSNineSliceImage>
+    </ControlTemplate>
+
+    <Style x:Key="BtnTextGlow"  TargetType="TextBlock">
+
+        <Setter Property="noesis:Text.Stroke" Value="{StaticResource LS_accent00TxtColor}"/>
+        <Setter Property="noesis:Text.StrokeThickness" Value="2"/>
+        <Setter Property="TextBlock.Effect">
+            <Setter.Value>
+                <DropShadowEffect BlurRadius="6" ShadowDepth="0" Opacity="1" Color="{StaticResource accent00Color}"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="BaseButtonStyle" TargetType="{x:Type ls:LSButton}">
+        <Style.Resources>
+            <Style TargetType="ContentPresenter">
+                <Style.Resources>
+                    <Style TargetType="TextBlock" BasedOn="{StaticResource BtnTextGlow }"/>
+                </Style.Resources>
+            </Style>
+        </Style.Resources>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+	    <Setter Property="VerticalContentAlignment" Value="Center" />
+	    <Setter Property="Template" Value="{StaticResource BaseButtonTemplate}"/>
+        <Setter Property="MinWidth" Value="{Binding (ls:ButtonHelper.ImageSource).Width, RelativeSource={RelativeSource Self}}"/>
+        <Setter Property="MinHeight" Value="{Binding (ls:ButtonHelper.ImageSource).Height, RelativeSource={RelativeSource Self}}"/>
+	    <Setter Property="FontSize" Value="{StaticResource ScaledMediumFontSize}"/>
+	    <Setter Property="Foreground" Value="{StaticResource LS_tint100}"/>
+	    <Setter Property="SoundID" Value="UI_HUD_Shared"/>
+	    <Setter Property="Padding" Value="40,0" />
+	    <Style.Triggers>
+		    <Trigger Property="IsPressed" Value="True">
+			    <Setter Property="Padding" Value="40,8,40,0" />
+		    </Trigger>
+		    <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="{StaticResource LS_accent25TxtColor}" />
+		    </Trigger>
+	    </Style.Triggers>
+    </Style>
+
+    <!-- Generic Button with Icon -->
+    <ControlTemplate x:Key="IconButtonTemplate" TargetType="ls:LSButton">
+        <Grid>
+            <Image x:Name="img" Source="{DynamicResource ButtonNormal}" Stretch="None"/>
+            <Image x:Name="icon" Margin="0,0,0,0"  HorizontalAlignment="Center" VerticalAlignment="Center" Source="{DynamicResource IconNormal}" Stretch="Uniform" Width="{DynamicResource IconWidth}" Height="{DynamicResource IconHeight}"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Source" Value="{DynamicResource ButtonHighlight}" TargetName="img"/>
+                <Setter Property="Source" Value="{DynamicResource IconHighlight}" TargetName="icon"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Source" Value="{DynamicResource ButtonPressed}" TargetName="img"/>
+                <Setter Property="Source" Value="{DynamicResource IconPressed}" TargetName="icon"/>
+                <Setter Property="Margin" Value="0,6,0,0" TargetName="icon"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Source" Value="{DynamicResource ButtonDisabled}" TargetName="img"/>
+                <Setter Property="Source" Value="{DynamicResource IconDisabled}" TargetName="icon"/>
+                <Setter Property="Opacity" Value="{DynamicResource IconDisabledOpacity}" TargetName="icon"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+
+
+
+    <!-- content template for icon + text buttons -->
+    <DataTemplate x:Key="TextAndIconBtnContent" >
+        <StackPanel x:Name="content" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+            <Rectangle x:Name="icon" VerticalAlignment="Center" Margin="0,0,10,0" Fill="{DynamicResource IconNormal}" Width="{DynamicResource IconWidth}" Height="{DynamicResource IconHeight}" />
+            <TextBlock x:Name="txt" VerticalAlignment="Center" Text="{Binding .}" Style="{StaticResource BtnTextGlow}"/>
+        </StackPanel>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsMouseOver}" Value="True">
+                <Setter Property="Fill" Value="{DynamicResource IconHighlight}" TargetName="icon"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsPressed}" Value="True">
+                <Setter Property="Fill" Value="{DynamicResource IconPressed}" TargetName="icon"/>
+            </DataTrigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="{StaticResource DisabledOpacity}" TargetName="icon"/>
+                <Setter Property="Fill" Value="{DynamicResource IconDisabled}" TargetName="icon"/>
+            </Trigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+
+    <!-- Just an ornament frame to use with normal "Big" style buttons to replace the ornament variant above -->
+    <Style x:Key="BigButtonOrnamentFrame" TargetType="ls:LSNineSliceImage" BasedOn="{StaticResource {x:Type ls:LSNineSliceImage}}">
+        <Style.Resources>
+            <BitmapImage x:Key="ButtonAppearanceBg" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/CC/btnAppearance_bg.png"/>
+        </Style.Resources>
+        <Setter Property="ImageSource" Value="{StaticResource ButtonAppearanceBg}"/>
+        <Setter Property="Slices" Value="96,0"/>
+        <Setter Property="IconWidth" Value="340"/>
+        <Setter Property="Margin" Value="-12,-34"/>
+        <Setter Property="Padding" Value="64,64"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="RightPopUpButton" TargetType="ls:LSButton">
+        <Style.Resources>
+            <ImageSource x:Key="ButtonNormal">pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/btn_d.png</ImageSource>
+            <ImageSource x:Key="ButtonHighlight">pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/btn_h.png</ImageSource>
+            <ImageSource x:Key="ButtonPressed">pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/btn_p.png</ImageSource>
+            <ImageSource x:Key="ButtonDisabled">pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/btn_disabled.png</ImageSource>
+        </Style.Resources>
+        <Setter Property="Foreground" Value="{StaticResource LS_tint100}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ls:LSButton">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="98"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Grid.Column="0" Grid.ColumnSpan="2" x:Name="img" Source="{DynamicResource ButtonNormal}" Stretch="None"/>
+                        <Image Grid.Column="0" x:Name="icon" VerticalAlignment="Center" HorizontalAlignment="Center" Source="{DynamicResource Icon}" Stretch="None"/>
+                        <TextBlock Grid.Column="1" Style="{StaticResource BtnTextGlow}" x:Name="txt" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="50,0,0,0" Text="{Binding Path=Content , RelativeSource={RelativeSource Mode=TemplatedParent}}" Background="Transparent" Foreground="{TemplateBinding Foreground}" FontSize="{TemplateBinding FontSize}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Source" Value="{DynamicResource ButtonHighlight}" TargetName="img"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Source" Value="{DynamicResource ButtonPressed}" TargetName="img"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Source" Value="{DynamicResource ButtonDisabled}" TargetName="img"/>
+                            <Setter Property="Opacity" Value="0.5" TargetName="icon"/>
+                            <Setter Property="Opacity" Value="0.5" TargetName="txt"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+
+    <Style x:Key="LeftPopUpButton" TargetType="ls:LSButton" BasedOn="{StaticResource RightPopUpButton}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ls:LSButton">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="98"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Grid.Column="0" Grid.ColumnSpan="2" x:Name="img" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/btn_d.png" Stretch="None">
+                            <Image.RenderTransform>
+                                <ScaleTransform ScaleX="-1" CenterX="240"/>
+                            </Image.RenderTransform>
+                        </Image>
+                        <TextBlock Grid.Column="0" Style="{StaticResource BtnTextGlow}" x:Name="txt" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,50,0" Text="{Binding Path=Content , RelativeSource={RelativeSource Mode=TemplatedParent}}" Foreground="{TemplateBinding Foreground}" FontSize="{TemplateBinding FontSize}"/>
+                        <Image Grid.Column="1" x:Name="icon" VerticalAlignment="Center" HorizontalAlignment="Center" Source="{DynamicResource Icon}" Stretch="None"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/btn_h.png" TargetName="img"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/btn_p.png" TargetName="img"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/btn_disabled.png" TargetName="img"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="BigButtonStyle" TargetType="{x:Type ls:LSButton}" BasedOn="{StaticResource BaseButtonStyle}">
+        <Setter Property="FontSize" Value="{DynamicResource LargeFontSize}"/>
+        <Setter Property="ls:ButtonHelper.ImageSource" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/BigBtn_d.png"/>
+        <Style.Triggers>
+	        <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="ls:ButtonHelper.ImageSource" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/BigBtn_h.png" />
+	        </Trigger>
+	        <Trigger Property="IsPressed" Value="True">
+                <Setter Property="ls:ButtonHelper.ImageSource" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/BigBtn_p.png"/>
+	        </Trigger>
+	        <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="ls:ButtonHelper.ImageSource" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/BigBtn_disabled.png" />
+	        </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="SmallButtonStyle" TargetType="{x:Type ls:LSButton}"  BasedOn="{StaticResource BaseButtonStyle}">
+        <Setter Property="FontSize" Value="{DynamicResource MediumFontSize}"/>
+        <Setter Property="ls:ButtonHelper.ImageSource" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/smallBtn_d.png"/>
+        <Style.Triggers>
+	        <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="ls:ButtonHelper.ImageSource" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/smallBtn_h.png" />
+	        </Trigger>
+	        <Trigger Property="IsPressed" Value="True">
+                <Setter Property="ls:ButtonHelper.ImageSource" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/smallBtn_p.png"/>
+	        </Trigger>
+	        <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="ls:ButtonHelper.ImageSource" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/smallBtn_disabled.png" />
+	        </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Brown Button -->
+    <Style x:Key="BrownButtonStyle" TargetType="{x:Type ls:LSButton}" BasedOn="{StaticResource BaseButtonStyle}">
+	    <Setter Property="ls:ButtonHelper.ImageSource" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_slim_brown_d.png"/>
+        <Setter Property="FontSize" Value="{StaticResource MediumFontSize}"/>
+        <Style.Triggers>
+	        <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="ls:ButtonHelper.ImageSource" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_slim_brown_h.png" />
+	        </Trigger>
+	        <Trigger Property="IsPressed" Value="True">
+                <Setter Property="ls:ButtonHelper.ImageSource" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_slim_brown_p.png"/>
+	        </Trigger>
+	        <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="ls:ButtonHelper.ImageSource" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_slim_brown_disabled.png" />
+	        </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="BigBrownButtonStyle" TargetType="ls:LSButton" BasedOn="{StaticResource BaseButtonStyle}">
+        <Setter Property="ls:ButtonHelper.ImageSource" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_big_brown_d.png"/>
+        <Style.Triggers>
+		    <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="ls:ButtonHelper.ImageSource" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_big_brown_h.png" />
+		    </Trigger>
+		    <Trigger Property="IsPressed" Value="True">
+                <Setter Property="ls:ButtonHelper.ImageSource" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_big_brown_p.png"/>
+		    </Trigger>
+		    <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="ls:ButtonHelper.ImageSource" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_big_brown_disabled.png" />
+		    </Trigger>
+	    </Style.Triggers>
+    </Style>
+
+    <Style x:Key="BigBrownButtonTextAndIconStyle" BasedOn="{StaticResource BigBrownButtonStyle}" TargetType="ls:LSButton">
+        <Style.Resources>
+            <System:Double x:Key="IconWidth">48</System:Double>
+            <System:Double x:Key="IconHeight">48</System:Double>
+        </Style.Resources>
+        <Setter Property="ContentTemplate" Value="{StaticResource TextAndIconBtnContent}"/>
+    </Style>
+
+    <!-- Brown Button with text and icon -->
+    <Style x:Key="BrownButtonTextAndIconStyle" BasedOn="{StaticResource BrownButtonStyle}" TargetType="ls:LSButton">
+        <Style.Resources>
+            <System:Double x:Key="IconWidth">48</System:Double>
+            <System:Double x:Key="IconHeight">48</System:Double>
+        </Style.Resources>
+        <Setter Property="ContentTemplate" Value="{StaticResource TextAndIconBtnContent}"/>
+    </Style>
+
+    <!-- Red Button -->
+    <ControlTemplate x:Key="RedButton" TargetType="Button">
+        <Grid ClipToBounds="True">
+            <Image x:Name="img" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_red_d.png" Stretch="None" />
+            <TextBlock x:Name="txt" Style="{StaticResource BtnTextGlow}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" Text="{Binding Name, Converter={StaticResource StringToUpperConverter}}" Background="Transparent" Foreground="{StaticResource LS_PrimaryColor}" FontSize="{StaticResource MediumFontSize}"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_red_h.png" TargetName="img"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_red_p.png" TargetName="img"/>
+                <Setter Property="Margin" Value="0,3,0,0" TargetName="txt"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_red_disabled.png" TargetName="img"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!-- Small Red Button -->
+    <Style x:Key="SmallRedButtonStyle" TargetType="{x:Type ls:LSButton}" BasedOn="{StaticResource BaseButtonStyle}">
+        <Setter Property="ls:ButtonHelper.ImageSource" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_small_red_d.png"/>
+        <Setter Property="FontWeight" Value="DemiBold"/>
+        <Setter Property="FontSize" Value="{StaticResource ScaledSmallishFontSize}"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="ls:ButtonHelper.ImageSource" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_small_red_h.png" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="ls:ButtonHelper.ImageSource" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_small_red_p.png"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="ls:ButtonHelper.ImageSource" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_small_red_disabled.png" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Blue Button -->
+    <Style x:Key="BigBlueButtonStyle" TargetType="{x:Type ls:LSButton}" BasedOn="{StaticResource BaseButtonStyle}">
+        <Setter Property="FontSize" Value="{StaticResource MediumFontSize}"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="ls:ButtonHelper.ImageSource" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_blue_d.png"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="ls:ButtonHelper.ImageSource" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_blue_h.png" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="ls:ButtonHelper.ImageSource" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_blue_p.png"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="ls:ButtonHelper.ImageSource" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_blue_disabled.png" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Big Blue Button with text and icon -->
+    <Style x:Key="BigBlueButtonTextAndIconStyle" BasedOn="{StaticResource BigBlueButtonStyle}" TargetType="ls:LSButton">
+        <Style.Resources>
+            <System:Double x:Key="IconWidth">48</System:Double>
+            <System:Double x:Key="IconHeight">48</System:Double>
+        </Style.Resources>
+        <Setter Property="ContentTemplate" Value="{StaticResource TextAndIconBtnContent}"/>
+    </Style>
+
+    <!-- Blue Button -->
+    <ControlTemplate x:Key="BlueButton" TargetType="Button">
+        <Grid ClipToBounds="True">
+            <Image x:Name="img" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_blue_d.png" Stretch="None" />
+            <TextBlock x:Name="txt" Style="{StaticResource BtnTextGlow}" Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Name, Converter={StaticResource StringToUpperConverter}}" Background="Transparent" Foreground="{StaticResource LS_PrimaryColor}" FontSize="{StaticResource MediumFontSize}"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_blue_h.png" TargetName="img"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_blue_p.png" TargetName="img"/>
+                <Setter Property="Margin" Value="0,8,0,0" TargetName="txt"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_blue_disabled.png" TargetName="img"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Key="BlueEdgeButtonStyle" TargetType="ls:LSButton" BasedOn="{StaticResource BaseButtonStyle}">
+        <Setter Property="FontSize" Value="{StaticResource MediumFontSize}"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="ls:ButtonHelper.ImageSource" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/smallerBtn_d.png"/>
+        <Style.Triggers>
+	        <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="ls:ButtonHelper.ImageSource" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/smallerBtn_h.png" />
+	        </Trigger>
+	        <Trigger Property="IsPressed" Value="True">
+                <Setter Property="ls:ButtonHelper.ImageSource" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/smallerBtn_p.png"/>
+	        </Trigger>
+	        <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="ls:ButtonHelper.ImageSource" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/smallerBtn_disabled.png" />
+	        </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Slim blue button -->
+    <Style x:Key="BlueButtonStyle" TargetType="{x:Type ls:LSButton}" BasedOn="{StaticResource BaseButtonStyle}">
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="ls:ButtonHelper.ImageSource" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_slim_blue_d.png"/>
+        <Style.Triggers>
+	        <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="ls:ButtonHelper.ImageSource" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_slim_blue_h.png" />
+	        </Trigger>
+	        <Trigger Property="IsPressed" Value="True">
+                <Setter Property="ls:ButtonHelper.ImageSource" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_slim_blue_p.png"/>
+	        </Trigger>
+	        <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="ls:ButtonHelper.ImageSource" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_slim_blue_disabled.png" />
+	        </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Slim Blue Button with text and icon -->
+    <Style x:Key="BlueButtonTextAndIconStyle" BasedOn="{StaticResource BlueButtonStyle}" TargetType="ls:LSButton">
+        <Style.Resources>
+            <System:Double x:Key="IconWidth">48</System:Double>
+            <System:Double x:Key="IconHeight">48</System:Double>
+        </Style.Resources>
+	    <Setter Property="ContentTemplate" Value="{StaticResource TextAndIconBtnContent}"/>
+    </Style>
+
+    <ControlTemplate x:Key="ToggleIconButtonTemplate" TargetType="ToggleButton">
+        <Grid>
+            <Image x:Name="img" Source="{DynamicResource ButtonUncheckedNormal}" Stretch="None"/>
+            <Image x:Name="icon" Source="{DynamicResource IconUncheckedNormal}" Stretch="Uniform" Width="{DynamicResource IconWidth}" Height="{DynamicResource IconHeight}"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <!-- Unchecked -->
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Source" Value="{DynamicResource ButtonUncheckedHighlight}" TargetName="img"/>
+                <Setter Property="Source" Value="{DynamicResource IconUncheckedHighlight}" TargetName="icon"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Source" Value="{DynamicResource ButtonUncheckedPressed}" TargetName="img"/>
+                <Setter Property="Source" Value="{DynamicResource IconUncheckedPressed}" TargetName="icon"/>
+                <Setter Property="Margin" Value="0,2,0,-2" TargetName="icon"/>
+            </Trigger>
+
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Source" Value="{DynamicResource ButtonUncheckedDisabled}" TargetName="img"/>
+                <Setter Property="Source" Value="{DynamicResource IconUncheckedDisabled}" TargetName="icon"/>
+            </Trigger>
+
+            <!-- Checked variants -->
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Source" Value="{DynamicResource ButtonCheckedNormal}" TargetName="img"/>
+                <Setter Property="Source" Value="{DynamicResource IconCheckedNormal}" TargetName="icon"/>
+            </Trigger>
+
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver" Value="True"/>
+                    <Condition Property="IsChecked" Value="True"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="Source" Value="{DynamicResource ButtonCheckedHighlight}" TargetName="img"/>
+                <Setter Property="Source" Value="{DynamicResource IconCheckedHighlight}" TargetName="icon"/>
+            </MultiTrigger>
+
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsPressed" Value="True"/>
+                    <Condition Property="IsChecked" Value="True"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="Source" Value="{DynamicResource ButtonCheckedPressed}" TargetName="img"/>
+                <Setter Property="Source" Value="{DynamicResource IconCheckedPressed}" TargetName="icon"/>
+            </MultiTrigger>
+
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsEnabled" Value="False"/>
+                    <Condition Property="IsChecked" Value="True"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="Source" Value="{DynamicResource ButtonCheckedDisabled}" TargetName="img"/>
+                <Setter Property="Source" Value="{DynamicResource IconCheckedDisabled}" TargetName="icon"/>
+            </MultiTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!-- TickBox Toggle Button -->
+    <Style x:Key="TickBox" TargetType="ToggleButton">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Grid Background="Transparent">
+                        <Image x:Name="img" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Options/checkBox_d.png" IsHitTestVisible="False"/>
+                        <Image x:Name="check" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Options/ico_check_d.png" Visibility="Hidden" IsHitTestVisible="False"/>
+
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="MouseEnter">
+                                <ls:LSPlaySound Sound="UI_Shared_Hover"/>
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="check" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="img" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Options/checkBox_disabled.png"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="img" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Options/checkBox_h.png"/>
+                            <Setter TargetName="check" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Options/ico_check_h.png"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed"  Value="True">
+                            <Setter TargetName="img" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Options/checkBox_p.png"/>
+                            <Setter TargetName="check" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Options/ico_check_h.png"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Enabled}" Value="False">
+                <Setter Property="Opacity" Value="{StaticResource DisabledOpacity}" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- EyeBox Toggle Button -->
+    <Style x:Key="EyeBoxButtonTemplate" TargetType="ToggleButton">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Image x:Name="check" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Equipment/ico_visibility_d.png"/>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="check" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Equipment/ico_visibility_d.png"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="check" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Equipment/ico_visibility_h.png"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="check" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Equipment/ico_visibility_h.png"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed"  Value="True">
+                            <Setter TargetName="check" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Equipment/ico_visibility_h.png"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Enabled}" Value="False">
+                <Setter Property="Opacity" Value="{StaticResource DisabledOpacity}" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Close Button -->
+    <Style x:Key="CloseButton" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <ControlTemplate.Resources>
+                        <ImageSource x:Key="BackgroundImage">pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/btn_roundBig_d.png</ImageSource>
+                        <ImageSource x:Key="IconImage">pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/btn_close_d.png</ImageSource>
+                    </ControlTemplate.Resources>
+                    <Grid>
+                        <Image x:Name="bg" Source="{StaticResource BackgroundImage}" Stretch="None" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Image x:Name="img" Source="{StaticResource IconImage}" Stretch="None" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/btn_roundBig_h.png" TargetName="bg"/>
+                            <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/btn_close_h.png" TargetName="img"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/btn_roundBig_h.png" TargetName="bg"/>
+                            <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/btn_close_d.png" TargetName="img"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/btn_roundBig_d.png" TargetName="bg"/>
+                            <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/btn_close_d.png" TargetName="img"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Small Close Button -->
+    <Style x:Key="SmallCloseButton" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Image x:Name="bg" Source="{StaticResource BtnSmallRound}" Stretch="None"/>
+                        <Image x:Name="icon" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/ico_cancel.png" Stretch="None"/>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="bg" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/btn_small_round_h.png"/>
+                            <Setter TargetName="icon" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/ico_cancel_h.png"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="bg" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/btn_small_round_p.png"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Thickness x:Key="SmallCloseButtonDefaultMargin">32</Thickness>
+
+    <!-- PopUp Close -->
+    <Style x:Key="PopUpCloseButton" TargetType="Button">
+        <Setter Property="Template" Value="{StaticResource ButtonTemplate}"/>
+        <Style.Resources>
+            <ImageSource x:Key="ButtonNormal">pack://application:,,,/GustavNoesisGUI;component/Assets/Container/container_closeBtn_d.png</ImageSource>
+            <ImageSource x:Key="ButtonHighlight">pack://application:,,,/GustavNoesisGUI;component/Assets/Container/container_closeBtn_h.png</ImageSource>
+            <ImageSource x:Key="ButtonPressed">pack://application:,,,/GustavNoesisGUI;component/Assets/Container/container_closeBtn_h.png</ImageSource>
+            <ImageSource x:Key="ButtonDisabled">pack://application:,,,/GustavNoesisGUI;component/Assets/Container/container_closeBtn_d.png</ImageSource>
+        </Style.Resources>
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="{StaticResource DisabledOpacity}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- rotate right button -->
+    <ControlTemplate x:Key="RotateRightButton" TargetType="ls:LSButton">
+        <ControlTemplate.Resources>
+            <ImageSource x:Key="ButtonNormal">pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_rotateRight_d.png</ImageSource>
+	    </ControlTemplate.Resources>
+	    <Grid>
+            <Image x:Name="img" Source="{StaticResource ButtonNormal}" Stretch="None" Margin="0,0,0,4"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_rotateRight_h.png" TargetName="img"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Margin" Value="0,4,0,0" TargetName="img"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_rotateRight_disabled.png" TargetName="img"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!-- rotate left button -->
+    <ControlTemplate x:Key="RotateLeftButton" TargetType="ls:LSButton">
+	    <ControlTemplate.Resources>
+            <ImageSource x:Key="ButtonNormal">pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_rotateLeft_d.png</ImageSource>
+	    </ControlTemplate.Resources>
+        <Grid>
+            <Image x:Name="img" Source="{StaticResource ButtonNormal}" Stretch="None" Margin="0,0,0,4"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_rotateLeft_h.png" TargetName="img"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Margin" Value="0,4,0,0" TargetName="img"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_rotateLeft_disabled.png" TargetName="img"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!-- plus button -->
+    <ControlTemplate x:Key="PlusButton" TargetType="Button">
+        <Grid>
+            <Image x:Name="img" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/btn_small_round_d.png" Stretch="None"/>
+            <Image x:Name="ico" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Minimap/ico_plus_d.png" Stretch="None"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/btn_small_round_h.png" TargetName="img"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/btn_small_round_p.png" TargetName="img"/>
+                <Setter Property="Margin" Value="0,2,0,-2" TargetName="ico"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/btn_small_round_disabled.png" TargetName="img"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!-- min button -->
+    <ControlTemplate x:Key="MinButton" TargetType="Button">
+        <Grid>
+            <Image x:Name="img" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/btn_small_round_d.png" Stretch="None"/>
+            <Image x:Name="ico" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Minimap/ico_minus_d.png" Stretch="None"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/btn_small_round_h.png" TargetName="img"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/btn_small_round_p.png" TargetName="img"/>
+                <Setter Property="Margin" Value="0,2,0,-2" TargetName="ico"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/btn_small_round_disabled.png" TargetName="img"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!-- up button -->
+    <ControlTemplate x:Key="UpButton" TargetType="Button">
+        <Grid>
+            <Image x:Name="img" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/box_btn_d.png" Stretch="None"/>
+            <Image x:Name="ico" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/box_btn_ico_arrow.png" Stretch="None"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/box_btn_h.png" TargetName="img"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/box_btn_p.png" TargetName="img"/>
+                <Setter Property="Margin" Value="0,2,0,-2" TargetName="ico"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/box_btn_disabled.png" TargetName="img"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!-- down button -->
+    <ControlTemplate x:Key="DownButton" TargetType="Button">
+        <Grid>
+            <Image x:Name="img" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/box_btn_d.png" Stretch="None"/>
+            <Image x:Name="ico" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/box_btn_ico_arrow.png" Stretch="None">
+                <Image.RenderTransform>
+                    <ScaleTransform ScaleY="-1" CenterY="10"/>
+                </Image.RenderTransform>
+            </Image>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/box_btn_h.png" TargetName="img"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/box_btn_p.png" TargetName="img"/>
+                <Setter Property="Margin" Value="0,2,0,-2" TargetName="ico"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/box_btn_disabled.png" TargetName="img"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!--Inventory View Tabs BEGIN -->
+
+    <Style x:Key="InvViewTabButtonBackgroundStyle" TargetType="Image">
+        <Setter Property="Stretch" Value="None"/>
+        <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/tabMini_plain_inactive_d.png"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem}},Path=IsMouseOver}" Value="True">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/tabMini_plain_inactive_h.png" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="ActiveTabButtonBackgroundStyle" TargetType="Image">
+        <Setter Property="Stretch" Value="None"/>
+        <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/tabMini_plain_active_d.png"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem}},Path=IsMouseOver}" Value="True">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/tabMini_plain_active_h.png" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--Kick Button -->
+    <ControlTemplate x:Key="KickButton">
+        <ControlTemplate.Resources>
+            <System:Double x:Key="IconDisabledOpacity">0.5</System:Double>
+            <ImageSource x:Key="ButtonNormal">pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/small_blackCircleBtn_d.png</ImageSource>
+            <ImageSource x:Key="ButtonHighlight">pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/small_blackCircleBtn_h.png</ImageSource>
+            <ImageSource x:Key="ButtonPressed">pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/small_blackCircleBtn_p.png</ImageSource>
+            <ImageSource x:Key="ButtonDisabled">pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/small_blackCircleBtn_disabled.png</ImageSource>
+            <ImageSource x:Key="IconNormal" >pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/ico_kick.png</ImageSource>
+            <ImageSource x:Key="IconHighlight" >pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/ico_kick.png</ImageSource>
+            <ImageSource x:Key="IconPressed" >pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/ico_kick.png</ImageSource>
+            <ImageSource x:Key="IconDisabled" >pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/ico_kick.png</ImageSource>
+            <System:Double x:Key="IconWidth">64</System:Double>
+            <System:Double x:Key="IconHeight">64</System:Double>
+        </ControlTemplate.Resources>
+        <ls:LSButton Command="{Binding DataContext.KickPlayer, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="{Binding PeerId}">
+            <ls:LSButton.Style>
+                <Style TargetType="ls:LSButton" >
+                    <Setter Property="Template" Value="{StaticResource IconButtonTemplate}"/>
+                    <Setter Property="Width" Value="100"/>
+                    <Setter Property="Height" Value="100"/>
+                    <Setter Property="Visibility" Value="Hidden"/>
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding DataContext.IsHost, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Value="True"/>
+                                <Condition Binding="{Binding PeerId, Converter={StaticResource GreaterThanConverter}, ConverterParameter=0}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.Setters>
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </MultiDataTrigger.Setters>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ls:LSButton.Style>
+        </ls:LSButton>
+    </ControlTemplate>
+
+    <!--==============================-->
+    <!-- Labeled TAB DECK Button -->
+
+    <BitmapImage x:Key="TabBg_d" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/BottomBar/btn_pil_d.png"/>
+    <BitmapImage x:Key="TabBg_h" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/BottomBar/btn_pil_h.png"/>
+    <BitmapImage x:Key="TabBg_p" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/BottomBar/btn_pil_p.png"/>
+    <BitmapImage x:Key="TabBg_disabled" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/BottomBar/btn_pil_disabled.png"/>
+
+    <BitmapImage x:Key="TabBg_active_d" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/BottomBar/btn_pil_active_d.png"/>
+    <BitmapImage x:Key="TabBg_active_h" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/BottomBar/btn_pil_active_h.png"/>
+    <BitmapImage x:Key="TabBg_active_p" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/BottomBar/btn_pil_active_p.png"/>
+    <BitmapImage x:Key="TabBg_active_disabled" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/BottomBar/btn_pil_active_disabled.png"/>
+
+    <BitmapImage x:Key="BtnActiveMod" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/BottomBar/btn_pil_activemod_d.png"/>
+
+
+    <ControlTemplate x:Key="TabButton" TargetType="{x:Type ls:LSButton}">
+        <ls:LSNineSliceImage x:Name="bg" ImageSource="{StaticResource TabBg_d}" Slices="36" Padding="36,0" MinHeight="78">
+            <TextBlock Text="{Binding Content, RelativeSource={RelativeSource Mode=TemplatedParent}}"  VerticalAlignment="Center" HorizontalAlignment="Stretch" TextAlignment="Center" TextTrimming="CharacterEllipsis"
+                       Foreground="{StaticResource LS_specialTxtColor}" FontSize="{StaticResource SmallFontSize}" Style="{StaticResource BtnTextGlow}" />
+         </ls:LSNineSliceImage>
+
+        <ControlTemplate.Triggers>
+            <DataTrigger Binding="{Binding MaxWidth, RelativeSource={RelativeSource AncestorType={x:Type ContentPresenter}}, Converter={StaticResource GreaterThanConverter}, ConverterParameter=200}" Value="True">
+                <Setter TargetName="bg" Property="MinWidth" Value="200"/>
+            </DataTrigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="ImageSource" TargetName="bg" Value="{StaticResource TabBg_h}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="ImageSource" TargetName="bg" Value="{StaticResource TabBg_p}"/>
+            </Trigger>
+            <Trigger Property="IsEnabled"  Value="False">
+                <Setter Property="ImageSource" TargetName="bg" Value="{StaticResource TabBg_disabled}"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!-- Labeled TAB DECK Button ACTIVE -->
+    <ControlTemplate x:Key="TabButton_Active" TargetType="{x:Type ls:LSButton}">
+        <Grid>
+            <ls:LSNineSliceImage x:Name="bg" ImageSource="{StaticResource TabBg_active_d}" Slices="36" Padding="36,0" MinHeight="78">
+                <TextBlock Text="{Binding Content, RelativeSource={RelativeSource Mode=TemplatedParent}}"  VerticalAlignment="Center" HorizontalAlignment="Stretch" TextAlignment="Center" TextTrimming="CharacterEllipsis"
+                       Foreground="{StaticResource LS_tint100}" FontSize="{StaticResource SmallFontSize}" Style="{StaticResource BtnTextGlow}"/>
+            </ls:LSNineSliceImage>
+            <ls:LSNineSliceImage HorizontalAlignment="Center" VerticalAlignment="Top" ImageSource="{StaticResource BtnActiveMod}" Slices="12, 0" MinWidth="64" Height="26"
+                                             Width="{Binding ActualWidth, ElementName=TabsBg, Converter={StaticResource AddConverter}, ConverterParameter=-380}" Margin="0,-12,0,0">
+                <Image Source="{StaticResource ActiveModArrow}" Stretch="UniformToFill" VerticalAlignment="Center"/>
+            </ls:LSNineSliceImage>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <DataTrigger Binding="{Binding MaxWidth, RelativeSource={RelativeSource AncestorType={x:Type ContentPresenter}}, Converter={StaticResource GreaterThanConverter}, ConverterParameter=200}" Value="True">
+                <Setter TargetName="bg" Property="MinWidth" Value="200"/>
+            </DataTrigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="ImageSource" TargetName="bg" Value="{StaticResource TabBg_active_h}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="ImageSource" TargetName="bg" Value="{StaticResource TabBg_active_p}"/>
+            </Trigger>
+            <Trigger Property="IsEnabled"  Value="False">
+                <Setter Property="ImageSource" TargetName="bg" Value="{StaticResource TabBg_active_disabled}"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Key="TabDividerImageStyle" TargetType="Image">
+        <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/BottomBar/btn_pil_divider.png"/>
+        <Setter Property="Margin" Value="-30,0, -30, 0" />
+        <Setter Property="Stretch" Value="None"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+    </Style>
+
+    <!-- Labeled Radio Button -->
+    <ControlTemplate x:Key="LabeledRadioButtonTemplate" TargetType="RadioButton">
+        <ls:LSNineSliceImage x:Name="bg" ImageSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/topNavBtn_inactive_d.png" Slices="212,0,212,0" MaxHeight="92" MinHeight="92" MinWidth="428" >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="26"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="33"/>
+                </Grid.ColumnDefinitions>
+
+                <Image x:Name="icon" Grid.Column="1" Width="48" Height="48" Source="{DynamicResource Icon}" Stretch="Uniform" Margin="14,-3,14,3" VerticalAlignment="Center"/>
+                <TextBlock x:Name="label" Grid.Column="2" LineStackingStrategy="BlockLineHeight" TextWrapping="NoWrap" Text="{Binding Content, RelativeSource={RelativeSource Mode=TemplatedParent}}" FontSize="{StaticResource SmallFontSize}" FontWeight="Bold" Foreground="{StaticResource LS_accent75TxtColor}" HorizontalAlignment="Center" TextAlignment="Center" noesis:Text.StrokeThickness="4" noesis:Text.Stroke="{StaticResource LS_tint00}" VerticalAlignment="Center" Margin="15,0,15,0"/>
+
+                <b:Interaction.Triggers>
+                    <b:EventTrigger EventName="MouseEnter">
+                        <ls:LSPlaySound Sound="UI_Shared_Hover"/>
+                    </b:EventTrigger>
+                </b:Interaction.Triggers>
+            </Grid>
+        </ls:LSNineSliceImage>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="bg" Property="ImageSource" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/topNavBtn_inactive_h.png"/>
+                <Setter TargetName="label" Property="Foreground" Value="{StaticResource LS_accent100TxtColor}" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="bg" Property="ImageSource" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/topNavBtn_inactive_p.png"/>
+            </Trigger>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter TargetName="bg" Property="ImageSource" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/topNavBtn_active_d.png"/>
+                <Setter TargetName="label" Property="Foreground" Value="{StaticResource LS_extraspecialTxtColor}"/>
+            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsChecked" Value="True"/>
+                    <Condition Property="IsMouseOver" Value="True"/>
+                </MultiTrigger.Conditions>
+                <Setter TargetName="bg" Property="ImageSource" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/topNavBtn_active_h.png"/>
+                <Setter TargetName="label" Property="Foreground" Value="{StaticResource LS_extraspecialTxtColor}"/>
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsChecked" Value="True"/>
+                    <Condition Property="IsPressed" Value="True"/>
+                </MultiTrigger.Conditions>
+                <Setter TargetName="bg" Property="ImageSource" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/topNavBtn_active_p.png"/>
+            </MultiTrigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="bg" Property="ImageSource" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/topNavBtn_inactive_disabled.png"/>
+            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsChecked" Value="True"/>
+                    <Condition Property="IsEnabled" Value="False"/>
+                </MultiTrigger.Conditions>
+                <Setter TargetName="bg" Property="ImageSource" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/topNavBtn_active_disabled.png"/>
+            </MultiTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!-- Partyline -->
+    <Style x:Key="SmlGoldIconBtnStyle" TargetType="ls:LSButton">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ls:LSButton">
+                    <Grid>
+                        <Image x:Name="Background" Source="{DynamicResource BackgroundImage}" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Image x:Name="Icon" Source="{DynamicResource IconImage}" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Background" Property="Source" Value="{DynamicResource BackgroundImageHighlight}"/>
+                            <Setter TargetName="Icon" Property="Source" Value="{DynamicResource IconImageHighlight}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Background" Property="Source" Value="{DynamicResource BackgroundImageDisabled}"/>
+                            <Setter TargetName="Icon" Property="Source" Value="{DynamicResource IconImageDisabled}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="PartylineScrollButtonStyleUp" TargetType="ls:LSButton" BasedOn="{StaticResource SmlGoldIconBtnStyle}">
+        <Style.Resources>
+            <BitmapImage x:Key="BackgroundImage" UriSource="{Binding UriSource, Source={StaticResource BtnSmallRound}}"/>
+            <BitmapImage x:Key="BackgroundImageHighlight" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Combatants/btn_small_round_h.png"/>
+            <BitmapImage x:Key="IconImage" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_upArrow_d.png"/>
+            <BitmapImage x:Key="IconImageHighlight" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_upArrow_h.png"/>
+        </Style.Resources>
+    </Style>
+    <Style x:Key="PartylineScrollButtonStyleDown" TargetType="ls:LSButton" BasedOn="{StaticResource SmlGoldIconBtnStyle}">
+        <Style.Resources>
+            <BitmapImage x:Key="BackgroundImage" UriSource="{Binding UriSource, Source={StaticResource BtnSmallRound}}"/>
+            <BitmapImage x:Key="BackgroundImageHighlight" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Combatants/btn_small_round_h.png"/>
+            <BitmapImage x:Key="IconImage" UriSource="{Binding UriSource, Source={StaticResource IconDownArrow}}"/>
+            <BitmapImage x:Key="IconImageHighlight" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_downArrow_h.png"/>
+        </Style.Resources>
+    </Style>
+
+    <Style x:Key="SmallRoundButtonStyleArrow" TargetType="ls:LSButton" BasedOn="{StaticResource SmlGoldIconBtnStyle}">
+        <Style.Resources>
+            <BitmapImage x:Key="BackgroundImage" UriSource="{Binding UriSource, Source={StaticResource BtnSmallRound}}"/>
+            <BitmapImage x:Key="BackgroundImageHighlight" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Combatants/btn_small_round_h.png"/>
+            <BitmapImage x:Key="BackgroundImageDisabled" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Combatants/btn_small_round_disabled.png"/>
+            <BitmapImage x:Key="IconImage" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Combatants/ico_arrow_d.png"/>
+            <BitmapImage x:Key="IconImageHighlight" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Combatants/ico_arrow_h.png"/>
+            <BitmapImage x:Key="IconImageDisabled" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Combatants/ico_arrow_disabled.png"/>
+        </Style.Resources>
+    </Style>
+
+
+    <ControlTemplate x:Key="PanelButtonWT" TargetType="ls:LSButton">
+        <ControlTemplate.Resources>
+            <BitmapImage x:Key="btnNormal" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/btn_hudNav_d.png"/>
+            <BitmapImage x:Key="btnHover" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/btn_hudNav_h.png" />
+            <BitmapImage x:Key="btnPressed" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/btn_hudNav_p.png" />
+            <BitmapImage x:Key="btnDisabled" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/btn_hudNav_disabled.png" />
+        </ControlTemplate.Resources>
+
+        <Grid>
+            <Image x:Name="BtnBg" Source="{StaticResource btnNormal}" Stretch="None"/>
+            <Image x:Name="icon" Source="{DynamicResource Icon_Normal}" Stretch="None"/>
+        </Grid>
+
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="BtnBg" Property="Source" Value="{StaticResource btnHover}"/>
+                <Setter TargetName="icon" Property="Source" Value="{DynamicResource Icon_Hover}" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="BtnBg" Property="Source" Value="{StaticResource btnPressed}" />
+                <Setter TargetName="icon" Property="Source" Value="{DynamicResource Icon_Pressed}" />
+                <Setter TargetName="icon" Property="Margin" Value="0,4,0,0" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="BtnBg" Property="Source" Value="{StaticResource btnDisabled}" />
+                <Setter TargetName="icon" Property="Opacity" Value="0.7" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+</ResourceDictionary>
