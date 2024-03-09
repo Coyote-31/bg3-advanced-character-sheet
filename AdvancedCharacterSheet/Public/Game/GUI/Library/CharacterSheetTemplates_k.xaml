@@ -313,6 +313,10 @@
     <!--INVENTORY FILTER TEMPLATE-->
     <!-- DataContext: VMCharacter or null | Tag: inventory or inventories to filter -->
     <ControlTemplate x:Key="FilterHolderTemplate" TargetType="ls:FilteringContainer">
+        
+        <!-- MOD_ACS: Add StackPanel to add Camp btn -->
+        <StackPanel Orientation="Horizontal">
+        
         <StackPanel d:DataContext="{d:DesignInstance {x:Type ls:Character}, IsDesignTimeCreatable=True}">
             <Border>
                 <Grid HorizontalAlignment="Left">
@@ -321,7 +325,8 @@
                 <TextBlock x:Name="CurrentItemFilteredName" Visibility="Collapsed" Text="{Binding CurrentFilter.Item.Name, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
                 <TextBlock x:Name="CurrentFilterName" Visibility="Collapsed" Text="{Binding CurrentFilter.Name, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
 
-                <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/frame_filters.png" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <!-- MOD_ACS: Add Name -->
+                <Image x:Name="framefilters" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/frame_filters.png" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                 <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/ico_search.png" Margin="12,16,0,0" Stretch="None" VerticalAlignment="Top" HorizontalAlignment="Left"/>
 
 
@@ -344,9 +349,11 @@
                     </b:Interaction.Triggers>
                 </ls:LSTextBox>
 
-                <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/frame_filters_EQ.png" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding IsFocused, ElementName=PART_FilterSearchBox, Converter={StaticResource BoolToVisibleConverter}}" IsHitTestVisible="False"/>
+                <!-- MOD_ACS: Add Name -->
+                <Image x:Name="framefiltersEQ" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/frame_filters_EQ.png" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding IsFocused, ElementName=PART_FilterSearchBox, Converter={StaticResource BoolToVisibleConverter}}" IsHitTestVisible="False"/>
 
-                <ls:LSButton x:Name="ClearFilter" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,16,32,0" BoundEvent="UICancel" Command="ls:FilteringContainer.ClearFilterCommand">
+                <!-- MOD_ACS: Update Margin // BG3: Margin="0,16,32,0" -->
+                <ls:LSButton x:Name="ClearFilter" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,15,32,0" BoundEvent="UICancel" Command="ls:FilteringContainer.ClearFilterCommand">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Grid x:Name="BtnHolder">
@@ -428,6 +435,50 @@
             </Popup>
         </StackPanel>
 
+            <!-- MOD_ACS: Add Camp/Companions panel button -->
+            <!--CAMP COMPANIONS TOGGLE-->
+            <Grid x:Name="CompanionAccessHolder" VerticalAlignment="Top" HorizontalAlignment="Left" Visibility="Visible" Margin="6,6,0,-6">
+                <Grid.RenderTransform>
+                    <TranslateTransform X="0" Y="0" />
+                </Grid.RenderTransform>
+                
+                <ls:LSButton x:Name="ToggleCampCompanionButton" Width="70" Height="70" Margin="0,0,0,0" ToolTipService.Placement="Bottom" Command="{Binding Path=DataContext.CustomEvent, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ls:UIWidget}}}" CommandParameter="ToggleCompanionsPanel">
+                    <ls:LSButton.Resources>
+                        <BitmapImage x:Key="partyLine_bigBtn_d" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/Buttons/partyLine_bigBtn_h.png"/>
+                        <BitmapImage x:Key="ico_party_d" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/campFollowers_btn_ico_d.png"/>
+                    </ls:LSButton.Resources>
+                    <ls:LSButton.ToolTip>
+                        <ls:LSTooltip IsHitTestVisible="False">
+                            <TextBlock Text="{Binding Source='ha8cd9920g28dfg4ebcg8a03g20ffa9fa4e4e',Converter={StaticResource TranslatedStringConverter}}" Style="{StaticResource TooltipBaseTextStyle}"/>
+                        </ls:LSTooltip>
+                    </ls:LSButton.ToolTip>
+                    <ls:LSButton.Template>
+                        <ControlTemplate TargetType="ls:LSButton">
+                            <Grid>
+                                <Image x:Name="Background" Source="{StaticResource partyLine_bigBtn_d}" Stretch="Uniform" Margin="-1,-1,1,1"/>
+                                <Image x:Name="ClassIcon" Source="{StaticResource ico_party_d}" Height="32" Margin="0,-1,0,1">
+                                    <Image.Effect>
+                                        <DropShadowEffect BlurRadius="20" ShadowDepth="0" Opacity="1"/>
+                                    </Image.Effect>
+                                </Image>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Background" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/Buttons/partyLine_bigBtn_h.png"/>
+                                    <Setter TargetName="ClassIcon" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/campFollowers_btn_ico_h.png"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="Background" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/Buttons/partyLine_bigBtn_p.png"/>
+                                    <Setter TargetName="ClassIcon" Property="Height" Value="29"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </ls:LSButton.Template>
+                </ls:LSButton>
+            </Grid>
+        
+        </StackPanel>
+
         <ControlTemplate.Triggers>
             <DataTrigger Binding="{Binding CurrentFilter, RelativeSource={RelativeSource Self}, Converter={StaticResource NullToBoolTrueConverter}, ConverterParameter='EmptyString'}" Value="False">
                 <Setter TargetName="CategoryName" Property="Text" Value=""/>
@@ -462,6 +513,30 @@
                 </MultiDataTrigger.Conditions>
                 <Setter TargetName="ClearFilter" Property="Visibility" Value="Collapsed"/>
             </MultiDataTrigger>
+            
+            <!-- MOD_ACS: Add trigger to make space for camp btn -->
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ParentState, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ls:UIWidget}}}" Value="CharacterPanel"/>
+                </MultiDataTrigger.Conditions>
+                <Setter TargetName="framefilters" Property="Height" Value="80"/>
+                <Setter TargetName="framefilters" Property="Width" Value="460"/>
+                <Setter TargetName="framefilters" Property="Stretch" Value="Fill"/>
+                <Setter TargetName="framefiltersEQ" Property="Height" Value="80"/>
+                <Setter TargetName="framefiltersEQ" Property="Width" Value="460"/>
+                <Setter TargetName="framefiltersEQ" Property="Stretch" Value="Fill"/>
+                <Setter TargetName="ClearFilter" Property="Margin" Value="0,15,28,0"/>
+                <Setter TargetName="CompanionAccessHolder" Property="Margin" Value="0,6,0,-6"/>
+            </MultiDataTrigger>
+            
+            <!-- MOD_ACS: Add trigger to hide camp btn in Companions Panel -->
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ParentState, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ls:UIWidget}}}" Value="CompanionsPanel"/>
+                </MultiDataTrigger.Conditions>
+                <Setter TargetName="CompanionAccessHolder" Property="Visibility" Value="Collapsed"/>
+            </MultiDataTrigger>
+            
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
