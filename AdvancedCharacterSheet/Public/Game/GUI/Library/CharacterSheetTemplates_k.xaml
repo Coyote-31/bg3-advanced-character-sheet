@@ -437,14 +437,15 @@
 
             <!-- MOD_ACS: Add Camp/Companions panel button -->
             <!--CAMP COMPANIONS TOGGLE-->
-            <Grid x:Name="CompanionAccessHolder" VerticalAlignment="Top" HorizontalAlignment="Left" Visibility="Visible" Margin="6,6,0,-6">
+            <Grid x:Name="CompanionAccessHolder" VerticalAlignment="Top" HorizontalAlignment="Left" Visibility="Visible" Margin="6,7,0,-7">
                 <Grid.RenderTransform>
                     <TranslateTransform X="0" Y="0" />
                 </Grid.RenderTransform>
                 
-                <ls:LSButton x:Name="ToggleCampCompanionButton" Width="70" Height="70" Margin="0,0,0,0" ToolTipService.Placement="Bottom" Command="{Binding Path=DataContext.CustomEvent, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ls:UIWidget}}}" CommandParameter="ToggleCompanionsPanel">
+                <ls:LSButton x:Name="ToggleCampCompanionButton" Width="68" Height="68" Margin="0,0,0,0" ToolTipService.Placement="Bottom" Command="{Binding Path=DataContext.CustomEvent, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ls:UIWidget}}}" CommandParameter="ToggleCompanionsPanel">
                     <ls:LSButton.Resources>
-                        <BitmapImage x:Key="partyLine_bigBtn_d" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/Buttons/partyLine_bigBtn_h.png"/>
+                        <BitmapImage x:Key="partyLine_bigBtn_h" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/Buttons/partyLine_bigBtn_h.png"/>
+                        <BitmapImage x:Key="partyLine_bigBtn_p" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/Buttons/partyLine_bigBtn_p.png"/>
                         <BitmapImage x:Key="ico_party_d" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/campFollowers_btn_ico_d.png"/>
                     </ls:LSButton.Resources>
                     <ls:LSButton.ToolTip>
@@ -455,7 +456,7 @@
                     <ls:LSButton.Template>
                         <ControlTemplate TargetType="ls:LSButton">
                             <Grid>
-                                <Image x:Name="Background" Source="{StaticResource partyLine_bigBtn_d}" Stretch="Uniform" Margin="-1,-1,1,1"/>
+                                <Image x:Name="Background" Source="{StaticResource partyLine_bigBtn_h}" Stretch="None" Margin="-1,-1,1,1"/>
                                 <Image x:Name="ClassIcon" Source="{StaticResource ico_party_d}" Height="32" Margin="0,-1,0,1">
                                     <Image.Effect>
                                         <DropShadowEffect BlurRadius="20" ShadowDepth="0" Opacity="1"/>
@@ -464,11 +465,11 @@
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter TargetName="Background" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/Buttons/partyLine_bigBtn_h.png"/>
+                                    <Setter TargetName="Background" Property="Source" Value="{StaticResource partyLine_bigBtn_h}"/>
                                     <Setter TargetName="ClassIcon" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/campFollowers_btn_ico_h.png"/>
                                 </Trigger>
                                 <Trigger Property="IsPressed" Value="True">
-                                    <Setter TargetName="Background" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/Buttons/partyLine_bigBtn_p.png"/>
+                                    <Setter TargetName="Background" Property="Source" Value="{StaticResource partyLine_bigBtn_p}"/>
                                     <Setter TargetName="ClassIcon" Property="Height" Value="29"/>
                                 </Trigger>
                             </ControlTemplate.Triggers>
