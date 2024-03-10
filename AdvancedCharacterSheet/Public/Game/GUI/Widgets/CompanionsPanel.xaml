@@ -63,6 +63,63 @@
 
         </Storyboard>
 
+        <!-- MOD_ACS: Add hide animation when out of camp -->
+        <Storyboard x:Key="HideCharacterSelectAnim_OutOfCamp" FillBehavior="Stop">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="EquipmentColumn">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="PaperdollHolder">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="NotInCampPaperdollHolder">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+
+            <DoubleAnimation
+                Storyboard.TargetName="EquipmentColumn"
+                Storyboard.TargetProperty="Opacity"
+                From="1"
+                To="0"
+                Duration="0:0:0.3">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseIn"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            
+            <DoubleAnimation
+                Storyboard.TargetName="PaperdollHolder"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="0"
+                Duration="0:0:0.3">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseIn"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+
+            <DoubleAnimation
+                Storyboard.TargetName="NotInCampPaperdollHolder"
+                Storyboard.TargetProperty="Opacity"
+                From="1"
+                To="0"
+                Duration="0:0:0.3">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseIn"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+
+            <ThicknessAnimation
+                Storyboard.TargetName="CharacterInfoColumn"
+                Storyboard.TargetProperty="Margin"
+                From="-800,0,800,0"
+                To="0,0,0,0"
+                Duration="0:0:0.4">
+                <ThicknessAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </ThicknessAnimation.EasingFunction>
+            </ThicknessAnimation>
+        </Storyboard>
+
         <Storyboard x:Key="ShowCharacterSelectAnim" FillBehavior="Stop">
             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="CharacterInfoColumn">
                 <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
@@ -81,6 +138,57 @@
             
             <DoubleAnimation
                 Storyboard.TargetName="PaperdollHolder"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="1"
+                Duration="0:0:0.4">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseIn"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            
+            <ThicknessAnimation
+                Storyboard.TargetName="CharacterInfoColumn"
+                Storyboard.TargetProperty="Margin"
+                From="0,0,0,0"
+                To="-800,0,800,0"
+                Duration="0:0:0.4">
+                <ThicknessAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseIn"/>
+                </ThicknessAnimation.EasingFunction>
+            </ThicknessAnimation>
+        </Storyboard>
+
+        <!-- MOD_ACS: Add show animation when out of camp -->
+        <Storyboard x:Key="ShowCharacterSelectAnim_OutOfCamp" FillBehavior="Stop">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="CharacterInfoColumn">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            
+            <DoubleAnimation
+                Storyboard.TargetName="EquipmentColumn"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="1"
+                Duration="0:0:0.4">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseIn"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            
+            <DoubleAnimation
+                Storyboard.TargetName="PaperdollHolder"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="0"
+                Duration="0:0:0.4">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseIn"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            
+            <DoubleAnimation
+                Storyboard.TargetName="NotInCampPaperdollHolder"
                 Storyboard.TargetProperty="Opacity"
                 From="0"
                 To="1"
@@ -449,6 +557,11 @@
                     <Setter TargetName="CampPortraits" Property="SelectedIndex" Value="0" />
                 </DataTrigger>
                 
+                <!-- MOD_ACS: Add not in camp paperDoll switch to portrait -->
+                <DataTrigger Binding="{Binding CurrentPlayer.SelectedCharacter.IsInCamp}" Value="False">
+                    <Setter TargetName="PaperdollHolder" Property="Visibility" Value="Collapsed"/>
+                    <Setter TargetName="NotInCampPaperdollHolder" Property="Visibility" Value="Visible"/>
+                </DataTrigger>
                 
                 <!--animate character sheet in and equipment out-->
                 <DataTrigger Binding="{Binding IsChecked, ElementName=ToggleCSView}" Value="False">
@@ -463,11 +576,25 @@
                     </DataTrigger.ExitActions>
                 </DataTrigger>
                 
-                <!-- MOD_ACS: Add not in camp paperDoll switch -->
-                <DataTrigger Binding="{Binding CurrentPlayer.SelectedCharacter.IsInCamp}" Value="False">
+                <!-- MOD_ACS: Add trigger for hide & show animations when out of camp -->
+                <!--animate character sheet in and equipment out-->
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding IsChecked, ElementName=ToggleCSView}" Value="False"/>
+                        <Condition Binding="{Binding CurrentPlayer.SelectedCharacter.IsInCamp}" Value="False"/>
+                    </MultiDataTrigger.Conditions>
+                    <Setter TargetName="CharacterInfoColumn" Property="Visibility" Value="Visible"/>
+                    <Setter TargetName="EquipmentColumn" Property="Visibility" Value="Collapsed"/>
                     <Setter TargetName="PaperdollHolder" Property="Visibility" Value="Collapsed"/>
-                    <Setter TargetName="NotInCampPaperdollHolder" Property="Visibility" Value="Visible"/>
-                </DataTrigger>
+                    <!-- MOD_ACS: Add Portrait replacement when out of camp -->
+                    <Setter TargetName="NotInCampPaperdollHolder" Property="Visibility" Value="Collapsed"/>
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard x:Name="StartHideCharactersheet_OutOfCamp" Storyboard="{StaticResource HideCharacterSelectAnim_OutOfCamp}"/>
+                    </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                        <BeginStoryboard x:Name="StartShowCharactersheet_OutOfCamp" Storyboard="{StaticResource ShowCharacterSelectAnim_OutOfCamp}"/>
+                    </DataTrigger.ExitActions>
+                </MultiDataTrigger>
 
             </ControlTemplate.Triggers>
         </ControlTemplate>
