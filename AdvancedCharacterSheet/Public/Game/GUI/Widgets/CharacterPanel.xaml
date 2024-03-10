@@ -82,9 +82,11 @@
             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="EquipmentHolder">
                 <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
             </ObjectAnimationUsingKeyFrames>
+            <!-- MOD_ACS: Disable CharacterInfoPanel animation -->
+            <!-- BG3: 
             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="CharacterInfoPanel">
                 <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
-            </ObjectAnimationUsingKeyFrames>
+            </ObjectAnimationUsingKeyFrames> -->
             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="InventoryColumn">
                 <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
             </ObjectAnimationUsingKeyFrames>
@@ -136,6 +138,18 @@
                 Duration="0:0:0.4">
                 <ThicknessAnimation.EasingFunction>
                     <CubicEase EasingMode="EaseIn"/>
+                </ThicknessAnimation.EasingFunction>
+            </ThicknessAnimation>
+
+            <!-- MOD_ACS: Add PaperdollHolder to recenter -->
+            <ThicknessAnimation
+                Storyboard.TargetName="PaperdollHolder"
+                Storyboard.TargetProperty="Margin"
+                From="-370,-50,370,12"
+                To="0,-50,0,12"
+                Duration="0:0:0.4">
+                <ThicknessAnimation.EasingFunction>
+                    <SineEase EasingMode="EaseInOut"/>
                 </ThicknessAnimation.EasingFunction>
             </ThicknessAnimation>
         </Storyboard>
@@ -195,8 +209,177 @@
                 </ThicknessAnimation.EasingFunction>
             </ThicknessAnimation>
 
+            <!-- MOD_ACS: Add PaperdollHolder to recenter -->
+            <ThicknessAnimation
+                Storyboard.TargetName="PaperdollHolder"
+                Storyboard.TargetProperty="Margin"
+                From="0,-50,0,12"
+                To="-370,-50,370,12"
+                Duration="0:0:0.4">
+                <ThicknessAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </ThicknessAnimation.EasingFunction>
+            </ThicknessAnimation>
+
+        </Storyboard>
+        
+        <!-- MOD_ACS: Add ToggleCSView Hide animation --> 
+        <Storyboard x:Key="ToggleCSView_HideCharacterSelectAnim" FillBehavior="Stop">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="XPBar">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="EquipmentHolder">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="PaperdollHolder">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="ToggleCSView">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            
+            <DoubleAnimation
+                Storyboard.TargetName="XPBar"
+                Storyboard.TargetProperty="Opacity"
+                From="1"
+                To="0"
+                Duration="0:0:0.3">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseIn"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            
+            <DoubleAnimation
+                Storyboard.TargetName="EquipmentHolder"
+                Storyboard.TargetProperty="Opacity"
+                From="1"
+                To="0"
+                Duration="0:0:0.3">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseIn"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            
+            <DoubleAnimation
+                Storyboard.TargetName="PaperdollHolder"
+                Storyboard.TargetProperty="Opacity"
+                From="1"
+                To="0"
+                Duration="0:0:0.3">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseIn"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            
+            <DoubleAnimation
+                Storyboard.TargetName="ToggleCSView"
+                Storyboard.TargetProperty="Opacity"
+                From="1"
+                To="0"
+                Duration="0:0:0.3">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseIn"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            
+            <ThicknessAnimation
+                Storyboard.TargetName="CharacterInfoPanel"
+                Storyboard.TargetProperty="Margin"
+                From="-800,0,800,0"
+                To="0,0,0,0"
+                Duration="0:0:0.4">
+                <ThicknessAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </ThicknessAnimation.EasingFunction>
+            </ThicknessAnimation>
+            
+            <ThicknessAnimation
+                Storyboard.TargetName="ToggleCSView_Close"
+                Storyboard.TargetProperty="Margin"
+                From="-800,0,800,0"
+                To="0,0,0,0"
+                Duration="0:0:0.4">
+                <ThicknessAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </ThicknessAnimation.EasingFunction>
+            </ThicknessAnimation>
         </Storyboard>
 
+        <!-- MOD_ACS: Add ToggleCSView Show animation --> 
+        <Storyboard x:Key="ToggleCSView_ShowCharacterSelectAnim" FillBehavior="Stop">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="CharacterInfoPanel">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="ToggleCSView_Close">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            
+            <DoubleAnimation
+                Storyboard.TargetName="XPBar"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="1"
+                Duration="0:0:0.4">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseIn"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            
+            <DoubleAnimation
+                Storyboard.TargetName="EquipmentHolder"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="1"
+                Duration="0:0:0.4">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseIn"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            
+            <DoubleAnimation
+                Storyboard.TargetName="PaperdollHolder"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="1"
+                Duration="0:0:0.4">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseIn"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+
+            <DoubleAnimation
+                Storyboard.TargetName="ToggleCSView"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="1"
+                Duration="0:0:0.4">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseIn"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            
+            <ThicknessAnimation
+                Storyboard.TargetName="CharacterInfoPanel"
+                Storyboard.TargetProperty="Margin"
+                From="0,0,0,0"
+                To="-800,0,800,0"
+                Duration="0:0:0.4">
+                <ThicknessAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseIn"/>
+                </ThicknessAnimation.EasingFunction>
+            </ThicknessAnimation>
+            
+            <ThicknessAnimation
+                Storyboard.TargetName="ToggleCSView_Close"
+                Storyboard.TargetProperty="Margin"
+                From="0,0,0,0"
+                To="-800,0,800,0"
+                Duration="0:0:0.4">
+                <ThicknessAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseIn"/>
+                </ThicknessAnimation.EasingFunction>
+            </ThicknessAnimation>
+        </Storyboard>
 
         <!-- ======  ILLITHID TEMPLATE ====== -->
 
@@ -331,7 +514,7 @@
                         </b:DataTrigger>
                     </b:Interaction.Triggers>
                     <!-- MOD_ACS: Update Width // BG3: Width="2080" -->
-                    <ls:LSNineSliceImage x:Name="BGpanel" Style="{StaticResource Generic9SliceBGFaded}" Width="2202" Height="{StaticResource InventoryColumnHeight}" ls:TooltipExtender.Owner="{Binding CurrentPlayer.SelectedCharacter}" Tag="{Binding CurrentPlayer.SelectedCharacter.Inventory}" Margin="6">
+                    <ls:LSNineSliceImage x:Name="BGpanel" Style="{StaticResource Generic9SliceBGFaded}" Width="1539" Height="{StaticResource InventoryColumnHeight}" ls:TooltipExtender.Owner="{Binding CurrentPlayer.SelectedCharacter}" Tag="{Binding CurrentPlayer.SelectedCharacter.Inventory}" Margin="6">
                         <Grid Name="CharacterPanelContents" >
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -387,60 +570,105 @@
                                 <!-- ===== MAIN PANEL ===== -->
                                 <Grid x:Name="CharacterSheetPage" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="{Binding IsChecked, ElementName=InventoryToggleButton, Converter={StaticResource BoolToVisibleConverter}}" ClipToBounds="False">
 
-                                    <!--PAPERDOLL-->
-                                    <Grid Margin="0,-50,0,12" ClipToBounds="True" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DataContext="{Binding CurrentPlayer.SelectedCharacter}">
-                                        <!-- MOD_ACS: Add Margin -->
-                                        <ls:LSPaperdoll HorizontalAlignment="Center" x:Name="CSPaperdoll" EntityRef="{Binding EntityHandle}" Width="{StaticResource CSDollWidth}" Height="{StaticResource CSDollHeight}" VerticalAlignment="Bottom" Margin="0,0,0,100" ClipToBounds="True" UseCombatPose="True" MouseRotate="True" MouseRotateMultiplier="10" RenderScale="{Binding DataContext.Data.RenderScale, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
-                                        <!--DOLL CONTROLS-->
-                                        <!-- MOD_ACS: Add Margin -->
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,10,0">
-                                            <ls:LSButton  x:Name="rotateRightBtn" Template="{StaticResource RotateRightButton}">
-                                                <b:Interaction.Triggers>
-                                                    <b:EventTrigger EventName="LSButtonPressed">
-                                                        <b:ChangePropertyAction PropertyName="RotationSpeed" Value="1.2" TargetName="CSPaperdoll" />
-                                                    </b:EventTrigger>
-                                                    <b:EventTrigger EventName="LSButtonReleased" >
-                                                        <b:ChangePropertyAction PropertyName="RotationSpeed" Value="0" TargetName="CSPaperdoll" />
-                                                    </b:EventTrigger>
-                                                </b:Interaction.Triggers>
-                                            </ls:LSButton>
-
-                                            <ls:LSToggleButton x:Name="ToggleEqView" Style="{StaticResource EyeBoxButtonTemplate}" IsChecked="True" SoundID="UI_HUD_Options_ToggleButton">
-                                                <ls:LSToggleButton.ToolTip>
-                                                    <ls:LSTooltip Content="{Binding Source='h5c2bca90g60ddg49fega1c2ga2894424c059',Converter={StaticResource TranslatedStringConverter}}"/>
-                                                </ls:LSToggleButton.ToolTip>
-                                            </ls:LSToggleButton>
-
-
-                                            <ls:LSButton  x:Name="rotateLeftBtn" Template="{StaticResource RotateLeftButton}">
-                                                <b:Interaction.Triggers>
-                                                    <b:EventTrigger EventName="LSButtonPressed" >
-                                                        <b:ChangePropertyAction PropertyName="RotationSpeed" Value="-1.2" TargetName="CSPaperdoll" />
-                                                    </b:EventTrigger>
-                                                    <b:EventTrigger EventName="LSButtonReleased" >
-                                                        <b:ChangePropertyAction PropertyName="RotationSpeed" Value="0" TargetName="CSPaperdoll" />
-                                                    </b:EventTrigger>
-                                                </b:Interaction.Triggers>
-                                            </ls:LSButton>
-                                        </StackPanel>
-
-                                    </Grid>
-
                                     <Grid ClipToBounds="True">
                                         <Grid.ColumnDefinitions>
+                                            <!-- MOD_ACS: Remove one Column -->
+                                            <!-- BG3: <ColumnDefinition Width="1*"/> -->
                                             <ColumnDefinition Width="1*"/>
-                                            <!-- MOD_ACS: Update Width // Width="1*" -->
-                                            <ColumnDefinition Width="1.15*"/>
                                             <ColumnDefinition Width="1*"/>
                                         </Grid.ColumnDefinitions>
-                                        <!--  INFO  -->
-                                        <Control Name="CharacterInfoPanel" Grid.Column="0" Template="{StaticResource CharSheetTabController}" HorizontalAlignment="Left" VerticalAlignment="Stretch" DataContext="{Binding CurrentPlayer.SelectedCharacter}"/>
+                                        
+                                        <!--PAPERDOLL-->
+                                        <!-- MOD_ACS: Moved inside Grid -->
+                                        <!-- MOD_ACS: Add Name / Update Margin & Grid.ColumnSpan // BG3: Margin="0,-50,0,12" Grid.ColumnSpan="3" -->
+                                        <Grid x:Name="PaperdollHolder" Margin="-370,-50,370,12" ClipToBounds="True" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DataContext="{Binding CurrentPlayer.SelectedCharacter}">
+                                            <!-- MOD_ACS: Add Margin -->
+                                            <ls:LSPaperdoll HorizontalAlignment="Center" x:Name="CSPaperdoll" EntityRef="{Binding EntityHandle}" Width="{StaticResource CSDollWidth}" Height="{StaticResource CSDollHeight}" VerticalAlignment="Bottom" Margin="0,0,0,100" ClipToBounds="True" UseCombatPose="True" MouseRotate="True" MouseRotateMultiplier="10" RenderScale="{Binding DataContext.Data.RenderScale, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
+                                            <!--DOLL CONTROLS-->
+                                            <!-- MOD_ACS: Add Margin -->
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,10,0">
+                                                <ls:LSButton  x:Name="rotateRightBtn" Template="{StaticResource RotateRightButton}">
+                                                    <b:Interaction.Triggers>
+                                                        <b:EventTrigger EventName="LSButtonPressed">
+                                                            <b:ChangePropertyAction PropertyName="RotationSpeed" Value="1.2" TargetName="CSPaperdoll" />
+                                                        </b:EventTrigger>
+                                                        <b:EventTrigger EventName="LSButtonReleased" >
+                                                            <b:ChangePropertyAction PropertyName="RotationSpeed" Value="0" TargetName="CSPaperdoll" />
+                                                        </b:EventTrigger>
+                                                    </b:Interaction.Triggers>
+                                                </ls:LSButton>
+
+                                                <ls:LSToggleButton x:Name="ToggleEqView" Style="{StaticResource EyeBoxButtonTemplate}" IsChecked="True" SoundID="UI_HUD_Options_ToggleButton">
+                                                    <ls:LSToggleButton.ToolTip>
+                                                        <ls:LSTooltip Content="{Binding Source='h5c2bca90g60ddg49fega1c2ga2894424c059',Converter={StaticResource TranslatedStringConverter}}"/>
+                                                    </ls:LSToggleButton.ToolTip>
+                                                </ls:LSToggleButton>
+
+
+                                                <ls:LSButton  x:Name="rotateLeftBtn" Template="{StaticResource RotateLeftButton}">
+                                                    <b:Interaction.Triggers>
+                                                        <b:EventTrigger EventName="LSButtonPressed" >
+                                                            <b:ChangePropertyAction PropertyName="RotationSpeed" Value="-1.2" TargetName="CSPaperdoll" />
+                                                        </b:EventTrigger>
+                                                        <b:EventTrigger EventName="LSButtonReleased" >
+                                                            <b:ChangePropertyAction PropertyName="RotationSpeed" Value="0" TargetName="CSPaperdoll" />
+                                                        </b:EventTrigger>
+                                                    </b:Interaction.Triggers>
+                                                </ls:LSButton>
+                                            </StackPanel>
+
+                                        </Grid>
 
                                         <!--EQUIP-->
-                                        <Control x:Name="EquipmentHolder" Grid.Column="1" VerticalAlignment="Stretch" Template="{StaticResource CharacterEquipmentTemplate}" DataContext="{Binding CurrentPlayer.SelectedCharacter}" Margin="40,60,40,44"/>
+                                        <!-- MOD_ACS: Update Grid.Column // BG3: Grid.Column="1" -->
+                                        <Control x:Name="EquipmentHolder" Grid.Column="0" VerticalAlignment="Stretch" Template="{StaticResource CharacterEquipmentTemplate}" DataContext="{Binding CurrentPlayer.SelectedCharacter}" Margin="40,60,40,44"/>
 
+                                        <!-- MOD_ACS: Add TOGGLE VIEW BTN -->
+                                        <ls:LSToggleButton x:Name="ToggleCSView" Grid.Column="0" SoundID="UI_HUD_Options_ToggleButton" VerticalAlignment="Top" HorizontalAlignment="Left" IsChecked="True" Margin="11,14,0,0">
+                                            <ls:LSToggleButton.Template>
+                                                <ControlTemplate TargetType="ls:LSToggleButton">
+                                                    <Grid ToolTipService.Placement="Top">
+                                                        <Grid.ToolTip>
+                                                            <ls:LSTooltip x:Name="Tooltip" Content="{Binding Source='hf76cbcb4g83ddg49d3gb01cgd00359f84713', Converter={StaticResource TranslatedStringConverter}}"/>
+                                                        </Grid.ToolTip>
+                                                        <Image x:Name="btn" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterSheet/btn_round_medium_d.png" Stretch="None"/>
+                                                        <Image x:Name="icon" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/BottomBar/ico_identity_d.png" Stretch="None"/>
+                                                    </Grid>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsChecked" Value="False">
+                                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                                        </Trigger>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter TargetName="btn" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterSheet/btn_round_medium_h.png"/>
+                                                            <Setter TargetName="icon" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/BottomBar/ico_identity_h.png"/>
+                                                        </Trigger>
+                                                        <Trigger Property="IsPressed" Value="True">
+                                                            <Setter TargetName="btn" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterSheet/btn_round_medium_p.png"/>
+                                                            <Setter TargetName="icon" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/BottomBar/ico_identity_p.png"/>
+                                                            <Setter TargetName="icon" Property="Margin" Value="0,0,0,-2"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </ls:LSToggleButton.Template>
+                                        </ls:LSToggleButton>
+                                        
+                                        <!--  INFO  -->
+                                        <!-- MOD_ACS: Moved after EquipmentHolder -->
+                                        <!-- MOD_ACS: Add Visibility Collapsed -->
+                                        <Control Name="CharacterInfoPanel" Grid.Column="0" Template="{StaticResource CharSheetTabController}" HorizontalAlignment="Left" VerticalAlignment="Stretch" DataContext="{Binding CurrentPlayer.SelectedCharacter}" Visibility="Collapsed"/>
+                                        
+                                        <!-- MOD_ACS: Add close CharacterInfoPanel btn -->
+                                        <ls:LSButton x:Name="ToggleCSView_Close" Style="{StaticResource SmallCloseButton}" SoundID="UI_Shared_Cancel" HorizontalAlignment="Right" VerticalAlignment="Top" Visibility="Collapsed">
+                                            <b:Interaction.Triggers>
+                                                <b:EventTrigger EventName="Click">
+                                                    <b:ChangePropertyAction TargetName="ToggleCSView" PropertyName="IsChecked" Value="True"/>
+                                                </b:EventTrigger>
+                                            </b:Interaction.Triggers>
+                                        </ls:LSButton>
+                                        
                                         <!--INVENTORY-->
-                                        <Grid x:Name="InventoryColumn" Grid.Column="2" Opacity="1" VerticalAlignment="Stretch" Width="{StaticResource InventoryColumnWidth}">
+                                        <!-- MOD_ACS: Update Grid.Column // BG3: Grid.Column="2" -->
+                                        <Grid x:Name="InventoryColumn" Grid.Column="1" Opacity="1" VerticalAlignment="Stretch" Width="{StaticResource InventoryColumnWidth}">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="*"/>
                                                 <RowDefinition Height="Auto"/>
@@ -460,7 +688,8 @@
                                     </Grid>
 
                                     <!--EXPERIENCE-->
-                                    <Grid Name="XPBar" VerticalAlignment="Top" Grid.ColumnSpan="3" DataContext="{Binding CurrentPlayer.SelectedCharacter}" HorizontalAlignment="Stretch" Margin="0,-38,0,38">
+                                    <!-- MOD_ACS: Add Width / Update Margin // BG3: Margin="0,-38,0,38" -->
+                                    <Grid Name="XPBar" VerticalAlignment="Top" Grid.ColumnSpan="3" DataContext="{Binding CurrentPlayer.SelectedCharacter}" Width="{Binding ActualWidth, ElementName=EquipmentHolder}" HorizontalAlignment="Left" Margin="40,-38,0,38">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="Auto"/>
@@ -852,6 +1081,10 @@
                     <Setter TargetName="EquipmentHolder" Property="Visibility" Value="Collapsed"/>
                     <Setter TargetName="InventoryColumn" Property="Visibility" Value="Collapsed"/>
                     <Setter TargetName="XPBar" Property="Visibility" Value="Collapsed"/>
+                    <!-- MOD_ACS: Add to hide button -->
+                    <Setter TargetName="ToggleCSView" Property="Visibility" Value="Collapsed"/>
+                    <!-- MOD_ACS: Add to recenter the doll -->
+                    <Setter TargetName="PaperdollHolder" Property="Margin" Value="0,-50,0,12"/>
 
                     <DataTrigger.EnterActions>
                         <BeginStoryboard x:Name="StartHideCharactersheet" Storyboard="{StaticResource HideCharacterSelectAnim}"/>
@@ -903,6 +1136,22 @@
                 <DataTrigger Binding="{Binding CurrentPlayer.SelectedCharacter.CharacterType}" Value="Avatar">
                     <Setter TargetName="AvatarIcon" Property="Visibility" Value="Visible"/>
                 </DataTrigger>
+                
+                <!-- MOD_ACS: Add ToggleCSView animate character sheet in and equipment out-->
+                <DataTrigger Binding="{Binding IsChecked, ElementName=ToggleCSView}" Value="False">
+                    <Setter TargetName="CharacterInfoPanel" Property="Visibility" Value="Visible"/>
+                    <Setter TargetName="ToggleCSView_Close" Property="Visibility" Value="Visible"/>
+                    <Setter TargetName="XPBar" Property="Visibility" Value="Collapsed"/>
+                    <Setter TargetName="EquipmentHolder" Property="Visibility" Value="Collapsed"/>
+                    <Setter TargetName="PaperdollHolder" Property="Visibility" Value="Collapsed"/>
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard x:Name="StartHideCharactersheet" Storyboard="{StaticResource ToggleCSView_HideCharacterSelectAnim}"/>
+                    </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                        <BeginStoryboard x:Name="StartShowCharactersheet" Storyboard="{StaticResource ToggleCSView_ShowCharacterSelectAnim}"/>
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+                
             </ControlTemplate.Triggers>
         </ControlTemplate>
 
