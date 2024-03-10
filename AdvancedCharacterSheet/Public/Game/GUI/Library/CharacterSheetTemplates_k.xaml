@@ -317,123 +317,123 @@
         <!-- MOD_ACS: Add StackPanel to add Camp btn -->
         <StackPanel Orientation="Horizontal">
         
-        <StackPanel d:DataContext="{d:DesignInstance {x:Type ls:Character}, IsDesignTimeCreatable=True}">
-            <Border>
-                <Grid HorizontalAlignment="Left">
-                <TextBlock x:Name="CategoryName" Visibility="Collapsed" Text="{Binding Source=hda234862gff1ag4acdgbc37gef3abaabd610, Converter={StaticResource TranslatedStringConverter}}"/>
-                <TextBlock x:Name="AdditionalFilters" Visibility="Collapsed" Text=""/>
-                <TextBlock x:Name="CurrentItemFilteredName" Visibility="Collapsed" Text="{Binding CurrentFilter.Item.Name, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-                <TextBlock x:Name="CurrentFilterName" Visibility="Collapsed" Text="{Binding CurrentFilter.Name, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+            <StackPanel d:DataContext="{d:DesignInstance {x:Type ls:Character}, IsDesignTimeCreatable=True}">
+                <Border>
+                    <Grid HorizontalAlignment="Left">
+                    <TextBlock x:Name="CategoryName" Visibility="Collapsed" Text="{Binding Source=hda234862gff1ag4acdgbc37gef3abaabd610, Converter={StaticResource TranslatedStringConverter}}"/>
+                    <TextBlock x:Name="AdditionalFilters" Visibility="Collapsed" Text=""/>
+                    <TextBlock x:Name="CurrentItemFilteredName" Visibility="Collapsed" Text="{Binding CurrentFilter.Item.Name, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                    <TextBlock x:Name="CurrentFilterName" Visibility="Collapsed" Text="{Binding CurrentFilter.Name, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
 
-                <!-- MOD_ACS: Add Name -->
-                <Image x:Name="framefilters" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/frame_filters.png" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/ico_search.png" Margin="12,16,0,0" Stretch="None" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-
-
-                    <ls:LSTextBox x:Name="PART_FilterSearchBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,14,0,0" Height="56" Width="400" TextAlignment="Left" FontSize="{DynamicResource ScaledMediumFontSize}" TextWrapping="NoWrap">
-                    <noesis:Text.Placeholder>
-                        <MultiBinding StringFormat="{}{0}{1}{2} {3}">
-                            <Binding Path="Text" ElementName="CategoryName"/>
-                            <Binding Path="Text" ElementName="CurrentItemFilteredName"/>
-                            <Binding Path="Text" ElementName="CurrentFilterName"/>
-                            <Binding Path="Text" ElementName="AdditionalFilters"/>
-                        </MultiBinding>
-                    </noesis:Text.Placeholder>
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="MouseEnter">
-                            <ls:LSPlaySound Sound="UI_Shared_Hover"/>
-                        </b:EventTrigger>
-                        <b:EventTrigger EventName="PreviewMouseDown">
-                            <ls:LSPlaySound Sound="UI_Shared_Press"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </ls:LSTextBox>
-
-                <!-- MOD_ACS: Add Name -->
-                <Image x:Name="framefiltersEQ" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/frame_filters_EQ.png" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding IsFocused, ElementName=PART_FilterSearchBox, Converter={StaticResource BoolToVisibleConverter}}" IsHitTestVisible="False"/>
-
-                <!-- MOD_ACS: Update Margin // BG3: Margin="0,16,32,0" -->
-                <ls:LSButton x:Name="ClearFilter" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,15,32,0" BoundEvent="UICancel" Command="ls:FilteringContainer.ClearFilterCommand">
-                    <Button.Template>
-                        <ControlTemplate TargetType="Button">
-                            <Grid x:Name="BtnHolder">
-                                <Image x:Name="bg" Source="{StaticResource BtnSmallRound}" Stretch="None"/>
-                                <Image x:Name="icon" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/ico_cancel.png" Stretch="None"/>
-                            </Grid>
-
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter TargetName="bg" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/btn_small_round_h.png"/>
-                                </Trigger>
-                                <Trigger Property="IsPressed" Value="True">
-                                    <Setter TargetName="bg" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/btn_small_round_p.png"/>
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Button.Template>
-                </ls:LSButton>
-            </Grid>
-            </Border>
+                    <!-- MOD_ACS: Add Name -->
+                    <Image x:Name="framefilters" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/frame_filters.png" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/ico_search.png" Margin="12,16,0,0" Stretch="None" VerticalAlignment="Top" HorizontalAlignment="Left"/>
 
 
-            <Popup IsOpen="{TemplateBinding IsPopupVisible}">
-                <ls:LSNineSliceImage x:Name="PopularFiltersHolder" Margin="0,-12,0,0"  HorizontalAlignment="Stretch" ImageSource="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/sorting_bg.png" Slices="60" Padding="10,40">
-                    <StackPanel>
-                        <TextBlock Foreground="{StaticResource LS_accent25TxtColor}" FontSize="{StaticResource SmallishFontSize}" Text="{Binding Source='hc0ed9c5ag8a2cg4167g8242g5076d73d695f',Converter={StaticResource TranslatedStringConverter}}" Margin="20,0" VerticalAlignment="Top"/>
+                        <ls:LSTextBox x:Name="PART_FilterSearchBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,14,0,0" Height="56" Width="400" TextAlignment="Left" FontSize="{DynamicResource ScaledMediumFontSize}" TextWrapping="NoWrap">
+                        <noesis:Text.Placeholder>
+                            <MultiBinding StringFormat="{}{0}{1}{2} {3}">
+                                <Binding Path="Text" ElementName="CategoryName"/>
+                                <Binding Path="Text" ElementName="CurrentItemFilteredName"/>
+                                <Binding Path="Text" ElementName="CurrentFilterName"/>
+                                <Binding Path="Text" ElementName="AdditionalFilters"/>
+                            </MultiBinding>
+                        </noesis:Text.Placeholder>
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="MouseEnter">
+                                <ls:LSPlaySound Sound="UI_Shared_Hover"/>
+                            </b:EventTrigger>
+                            <b:EventTrigger EventName="PreviewMouseDown">
+                                <ls:LSPlaySound Sound="UI_Shared_Press"/>
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </ls:LSTextBox>
 
-                        <ListBox x:Name="FilterListHolder" ItemsSource="{TemplateBinding SuggestedFiltersList}" SelectedItem="{Binding CurrentFilterInternal,RelativeSource={RelativeSource TemplatedParent}}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="20,0,0,0" VerticalAlignment="Top">
-                            <ListBox.Resources>
-                                <DataTemplate DataType="{x:Type ls:VMEnumFilter}">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Image Grid.Column="0" Grid.ColumnSpan="2" x:Name="BtnBorder" Stretch="None" Source="/GustavNoesisGUI;component/Assets/CharacterPanel/selector_listitem_d.png"/>
-                                        <Image Grid.Column="0" Stretch="None" Source="/GustavNoesisGUI;component/Assets/CharacterPanel/ico_filter.png" VerticalAlignment="Center" Margin="4,0,16,0"/>
-                                        <TextBlock Grid.Column="1" x:Name="BtnText" Text="{Binding }" Foreground="{StaticResource LS_baseTxtColor}" FontSize="{StaticResource MediumFontSize}" HorizontalAlignment="Left" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Width="400"/>
-                                    </Grid>
-                                    <DataTemplate.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter TargetName="BtnBorder" Property="Source" Value="/GustavNoesisGUI;component/Assets/CharacterPanel/selector_listitem_h.png"/>
-                                            <Setter TargetName="BtnText" Property="Foreground" Value="{StaticResource LS_accent100TxtColor}"/>
-                                        </Trigger>
+                    <!-- MOD_ACS: Add Name -->
+                    <Image x:Name="framefiltersEQ" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/frame_filters_EQ.png" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding IsFocused, ElementName=PART_FilterSearchBox, Converter={StaticResource BoolToVisibleConverter}}" IsHitTestVisible="False"/>
 
-                                        <DataTrigger Binding="{Binding Enum, Converter={StaticResource NullToBoolTrueConverter}}" Value="False">
-                                            <Setter TargetName="BtnText" Property="Text" Value="{Binding Name}"/>
-                                        </DataTrigger>
-                                    </DataTemplate.Triggers>
-                                </DataTemplate>
+                    <!-- MOD_ACS: Update Margin // BG3: Margin="0,16,32,0" -->
+                    <ls:LSButton x:Name="ClearFilter" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,15,32,0" BoundEvent="UICancel" Command="ls:FilteringContainer.ClearFilterCommand">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Grid x:Name="BtnHolder">
+                                    <Image x:Name="bg" Source="{StaticResource BtnSmallRound}" Stretch="None"/>
+                                    <Image x:Name="icon" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/ico_cancel.png" Stretch="None"/>
+                                </Grid>
 
-                                <DataTemplate DataType="{x:Type ls:VMInventorySlot}">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Image Grid.Column="0" Grid.ColumnSpan="2" x:Name="BtnBorder" Stretch="None" Source="/GustavNoesisGUI;component/Assets/CharacterPanel/selector_listitem_d.png"/>
-                                        <Rectangle Grid.Column="0" Height="28" Width="28" Fill="{Binding Object.Icon}" VerticalAlignment="Center" Margin="4,0,16,0"/>
-                                        <TextBlock Grid.Column="1" x:Name="BtnText" Text="{Binding Object.Name}" Foreground="{StaticResource LS_baseTxtColor}" FontSize="{StaticResource MediumFontSize}" HorizontalAlignment="Left" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Width="400"/>
-                                    </Grid>
-                                    <DataTemplate.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter TargetName="BtnBorder" Property="Source" Value="/GustavNoesisGUI;component/Assets/CharacterPanel/selector_listitem_h.png"/>
-                                            <Setter TargetName="BtnText" Property="Foreground" Value="{StaticResource LS_accent100TxtColor}"/>
-                                        </Trigger>
-                                    </DataTemplate.Triggers>
-                                </DataTemplate>
-                            </ListBox.Resources>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="bg" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/btn_small_round_h.png"/>
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="True">
+                                        <Setter TargetName="bg" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/btn_small_round_p.png"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </ls:LSButton>
+                </Grid>
+                </Border>
 
-                            <ListBox.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Vertical"/>
-                                </ItemsPanelTemplate>
-                            </ListBox.ItemsPanel>
-                        </ListBox>
-                    </StackPanel>
-                </ls:LSNineSliceImage>
-            </Popup>
-        </StackPanel>
+
+                <Popup IsOpen="{TemplateBinding IsPopupVisible}">
+                    <ls:LSNineSliceImage x:Name="PopularFiltersHolder" Margin="0,-12,0,0"  HorizontalAlignment="Stretch" ImageSource="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/sorting_bg.png" Slices="60" Padding="10,40">
+                        <StackPanel>
+                            <TextBlock Foreground="{StaticResource LS_accent25TxtColor}" FontSize="{StaticResource SmallishFontSize}" Text="{Binding Source='hc0ed9c5ag8a2cg4167g8242g5076d73d695f',Converter={StaticResource TranslatedStringConverter}}" Margin="20,0" VerticalAlignment="Top"/>
+
+                            <ListBox x:Name="FilterListHolder" ItemsSource="{TemplateBinding SuggestedFiltersList}" SelectedItem="{Binding CurrentFilterInternal,RelativeSource={RelativeSource TemplatedParent}}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="20,0,0,0" VerticalAlignment="Top">
+                                <ListBox.Resources>
+                                    <DataTemplate DataType="{x:Type ls:VMEnumFilter}">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Image Grid.Column="0" Grid.ColumnSpan="2" x:Name="BtnBorder" Stretch="None" Source="/GustavNoesisGUI;component/Assets/CharacterPanel/selector_listitem_d.png"/>
+                                            <Image Grid.Column="0" Stretch="None" Source="/GustavNoesisGUI;component/Assets/CharacterPanel/ico_filter.png" VerticalAlignment="Center" Margin="4,0,16,0"/>
+                                            <TextBlock Grid.Column="1" x:Name="BtnText" Text="{Binding }" Foreground="{StaticResource LS_baseTxtColor}" FontSize="{StaticResource MediumFontSize}" HorizontalAlignment="Left" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Width="400"/>
+                                        </Grid>
+                                        <DataTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="BtnBorder" Property="Source" Value="/GustavNoesisGUI;component/Assets/CharacterPanel/selector_listitem_h.png"/>
+                                                <Setter TargetName="BtnText" Property="Foreground" Value="{StaticResource LS_accent100TxtColor}"/>
+                                            </Trigger>
+
+                                            <DataTrigger Binding="{Binding Enum, Converter={StaticResource NullToBoolTrueConverter}}" Value="False">
+                                                <Setter TargetName="BtnText" Property="Text" Value="{Binding Name}"/>
+                                            </DataTrigger>
+                                        </DataTemplate.Triggers>
+                                    </DataTemplate>
+
+                                    <DataTemplate DataType="{x:Type ls:VMInventorySlot}">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Image Grid.Column="0" Grid.ColumnSpan="2" x:Name="BtnBorder" Stretch="None" Source="/GustavNoesisGUI;component/Assets/CharacterPanel/selector_listitem_d.png"/>
+                                            <Rectangle Grid.Column="0" Height="28" Width="28" Fill="{Binding Object.Icon}" VerticalAlignment="Center" Margin="4,0,16,0"/>
+                                            <TextBlock Grid.Column="1" x:Name="BtnText" Text="{Binding Object.Name}" Foreground="{StaticResource LS_baseTxtColor}" FontSize="{StaticResource MediumFontSize}" HorizontalAlignment="Left" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Width="400"/>
+                                        </Grid>
+                                        <DataTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="BtnBorder" Property="Source" Value="/GustavNoesisGUI;component/Assets/CharacterPanel/selector_listitem_h.png"/>
+                                                <Setter TargetName="BtnText" Property="Foreground" Value="{StaticResource LS_accent100TxtColor}"/>
+                                            </Trigger>
+                                        </DataTemplate.Triggers>
+                                    </DataTemplate>
+                                </ListBox.Resources>
+
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Vertical"/>
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                            </ListBox>
+                        </StackPanel>
+                    </ls:LSNineSliceImage>
+                </Popup>
+            </StackPanel>
 
             <!-- MOD_ACS: Add Camp/Companions panel button -->
             <!--CAMP COMPANIONS TOGGLE-->
@@ -526,6 +526,7 @@
                 <Setter TargetName="framefiltersEQ" Property="Height" Value="80"/>
                 <Setter TargetName="framefiltersEQ" Property="Width" Value="460"/>
                 <Setter TargetName="framefiltersEQ" Property="Stretch" Value="Fill"/>
+                <Setter TargetName="PART_FilterSearchBox" Property="Width" Value="360"/>
                 <Setter TargetName="ClearFilter" Property="Margin" Value="0,15,28,0"/>
                 <Setter TargetName="CompanionAccessHolder" Property="Margin" Value="0,6,0,-6"/>
             </MultiDataTrigger>
