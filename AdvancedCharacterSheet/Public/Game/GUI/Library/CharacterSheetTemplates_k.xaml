@@ -147,7 +147,7 @@
     <ControlTemplate x:Key="NoResultsFoundSearchTemplate" TargetType="Control">
         <Grid>
             <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/CharacterPanel/invSlot_message_bg.png" Stretch="Fill" HorizontalAlignment="Center"/>
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource LS_extraspecialTxtColor}" FontSize="{StaticResource SmallFontSize}" ls:TextBlockFormatter.SourceText="{Binding Source='h7f09be65g3d97g45dfg87f1gb70869a7ae24', Converter={StaticResource TranslatedStringConverter}}"/>
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource LS_extraspecialTxtColor}" FontSize="{StaticResource ScaledSmallishFontSize}" ls:TextBlockFormatter.SourceText="{Binding Source='h7f09be65g3d97g45dfg87f1gb70869a7ae24', Converter={StaticResource TranslatedStringConverter}}"/>
         </Grid>
     </ControlTemplate>
 
@@ -199,7 +199,7 @@
             </Grid.RowDefinitions>
 
             <!-- MOD_ACS: Update margin // BG3: Margin="440,24" -->
-            <TextBlock Grid.Row="0" HorizontalAlignment="Center" x:Name="Description" Text="{Binding Source=h4683b44fg5f66g4001gbc80gbcb307102d8d,Converter={StaticResource TranslatedStringConverter}}" TextAlignment="Center" TextWrapping="Wrap" FontSize="{StaticResource ScaledMediumFontSize}" Foreground="{StaticResource LS_accent100TxtColor}" Margin="440,23,440,13"/>
+            <TextBlock Grid.Row="0" HorizontalAlignment="Center" x:Name="Description" Text="{Binding Source=h4683b44fg5f66g4001gbc80gbcb307102d8d,Converter={StaticResource TranslatedStringConverter}}" TextAlignment="Center" TextWrapping="Wrap" FontSize="{StaticResource ScaledMediumFontSize}" Foreground="{StaticResource LS_accent100TxtColor}" Margin="100,23,100,13"/>
 
             <TextBlock Grid.Row="1" x:Name="NoReactionsMsg" Foreground="{StaticResource LS_baseTxtColor}" TextWrapping="Wrap" MaxWidth="600" IsHitTestVisible="False" HorizontalAlignment="Center" TextAlignment="Center" FontStyle="Italic" Visibility="Collapsed" Margin="20,368,40,20" noesis:Text.StrokeThickness="6">
                 <noesis:Text.Stroke>
@@ -1659,11 +1659,11 @@
             </b:Interaction.Triggers>
 
             <!-- MOD_ACS: Update Background Stretch / Add Margin // BG3: Stretch="None" -->
-            <Image x:Name="Background" Source="{StaticResource SpellbookBg}" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="254,14,254,0"/>
+            <Image x:Name="Background" Source="{StaticResource SpellbookBg}" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,13,0,-1"/>
 
             <!-- Spellbook -->
             <!-- MOD_ACS: Add Margin -->
-            <Grid x:Name="ClassPanelRoot" Margin="0,0,0,18">
+            <Grid x:Name="ClassPanelRoot" Margin="0,0,0,17">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
@@ -1671,8 +1671,9 @@
                 <!-- Tabs -->
                 <!-- MOD_ACS: Update Tabs Margin // BG3: Margin="0,4,0,0" -->
                 <StackPanel Grid.Row="0" x:Name="TabsContainer" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="0,17,0,-9">
+                    <!-- MOD_ACS: Update Visibility // BG3: Visibility="{Binding SpellBooks.Count, Converter={StaticResource CountToVisibilityConverter}, ConverterParameter='5'}" -->
                     <ls:LSButton x:Name="NavigationLeftButton" Template="{StaticResource IconButtonTemplate}" VerticalAlignment="Center"
-                                             Visibility="{Binding SpellBooks.Count, Converter={StaticResource CountToVisibilityConverter}, ConverterParameter='5'}"
+                                             Visibility="{Binding SpellBooks.Count, Converter={StaticResource CountToVisibilityConverter}, ConverterParameter='4'}"
                                              SoundID="UI_Shared_Panel_Select">
                         <ls:LSButton.Resources>
                             <BitmapImage x:Key="ButtonNormal" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/CC/btn_roundSmall_d.png"/>
@@ -1964,8 +1965,9 @@
                         </ListBox.ItemTemplate>
                     </ListBox>
 
+                    <!-- MOD_ACS: Update Visibility // BG3: Visibility="{Binding SpellBooks.Count, Converter={StaticResource CountToVisibilityConverter}, ConverterParameter='5'}" -->
                     <ls:LSButton x:Name="NavigationRightButton" Template="{StaticResource IconButtonTemplate}" VerticalAlignment="Center" RenderTransformOrigin="0.5, 0.5"
-                                             Visibility="{Binding SpellBooks.Count, Converter={StaticResource CountToVisibilityConverter}, ConverterParameter='5'}"
+                                             Visibility="{Binding SpellBooks.Count, Converter={StaticResource CountToVisibilityConverter}, ConverterParameter='4'}"
                                              SoundID="UI_Shared_Panel_Select">
                         <ls:LSButton.Resources>
                             <BitmapImage x:Key="ButtonNormal" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/CC/btn_roundSmall_d.png"/>
@@ -2008,7 +2010,7 @@
 
                     <!-- Class image and info -->
                     <!-- MOD_ACS: Update margin // BG3: Margin="0,20,0,0" -->
-                    <Grid x:Name="InfoPanel" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Right" Margin="26,20,0,0">
+                    <Grid x:Name="InfoPanel" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Right" Margin="-14,54,-14,0">
 
                         <Image HorizontalAlignment="Center" VerticalAlignment="Top" Stretch="None" Source="{StaticResource MainIconBg}"/>
 
@@ -2358,7 +2360,7 @@
                                     <!-- MOD_ACS: Add switcher ToggleSpy to handle ClassSectionGrid Visibility btn -->
                                     <Border x:Name="ClassSectionGridToggleSpy" Visibility="Visible"/>
                                     <!-- MOD_ACS: Switch visibility binding to Collapsed / Update Strech & Margin / Add MaxWidth // BG3: Stretch="Fill" Visibility="{Binding Visibility, ElementName=PreparedSpellsSection}" Margin="0,6,0,0"-->
-                                    <Image x:Name="PreparedSpellsSectionOpening" Source="{StaticResource PreparedSpellsTop}" MaxWidth="1112" Stretch="Fill" Visibility="Collapsed" Margin="0,4,0,0"/>
+                                    <Image x:Name="PreparedSpellsSectionOpening" Source="{StaticResource PreparedSpellsTop}" MaxWidth="1112" Stretch="Fill" Visibility="Collapsed" Margin="0,4,0,-1"/>
 
                                     <!-- MOD_ACS: Switch visibility binding to PreparedSpellsSectionOpening // BG3:  Visibility="Collapsed" Width="{Binding Source.Width, ElementName=PreparedSpellsSectionOpening}" -->
                                     <Border x:Name="PreparedSpellsSection" Visibility="{Binding Visibility, ElementName=PreparedSpellsSectionOpening}" Width="{Binding ActualWidth, ElementName=PreparedSpellsSectionOpening}">
