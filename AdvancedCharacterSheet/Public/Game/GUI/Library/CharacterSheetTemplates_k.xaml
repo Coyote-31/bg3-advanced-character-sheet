@@ -6069,7 +6069,8 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <Border x:Name="Background" Grid.Column="0" Grid.ColumnSpan="2" Background="{StaticResource LS_accent100TxtColor}" Opacity="0" CornerRadius="12" />
+                    <!-- MOD_ACS: Add Margin -->
+                    <Border x:Name="Background" Grid.Column="0" Grid.ColumnSpan="2" Background="{StaticResource LS_accent100TxtColor}" Opacity="0" CornerRadius="12" Margin="0,3,0,3" />
                     <ContentPresenter x:Name="Content" Grid.Column="0" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"/>
                     <Image x:Name="IsNewIcon" Grid.Column="1" Source="{StaticResource NewRecipeIcon}" Stretch="None" VerticalAlignment="Center" Visibility="{Binding IsNew, Converter={StaticResource BoolToVisibleConverter}, ConverterParameter={StaticResource TrueValue}}"/>
 
@@ -6115,7 +6116,10 @@
                 <Setter Property="VerticalAlignment" Value="Center"/>
                 <Setter Property="TextWrapping" Value="Wrap"/>
                 <Setter Property="LineStackingStrategy" Value="BlockLineHeight"/>
-                <Setter Property="LineHeight" Value="{StaticResource ScaledDefaultFontSizeLineHeight}"/>
+                <!-- MOD_ACS: Update LineHeight // BG3: Value="{StaticResource ScaledDefaultFontSizeLineHeight}" -->
+                <Setter Property="LineHeight" Value="{StaticResource ScaledMediumFontSizeLineHeight}"/>
+                <!-- MOD_ACS: Add FontSize -->
+                <Setter Property="FontSize" Value="{StaticResource ScaledMediumFontSize}"/>
             </Style>
 
             <Style x:Key="AlchemyWrappingText" TargetType="TextBlock">
@@ -6206,7 +6210,8 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
                                         <ContentPresenter x:Name="Icon" Grid.Column="0" Content="{Binding Result.Item}" Width="72" Height="72" VerticalAlignment="Center" ClipToBounds="False" Margin="8,0,0,0" ContentTemplate="{StaticResource Template.ItemNoCount}"/>
-                                        <TextBlock x:Name="Name" Grid.Column="1" Text="{Binding Result.Item.NameAlchemy}" Style="{StaticResource ListEntryTextStyle}" Margin="12,12"/>
+                                        <!-- MOD_ACS: Update Margin // BG3: Margin="12,12" -->
+                                        <TextBlock x:Name="Name" Grid.Column="1" Text="{Binding Result.Item.NameAlchemy}" Style="{StaticResource ListEntryTextStyle}" Margin="12,2,12,-2"/>
                                         <Button Grid.Column="0" Grid.ColumnSpan="2" Command="{Binding DataContext.ChangeSelectedRecipe, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="{Binding .}" Background="Transparent"/>
                                     </Grid>
                                 </ContentControl>
@@ -6256,6 +6261,8 @@
                             <Setter Property="Width" Value="600"/>
                             <Setter Property="TextAlignment" Value="Center"/>
                             <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+                            <!-- MOD_ACS: Add FontSize -->
+                            <Setter Property="FontSize" Value="{StaticResource ScaledMediumFontSize}"/>
                         </Style>
                     </StackPanel.Resources>
                     <b:Interaction.Triggers>
@@ -6286,8 +6293,8 @@
                             <BitmapImage x:Key="SlotDisabled_h" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Alchemy/crafting_itemFrame_error_h.png"/>
                         </ContentControl.Resources>
                     </ContentControl>
-
-                    <TextBlock x:Name="Count" Text="{Binding Count, StringFormat='{}{0}/1'}" Foreground="{StaticResource LS_tint100}"/>
+                    <!-- MOD_ACS: Add IsHitTestVisible to prevent overlapping with button -->
+                    <TextBlock x:Name="Count" Text="{Binding Count, StringFormat='{}{0}/1'}" Foreground="{StaticResource LS_tint100}" IsHitTestVisible="False"/>
                 </StackPanel>
 
                 <DataTemplate.Triggers>
@@ -6663,7 +6670,8 @@
             </Grid.ColumnDefinitions>
 
             <!-- RECIPES -->
-            <Grid x:Name="RecipesList" Grid.Column="0" HorizontalAlignment="Center" Width="852"  Margin="0,44,0,0">
+            <!-- MOD_ACS: Update Width // BG3: Width="852" -->
+            <Grid x:Name="RecipesList" Grid.Column="0" HorizontalAlignment="Center" Width="740"  Margin="0,44,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
@@ -6859,7 +6867,8 @@
             </Grid>
 
             <!-- EXTRACT AND CRAFTING -->
-            <StackPanel x:Name="ExtractAndCrafting" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,44,0,0">
+            <!-- MOD_ACS: Update Margin // BG3: Margin="0,44,0,0" -->
+            <StackPanel x:Name="ExtractAndCrafting" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,36,0,0">
                 <!-- Title -->
                 <ContentControl Name="CraftingTitle" Style="{StaticResource BaseTitleStyle}">
                     <TextBlock Text="{Binding Source='hd40af023g3265g492dgb433gb272f433a093', Converter={StaticResource TranslatedStringConverter}}"/>
@@ -6867,10 +6876,12 @@
 
                 <!-- Extract and crafting -->
                 <Grid x:Name="ExtractCrafting" HorizontalAlignment="Center" VerticalAlignment="Top">
-                    <Image x:Name="AlchemyBg" Source="{StaticResource CombineBg}" HorizontalAlignment="Center" VerticalAlignment="Top" Stretch="None"/>
-
-                    <Grid x:Name="AlchemyOrbHolder" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,312,0,0">
-                        <Image x:Name="AlchemyOrb" Source="{StaticResource OrbEnabled}" Stretch="None"/>
+                    <!-- MOD_ACS: Update Stretch // BG3: Stretch="None" -->
+                    <Image x:Name="AlchemyBg" Source="{StaticResource CombineBg}" HorizontalAlignment="Center" VerticalAlignment="Top" Stretch="Uniform"/>
+                    <!-- MOD_ACS: Update Margin // BG3: Margin="0,312,0,0" -->
+                    <Grid x:Name="AlchemyOrbHolder" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,235,0,0">
+                        <!-- MOD_ACS: Add Width / Update Stretch // BG3: Stretch="None" -->
+                        <Image x:Name="AlchemyOrb" Source="{StaticResource OrbEnabled}" Stretch="Uniform" Width="174"/>
 
                         <ls:AnimatedImage x:Name="AlchemyOrbVFX" Style="{StaticResource AlchemyAnimationStyle}"/>
 
@@ -6916,8 +6927,9 @@
                     <Grid x:Name="Crafting" Visibility="Hidden">
 
                         <Grid x:Name="CraftingSolution">
+                            <!-- MOD_ACS: Update Margin // BG3: Margin="-120,132,0,0" -->
                             <ContentPresenter x:Name="BaseItem" ContentTemplate="{StaticResource CraftingSlot}" Content="{Binding SelectedRecipe.BaseExtract.Item}" 
-                                              HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-120,132,0,0" 
+                                              HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-152,92,0,0" 
                                               ToolTipService.Placement="Left" 
                                               Tag="Main">
                                 <ContentPresenter.ToolTip>
@@ -6925,8 +6937,9 @@
                                 </ContentPresenter.ToolTip>
                             </ContentPresenter>
 
+                            <!-- MOD_ACS: Update Margin // BG3: Margin="0,132,-118,0" -->
                             <ContentPresenter x:Name="ExtraExtract" ContentTemplate="{StaticResource CraftingSlot}" Content="{Binding SelectedExtraExtract}" 
-                                              HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,132,-118,0" 
+                                              HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,92,-150,0" 
                                               ToolTipService.Placement="Left" 
                                               Tag="Extra">
                                 <ContentPresenter.ToolTip>
@@ -6936,9 +6949,11 @@
                         </Grid>
 
                         <Grid x:Name="CraftingExtract" Visibility="Collapsed">
-                            <TextBlock x:Name="ExtractResultTut" Text="{Binding Source='h45fd5913g762cg44fbg8498g37522dcff3c3', Converter={StaticResource TranslatedStringConverter}}" FontSize="{StaticResource ScaledMediumFontSize}" Foreground="{StaticResource LS_accent25TxtColor}" MaxWidth="800" TextAlignment="Center" TextWrapping="Wrap"/>
+                            <!-- MOD_ACS: Update FontSize & MaxWidth // BG3: FontSize="{StaticResource ScaledMediumFontSize}" MaxWidth="800" -->
+                            <TextBlock x:Name="ExtractResultTut" Text="{Binding Source='h45fd5913g762cg44fbg8498g37522dcff3c3', Converter={StaticResource TranslatedStringConverter}}" FontSize="{StaticResource ScaledSmallishFontSize}" Foreground="{StaticResource LS_accent25TxtColor}" MaxWidth="700" TextAlignment="Center" TextWrapping="Wrap"/>
 
-                            <TextBlock x:Name="ExtractResultName" Text="{Binding SelectedRecipe.BaseExtract.Item.Name}" FontSize="{StaticResource ScaledLargeFontSize}" Foreground="{StaticResource LS_accent100TxtColor}" Width="1000" Margin="0,140,0,0" TextAlignment="Center"/>
+                            <!-- MOD_ACS: Update Width // BG3: Width="1000" -->
+                            <TextBlock x:Name="ExtractResultName" Text="{Binding SelectedRecipe.BaseExtract.Item.Name}" FontSize="{StaticResource ScaledLargeFontSize}" Foreground="{StaticResource LS_accent100TxtColor}" Width="700" Margin="0,140,0,0" TextAlignment="Center"/>
 
                             <TextBlock x:Name="ExtractResultCount" FontSize="{StaticResource ScaledMediumFontSize}" Foreground="{StaticResource LS_baseTxtColor}" Margin="0,190,0,0" TextAlignment="Center">
                                 <TextBlock.Text>
@@ -6948,7 +6963,8 @@
                                     </MultiBinding>
                                 </TextBlock.Text>
                             </TextBlock>
-                            <Grid Margin="0,246,0,0" Width="498" VerticalAlignment="Top">
+                            <!-- MOD_ACS: Update Width // BG3: Width="498" -->
+                            <Grid Margin="0,246,0,0" Width="496" VerticalAlignment="Top">
                                 <ContentPresenter x:Name="ExtractSlot1" ContentTemplate="{StaticResource ExtractCraftingSlot}" Content="{Binding SelectedRecipe.BaseExtract}" 
                                               HorizontalAlignment="Left" 
                                               ls:AttachedProperties.InheritedNumber="1"/>
@@ -6963,8 +6979,9 @@
                             </Grid>
                         </Grid>
                         
+                        <!-- MOD_ACS: Update Margin // BG3: Margin="0,658,0,0" -->
                         <StackPanel x:Name="Result" DataContext="{Binding SelectedRecipe.Result}" 
-                                        HorizontalAlignment="Center" Margin="0,658,0,0"
+                                        HorizontalAlignment="Center" Margin="-1,530,1,0"
                                         ToolTipService.Placement="Left">
                             <StackPanel.Resources>
                                 <Style TargetType="TextBlock">
@@ -6987,29 +7004,34 @@
                                 </ContentControl.Resources>
                             </ContentControl>
 
-                            <TextBlock x:Name="ResultName" Text="{Binding Item.Name}" FontSize="{StaticResource ScaledBigFontSize}" Foreground="{StaticResource LS_extraspecialTxtColor}" Width="800" TextWrapping="Wrap" LineStackingStrategy="BlockLineHeight" LineHeight="{StaticResource ScaledIntermediateFontSizeLineHeight}" Margin="0,16,0,0"/>
+                            <!-- MOD_ACS: Update FontSize & Width & Margin // BG3: FontSize="{StaticResource ScaledBigFontSize}" Width="800" Margin="0,16,0,0" -->
+                            <TextBlock x:Name="ResultName" Text="{Binding Item.Name}" FontSize="{StaticResource ScaledLargeFontSize}" Foreground="{StaticResource LS_extraspecialTxtColor}" Width="700" TextWrapping="Wrap" LineStackingStrategy="BlockLineHeight" LineHeight="{StaticResource ScaledIntermediateFontSizeLineHeight}" Margin="0,70,0,0"/>
                         </StackPanel>
                     </Grid>
                 </Grid>
 
                 <Grid>
                     <!-- Errors -->
+                    <!-- MOD_ACS: Update MaxWidth & FontSize  // BG3: MaxWidth="800" FontSize="{StaticResource ScaledLargeFontSize}" -->
                     <TextBlock x:Name="ExtractCraftingError" 
                                    Style="{StaticResource AlchemyWrappingText}" 
                                    Foreground="{StaticResource LS_alertTxtColor}" 
-                                   FontSize="{StaticResource ScaledLargeFontSize}" 
-                                   Visibility="Collapsed" MaxWidth="800" Margin="0,16,0,0"
+                                   FontSize="{StaticResource ScaledDefaultFontSize}" 
+                                   Visibility="Collapsed" MaxWidth="700" Margin="0,16,0,0"
                                VerticalAlignment="Center"/>
+                    <!-- MOD_ACS: Update MaxWidth & FontSize // BG3: MaxWidth="800" FontSize="{StaticResource ScaledDefaultFontSize}"  -->
                     <TextBlock x:Name="ExtractCraftingTutorial" Text="{Binding Source='h869eeab2g5859g4defg8eb7ge77cc11eaa1a',Converter={StaticResource TranslatedStringConverter}}" 
                                    Style="{StaticResource AlchemyWrappingText}" 
                                    Foreground="{StaticResource LS_accent100TxtColor}" 
-                                   FontSize="{StaticResource ScaledDefaultFontSize}" 
-                                   Visibility="Collapsed" MaxWidth="800" Margin="0,16,0,0"/>
+                                   FontSize="{StaticResource ScaledMediumFontSize}" 
+                                   Visibility="Collapsed" MaxWidth="700" Margin="0,16,0,0"/>
 
                     <!-- Amount Input -->
-                    <StackPanel x:Name="AmountInput" Visibility="Hidden" Height="120">
+                    <!-- MOD_ACS: Add margin -->
+                    <StackPanel x:Name="AmountInput" Visibility="Hidden" Height="120" Margin="0,20,0,0">
 
-                        <TextBlock x:Name="AmountInputTitle" Text="{Binding Source='h7a90a95cgf7b0g4b53g93efg2837c4dc267a', Converter={StaticResource TranslatedStringConverter}}" Foreground="{StaticResource LS_extraspecialTxtColor}" HorizontalAlignment="Center"/>
+                        <!-- MOD_ACS: Add FontSize -->
+                        <TextBlock x:Name="AmountInputTitle" Text="{Binding Source='h7a90a95cgf7b0g4b53g93efg2837c4dc267a', Converter={StaticResource TranslatedStringConverter}}" FontSize="{StaticResource ScaledMediumFontSize}" Foreground="{StaticResource LS_extraspecialTxtColor}" HorizontalAlignment="Center"/>
 
                         <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center" >
                             <ls:LSButton x:Name="NavigationLeftButton" Template="{StaticResource IconButtonTemplate}" VerticalAlignment="Center">
@@ -7114,9 +7136,10 @@
                 </ls:LSButton>
 
                 <!-- Craft message -->
+                <!-- MOD_ACS: Update Width // BG3: Width="1000" -->
                 <TextBlock x:Name="ExtractCraftingMessage" 
                                Style="{StaticResource AlchemyWrappingText}"
-                               Foreground="{StaticResource LS_accent100TxtColor}" Width="1000" Opacity="0" Margin="0,20,0,0" FontSize="{StaticResource ScaledSmallishFontSize}">
+                               Foreground="{StaticResource LS_accent100TxtColor}" Width="700" Opacity="0" Margin="0,20,0,0" FontSize="{StaticResource ScaledSmallishFontSize}">
                     <TextBlock.Text>
                         <MultiBinding Converter="{StaticResource ParameterizedTranslatedStringConverter}">
                             <Binding Source="h1b698442ga1f1g4ecagba7ag82b58143139a"/>
@@ -7261,7 +7284,8 @@
             </DataTrigger>
 
             <DataTrigger Binding="{Binding SelectedRecipe.IsSolutionRecipe}" Value="True">
-                <Setter TargetName="ExtractCrafting" Property="Margin" Value="0,-81,0,0"/>
+                <!-- MOD_ACS: Disabled margin change -->
+                <!-- BG3: <Setter TargetName="ExtractCrafting" Property="Margin" Value="0,-81,0,0"/> -->
             </DataTrigger>
 
             <!-- If there's no real selected extra extract, set the tooltip to use the VMTooltipItemSectionDetail instead -->
@@ -7339,8 +7363,16 @@
                 <Setter TargetName="AlchemyOrbHolder" Property="Visibility" Value="Collapsed"/>
 
                 <Setter TargetName="AlchemyBg" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Alchemy/extract_flowLines_inactive.png"/>
-                <Setter TargetName="AlchemyBg" Property="VerticalAlignment" Value="Center"/>
-                <Setter TargetName="AlchemyBg" Property="Margin" Value="0,82,0,-82"/>
+                <!-- MOD_ACS: Disable AlchemyBg VerticalAlignment -->
+                <!-- BG3: <Setter TargetName="AlchemyBg" Property="VerticalAlignment" Value="Center"/> -->
+                <!-- MOD_ACS: Update Margin // BG3: Value="0,82,0,-82" -->
+                <Setter TargetName="AlchemyBg" Property="Margin" Value="0,330,0,-330"/>
+                <!-- MOD_ACS: Add Stretch -->
+                <Setter TargetName="AlchemyBg" Property="Stretch" Value="None"/>
+                <!-- MOD_ACS: Add Result Margin -->
+                <Setter TargetName="Result" Property="Margin" Value="-1,661,1,0"/>
+                <!-- MOD_ACS: Add ResultName Margin -->
+                <Setter TargetName="ResultName" Property="Margin" Value="0,12,0,0"/>
             </DataTrigger>
 
             <MultiDataTrigger>
