@@ -31,9 +31,9 @@
     <System:Double x:Key="CornerRadius">20</System:Double>
 
     <!-- MOD_ACS: Update InventoryColumnWidth // BG3: 676 -->
-    <System:Double x:Key="InventoryColumnWidth">676</System:Double>
+    <System:Double x:Key="InventoryColumnWidth">700</System:Double>
     <!-- MOD_ACS: Update InventoryColumnHeight // MOD_BCPP: 1620 // BG3: 1468 -->
-    <System:Double x:Key="InventoryColumnHeight">1618</System:Double>
+    <System:Double x:Key="InventoryColumnHeight">1632</System:Double>
 
     <!-- MOD_ACS: Update CSContentHeight 1550 // MOD_BCPP: 1550 // BG3: 1340 -->
     <System:Double x:Key="CSContentHeight">1550</System:Double>
@@ -138,7 +138,8 @@
         <Grid>
             <!-- MOD_ACS: Update source // BG3: .../Assets/CharacterPanel/..." -->
             <Image Source="/GustavNoesisGUI;component/Assets/ACS/CharacterPanel/invSlot_message_bg.png" Stretch="None" HorizontalAlignment="Center"/>
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource LS_extraspecialTxtColor}" FontSize="{StaticResource SmallFontSize}" ls:TextBlockFormatter.SourceText="{Binding Source='h7f09be65g3d97g45dfg87f1gb70869a7ae24', Converter={StaticResource TranslatedStringConverter}}"/>
+            <!-- MOD_ACS: Update FontSize // BG3: FontSize="{StaticResource SmallFontSize}" -->
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource LS_extraspecialTxtColor}" FontSize="{StaticResource ScaledSmallishFontSize}" ls:TextBlockFormatter.SourceText="{Binding Source='h7f09be65g3d97g45dfg87f1gb70869a7ae24', Converter={StaticResource TranslatedStringConverter}}"/>
         </Grid>
     </ControlTemplate>
 
@@ -8337,8 +8338,8 @@
 
             </b:Interaction.Triggers>
 
-            <!-- MOD_ACS: Add margin -->
-            <Grid x:Name="InventoryColumnHolder" Tag="JustCreated" HorizontalAlignment="Stretch" Margin="0,-7,-1,0">
+            <!-- MOD_ACS: Add Margin, Height & Width / Update HorizontalAlignment // BG3: HorizontalAlignment="Stretch" -->
+            <Grid x:Name="InventoryColumnHolder" Tag="JustCreated" Height="1562" Width="780" HorizontalAlignment="Left" Margin="0,-7,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
@@ -8369,7 +8370,8 @@
                 </ls:LSInputBinding>
 
                 <!-- Inventory -->
-                <ListBox Grid.Row="1" x:Name="InventoryHolder" ItemsSource="{Binding GeneratedItemsList, ElementName=FilteringContainerHolder}" ItemsPanel="{StaticResource InventoryGridTemplate}" SelectionMode="Extended" ls:MultiSelect.IsEnabled="False" ItemTemplate="{StaticResource Template.InventorySlot}" ls:AttachedProperties.InheritedNumber="{Binding ActualWidth, ElementName=InventoryColumnHolder}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Right" ItemContainerStyle="{StaticResource InvContainerItemStyle}">
+                <!-- MOD_ACS: Update HorizontalAlignment // BG3: HorizontalAlignment="Right" -->
+                <ListBox Grid.Row="1" x:Name="InventoryHolder" ItemsSource="{Binding GeneratedItemsList, ElementName=FilteringContainerHolder}" ItemsPanel="{StaticResource InventoryGridTemplate}" SelectionMode="Extended" ls:MultiSelect.IsEnabled="False" ItemTemplate="{StaticResource Template.InventorySlot}" ls:AttachedProperties.InheritedNumber="{Binding ActualWidth, ElementName=InventoryColumnHolder}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Left" ItemContainerStyle="{StaticResource InvContainerItemStyle}">
 
                     <b:Interaction.Behaviors>
                         <ls:DragGenericBehavior StartDragCommand="{Binding DataContext.DragInventoryCommand , RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
@@ -8380,18 +8382,18 @@
                         <ControlTemplate TargetType="ListBox">
                             <Grid x:Name="TemplateRoot" >
                                 <!-- MOD_ACS: Inventory Border - Update margin // BG3: Margin="-6,-4,20,-6" -->
-                                <Border x:Name="InventoryTint" Background="{StaticResource InventoryBGShade}" Margin="-8,-8,19,-7" BorderBrush="Transparent" BorderThickness="2"/>
+                                <Border x:Name="InventoryTint" Background="{StaticResource InventoryBGShade}" Margin="-1,-8,19,-8" BorderBrush="Transparent" BorderThickness="2"/>
                                 <!-- MOD_ACS: Add name / Update padding & align // BG3: Padding="0,0,0,0" // HorizontalContentAlignment="Right" -->
-                                <ScrollViewer x:Name="InventoryScrolling" VerticalScrollBarVisibility="Visible"  HorizontalContentAlignment="Center" Template="{StaticResource NoForcedStyleScrollViewerTemplate}" HorizontalScrollBarVisibility="Disabled" Padding="7,0,-7,0">
+                                <ScrollViewer x:Name="InventoryScrolling" VerticalScrollBarVisibility="Visible"  HorizontalContentAlignment="Center" Template="{StaticResource NoForcedStyleScrollViewerTemplate}" HorizontalScrollBarVisibility="Disabled" Padding="8,0,-8,0">
                                     <b:Interaction.Behaviors>
                                         <ls:DragScrollingBehavior/>
                                     </b:Interaction.Behaviors>
                                     <!-- MOD_ACS: Inventory contain - Add margin to equalize top gap -->
-                                    <ItemsPresenter x:Name="itemsContainer" Margin="0,0,0,1"/>
+                                    <ItemsPresenter x:Name="itemsContainer" Margin="8,0,0,0"/>
                                 </ScrollViewer>
                                 <Grid x:Name="NoItemsFoundOverlay" Visibility="Collapsed">
                                     <!-- MOD_ACS: Add margin to search bg shading -->
-                                    <Rectangle x:Name="NoItemsFoundBg" Fill="{StaticResource LS_DisabledPanelColor}" Margin="3,0,27,1"/>
+                                    <Rectangle x:Name="NoItemsFoundBg" Fill="{StaticResource LS_DisabledPanelColor}" Margin="8,0,34,1"/>
                                     <!-- MOD_ACS: Update margin & align // BG3: Margin="0,40,0,0" VerticalAlignment="Top" -->
                                     <Control  x:Name="NoItemsFoundControl" Template="{StaticResource NoResultsFoundTemplate}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="4,0,30,0"/>
                                 </Grid>
@@ -8404,8 +8406,8 @@
                                     </MultiDataTrigger.Conditions>
                                     <Setter TargetName="NoItemsFoundOverlay" Property="Visibility" Value="Visible"/>
                                     <!-- MOD_ACS: Add to Recenter on search -->
-                                    <Setter TargetName="itemsContainer" Property="Margin" Value="0,0,-3,1"/>
-                                    <Setter TargetName="InventoryTint" Property="Margin" Value="-5,-8,19,-7"/>
+                                    <Setter TargetName="itemsContainer" Property="Margin" Value="0,0,-2,1"/>
+                                    <Setter TargetName="InventoryTint" Property="Margin" Value="-1,-8,25,-8"/>
                                 </MultiDataTrigger>
 
                                 <!--Hide the no items found overlay if we're attempting to drag-->
@@ -8417,6 +8419,15 @@
                                 <DataTrigger Binding="{Binding CurrentFilter, ElementName=FilteringContainerHolder, Converter={StaticResource NullToBoolTrueConverter}}" Value="False">
                                     <Setter TargetName="InventoryTint" Property="Background" Value="{StaticResource InventoryBGShadeFilter}"/>
                                     <Setter TargetName="InventoryTint" Property="BorderBrush" Value="{StaticResource InventoryBGShadeFilterBorder}"/>
+                                </DataTrigger>
+                                
+                                <!-- MOD_ACS: Add trigger for Character Panel context -->
+                                <DataTrigger Binding="{Binding Name, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Value="CharacterPanel" >
+                                    <Setter TargetName="TemplateRoot" Property="RenderTransform">
+                                        <Setter.Value>
+                                            <ScaleTransform ScaleX="0.88" ScaleY="0.88"/>
+                                        </Setter.Value>
+                                    </Setter>
                                 </DataTrigger>
                                 
                                 <!-- MOD_ACS: Add trigger for Party Panel context -->
@@ -8453,10 +8464,15 @@
                                 
                                 <!-- MOD_ACS: Add trigger for Companions Panel-->
                                 <DataTrigger Binding="{Binding Name, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Value="CompanionsPanel"> 
-                                    <Setter TargetName="InventoryTint" Property="Margin" Value="-8,-8,20,-7"/>
-                                    <Setter TargetName="InventoryScrolling" Property="Padding" Value="6,0,-6,0"/>
-                                    <Setter TargetName="NoItemsFoundBg" Property="Margin" Value="3,0,29,1"/>
+                                    <Setter TargetName="InventoryTint" Property="Margin" Value="-1,-8,20,-8"/>
+                                    <Setter TargetName="InventoryScrolling" Property="Padding" Value="10,0,-10,0"/>
+                                    <Setter TargetName="NoItemsFoundBg" Property="Margin" Value="7,0,34,1"/>
                                     <Setter TargetName="NoItemsFoundControl" Property="Margin" Value="4,0,30,0"/>
+                                    <Setter TargetName="TemplateRoot" Property="RenderTransform">
+                                        <Setter.Value>
+                                            <ScaleTransform ScaleX="0.88" ScaleY="0.88"/>
+                                        </Setter.Value>
+                                    </Setter>
                                 </DataTrigger>
                                 <MultiDataTrigger>
                                     <MultiDataTrigger.Conditions>
@@ -8464,8 +8480,8 @@
                                         <Condition Binding="{Binding CurrentFilter, ElementName=FilteringContainerHolder, Converter={StaticResource NullToBoolTrueConverter}}" Value="False"/>
                                         <Condition Binding="{Binding ItemsSource.Count, RelativeSource={RelativeSource Self}}" Value="0"/>
                                     </MultiDataTrigger.Conditions>
-                                    <Setter TargetName="itemsContainer" Property="Margin" Value="0,0,-2,1"/>
-                                    <Setter TargetName="InventoryTint" Property="Margin" Value="-6,-8,20,-7"/>
+                                    <Setter TargetName="itemsContainer" Property="Margin" Value="0,0,0,1"/>
+                                    <Setter TargetName="InventoryTint" Property="Margin" Value="0,-6,27,-6"/>
                                 </MultiDataTrigger>
                                 
                             </ControlTemplate.Triggers>
@@ -8535,8 +8551,8 @@
                     </ls:FilteringContainer>
 
                     <!--Infotip-->
-                    <!-- MOD_ACS: Update Margin // BG3: Margin="-8,-8,8,0" -->
-                    <Control Grid.Column="2" Template="{StaticResource CharacterSheetInfotipTemplate}" VerticalAlignment="Center" Margin="-24,-8,24,0"  HorizontalAlignment="Right" ToolTipService.Placement="Right"/>
+                    <!-- MOD_ACS: Add Name / Update Margin // BG3: Margin="-8,-8,8,0" -->
+                    <Control x:Name="CharacterSheetInfotip" Grid.Column="2" Template="{StaticResource CharacterSheetInfotipTemplate}" VerticalAlignment="Center" Margin="-111,-8,111,0" HorizontalAlignment="Right" ToolTipService.Placement="Right"/>
 
 
 
@@ -8554,8 +8570,8 @@
                 
                 <!-- MOD_ACS: Add setters for inventory Party Panel context -->
                 <!-- MOD_ACS:  720-820 = 8 items by line (Scale=0.9) -->
-                <Setter TargetName="InventoryColumnHolder" Property="Width" Value="780"/>
                 <Setter TargetName="InventoryColumnHolder" Property="Height" Value="388"/>
+                <Setter TargetName="InventoryColumnHolder" Property="Width" Value="780"/>
                 <Setter TargetName="InventoryColumnHolder" Property="HorizontalAlignment" Value="Left"/>
                 <Setter TargetName="InventoryColumnHolder" Property="Margin" Value="-1,-9,-40,-20"/>
                 <Setter TargetName="InventoryHolder" Property="HorizontalAlignment" Value="Left"/>
@@ -8576,9 +8592,12 @@
             </MultiDataTrigger>
             
             <!-- MOD_ACS: Add trigger for Companions Panel-->
-            <DataTrigger Binding="{Binding Name, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Value="CompanionsPanel"> 
-                <Setter TargetName="FiltersControl" Property="Margin" Value="0,7,0,0"/>
+            <DataTrigger Binding="{Binding Name, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Value="CompanionsPanel">
+                <Setter TargetName="InventoryColumnHolder" Property="Height" Value="1569"/>
+                <Setter TargetName="InventoryColumnHolder" Property="Width" Value="780"/>
                 <Setter TargetName="InventoryColumnHolder" Property="Margin" Value="0,-7,0,0"/>
+                <Setter TargetName="InventoryHolder" Property="Margin" Value="0,0,0,0"/>
+                <Setter TargetName="FiltersControl" Property="Margin" Value="0,7,0,0"/>
             </DataTrigger>
             
         </ControlTemplate.Triggers>
@@ -8819,8 +8838,8 @@
                 </ls:LSInputBinding>
 
                 <!-- Inventory -->
-                <!-- MOD_ACS: Add Height -->
-                <ListBox Grid.Row="1" x:Name="InventoryHolder" Height="1290" ItemsSource="{Binding Inventories[0].Slots}" ItemsPanel="{StaticResource InventoryGridTemplate}" SelectionMode="Extended" ls:MultiSelect.IsEnabled="False" ItemTemplate="{StaticResource Template.InventorySlot}" ls:AttachedProperties.InheritedNumber="{Binding ActualWidth, ElementName=InventoryColumnHolder}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Stretch" ItemContainerStyle="{StaticResource InvContainerItemStyle}">
+                <!-- MOD_ACS: Add Height, Width & Margin / Update ls:AttachedProperties.InheritedNumber // BG3: ls:AttachedProperties.InheritedNumber="{Binding ActualWidth, ElementName=InventoryColumnHolder}" -->
+                <ListBox Grid.Row="1" x:Name="InventoryHolder" Height="1480" Width="1600" Margin="12,-6,-12,6" ItemsSource="{Binding Inventories[0].Slots}" ItemsPanel="{StaticResource InventoryGridTemplate}" SelectionMode="Extended" ls:MultiSelect.IsEnabled="False" ItemTemplate="{StaticResource Template.InventorySlot}" ls:AttachedProperties.InheritedNumber="1600" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Stretch" ItemContainerStyle="{StaticResource InvContainerItemStyle}">
 
                     <b:Interaction.Behaviors>
                         <ls:DragGenericBehavior StartDragCommand="{Binding DataContext.DragInventoryCommand , RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
@@ -8829,23 +8848,37 @@
 
                     <ListBox.Template>
                         <ControlTemplate TargetType="ListBox">
-                            <Grid x:Name="TemplateRoot" >
+                            <!-- MOD_ACS: Add Margin -->
+                            <Grid x:Name="TemplateRoot" Margin="6,6,0,0">
                                 <!-- MOD_ACS: Update Margin // BG3: Margin="-6,-4,20,-6" -->
-                                <Border x:Name="InventoryTint" Background="{StaticResource InventoryBGShade}" Margin="7,-6,22,-6" BorderBrush="Transparent" IsHitTestVisible="False"/>
+                                <Border x:Name="InventoryTint" Background="{StaticResource InventoryBGShade}" Margin="-7,-6,22,-6" BorderBrush="Transparent" IsHitTestVisible="False"/>
                                 <!-- MOD_ACS: Update Padding // BG3: Padding="0,0,0,0" -->
-                                <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalContentAlignment="Right" Template="{StaticResource NoForcedStyleScrollViewerTemplate}" HorizontalScrollBarVisibility="Disabled" Padding="5,0,-5,-1" >
+                                <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalContentAlignment="Right" Template="{StaticResource NoForcedStyleScrollViewerTemplate}" HorizontalScrollBarVisibility="Disabled" Padding="10,0,-10,0" >
                                     <b:Interaction.Behaviors>
                                         <ls:DragScrollingBehavior/>
                                     </b:Interaction.Behaviors>
                                     <ItemsPresenter x:Name="itemsContainer"/>
                                 </ScrollViewer>
                             </Grid>
+                                                    
+                            <!-- MOD_ACS: Add ControlTemplate.Triggers -->
+                            <ControlTemplate.Triggers>
+                                <!-- MOD_ACS: Add trigger for Companions Panel-->
+                                <DataTrigger Binding="{Binding Name, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Value="CompanionsPanel">
+                                    <Setter TargetName="TemplateRoot" Property="RenderTransform">
+                                        <Setter.Value>
+                                            <ScaleTransform ScaleX="0.88" ScaleY="0.88"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>                            
+                            </ControlTemplate.Triggers>
+                        
                         </ControlTemplate>
                     </ListBox.Template>
                 </ListBox>
 
                 <!-- MOD_ACS: Add CampChest footer informations - PartySupplies, Inspiration & Gold / CampChest Gold & ItemsNumber / CampInventory Weight & TotalGoldValue -->
-                <Grid x:Name="CampChestFooterInfo" Grid.Row="2" VerticalAlignment="Center" Margin="0,12,0,0">
+                <Grid x:Name="CampChestFooterInfo" Grid.Row="2" VerticalAlignment="Top" Margin="0,-160,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
@@ -8937,7 +8970,7 @@
 
                     <!--Infotip-->
                     <!-- MOD_ACS: Update Margin // BG3: Margin="-8,-8,8,0" -->
-                    <Control Grid.Column="2" Template="{StaticResource CharacterSheetInfotipTemplate}" VerticalAlignment="Center" Margin="-24,-8,24,0"  HorizontalAlignment="Right" ToolTipService.Placement="Right"/>
+                    <Control Grid.Column="2" Template="{StaticResource CharacterSheetInfotipTemplate}" VerticalAlignment="Center" Margin="-18,-8,18,0"  HorizontalAlignment="Right" ToolTipService.Placement="Right"/>
                 </Grid>
 
             </Grid>
@@ -8985,7 +9018,7 @@
 
             </b:Interaction.Triggers>
             <!-- MOD_ACS: Add margin -->
-            <Grid x:Name="EquipmentHolder" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="-34,33,-24,0">
+            <Grid x:Name="EquipmentHolder" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="-28,33,-24,0">
                 <Grid.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>

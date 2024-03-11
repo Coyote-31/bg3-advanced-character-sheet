@@ -90,6 +90,59 @@
             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="InventoryColumn">
                 <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
             </ObjectAnimationUsingKeyFrames>
+            
+            <!-- MOD_ACS: Add Starting visibilities -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="ToggleCSView">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="XPBar">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            
+            <!-- MOD_ACS: Add ToggleCSView animations -->
+            <DoubleAnimation
+                Storyboard.TargetName="ToggleCSView"
+                Storyboard.TargetProperty="Opacity"
+                From="1"
+                To="0"
+                Duration="0:0:0.4">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <ThicknessAnimation
+                Storyboard.TargetName="ToggleCSView"
+                Storyboard.TargetProperty="Margin"
+                From="13,-4,0,0"
+                To="353,-4,-340,0"
+                Duration="0:0:0.4">
+                <ThicknessAnimation.EasingFunction>
+                    <SineEase EasingMode="EaseInOut"/>
+                </ThicknessAnimation.EasingFunction>
+            </ThicknessAnimation>
+            
+            <!-- MOD_ACS: Add XPBar animations -->
+            <DoubleAnimation
+                Storyboard.TargetName="XPBar"
+                Storyboard.TargetProperty="Opacity"
+                From="1"
+                To="0"
+                Duration="0:0:0.4">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <ThicknessAnimation
+                Storyboard.TargetName="XPBar"
+                Storyboard.TargetProperty="Margin"
+                From="100,8,0,10"
+                To="440,8,-340,10"
+                Duration="0:0:0.4">
+                <ThicknessAnimation.EasingFunction>
+                    <SineEase EasingMode="EaseInOut"/>
+                </ThicknessAnimation.EasingFunction>
+            </ThicknessAnimation>
+            
             <DoubleAnimation
                 Storyboard.TargetName="EquipmentHolder"
                 Storyboard.TargetProperty="Opacity"
@@ -100,6 +153,19 @@
                     <CubicEase EasingMode="EaseOut"/>
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
+            
+            <!-- MOD_ACS: Add EquipmentHolder Slide animation -->
+            <ThicknessAnimation
+                Storyboard.TargetName="EquipmentHolder"
+                Storyboard.TargetProperty="Margin"
+                From="40,60,40,44"
+                To="380,60,-300,44"
+                Duration="0:0:0.4">
+                <ThicknessAnimation.EasingFunction>
+                    <SineEase EasingMode="EaseInOut"/>
+                </ThicknessAnimation.EasingFunction>
+            </ThicknessAnimation>
+            
             <DoubleAnimation
                 Storyboard.TargetName="CharacterInfoPanel"
                 Storyboard.TargetProperty="Opacity"
@@ -127,7 +193,9 @@
                 To="0"
                 Duration="0:0:0.3">
                 <DoubleAnimation.EasingFunction>
-                    <CubicEase EasingMode="EaseIn"/>
+                    <!-- MOD_ACS: Update EasingFunction -->
+                    <!-- BG3: <CubicEase EasingMode="EaseIn"/> -->
+                    <SineEase EasingMode="EaseInOut"/>
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
             <ThicknessAnimation
@@ -137,7 +205,9 @@
                 To="800,0,-800,0"
                 Duration="0:0:0.4">
                 <ThicknessAnimation.EasingFunction>
-                    <CubicEase EasingMode="EaseIn"/>
+                    <!-- MOD_ACS: Update EasingFunction -->
+                    <!-- BG3: <CubicEase EasingMode="EaseIn"/> -->
+                    <SineEase EasingMode="EaseInOut"/>
                 </ThicknessAnimation.EasingFunction>
             </ThicknessAnimation>
 
@@ -145,7 +215,7 @@
             <ThicknessAnimation
                 Storyboard.TargetName="PaperdollHolder"
                 Storyboard.TargetProperty="Margin"
-                From="-370,-50,370,12"
+                From="-340,-50,340,12"
                 To="0,-50,0,12"
                 Duration="0:0:0.4">
                 <ThicknessAnimation.EasingFunction>
@@ -156,6 +226,51 @@
 
 
         <Storyboard x:Key="ShowCharacterSelectAnim" FillBehavior="Stop">
+            
+            <!-- MOD_ACS: Add ToggleCSView animations -->
+            <DoubleAnimation
+                Storyboard.TargetName="ToggleCSView"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="1"
+                Duration="0:0:0.4">
+                <DoubleAnimation.EasingFunction>
+                    <SineEase EasingMode="EaseInOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <ThicknessAnimation
+                Storyboard.TargetName="ToggleCSView"
+                Storyboard.TargetProperty="Margin"
+                From="353,-4,-340,0"
+                To="13,-4,0,0"
+                Duration="0:0:0.4">
+                <ThicknessAnimation.EasingFunction>
+                    <SineEase EasingMode="EaseInOut"/>
+                </ThicknessAnimation.EasingFunction>
+            </ThicknessAnimation>
+            
+            <!-- MOD_ACS: Add XPBar animations -->
+            <DoubleAnimation
+                Storyboard.TargetName="XPBar"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="1"
+                Duration="0:0:0.4">
+                <DoubleAnimation.EasingFunction>
+                    <SineEase EasingMode="EaseInOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <ThicknessAnimation
+                Storyboard.TargetName="XPBar"
+                Storyboard.TargetProperty="Margin"
+                From="440,8,-340,10"
+                To="100,8,0,10"
+                Duration="0:0:0.4">
+                <ThicknessAnimation.EasingFunction>
+                    <SineEase EasingMode="EaseInOut"/>
+                </ThicknessAnimation.EasingFunction>
+            </ThicknessAnimation>
+            
             <DoubleAnimation
                 Storyboard.TargetName="EquipmentHolder"
                 Storyboard.TargetProperty="Opacity"
@@ -163,9 +278,24 @@
                 To="1"
                 Duration="0:0:0.4">
                 <DoubleAnimation.EasingFunction>
-                    <CubicEase EasingMode="EaseOut"/>
+                    <!-- MOD_ACS: Update EasingFunction -->
+                    <!-- BG3: <CubicEase EasingMode="EaseOut"/> -->
+                    <SineEase EasingMode="EaseInOut"/>
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
+            
+            <!-- MOD_ACS: Add EquipmentHolder Slide animation -->
+            <ThicknessAnimation
+                Storyboard.TargetName="EquipmentHolder"
+                Storyboard.TargetProperty="Margin"
+                From="380,60,-300,44"
+                To="40,60,40,44"
+                Duration="0:0:0.4">
+                <ThicknessAnimation.EasingFunction>
+                    <SineEase EasingMode="EaseInOut"/>
+                </ThicknessAnimation.EasingFunction>
+            </ThicknessAnimation>
+            
             <DoubleAnimation
                 Storyboard.TargetName="CharacterInfoPanel"
                 Storyboard.TargetProperty="Opacity"
@@ -205,7 +335,9 @@
                 To="0,0,0,0"
                 Duration="0:0:0.4">
                 <ThicknessAnimation.EasingFunction>
-                    <CubicEase EasingMode="EaseOut"/>
+                    <!-- MOD_ACS: Update EasingFunction -->
+                    <!-- BG3: <CubicEase EasingMode="EaseOut"/> -->
+                    <SineEase EasingMode="EaseInOut"/>
                 </ThicknessAnimation.EasingFunction>
             </ThicknessAnimation>
 
@@ -214,10 +346,10 @@
                 Storyboard.TargetName="PaperdollHolder"
                 Storyboard.TargetProperty="Margin"
                 From="0,-50,0,12"
-                To="-370,-50,370,12"
+                To="-340,-50,340,12"
                 Duration="0:0:0.4">
                 <ThicknessAnimation.EasingFunction>
-                    <CubicEase EasingMode="EaseOut"/>
+                    <SineEase EasingMode="EaseInOut"/>
                 </ThicknessAnimation.EasingFunction>
             </ThicknessAnimation>
 
@@ -243,7 +375,7 @@
                 Storyboard.TargetProperty="Opacity"
                 From="1"
                 To="0"
-                Duration="0:0:0.3">
+                Duration="0:0:0.2">
                 <DoubleAnimation.EasingFunction>
                     <CubicEase EasingMode="EaseIn"/>
                 </DoubleAnimation.EasingFunction>
@@ -276,7 +408,7 @@
                 Storyboard.TargetProperty="Opacity"
                 From="1"
                 To="0"
-                Duration="0:0:0.3">
+                Duration="0:0:0.2">
                 <DoubleAnimation.EasingFunction>
                     <CubicEase EasingMode="EaseIn"/>
                 </DoubleAnimation.EasingFunction>
@@ -496,7 +628,7 @@
         <ControlTemplate>
             <Grid x:Name="bgFade" Margin="-1400,0,-1400,-1000">
                 <!-- MOD_ACS: Update Margin // BG3: Margin="1672,0,0,1460" -->
-                <Grid x:Name="Panel" HorizontalAlignment="Left" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5" Margin="1550,0,0,1460">
+                <Grid x:Name="Panel" HorizontalAlignment="Left" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5" Margin="1550,0,0,1454">
                     <Grid.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -514,7 +646,7 @@
                         </b:DataTrigger>
                     </b:Interaction.Triggers>
                     <!-- MOD_ACS: Update Width // BG3: Width="2080" -->
-                    <ls:LSNineSliceImage x:Name="BGpanel" Style="{StaticResource Generic9SliceBGFaded}" Width="1539" Height="{StaticResource InventoryColumnHeight}" ls:TooltipExtender.Owner="{Binding CurrentPlayer.SelectedCharacter}" Tag="{Binding CurrentPlayer.SelectedCharacter.Inventory}" Margin="6">
+                    <ls:LSNineSliceImage x:Name="BGpanel" Style="{StaticResource Generic9SliceBGFaded}" Width="1500" Height="{StaticResource InventoryColumnHeight}" ls:TooltipExtender.Owner="{Binding CurrentPlayer.SelectedCharacter}" Tag="{Binding CurrentPlayer.SelectedCharacter.Inventory}" Margin="6">
                         <Grid Name="CharacterPanelContents" >
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -575,13 +707,13 @@
                                             <!-- MOD_ACS: Remove one Column -->
                                             <!-- BG3: <ColumnDefinition Width="1*"/> -->
                                             <ColumnDefinition Width="1*"/>
-                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="0.9*"/>
                                         </Grid.ColumnDefinitions>
                                         
                                         <!--PAPERDOLL-->
                                         <!-- MOD_ACS: Moved inside Grid -->
                                         <!-- MOD_ACS: Add Name / Update Margin & Grid.ColumnSpan // BG3: Margin="0,-50,0,12" Grid.ColumnSpan="3" -->
-                                        <Grid x:Name="PaperdollHolder" Margin="-370,-50,370,12" ClipToBounds="True" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DataContext="{Binding CurrentPlayer.SelectedCharacter}">
+                                        <Grid x:Name="PaperdollHolder" Margin="-340,-50,340,12" ClipToBounds="True" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DataContext="{Binding CurrentPlayer.SelectedCharacter}">
                                             <!-- MOD_ACS: Add Margin -->
                                             <ls:LSPaperdoll HorizontalAlignment="Center" x:Name="CSPaperdoll" EntityRef="{Binding EntityHandle}" Width="{StaticResource CSDollWidth}" Height="{StaticResource CSDollHeight}" VerticalAlignment="Bottom" Margin="0,0,0,100" ClipToBounds="True" UseCombatPose="True" MouseRotate="True" MouseRotateMultiplier="10" RenderScale="{Binding DataContext.Data.RenderScale, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
                                             <!--DOLL CONTROLS-->
@@ -624,7 +756,7 @@
                                         <Control x:Name="EquipmentHolder" Grid.Column="0" VerticalAlignment="Stretch" Template="{StaticResource CharacterEquipmentTemplate}" DataContext="{Binding CurrentPlayer.SelectedCharacter}" Margin="40,60,40,44"/>
 
                                         <!-- MOD_ACS: Add TOGGLE VIEW BTN -->
-                                        <ls:LSToggleButton x:Name="ToggleCSView" Grid.Column="0" SoundID="UI_HUD_Options_ToggleButton" VerticalAlignment="Top" HorizontalAlignment="Left" IsChecked="True" Margin="11,14,0,0">
+                                        <ls:LSToggleButton x:Name="ToggleCSView" Grid.Column="0" SoundID="UI_HUD_Options_ToggleButton" VerticalAlignment="Top" HorizontalAlignment="Left" IsChecked="True" Margin="13,-4,0,0">
                                             <ls:LSToggleButton.Template>
                                                 <ControlTemplate TargetType="ls:LSToggleButton">
                                                     <Grid ToolTipService.Placement="Top">
@@ -651,6 +783,41 @@
                                                 </ControlTemplate>
                                             </ls:LSToggleButton.Template>
                                         </ls:LSToggleButton>
+                                        
+                                        <!--EXPERIENCE-->
+                                        <!-- MOD_ACS: Moved inside Grid -->
+                                        <!-- MOD_ACS: Add Width & Grid.Column / Update Margin & Grid.ColumnSpan // BG3: Margin="0,-38,0,38" Grid.ColumnSpan="3" -->
+                                        <Grid Name="XPBar" VerticalAlignment="Top" Grid.Column="0" Grid.ColumnSpan="1" DataContext="{Binding CurrentPlayer.SelectedCharacter}" Width="{Binding ActualWidth, ElementName=EquipmentHolder}" HorizontalAlignment="Left" Margin="100,8,0,10">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.ToolTip>
+                                                <ls:LSTooltip>
+                                                    <ls:LSTooltip.Resources>
+                                                        <System:Double x:Key="MaxTooltipContentWidth">720</System:Double>
+                                                    </ls:LSTooltip.Resources>
+                                                    <TextBlock TextWrapping="Wrap" MaxWidth="700" HorizontalAlignment="Center" Foreground="{DynamicResource TooltipColor.Primary}" >
+                                                    <b:Interaction.Behaviors>
+                                                        <ls:CtxTransStringRunGeneratorBehavior Source="{Binding Path=DataContext.Stats.Level.Description, ElementName=NameStack}" ParamRunStyle="{StaticResource TooltipUnitParamRun}"/>
+                                                    </b:Interaction.Behaviors>
+                                                    </TextBlock>
+                                                </ls:LSTooltip>
+                                            </Grid.ToolTip>
+                                            <TextBlock Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource DetailedListText}" Margin="0,0,10,0" TextAlignment="Right" HorizontalAlignment="Right">
+                                            <Run Text="{Binding Source='h8e782babg516fg4d7cgbd57g335de64c94a3', Converter={StaticResource TranslatedStringConverter}}"/>
+                                            <Run Text="{Binding Stats.Level.Value}"/>
+                                            </TextBlock>
+                                            <Control Grid.Column="1" VerticalAlignment="Center" Template="{DynamicResource XPBarTemplate}"/>
+
+                                            <TextBlock Grid.Column="2" VerticalAlignment="Center" Text="{Binding Source='hd0a79314g0517g4938ga883g9f991801df75', Converter={StaticResource TranslatedStringConverter}}" Style="{StaticResource DetailedListText}" Margin="10,0,0,0"/>
+                                            
+                                            <!-- MOD_ACS: Add Scaler -->
+                                            <Grid.RenderTransform>
+                                                <ScaleTransform ScaleX="0.86" ScaleY="0.86"/>
+                                            </Grid.RenderTransform>
+                                        </Grid>
                                         
                                         <!--  INFO  -->
                                         <!-- MOD_ACS: Moved after EquipmentHolder -->
@@ -681,41 +848,11 @@
 
                                             <!-- Weight bar -->
                                             <!-- MOD_ACS: Update Margin // BG3: Margin="0,16,0,16" -->
-                                            <Control Template="{StaticResource WeightBarTemplate}" Margin="-11,16,11,16" Grid.Row="1" HorizontalAlignment="Center" DataContext="{Binding CurrentPlayer.SelectedCharacter}"/>
+                                            <Control Template="{StaticResource WeightBarTemplate}" Margin="-17,16,17,16" Grid.Row="1" HorizontalAlignment="Center" DataContext="{Binding CurrentPlayer.SelectedCharacter}"/>
 
                                         </Grid>
 
                                     </Grid>
-
-                                    <!--EXPERIENCE-->
-                                    <!-- MOD_ACS: Add Width / Update Margin // BG3: Margin="0,-38,0,38" -->
-                                    <Grid Name="XPBar" VerticalAlignment="Top" Grid.ColumnSpan="3" DataContext="{Binding CurrentPlayer.SelectedCharacter}" Width="{Binding ActualWidth, ElementName=EquipmentHolder}" HorizontalAlignment="Left" Margin="40,-38,0,38">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Grid.ToolTip>
-                                            <ls:LSTooltip>
-                                                <ls:LSTooltip.Resources>
-                                                    <System:Double x:Key="MaxTooltipContentWidth">720</System:Double>
-                                                </ls:LSTooltip.Resources>
-                                                <TextBlock TextWrapping="Wrap" MaxWidth="700" HorizontalAlignment="Center" Foreground="{DynamicResource TooltipColor.Primary}" >
-					                        	<b:Interaction.Behaviors>
-					                        		<ls:CtxTransStringRunGeneratorBehavior Source="{Binding Path=DataContext.Stats.Level.Description, ElementName=NameStack}" ParamRunStyle="{StaticResource TooltipUnitParamRun}"/>
-					                	        </b:Interaction.Behaviors>
-                                                </TextBlock>
-                                            </ls:LSTooltip>
-                                        </Grid.ToolTip>
-                                        <TextBlock Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource DetailedListText}" Margin="0,0,10,0" TextAlignment="Right" HorizontalAlignment="Right">
-                                          <Run Text="{Binding Source='h8e782babg516fg4d7cgbd57g335de64c94a3', Converter={StaticResource TranslatedStringConverter}}"/>
-                                          <Run Text="{Binding Stats.Level.Value}"/>
-                                        </TextBlock>
-                                        <Control Grid.Column="1" VerticalAlignment="Center" Template="{DynamicResource XPBarTemplate}"/>
-
-                                        <TextBlock Grid.Column="2" VerticalAlignment="Center" Text="{Binding Source='hd0a79314g0517g4938ga883g9f991801df75', Converter={StaticResource TranslatedStringConverter}}" Style="{StaticResource DetailedListText}" Margin="10,0,0,0"/>
-                                    </Grid>
-
 
                                     <b:Interaction.Triggers>
                                         <b:DataTrigger Binding="{Binding IsChecked, ElementName=InventoryToggleButton}" Value="False">

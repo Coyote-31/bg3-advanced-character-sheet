@@ -237,7 +237,7 @@
         <ControlTemplate>
             <Grid x:Name="bgFade" Margin="-1000,0,-1000,-1000">
                 <!-- MOD_ACS: Update Margin & Width // BG3: Margin="0,0,1060,1440" Width="1426" -->
-                <Grid x:Name="Panel" HorizontalAlignment="Right" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5" Margin="0,0,986,1444" Width="1539">
+                <Grid x:Name="Panel" HorizontalAlignment="Right" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5" Margin="0,0,986,1438" Width="1543">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -256,7 +256,7 @@
                     <!--===== PANEL CONTENTS =====-->
                     <Grid Grid.Row="1">
                         <!-- MOD_ACS: Update Height & Margin // BG3: Height="1468" Margin="22" -->
-                        <ls:LSNineSliceImage x:Name="BGpanel" Style="{StaticResource Generic9SliceBGFaded}" Height="1618" Margin="22,18,22,22">
+                        <ls:LSNineSliceImage x:Name="BGpanel" Style="{StaticResource Generic9SliceBGFaded}" Height="1632" Margin="22,18,22,22">
                             <Grid Name="CharacterPanelContents">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -341,8 +341,10 @@
                                         
                                         <Grid ClipToBounds="True">
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="Auto"/>
+                                                <!-- MOD_ACS: Update Width // BG3: Width="*" -->
+                                                <ColumnDefinition Width="1*"/>
+                                                <!-- MOD_ACS: Update Width // BG3: Width="Auto" -->
+                                                <ColumnDefinition Width="0.9*"/>
                                             </Grid.ColumnDefinitions>
 
                                             <!-- EQUIPMENT COLUMN -->
@@ -400,7 +402,8 @@
                                             </Grid>
 
                                             <!-- INVENTORY COLUMN -->
-                                                <Grid x:Name="InventoryColumn" Grid.Column="1" Opacity="1" VerticalAlignment="Stretch" Width="{StaticResource InventoryColumnWidth}">
+                                            <!-- MOD_ACS: Add Margin -->
+                                            <Grid x:Name="InventoryColumn" Grid.Column="1" Opacity="1" VerticalAlignment="Stretch" Width="{StaticResource InventoryColumnWidth}" Margin="-4,0,0,0">
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="*"/>
                                                     <RowDefinition Height="Auto"/>
