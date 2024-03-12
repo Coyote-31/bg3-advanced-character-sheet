@@ -14,7 +14,7 @@ The purpose of this mod is to improve Character, Party and Companions Panels. Al
 > Delete manually AToR old mod version.
 
 ## 🔖 Version
-- 📦 **ACS** mod : `2.4.0`
+- 📦 **ACS** mod : `2.5.0`
 - 🎮 **BG3** compatibility : `Hotfix #21 [Patch6_Hotfix4]`
 
 ## ✨ Features
@@ -24,10 +24,14 @@ The purpose of this mod is to improve Character, Party and Companions Panels. Al
 - Extend the **size** of useful content in Party Panel.
 - **Align** everything in its right place.
 - Replace some backgrounds and sprites to **fix artifacts** in vanilla images ( Party Panel Bg, Tabs, ... ).
-- Full review of the **Inventory** for Character and Party Panels.
-- Full review of the **Equipment** for Character and Party Panels.
-- Add buttons in *Spells Book*
+- Rework **Inventory** for Character and Party Panels.
+- Rework **Equipment** for Character and Party Panels.
 - Rework *Camp/Companions* Panels.
+- Rework *Alchemy* Panels.
+- Add **Button in Spells Book** to open *learn from scrolls* & collapse section before *prepared spells*.
+- Add **Button in Character and Party Panels** to open *Camp/Companions* Panel even out of camp.
+- Add **Button in Character Panel** to switch between *Info & Equipment* (like in Camp/Companions panel)
+- Add more **slots** to *inventories*.
 
 *All Types of Resistance*:
 - Display **all** types of resistance including ones without any immunity, resistance or weakness.
@@ -39,7 +43,7 @@ The purpose of this mod is to improve Character, Party and Companions Panels. Al
 ## 🔀 Compatibility
 
 ### 🟢 **Compatible** with the following mods :
-- **Better Character and Party Panels** ( *BCPP* ) *All variants* : Tested with BCPP v1.6.1 ( Alias 1.61 )
+- **Better Character and Party Panels** ( *BCPP* ) *All variants* : Tested with BCPP v1.6.2 ( Alias 1.62 )
 - **Better Tooltips** ( *BT* ) : Tested with BT v1.1.1 ( Alias 1.11 )
 - **Better Target Info** ( *BTI* ) : Tested with BTI v1.2.0.1 ( Alias 1.2 )
 
@@ -52,7 +56,8 @@ The purpose of this mod is to improve Character, Party and Companions Panels. Al
 - None -> *Tell me if you find one ❗*
 
 ### 🔴 **Not compatible** with the following mods :
-- None -> *Tell me if you find one ❗*
+- **Sorcerers can Learn Spells from Scrolls**
+- **Scroll Learning SE**
 
 ### 📄 Modified Files :
 
@@ -90,12 +95,18 @@ Remove the mod's `.pak` file from :
 
 ### Manager :
 
-- With `BG3 Mod Manager`.
-- With `Vortex`.
+- Delete with `BG3 Mod Manager`.
+- Delete with `Vortex`.
 
 ## 🔍 Screenshots
 
-### All resistance icons grouped & ordered :
+### All Resistance Tooltips :
+
+<p align="center">
+  <img src="Docs/Screenshots/Tooltips.png" alt="Tooltips"/>
+</p>
+
+### All Resistance icons grouped & ordered :
 
 <p align="center">
   <img src="Docs/Screenshots/Inspect_creature_Mizora.png" alt="Inspect creature Mizora"/>
@@ -107,12 +118,6 @@ Remove the mod's `.pak` file from :
   <img src="Docs/Screenshots/CharPanel_Karlach.png" alt="Character panel"/>
 </p>
 
-### Tooltips :
-
-<p align="center">
-  <img src="Docs/Screenshots/Tooltips.png" alt="Tooltips"/>
-</p>
-
 ### Inspect items :
 
 <p align="center">
@@ -122,23 +127,65 @@ Remove the mod's `.pak` file from :
 ### Character & Camp/Companions Panel :
 
 <p align="center">
-  <img src="Docs/Screenshots/CS_and_Camp.png" alt="Character and Camp panels"/>
+  <img src="Docs/Screenshots/Char_and_Camp.png" alt="Character and Camp panels"/>
 </p>
 
 <p align="center">
-  <img src="Docs/Screenshots/CS_and_Companion.png" alt="Character and Companions panels"/>
+  <img src="Docs/Screenshots/Char_and_Companion_1.png" alt="Character and Companions panels #1"/>
 </p>
 
 <p align="center">
-  <img src="Docs/Screenshots/SpellBook_and_CompanionSheet.png" alt="SpellBook and Companions panel #1"/>
+  <img src="Docs/Screenshots/Char_and_Companion_2.png" alt="Character and Companions panels #2"/>
 </p>
 
 <p align="center">
-  <img src="Docs/Screenshots/SpellBook_and_CompanionSheet2.png" alt="SpellBook and Companions panel #2"/>
+  <img src="Docs/Screenshots/Char_and_Companion_3.png" alt="Character and Companions panels #3"/>
 </p>
 
 <p align="center">
-  <img src="Docs/Screenshots/SpellBook_and_CompanionSheet3.png" alt="SpellBook and Companions panel #3"/>
+  <img src="Docs/Screenshots/Char_and_Companion_4.png" alt="Character and Companions panels #4"/>
+</p>
+
+<p align="center">
+  <img src="Docs/Screenshots/Char_and_Companion_5.png" alt="Character and Companions panels #5"/>
+</p>
+
+### Spell Book Panel :
+
+<p align="center">
+  <img src="Docs/Screenshots/SpellBook_1.png" alt="Spell Book panel #1"/>
+</p>
+
+<p align="center">
+  <img src="Docs/Screenshots/SpellBook_2.png" alt="Spell Book panel #2"/>
+</p>
+
+<p align="center">
+  <img src="Docs/Screenshots/SpellBook_3.png" alt="Spell Book panel #3"/>
+</p>
+
+<p align="center">
+  <img src="Docs/Screenshots/SpellBook_4.png" alt="Spell Book panel #4"/>
+</p>
+
+### Alchemy Panel :
+
+<p align="center">
+  <img src="Docs/Screenshots/Alchemy_1.png" alt="Alchemy panel #1"/>
+</p>
+
+<p align="center">
+  <img src="Docs/Screenshots/Alchemy_2.png" alt="Alchemy panel #2"/>
+</p>
+
+<p align="center">
+  <img src="Docs/Screenshots/Alchemy_3.png" alt="Alchemy panel #3"/>
+</p>
+
+### Illithid Panel :
+
+<p align="center">
+  <img src="Docs/Screenshots/Illithid.png" alt="Illithid panel"/>
 </p>
 
 ### Party Panel :
@@ -152,13 +199,13 @@ Remove the mod's `.pak` file from :
 </p>
 
 <p align="center">
-  <img src="Docs/Screenshots/Party_CS.png" alt="Party CharacterSheet panel #1"/>
+  <img src="Docs/Screenshots/Party_CS_1.png" alt="Party CharacterSheet panel #1"/>
 </p>
 
 <p align="center">
-  <img src="Docs/Screenshots/Party_CS2.png" alt="Party CharacterSheet panel #2"/>
+  <img src="Docs/Screenshots/Party_CS_2.png" alt="Party CharacterSheet panel #2"/>
 </p>
 
 <p align="center">
-  <img src="Docs/Screenshots/Party_CS3.png" alt="Party CharacterSheet panel #3"/>
+  <img src="Docs/Screenshots/Party_CS_3.png" alt="Party CharacterSheet panel #3"/>
 </p>
