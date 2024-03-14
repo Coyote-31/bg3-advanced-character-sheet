@@ -2269,7 +2269,7 @@
                                                 <TextBlock x:Name="SpellsTitleText" ls:TextBlockFormatter.SourceText="{Binding Source='h062f5cf9gb2e5g4c0dgadc9g68898c250650',Converter={StaticResource TranslatedStringConverter}}" Style="{StaticResource ActionGroupTitleStyle}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="120,10,0,0"/>
 
                                                 <!-- MOD_ACS: Update LearnSpellsButton - Moved to SpellbookActionGroup// BG3: HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,26,0" MinWidth="150" -->
-                                                <ls:LSButton x:Name="LearnSpellsButton" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" Margin="-1,10,1,-12" Command="{Binding DataContext.OpenLearnSpellsCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" MinWidth="150">
+                                                <ls:LSButton x:Name="LearnSpellsButton" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" Margin="-1,10,1,6" Command="{Binding DataContext.OpenLearnSpellsCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" MinWidth="150">
                                                     <ls:LSButton.Template>
                                                         <ControlTemplate TargetType="ls:LSButton">
                                                             <ControlTemplate.Resources>
@@ -2826,6 +2826,17 @@
                 <!-- MOD_ACS: Disable // BG3: Value="Visible" -->
                 <Setter TargetName="SpellsTitleText" Property="Visibility" Value="Collapsed"/>
             </DataTrigger>
+            
+            <!-- MOD_ACS: Add LearnSpells btn trigger for 'Scroll Learning SE' & 'No Spell Prep SE' mods compatibility -->
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding SelectedItem.Class.CanLearnSpells, ElementName=Tabs}" Value="True"/>
+                    <Condition Binding="{Binding Visibility, ElementName=PreparedSpellsSectionOpening}" Value="Collapsed"/>
+                </MultiDataTrigger.Conditions>
+                <Setter TargetName="LearnSpellsButton" Property="Visibility" Value="Visible"/>
+                <Setter TargetName="SpellsTitle" Property="Visibility" Value="Visible"/>
+                <Setter TargetName="SpellsTitleText" Property="Visibility" Value="Collapsed"/>
+            </MultiDataTrigger>
 
             <DataTrigger Binding="{Binding SelectedItem.Class.MustPrepareSpells, ElementName=Tabs, FallbackValue=False}" Value="False">
                 <Setter TargetName="KnownSpellSection" Property="Visibility" Value="Collapsed"/>
