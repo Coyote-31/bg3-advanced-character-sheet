@@ -14,7 +14,7 @@ The purpose of this mod is to improve Character, Party and Companions Panels. Al
 > Delete manually AToR old mod version.
 
 ## 🔖 Version
-- 📦 **ACS** mod : `2.5.0`
+- 📦 **ACS** mod : `2.5.1`
 - 🎮 **BG3** compatibility : `Hotfix #21 [Patch6_Hotfix4]`
 
 ## ✨ Features
@@ -51,13 +51,14 @@ The purpose of this mod is to improve Character, Party and Companions Panels. Al
     
 - **Companions Panel and Camp Chest Everywhere** ( *CPCCE* ) : Tested with CPCCE v1.2.0 ( Alias 1.2 )
 - **Dynamic Siderbar** ( *DS* ) : Tested with DS v1.2.9 ( Alias 1.29 )
+- **Scroll Learning SE**
+- **No Spell Prep SE**
 
 ### 🟡 Compatible with **minor bugs** :
 - None -> *Tell me if you find one ❗*
 
 ### 🔴 **Not compatible** with the following mods :
-- **Sorcerers can Learn Spells from Scrolls**
-- **Scroll Learning SE**
+- None -> *Tell me if you find one ❗*
 
 ### 📄 Modified Files :
 
