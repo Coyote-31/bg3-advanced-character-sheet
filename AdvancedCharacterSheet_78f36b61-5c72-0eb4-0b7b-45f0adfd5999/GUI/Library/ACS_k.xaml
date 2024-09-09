@@ -3,7 +3,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                    xmlns:ls="clr-namespace:ls;assembly=SharedGUI"
+                    xmlns:ls="clr-namespace:ls;assembly=Code"
                     xmlns:noesis="clr-namespace:NoesisGUIExtensions;assembly=Noesis.GUI.Extensions"
                     xmlns:System="clr-namespace:System;assembly=mscorlib"
                     mc:Ignorable="d">
@@ -23,7 +23,7 @@
                 <Setter Property="MaxWidth" Value="600" />
                 <Setter Property="IsHitTestVisible" Value="False" />
             </Style>
-            <BitmapImage x:Key="CheckboxRound_h" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/Reactions/checkBoxRound_h.png"/>
+            <BitmapImage x:Key="CheckboxRound_h" UriSource="pack://application:,,,/Core;component/Assets/Reactions/checkBoxRound_h.png"/>
             <Style TargetType="ContentPresenter">
                 <Style.Resources>
                     <Style TargetType="TextBlock">
@@ -102,14 +102,14 @@
             </DataTemplate>
         </ControlTemplate.Resources>
 
-        <Grid x:Name="rootIntTemp" ToolTipService.IsEnabled="False"  ToolTipService.Placement="Right" ToolTipService.VerticalOffset="-74" MaxWidth="700" Margin="0,0,0,6" Background="Transparent">
+        <Grid x:Name="rootIntTemp" ToolTipService.IsEnabled="False"  ToolTipService.Placement="Right" ToolTipService.VerticalOffset="-74" MaxWidth="700" Background="Transparent">
             <Grid.ToolTip>
                 <ls:LSTooltip x:Name="InterruptTooltip" Content="{Binding Path=Content, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
             </Grid.ToolTip>
             <Grid>
                 
-				<Border x:Name="InterruptBtnBg" BorderBrush="{StaticResource LS_PanelSelectedBorderInverted}" BorderThickness="2" CornerRadius="12" Background="{StaticResource RowBG_d}"/>
-				
+				<Border x:Name="InterruptBtnBg" BorderBrush="{StaticResource LS_PanelSelectedBorderInverted}" BorderThickness="2" CornerRadius="12" Background="{StaticResource RowBG_d}" Margin="0,0,0,4"/>
+
                 <Grid HorizontalAlignment="Left" VerticalAlignment="Center" Margin="12,0,0,0">
                     <Image x:Name="BtnCheckBG" Source="{StaticResource CheckboxRound_h}" Stretch="None">
                         <Image.Effect>
@@ -135,7 +135,7 @@
                 <Setter TargetName="InterruptBtnBg" Property="BorderBrush" Value="{StaticResource LS_PanelBorder}"/>
                 <Setter TargetName="InterruptBtnBg" Property="Background" Value="{StaticResource LS_BlackA20}"/>
             </Trigger>
-            
+
             <!--UNSELECTED HOVER-->
             <MultiTrigger>
                 <MultiTrigger.Conditions>
@@ -147,13 +147,13 @@
                 <Setter TargetName="InterruptBtnBg" Property="Background" Value="{StaticResource RowBG_h}"/>
                 <Setter TargetName="InterruptBtnBg" Property="BorderBrush" Value="{StaticResource LS_PanelSelectedBorderInverted}"/>
             </MultiTrigger>
-            
+
             <!--OTHER PLAYERS-->
             <Trigger Property="IsEnabled" Value="False">
                 <Setter TargetName="BtnCheckBG" Property="Opacity" Value="0.25"/>
                 <Setter TargetName="InterruptBtnBg" Property="Background" Value="{StaticResource LS_BlackA20}"/>
             </Trigger>
-            
+
             <!--OTHER PLAYERS SELECTED-->
             <MultiTrigger>
                 <MultiTrigger.Conditions>
@@ -163,7 +163,7 @@
                 <Setter TargetName="BtnCheckBG" Property="Opacity" Value="0.25"/>
                 <Setter TargetName="InterruptBtnBg" Property="Background" Value="{StaticResource RowBG_guest_h}"/>
             </MultiTrigger>
-            
+
             <!--DISABLED-->
             <DataTrigger Binding="{Binding Available}" Value="False">
                 <Setter TargetName="BtnCheck" Property="Visibility" Value="Collapsed"/>
@@ -182,7 +182,7 @@
     <DataTemplate DataType="{x:Type ls:VMResistance}">
         <!-- MOD_ACS: images -->
         <DataTemplate.Resources>
-            <ImageSource x:Key="NoResistanceIcon">pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/resistance_none_bg.png</ImageSource>
+            <ImageSource x:Key="NoResistanceIcon">pack://application:,,,/Core;component/Assets/CharacterPanel/resistance_none_bg.png</ImageSource>
         </DataTemplate.Resources>
         <!-- Enum value stored in tag as LocaEnum doesn't correctly support values past MAX. For those cases we have to alter the value (see triggers) -->
         <StackPanel x:Name="root" Tag="{Binding DamageTypeValue}">
@@ -321,7 +321,7 @@
     <DataTemplate x:Key="ACS_CampPortraitTemplate">
         <DataTemplate.Resources>
             <!-- MOD_ACS: Add camp portrait image -->
-            <BitmapImage x:Key="CampPortraitImage" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/ACS/CompanionsPanel/campPortrait.png" />
+            <BitmapImage x:Key="CampPortraitImage" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/CompanionsPanel/campPortrait.png" />
             <ImageBrush x:Key="CampPortraitImageBrush" ImageSource="{StaticResource CampPortraitImage}" Stretch="UniformToFill" Viewbox="0,0,0.8,1" Margin="0,-4,0,-4" />
 
             <Style TargetType="Border" >
