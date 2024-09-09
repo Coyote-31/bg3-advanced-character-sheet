@@ -1,0 +1,67 @@
+<ls:StateMachine xmlns:ls="clr-namespace:ls;assembly=Code"
+              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ls:StateMachine.States>
+
+	    <!--STATE: Character panel-->
+        <ls:State Name="CharacterPanel" Layout="Player" Owner="Player" HideStatesBelow="False" IsModal="False" ModType="Override">
+            <ls:State.Widgets>
+                <ls:StateWidget Filename="CharacterPanel.xaml" Layer="PopupPanels" SoundLayer="NonHUDWidget"/>
+            </ls:State.Widgets>
+
+            <ls:State.Events>
+                <ls:StateEvent Name = "CloseWidget">
+                    <ls:StateEvent.Actions>
+                        <ls:RequestCloseWidget/>
+                    </ls:StateEvent.Actions>
+                </ls:StateEvent>
+                <!--RemovePanelState happens after closing animation so the widget is cleaned up-->
+                <ls:StateEvent Name = "RemovePanelState">
+                    <ls:StateEvent.Actions>
+                        <ls:RemoveState/>
+                    </ls:StateEvent.Actions>
+                </ls:StateEvent>
+                <ls:StateEvent Name = "ToggleCharacterPanel">
+                    <ls:StateEvent.Actions>
+                        <ls:RequestCloseWidget/>
+                    </ls:StateEvent.Actions>
+                </ls:StateEvent>
+                <ls:StateEvent Name = "ToggleInterrupts">
+                    <ls:StateEvent.Actions>
+                        <ls:RequestCloseWidget Metadata="ToggleInterrupts"/>
+                    </ls:StateEvent.Actions>
+                </ls:StateEvent>
+
+                <ls:StateEvent Name = "OpenLearnSpells">
+                    <ls:StateEvent.Actions>
+                        <ls:SetSubstate Name="LearnSpellsPopupPanel"/>
+                    </ls:StateEvent.Actions>
+                </ls:StateEvent>
+            </ls:State.Events>
+        </ls:State>
+		
+		<!--STATE: CompanionsPanel-->
+        <ls:State Name="CompanionsPanel" Layout="Player" Owner="Player" HideStatesBelow="False" ModType="Override">
+            <ls:State.Widgets>
+                <ls:StateWidget Filename="CompanionsPanel.xaml" Layer="PopupPanels" SoundLayer="NonHUDWidget"/>
+            </ls:State.Widgets>
+
+            <ls:State.Events>
+                <ls:StateEvent Name = "CloseCompanionsPanel">
+                    <ls:StateEvent.Actions>
+                        <ls:RemoveState/>
+                    </ls:StateEvent.Actions>
+                </ls:StateEvent>
+                <ls:StateEvent Name = "ToggleCompanionsPanel">
+                    <ls:StateEvent.Actions>
+                        <ls:RemoveState/>
+                    </ls:StateEvent.Actions>
+                </ls:StateEvent>
+                <ls:StateEvent Name = "OpenCompanionsPanel">
+                </ls:StateEvent>
+            </ls:State.Events>
+        </ls:State>
+
+    </ls:StateMachine.States>
+</ls:StateMachine>

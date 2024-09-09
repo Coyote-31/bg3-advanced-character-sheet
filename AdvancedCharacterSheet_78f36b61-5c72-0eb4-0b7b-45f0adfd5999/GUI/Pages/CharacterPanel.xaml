@@ -1,0 +1,1299 @@
+<ls:UIWidget x:Name="CharacterPanel"
+             ls:UIWidget.ContextName="Alchemy"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ls="clr-namespace:ls;assembly=SharedGUI"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
+             xmlns:noesis="clr-namespace:NoesisGUIExtensions;assembly=Noesis.GUI.Extensions"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance {x:Type ls:DCAlchemy}, IsDesignTimeCreatable=True}"
+             d:DesignHeight="2160" d:DesignWidth="3840">
+
+    <b:Interaction.Triggers>
+        <b:EventTrigger EventName="WidgetClosing">
+            <b:InvokeCommandAction Command="{Binding HideAvailableEquipmentCommand}" CommandParameter="{Binding CurrentPlayer.SelectedCharacter.Equipment}"/>
+        </b:EventTrigger>
+        <b:EventTrigger EventName="Loaded">
+            <b:InvokeCommandAction Command="{Binding ActionCancelCommand}"/>
+            <b:InvokeCommandAction Command="{Binding HideAvailableEquipmentCommand}" CommandParameter="{Binding CurrentPlayer.SelectedCharacter.Equipment}"/>
+        </b:EventTrigger>
+    </b:Interaction.Triggers>
+
+    <ls:UIWidget.Resources>
+
+        <BitmapImage x:Key="decorated_header_4">pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/header_charactersheet_faded_4.png</BitmapImage>
+        <BitmapImage x:Key="decorated_header_3">pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/header_charactersheet_faded.png</BitmapImage>
+        <BitmapImage x:Key="decorated_header_2">pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/header_charactersheet_faded_2.png</BitmapImage>
+
+        <DropShadowEffect x:Key="DropShadow" Direction="270" Color="{StaticResource LS_PrimaryColorDropShadowColor}" ShadowDepth="3.0" BlurRadius="5.0"/>
+
+        <Storyboard x:Key="FadeInBrainImage">
+            <DoubleAnimation
+                Storyboard.TargetName="IllithidBackgroundHolder"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="0.8"
+                Duration="0:0:1.2">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+
+            <DoubleAnimation
+                Storyboard.TargetName="IllithidBackgroundTransform"
+                Storyboard.TargetProperty="(ScaleTransform.ScaleX)"
+                From="1.3"
+                To="1.46"
+                Duration="0:0:2.4">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation
+                Storyboard.TargetName="IllithidBackgroundTransform"
+                Storyboard.TargetProperty="(ScaleTransform.ScaleY)"
+                From="1.3"
+                To="1.46"
+                Duration="0:0:2.4">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+
+        </Storyboard>
+
+        <Storyboard x:Key="FadeInAlchemyImage">
+            <DoubleAnimation
+                Storyboard.TargetName="AlchemyBackgroundHolder"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="1"
+                Duration="0:0:1.0">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
+        <Storyboard x:Key="HideCharacterSelectAnim" FillBehavior="Stop">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="EquipmentHolder">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <!-- MOD_ACS: Disable CharacterInfoPanel animation -->
+            <!-- BG3: 
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="CharacterInfoPanel">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames> -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="InventoryColumn">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            
+            <!-- MOD_ACS: Add Starting visibilities -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="ToggleCSView">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="XPBar">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            
+            <!-- MOD_ACS: Add ToggleCSView animations -->
+            <DoubleAnimation
+                Storyboard.TargetName="ToggleCSView"
+                Storyboard.TargetProperty="Opacity"
+                From="1"
+                To="0"
+                Duration="0:0:0.4">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <ThicknessAnimation
+                Storyboard.TargetName="ToggleCSView"
+                Storyboard.TargetProperty="Margin"
+                From="13,-4,0,0"
+                To="353,-4,-340,0"
+                Duration="0:0:0.4">
+                <ThicknessAnimation.EasingFunction>
+                    <SineEase EasingMode="EaseInOut"/>
+                </ThicknessAnimation.EasingFunction>
+            </ThicknessAnimation>
+            
+            <!-- MOD_ACS: Add XPBar animations -->
+            <DoubleAnimation
+                Storyboard.TargetName="XPBar"
+                Storyboard.TargetProperty="Opacity"
+                From="1"
+                To="0"
+                Duration="0:0:0.4">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <ThicknessAnimation
+                Storyboard.TargetName="XPBar"
+                Storyboard.TargetProperty="Margin"
+                From="100,8,0,10"
+                To="440,8,-340,10"
+                Duration="0:0:0.4">
+                <ThicknessAnimation.EasingFunction>
+                    <SineEase EasingMode="EaseInOut"/>
+                </ThicknessAnimation.EasingFunction>
+            </ThicknessAnimation>
+            
+            <DoubleAnimation
+                Storyboard.TargetName="EquipmentHolder"
+                Storyboard.TargetProperty="Opacity"
+                From="1"
+                To="0"
+                Duration="0:0:0.4">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            
+            <!-- MOD_ACS: Add EquipmentHolder Slide animation -->
+            <ThicknessAnimation
+                Storyboard.TargetName="EquipmentHolder"
+                Storyboard.TargetProperty="Margin"
+                From="40,60,40,44"
+                To="380,60,-300,44"
+                Duration="0:0:0.4">
+                <ThicknessAnimation.EasingFunction>
+                    <SineEase EasingMode="EaseInOut"/>
+                </ThicknessAnimation.EasingFunction>
+            </ThicknessAnimation>
+            
+            <DoubleAnimation
+                Storyboard.TargetName="CharacterInfoPanel"
+                Storyboard.TargetProperty="Opacity"
+                From="1"
+                To="0"
+                Duration="0:0:0.3">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseIn"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <ThicknessAnimation
+                Storyboard.TargetName="CharacterInfoPanel"
+                Storyboard.TargetProperty="Margin"
+                From="0,0,0,0"
+                To="-800,0,800,0"
+                Duration="0:0:0.4">
+                <ThicknessAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseIn"/>
+                </ThicknessAnimation.EasingFunction>
+            </ThicknessAnimation>
+            <DoubleAnimation
+                Storyboard.TargetName="InventoryColumn"
+                Storyboard.TargetProperty="Opacity"
+                From="1"
+                To="0"
+                Duration="0:0:0.3">
+                <DoubleAnimation.EasingFunction>
+                    <!-- MOD_ACS: Update EasingFunction -->
+                    <!-- BG3: <CubicEase EasingMode="EaseIn"/> -->
+                    <SineEase EasingMode="EaseInOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <ThicknessAnimation
+                Storyboard.TargetName="InventoryColumn"
+                Storyboard.TargetProperty="Margin"
+                From="0,0,0,0"
+                To="800,0,-800,0"
+                Duration="0:0:0.4">
+                <ThicknessAnimation.EasingFunction>
+                    <!-- MOD_ACS: Update EasingFunction -->
+                    <!-- BG3: <CubicEase EasingMode="EaseIn"/> -->
+                    <SineEase EasingMode="EaseInOut"/>
+                </ThicknessAnimation.EasingFunction>
+            </ThicknessAnimation>
+
+            <!-- MOD_ACS: Add PaperdollHolder to recenter -->
+            <ThicknessAnimation
+                Storyboard.TargetName="PaperdollHolder"
+                Storyboard.TargetProperty="Margin"
+                From="-340,-50,340,12"
+                To="0,-50,0,12"
+                Duration="0:0:0.4">
+                <ThicknessAnimation.EasingFunction>
+                    <SineEase EasingMode="EaseInOut"/>
+                </ThicknessAnimation.EasingFunction>
+            </ThicknessAnimation>
+        </Storyboard>
+
+
+        <Storyboard x:Key="ShowCharacterSelectAnim" FillBehavior="Stop">
+            
+            <!-- MOD_ACS: Add ToggleCSView animations -->
+            <DoubleAnimation
+                Storyboard.TargetName="ToggleCSView"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="1"
+                Duration="0:0:0.4">
+                <DoubleAnimation.EasingFunction>
+                    <SineEase EasingMode="EaseInOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <ThicknessAnimation
+                Storyboard.TargetName="ToggleCSView"
+                Storyboard.TargetProperty="Margin"
+                From="353,-4,-340,0"
+                To="13,-4,0,0"
+                Duration="0:0:0.4">
+                <ThicknessAnimation.EasingFunction>
+                    <SineEase EasingMode="EaseInOut"/>
+                </ThicknessAnimation.EasingFunction>
+            </ThicknessAnimation>
+            
+            <!-- MOD_ACS: Add XPBar animations -->
+            <DoubleAnimation
+                Storyboard.TargetName="XPBar"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="1"
+                Duration="0:0:0.4">
+                <DoubleAnimation.EasingFunction>
+                    <SineEase EasingMode="EaseInOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <ThicknessAnimation
+                Storyboard.TargetName="XPBar"
+                Storyboard.TargetProperty="Margin"
+                From="440,8,-340,10"
+                To="100,8,0,10"
+                Duration="0:0:0.4">
+                <ThicknessAnimation.EasingFunction>
+                    <SineEase EasingMode="EaseInOut"/>
+                </ThicknessAnimation.EasingFunction>
+            </ThicknessAnimation>
+            
+            <DoubleAnimation
+                Storyboard.TargetName="EquipmentHolder"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="1"
+                Duration="0:0:0.4">
+                <DoubleAnimation.EasingFunction>
+                    <!-- MOD_ACS: Update EasingFunction -->
+                    <!-- BG3: <CubicEase EasingMode="EaseOut"/> -->
+                    <SineEase EasingMode="EaseInOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            
+            <!-- MOD_ACS: Add EquipmentHolder Slide animation -->
+            <ThicknessAnimation
+                Storyboard.TargetName="EquipmentHolder"
+                Storyboard.TargetProperty="Margin"
+                From="380,60,-300,44"
+                To="40,60,40,44"
+                Duration="0:0:0.4">
+                <ThicknessAnimation.EasingFunction>
+                    <SineEase EasingMode="EaseInOut"/>
+                </ThicknessAnimation.EasingFunction>
+            </ThicknessAnimation>
+            
+            <DoubleAnimation
+                Storyboard.TargetName="CharacterInfoPanel"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="1"
+                Duration="0:0:0.2">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+
+            <ThicknessAnimation
+                Storyboard.TargetName="CharacterInfoPanel"
+                Storyboard.TargetProperty="Margin"
+                From="-800,0,800,0"
+                To="0,0,0,0"
+                Duration="0:0:0.4">
+                <ThicknessAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </ThicknessAnimation.EasingFunction>
+            </ThicknessAnimation>
+            <DoubleAnimation
+                Storyboard.TargetName="InventoryColumn"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="1"
+                Duration="0:0:0.2">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+
+            <ThicknessAnimation
+                Storyboard.TargetName="InventoryColumn"
+                Storyboard.TargetProperty="Margin"
+                From="800,0,-800,0"
+                To="0,0,0,0"
+                Duration="0:0:0.4">
+                <ThicknessAnimation.EasingFunction>
+                    <!-- MOD_ACS: Update EasingFunction -->
+                    <!-- BG3: <CubicEase EasingMode="EaseOut"/> -->
+                    <SineEase EasingMode="EaseInOut"/>
+                </ThicknessAnimation.EasingFunction>
+            </ThicknessAnimation>
+
+            <!-- MOD_ACS: Add PaperdollHolder to recenter -->
+            <ThicknessAnimation
+                Storyboard.TargetName="PaperdollHolder"
+                Storyboard.TargetProperty="Margin"
+                From="0,-50,0,12"
+                To="-340,-50,340,12"
+                Duration="0:0:0.4">
+                <ThicknessAnimation.EasingFunction>
+                    <SineEase EasingMode="EaseInOut"/>
+                </ThicknessAnimation.EasingFunction>
+            </ThicknessAnimation>
+
+        </Storyboard>
+        
+        <!-- MOD_ACS: Add ToggleCSView Hide animation --> 
+        <Storyboard x:Key="ToggleCSView_HideCharacterSelectAnim" FillBehavior="Stop">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="XPBar">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="EquipmentHolder">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="PaperdollHolder">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="ToggleCSView">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            
+            <DoubleAnimation
+                Storyboard.TargetName="XPBar"
+                Storyboard.TargetProperty="Opacity"
+                From="1"
+                To="0"
+                Duration="0:0:0.2">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseIn"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            
+            <DoubleAnimation
+                Storyboard.TargetName="EquipmentHolder"
+                Storyboard.TargetProperty="Opacity"
+                From="1"
+                To="0"
+                Duration="0:0:0.3">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseIn"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            
+            <DoubleAnimation
+                Storyboard.TargetName="PaperdollHolder"
+                Storyboard.TargetProperty="Opacity"
+                From="1"
+                To="0"
+                Duration="0:0:0.3">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseIn"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            
+            <DoubleAnimation
+                Storyboard.TargetName="ToggleCSView"
+                Storyboard.TargetProperty="Opacity"
+                From="1"
+                To="0"
+                Duration="0:0:0.2">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseIn"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            
+            <ThicknessAnimation
+                Storyboard.TargetName="CharacterInfoPanel"
+                Storyboard.TargetProperty="Margin"
+                From="-800,0,800,0"
+                To="0,0,0,0"
+                Duration="0:0:0.4">
+                <ThicknessAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </ThicknessAnimation.EasingFunction>
+            </ThicknessAnimation>
+            
+            <ThicknessAnimation
+                Storyboard.TargetName="ToggleCSView_Close"
+                Storyboard.TargetProperty="Margin"
+                From="-800,0,800,0"
+                To="0,0,0,0"
+                Duration="0:0:0.4">
+                <ThicknessAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </ThicknessAnimation.EasingFunction>
+            </ThicknessAnimation>
+        </Storyboard>
+
+        <!-- MOD_ACS: Add ToggleCSView Show animation --> 
+        <Storyboard x:Key="ToggleCSView_ShowCharacterSelectAnim" FillBehavior="Stop">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="CharacterInfoPanel">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="ToggleCSView_Close">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            
+            <DoubleAnimation
+                Storyboard.TargetName="XPBar"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="1"
+                Duration="0:0:0.4">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseIn"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            
+            <DoubleAnimation
+                Storyboard.TargetName="EquipmentHolder"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="1"
+                Duration="0:0:0.4">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseIn"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            
+            <DoubleAnimation
+                Storyboard.TargetName="PaperdollHolder"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="1"
+                Duration="0:0:0.4">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseIn"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+
+            <DoubleAnimation
+                Storyboard.TargetName="ToggleCSView"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="1"
+                Duration="0:0:0.4">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseIn"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            
+            <ThicknessAnimation
+                Storyboard.TargetName="CharacterInfoPanel"
+                Storyboard.TargetProperty="Margin"
+                From="0,0,0,0"
+                To="-800,0,800,0"
+                Duration="0:0:0.4">
+                <ThicknessAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseIn"/>
+                </ThicknessAnimation.EasingFunction>
+            </ThicknessAnimation>
+            
+            <ThicknessAnimation
+                Storyboard.TargetName="ToggleCSView_Close"
+                Storyboard.TargetProperty="Margin"
+                From="0,0,0,0"
+                To="-800,0,800,0"
+                Duration="0:0:0.4">
+                <ThicknessAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseIn"/>
+                </ThicknessAnimation.EasingFunction>
+            </ThicknessAnimation>
+        </Storyboard>
+
+        <!-- ======  ILLITHID TEMPLATE ====== -->
+
+        <!--TadpoleCountTemplate copied from gamepad-->
+        <ControlTemplate x:Key="TadpoleCountTemplate" TargetType="Control">
+            <Grid>
+                <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/TadpoleTree_c/TadpoleCounterHolder.png" HorizontalAlignment="Center" VerticalAlignment="Top" Stretch="None" Margin="-30,0,-30,-30" />
+                <TextBlock x:Name="TadpoleCountTxt" HorizontalAlignment="Center" noesis:Text.Stroke="{StaticResource LS_specialTxtColor}" noesis:Text.StrokeThickness="3" IsHitTestVisible="False" VerticalAlignment="Top" Margin="0,140,0,0" TextAlignment="Center" FontSize="{StaticResource ScaledHumongousFontSize}" Text="{Binding DataContext.CurrentPlayer.PartyTadpoleCount, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Foreground="{StaticResource LS_specialTxtColor}">
+                    <TextBlock.Effect>
+                        <DropShadowEffect x:Name="TadpoleCountTxtShadow" Direction="270" Color="{StaticResource specialColor}" ShadowDepth="3.0" BlurRadius="10.0"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock x:Name="TadpoleCountLabel" HorizontalAlignment="Stretch" VerticalAlignment="Top" TextAlignment="Center" TextWrapping="Wrap" FontSize="{StaticResource ScaledDefaultFontSize}" Text="{Binding Source='hef430f37g1a44g4d62g8b27gef6546d71ec4', Converter={StaticResource TranslatedStringConverter}}" Margin="0,260,0,0" MaxWidth="300" Foreground="{StaticResource LS_specialTxtColor}"/>
+            </Grid>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="CharacterIllithidTemplate" TargetType="Control">
+            <Grid>
+                <Grid.Resources>
+                    <Style x:Key="BodyText" TargetType="TextBlock">
+                        <Setter Property="FontSize" Value="{StaticResource ScaledDefaultFontSize}"/>
+                        <Setter Property="Foreground" Value="{StaticResource LS_accent100TxtColor}"/>
+                        <Setter Property="TextWrapping" Value="Wrap"/>
+                        <Setter Property="TextAlignment" Value="Center"/>
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                    </Style>
+                    <Style x:Key="TitleText" TargetType="TextBlock" BasedOn="{StaticResource BodyText}">
+                        <Setter Property="FontSize" Value="{StaticResource ScaledTitleFontSize}"/>
+                        <Setter Property="Foreground" Value="{StaticResource LS_tint100}"/>
+                    </Style>
+                </Grid.Resources>
+
+                <Grid Name="IllithidHidden" Visibility="Collapsed" >
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Width="1260" Style="{StaticResource BodyText}" Text="{Binding Source=h7d846a8fg8c30g4debgbb99g23ea547bfafa, Converter={StaticResource TranslatedStringConverter}}"/>
+                        <Grid Width="420" Margin="0,40" Opacity="0.6">
+                            <Grid.ToolTip>
+                                <ls:LSTooltip>
+                                    <TextBlock x:Name="TooltipContent" Text="{Binding Source='h10091f5dg95efg43eega690g96ed3ce694a7', Converter={StaticResource TranslatedStringConverter}}"/>
+                                </ls:LSTooltip>
+                            </Grid.ToolTip>
+                            <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_blue_disabled.png"/>
+                            <TextBlock Text="{Binding Source=heead3bebgdc62g41c5g8cd1g3d96b81a7c68, Converter={StaticResource TranslatedStringConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+
+                <Grid Name="IllithidLocked" Visibility="Collapsed" VerticalAlignment="Center">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,80">
+                        <TextBlock Style="{StaticResource TitleText}" Text="{Binding Source=h764fcd6cgd702g41bcg93a6g64855afd2c92, Converter={StaticResource TranslatedStringConverter}}" MaxWidth="700" Margin="0,0,0,40" VerticalAlignment="Top"/>
+                        <TextBlock Style="{StaticResource BodyText}">
+                            <ls:TextBlockFormatter.SourceText>
+                                    <MultiBinding Converter="{StaticResource ParameterizedTranslatedStringConverter}">
+                                        <Binding Source="hae014f0cgf722g4cd8g93d8gd9faaa4e2ef7"/>
+                                        <Binding Path="Name"/>
+                                    </MultiBinding>
+                            </ls:TextBlockFormatter.SourceText>
+                        </TextBlock>
+                    </StackPanel>
+                </Grid>
+
+                <Grid x:Name="IllithidUnLocked"  Visibility="Collapsed">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource BodyText}" Text="{Binding Source=hb6d4f05fg375bg4219ga684g1be1396aa6e9, Converter={StaticResource TranslatedStringConverter}}" MaxWidth="700" Margin="0,0,0,40" VerticalAlignment="Top">
+
+                        </TextBlock>
+                        <Control HorizontalAlignment="Center" Template="{StaticResource TadpoleCountTemplate}" />
+                        <ls:LSButton Style="{StaticResource BigBlueButtonStyle}" Content="{Binding Source=h1f318f39g2d8eg46ccga7cag187950e70bbd, Converter={StaticResource TranslatedStringConverter}}" Command="{Binding Path=DataContext.CustomEvent, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ls:UIWidget}}}" CommandParameter="OpenTadpoleTree" SoundID="UI_HUD_EscapeMenu" ls:TutorialProperties.TargetID="TUT_TadpoleTree" ls:TutorialProperties.ModalType="TopRight"/>
+                    </StackPanel>
+                </Grid>
+
+            </Grid>
+
+
+            <ControlTemplate.Triggers>
+                <DataTrigger Binding="{Binding TadpoleTreeState}" Value="Hidden">
+                    <Setter TargetName="IllithidHidden" Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding TadpoleTreeState}" Value="Locked">
+                    <Setter TargetName="IllithidLocked" Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding TadpoleTreeState}" Value="Available">
+                    <Setter TargetName="IllithidUnLocked" Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+            </ControlTemplate.Triggers>
+
+        </ControlTemplate>
+
+
+        <!-- ===== HEADER TEMPLATE ===== -->
+        <ControlTemplate x:Key="RoundTabsTemplate" TargetType="RadioButton">
+            <Grid>
+                <Image x:Name="btn" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/tab_header_inactive_d.png" Stretch="Fill"/>
+                <Image x:Name="icon" Width="64" Height="64" Source="{DynamicResource Icon}" Stretch="Uniform"/>
+            </Grid>
+
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="btn" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/tab_header_inactive_h.png"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter TargetName="btn" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/tab_header_inactive_p.png"/>
+                    <Setter TargetName="icon" Property="Margin" Value="0,2,0,-2"/>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter TargetName="btn" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/tab_header_active_d.png"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </ls:UIWidget.Resources>
+
+
+    <ls:UIWidget.Template>
+        <ControlTemplate>
+            <Grid x:Name="bgFade" Margin="-1400,0,-1400,-1000">
+                <!-- MOD_ACS: Update Margin // BG3: Margin="1672,0,0,1460" -->
+                <Grid x:Name="Panel" HorizontalAlignment="Left" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5" Margin="1550,0,0,1454">
+                    <Grid.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Grid.RenderTransform>
+                    <b:Interaction.Behaviors>
+                        <ls:LSMouseDragElementBehavior HitArea="{Binding ElementName=DragHit,Mode=OneWay}"/>
+                    </b:Interaction.Behaviors>
+                    <b:Interaction.Triggers>
+                        <b:DataTrigger Binding="{Binding IsVisible, ElementName=Panel}" Value="False">
+                            <b:ControlStoryboardAction Storyboard="{StaticResource SimpleFadeIn}"/>
+                        </b:DataTrigger>
+                    </b:Interaction.Triggers>
+                    <!-- MOD_ACS: Update Width // BG3: Width="2080" -->
+                    <ls:LSNineSliceImage x:Name="BGpanel" Style="{StaticResource Generic9SliceBGFaded}" Width="1500" Height="{StaticResource InventoryColumnHeight}" ls:TooltipExtender.Owner="{Binding CurrentPlayer.SelectedCharacter}" Tag="{Binding CurrentPlayer.SelectedCharacter.Inventory}" Margin="6">
+                        <Grid Name="CharacterPanelContents" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition MaxHeight="{StaticResource CSContentHeight}"/>
+                            </Grid.RowDefinitions>
+                            <Grid.Resources>
+                                <BitmapImage x:Key="AlchemyBackground" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/Background_Alchemy.png"/>
+                                <BitmapImage x:Key="BrainFaintBG" UriSource="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/Background_FaintBrain.png"/>
+                            </Grid.Resources>
+                            <!--PANEL BACKGROUNDS-->
+
+                            <Border x:Name="AlchemyBackgroundHolder" Grid.Row="0" Grid.RowSpan="2" CornerRadius="26" Visibility="{Binding IsChecked, ElementName=AlchemyToggleButton, Converter={StaticResource BoolToVisibleConverter}}">
+                                <Border.Background>
+                                    <ImageBrush Stretch="UniformToFill" ImageSource="{StaticResource AlchemyBackground}"/>
+                                </Border.Background>
+                            </Border>
+
+                            <Border x:Name="IllithidBackgroundHolder" Grid.Row="0" Grid.RowSpan="2" CornerRadius="26" Visibility="{Binding IsChecked, ElementName=IllithidToggleButton, Converter={StaticResource BoolToVisibleConverter}}">
+                                <Border.Background>
+                                    <ImageBrush Stretch="None" ImageSource="{StaticResource BrainFaintBG}"/>
+                                </Border.Background>
+                                <Rectangle x:Name="IllithidBackgroundHolder_locked" Fill="{StaticResource LS_PopUpBackgroundColorMedium}" Visibility="Collapsed"/>
+                                <Border.LayoutTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform x:Name="IllithidBackgroundTransform" ScaleX="3" ScaleY="3"/>
+                                    </TransformGroup>
+                                </Border.LayoutTransform>
+                            </Border>
+
+                            <!--DRAG AREA-->
+                            <Border x:Name="DragHit" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" CornerRadius="26,26,0,0">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="1,0" EndPoint="1,1">
+                                        <GradientStop Offset="0" Color="#D4000000" />
+                                        <GradientStop Offset="1" Color="#00000000" />
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <b:Interaction.Triggers>
+                                    <b:EventTrigger EventName="Loaded">
+                                        <b:InvokeCommandAction Command="{Binding Path=DataContext.DismissNotification, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
+                                    </b:EventTrigger>
+                                    <b:EventTrigger EventName="MouseEnter">
+                                        <b:InvokeCommandAction Command="{Binding DataContext.SetCursorCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="Resize"/>
+                                    </b:EventTrigger>
+                                    <b:EventTrigger EventName="MouseLeave">
+                                        <b:InvokeCommandAction Command="{Binding DataContext.SetCursorCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter=""/>
+                                    </b:EventTrigger>
+                                </b:Interaction.Triggers>
+                            </Border>
+
+                            <!--===== PAGES =====-->
+                            <Grid Grid.Row="1" Margin="0,22,0,0">
+                                <!-- ===== MAIN PANEL ===== -->
+                                <Grid x:Name="CharacterSheetPage" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="{Binding IsChecked, ElementName=InventoryToggleButton, Converter={StaticResource BoolToVisibleConverter}}" ClipToBounds="False">
+
+                                    <Grid ClipToBounds="True">
+                                        <Grid.ColumnDefinitions>
+                                            <!-- MOD_ACS: Remove one Column -->
+                                            <!-- BG3: <ColumnDefinition Width="1*"/> -->
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="0.9*"/>
+                                        </Grid.ColumnDefinitions>
+                                        
+                                        <!--PAPERDOLL-->
+                                        <!-- MOD_ACS: Moved inside Grid -->
+                                        <!-- MOD_ACS: Add Name / Update Margin & Grid.ColumnSpan // BG3: Margin="0,-50,0,12" Grid.ColumnSpan="3" -->
+                                        <Grid x:Name="PaperdollHolder" Margin="-340,-50,340,12" ClipToBounds="True" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DataContext="{Binding CurrentPlayer.SelectedCharacter}">
+                                            <!-- MOD_ACS: Add Margin -->
+                                            <ls:LSPaperdoll HorizontalAlignment="Center" x:Name="CSPaperdoll" EntityRef="{Binding EntityHandle}" Width="{StaticResource CSDollWidth}" Height="{StaticResource CSDollHeight}" VerticalAlignment="Bottom" Margin="0,0,0,100" ClipToBounds="True" UseCombatPose="True" MouseRotate="True" MouseRotateMultiplier="10" RenderScale="{Binding DataContext.Data.RenderScale, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
+                                            <!--DOLL CONTROLS-->
+                                            <!-- MOD_ACS: Add Margin -->
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,10,0">
+                                                <ls:LSButton  x:Name="rotateRightBtn" Template="{StaticResource RotateRightButton}">
+                                                    <b:Interaction.Triggers>
+                                                        <b:EventTrigger EventName="LSButtonPressed">
+                                                            <b:ChangePropertyAction PropertyName="RotationSpeed" Value="1.2" TargetName="CSPaperdoll" />
+                                                        </b:EventTrigger>
+                                                        <b:EventTrigger EventName="LSButtonReleased" >
+                                                            <b:ChangePropertyAction PropertyName="RotationSpeed" Value="0" TargetName="CSPaperdoll" />
+                                                        </b:EventTrigger>
+                                                    </b:Interaction.Triggers>
+                                                </ls:LSButton>
+
+                                                <ls:LSToggleButton x:Name="ToggleEqView" Style="{StaticResource EyeBoxButtonTemplate}" IsChecked="True" SoundID="UI_HUD_Options_ToggleButton">
+                                                    <ls:LSToggleButton.ToolTip>
+                                                        <ls:LSTooltip Content="{Binding Source='h5c2bca90g60ddg49fega1c2ga2894424c059',Converter={StaticResource TranslatedStringConverter}}"/>
+                                                    </ls:LSToggleButton.ToolTip>
+                                                </ls:LSToggleButton>
+
+
+                                                <ls:LSButton  x:Name="rotateLeftBtn" Template="{StaticResource RotateLeftButton}">
+                                                    <b:Interaction.Triggers>
+                                                        <b:EventTrigger EventName="LSButtonPressed" >
+                                                            <b:ChangePropertyAction PropertyName="RotationSpeed" Value="-1.2" TargetName="CSPaperdoll" />
+                                                        </b:EventTrigger>
+                                                        <b:EventTrigger EventName="LSButtonReleased" >
+                                                            <b:ChangePropertyAction PropertyName="RotationSpeed" Value="0" TargetName="CSPaperdoll" />
+                                                        </b:EventTrigger>
+                                                    </b:Interaction.Triggers>
+                                                </ls:LSButton>
+                                            </StackPanel>
+
+                                        </Grid>
+
+                                        <!--EQUIP-->
+                                        <!-- MOD_ACS: Update Grid.Column // BG3: Grid.Column="1" -->
+                                        <Control x:Name="EquipmentHolder" Grid.Column="0" VerticalAlignment="Stretch" Template="{StaticResource CharacterEquipmentTemplate}" DataContext="{Binding CurrentPlayer.SelectedCharacter}" Margin="40,60,40,44"/>
+
+                                        <!-- MOD_ACS: Add TOGGLE VIEW BTN -->
+                                        <ls:LSToggleButton x:Name="ToggleCSView" Grid.Column="0" SoundID="UI_HUD_Options_ToggleButton" VerticalAlignment="Top" HorizontalAlignment="Left" IsChecked="True" Margin="13,-4,0,0">
+                                            <ls:LSToggleButton.Template>
+                                                <ControlTemplate TargetType="ls:LSToggleButton">
+                                                    <Grid ToolTipService.Placement="Top">
+                                                        <Grid.ToolTip>
+                                                            <ls:LSTooltip x:Name="Tooltip" Content="{Binding Source='hf76cbcb4g83ddg49d3gb01cgd00359f84713', Converter={StaticResource TranslatedStringConverter}}"/>
+                                                        </Grid.ToolTip>
+                                                        <Image x:Name="btn" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterSheet/btn_round_medium_d.png" Stretch="None"/>
+                                                        <Image x:Name="icon" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/BottomBar/ico_identity_d.png" Stretch="None"/>
+                                                    </Grid>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsChecked" Value="False">
+                                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                                        </Trigger>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter TargetName="btn" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterSheet/btn_round_medium_h.png"/>
+                                                            <Setter TargetName="icon" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/BottomBar/ico_identity_h.png"/>
+                                                        </Trigger>
+                                                        <Trigger Property="IsPressed" Value="True">
+                                                            <Setter TargetName="btn" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterSheet/btn_round_medium_p.png"/>
+                                                            <Setter TargetName="icon" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/BottomBar/ico_identity_p.png"/>
+                                                            <Setter TargetName="icon" Property="Margin" Value="0,0,0,-2"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </ls:LSToggleButton.Template>
+                                        </ls:LSToggleButton>
+                                        
+                                        <!--EXPERIENCE-->
+                                        <!-- MOD_ACS: Moved inside Grid -->
+                                        <!-- MOD_ACS: Add Width & Grid.Column / Update Margin & Grid.ColumnSpan // BG3: Margin="0,-38,0,38" Grid.ColumnSpan="3" -->
+                                        <Grid Name="XPBar" VerticalAlignment="Top" Grid.Column="0" Grid.ColumnSpan="1" DataContext="{Binding CurrentPlayer.SelectedCharacter}" Width="{Binding ActualWidth, ElementName=EquipmentHolder}" HorizontalAlignment="Left" Margin="100,8,0,10">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.ToolTip>
+                                                <ls:LSTooltip>
+                                                    <ls:LSTooltip.Resources>
+                                                        <System:Double x:Key="MaxTooltipContentWidth">720</System:Double>
+                                                    </ls:LSTooltip.Resources>
+                                                    <TextBlock TextWrapping="Wrap" MaxWidth="700" HorizontalAlignment="Center" Foreground="{DynamicResource TooltipColor.Primary}" >
+                                                    <b:Interaction.Behaviors>
+                                                        <ls:CtxTransStringRunGeneratorBehavior Source="{Binding Path=DataContext.Stats.Level.Description, ElementName=NameStack}" ParamRunStyle="{StaticResource TooltipUnitParamRun}"/>
+                                                    </b:Interaction.Behaviors>
+                                                    </TextBlock>
+                                                </ls:LSTooltip>
+                                            </Grid.ToolTip>
+                                            <TextBlock Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource DetailedListText}" Margin="0,0,10,0" TextAlignment="Right" HorizontalAlignment="Right">
+                                            <Run Text="{Binding Source='h8e782babg516fg4d7cgbd57g335de64c94a3', Converter={StaticResource TranslatedStringConverter}}"/>
+                                            <Run Text="{Binding Stats.Level.Value}"/>
+                                            </TextBlock>
+                                            <Control Grid.Column="1" VerticalAlignment="Center" Template="{DynamicResource XPBarTemplate}"/>
+
+                                            <TextBlock Grid.Column="2" VerticalAlignment="Center" Text="{Binding Source='hd0a79314g0517g4938ga883g9f991801df75', Converter={StaticResource TranslatedStringConverter}}" Style="{StaticResource DetailedListText}" Margin="10,0,0,0"/>
+                                            
+                                            <!-- MOD_ACS: Add Scaler -->
+                                            <Grid.RenderTransform>
+                                                <ScaleTransform ScaleX="0.86" ScaleY="0.86"/>
+                                            </Grid.RenderTransform>
+                                        </Grid>
+                                        
+                                        <!--  INFO  -->
+                                        <!-- MOD_ACS: Moved after EquipmentHolder -->
+                                        <!-- MOD_ACS: Add Visibility Collapsed -->
+                                        <Control Name="CharacterInfoPanel" Grid.Column="0" Template="{StaticResource CharSheetTabController}" HorizontalAlignment="Left" VerticalAlignment="Stretch" DataContext="{Binding CurrentPlayer.SelectedCharacter}" Visibility="Collapsed"/>
+                                        
+                                        <!-- MOD_ACS: Add close CharacterInfoPanel btn -->
+                                        <ls:LSButton x:Name="ToggleCSView_Close" Style="{StaticResource SmallCloseButton}" SoundID="UI_Shared_Cancel" HorizontalAlignment="Right" VerticalAlignment="Top" Visibility="Collapsed">
+                                            <b:Interaction.Triggers>
+                                                <b:EventTrigger EventName="Click">
+                                                    <b:ChangePropertyAction TargetName="ToggleCSView" PropertyName="IsChecked" Value="True"/>
+                                                </b:EventTrigger>
+                                            </b:Interaction.Triggers>
+                                        </ls:LSButton>
+                                        
+                                        <!--INVENTORY-->
+                                        <!-- MOD_ACS: Update Grid.Column // BG3: Grid.Column="2" -->
+                                        <Grid x:Name="InventoryColumn" Grid.Column="1" Opacity="1" VerticalAlignment="Stretch" Width="{StaticResource InventoryColumnWidth}">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+
+                                            <!--INVENTORY-->
+                                            <Grid Grid.Row="0" DataContext="{Binding CurrentPlayer.SelectedCharacter}" VerticalAlignment="Stretch">
+                                                <Control x:Name="PanelTemplateHolder" Template="{StaticResource CharacterInventoryTemplate}"/>
+                                            </Grid>
+
+                                            <!-- Weight bar -->
+                                            <!-- MOD_ACS: Update Margin // BG3: Margin="0,16,0,16" -->
+                                            <Control Template="{StaticResource WeightBarTemplate}" Margin="-17,16,17,16" Grid.Row="1" HorizontalAlignment="Center" DataContext="{Binding CurrentPlayer.SelectedCharacter}"/>
+
+                                        </Grid>
+
+                                    </Grid>
+
+                                    <b:Interaction.Triggers>
+                                        <b:DataTrigger Binding="{Binding IsChecked, ElementName=InventoryToggleButton}" Value="False">
+                                            <b:InvokeCommandAction Command="{Binding HideAvailableEquipmentCommand}" CommandParameter="{Binding CurrentPlayer.SelectedCharacter.Equipment}"/>
+                                        </b:DataTrigger>
+
+                                    </b:Interaction.Triggers>
+
+
+                                </Grid>
+
+                                <!-- ===== SPELLBOOK ===== -->
+                                <Grid x:Name="SpellBookPanel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="{Binding IsChecked, ElementName=SpellbookToggleButton, Converter={StaticResource BoolToVisibleConverter}}">
+
+                                    <Control x:Name="SpellbookAndActionsHolder" Template="{StaticResource MultiClassSpellbookTemplate}" Visibility="{Binding IsChecked, ElementName=SpellbookToggleButton, Converter={StaticResource BoolToVisibleConverter}}" IsEnabled="{Binding DataContext.CurrentPlayer.UIData.AllowInteraction, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" HorizontalAlignment="Center" VerticalAlignment="Top" DataContext="{Binding CurrentPlayer.SelectedCharacter}"/>
+
+
+                                </Grid>
+
+                                <!-- ===== ALCHEMY ===== -->
+                                <Grid x:Name="AlchemyPanel" HorizontalAlignment="Stretch" Visibility="{Binding IsChecked, ElementName=AlchemyToggleButton, Converter={StaticResource BoolToVisibleConverter}}" Height="{StaticResource CSContentHeight}">
+                                    <Control x:Name="AlchemyHolder" Template="{StaticResource AlchemyPanelTemplate}" DataContext="{Binding .}"/>
+                                </Grid>
+
+
+                                <!-- ===== ILLITHIDPOWERS ===== -->
+                                <Grid x:Name="IllithidPanel" HorizontalAlignment="Stretch" Visibility="{Binding IsChecked, ElementName=IllithidToggleButton, Converter={StaticResource BoolToVisibleConverter}}" Height="{StaticResource CSContentHeight}">
+                                    <Control x:Name="IllithidHolder" HorizontalAlignment="Center" Template="{StaticResource CharacterIllithidTemplate}" DataContext="{Binding CurrentPlayer.SelectedCharacter}"/>
+                                </Grid>
+                            </Grid>
+
+                            <!--===== HEADER =====-->
+                            <Grid x:Name="HeaderContents" Grid.Row="0">
+
+                                <!--DECORATIVE-->
+                                <Image x:Name="HeaderDecor" Source="{StaticResource decorated_header_4}" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Top" IsHitTestVisible="False" Margin="0,-60,0,0"/>
+
+                                <!--MAIN TABS CONTROLS-->
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,-46,0,0">
+                                    <StackPanel.Resources>
+                                        <Style TargetType="ls:LSRadioButton">
+                                            <Setter Property="Template" Value="{StaticResource RoundTabsTemplate}"/>
+                                            <Setter Property="GroupName" Value="CategoryToggleButtons"/>
+                                            <Setter Property="ToolTipService.Placement" Value="Top"/>
+                                            <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
+                                            <Setter Property="EatInput" Value="True"/>
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                            <Setter Property="Margin" Value="-5,0"/>
+                                            <Setter Property="Height" Value="104"/>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsChecked" Value="False">
+                                                    <Setter Property="IsEnabled" Value="True" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </StackPanel.Resources>
+                                    <ls:LSRadioButton x:Name="InventoryToggleButton" Command="{Binding CustomEvent}" CommandParameter="ToggleInventory" IsChecked="True">
+                                        <RadioButton.ToolTip>
+                                            <ls:LSTooltip Content="{Binding Source='h091222a8ga54fg4ac6g862dg4b260b2c37f0',Converter={StaticResource TranslatedStringConverter}}"/>
+                                        </RadioButton.ToolTip>
+                                        <RadioButton.Resources>
+                                            <ImageSource x:Key="Icon">pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/ico_sheet_active_d.png</ImageSource>
+                                        </RadioButton.Resources>
+                                        <b:Interaction.Triggers>
+                                            <b:EventTrigger EventName="Click">
+                                                <ls:LSPlaySound Sound="UI_HUD_Inventory_Open"/>
+                                            </b:EventTrigger>
+                                        </b:Interaction.Triggers>
+                                    </ls:LSRadioButton>
+
+                                    <ls:LSRadioButton x:Name="SpellbookToggleButton" Command="{Binding CustomEvent}" CommandParameter="ToggleSpells" >
+                                        <RadioButton.ToolTip>
+                                            <ls:LSTooltip Content="{Binding Source='h15329947gc691g4323gac0fge3fbcecb92d9',Converter={StaticResource TranslatedStringConverter}}"/>
+                                        </RadioButton.ToolTip>
+                                        <RadioButton.Resources>
+                                            <ImageSource x:Key="Icon">pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/ico_spells_active_d.png</ImageSource>
+                                        </RadioButton.Resources>
+                                        <b:Interaction.Triggers>
+                                            <b:EventTrigger EventName="Click">
+                                                <ls:LSPlaySound Sound="UI_HUD_SpellBook_Open"/>
+                                            </b:EventTrigger>
+                                        </b:Interaction.Triggers>
+                                    </ls:LSRadioButton>
+
+                                    <ls:LSRadioButton x:Name="AlchemyToggleButton" Command="{Binding CustomEvent}" CommandParameter="ToggleAlchemy">
+                                        <RadioButton.ToolTip>
+                                            <ls:LSTooltip Content="{Binding Source='h5fd98be2gf77dg4dedg9fbeg312c770c4aea',Converter={StaticResource TranslatedStringConverter}}"/>
+                                        </RadioButton.ToolTip>
+                                        <RadioButton.Resources>
+                                            <ImageSource x:Key="Icon">pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/ico_alchemy_inactive_d.png</ImageSource>
+                                        </RadioButton.Resources>
+                                        <b:Interaction.Triggers>
+                                            <b:EventTrigger EventName="Click">
+                                                <ls:LSPlaySound Sound="UI_HUD_Alchemy_Open"/>
+                                            </b:EventTrigger>
+                                        </b:Interaction.Triggers>
+                                    </ls:LSRadioButton>
+
+                                    <ls:LSRadioButton x:Name="IllithidToggleButton" Command="{Binding CustomEvent}" CommandParameter="ToggleIllithid">
+                                        <RadioButton.ToolTip>
+                                            <ls:LSTooltip x:Name="IllithidButtonTooltip"  Content="{Binding Source='h2d773583g5f0dg4737g93d5g324f4bcfe2ac',Converter={StaticResource TranslatedStringConverter}}"/>
+                                        </RadioButton.ToolTip>
+                                        <RadioButton.Resources>
+                                            <ImageSource x:Key="Icon">pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterPanel/ico_illithid_active_d.png</ImageSource>
+                                        </RadioButton.Resources>
+                                    </ls:LSRadioButton>
+                                </StackPanel>
+
+                                <!--NAME STACK-->
+                                <!-- MOD_ACS: Update Margin // BG3: Margin="22,0,0,0" -->
+                                <StackPanel x:Name="NameStack" DataContext="{Binding CurrentPlayer.SelectedCharacter}" Margin="36,16,0,-16" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Stretch" >
+                                    <Image x:Name="AvatarIcon" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/ico_avatar.png" VerticalAlignment="Center" Stretch="None" Visibility="Collapsed"/>
+                                    <TextBlock TextAlignment="Center" FontSize="{StaticResource ScaledIntermediateFontSize}" Foreground="{StaticResource LS_accent100TxtColor}" Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                                </StackPanel>
+
+                                <!--CLOSE & LOCK-->
+                                <StackPanel Panel.ZIndex="2" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
+                                    <!--GOLD AND INSPIRATION-->
+
+                                    <!-- MOD_ACS: Update Margin // BG3: Margin="0,0,22,0" -->
+                                    <Control Template="{StaticResource HeaderInspirationPointsGold}" DataContext="{Binding CurrentPlayer}" Panel.ZIndex="1" VerticalAlignment="Center" Margin="0,18,22,-18">
+                                    </Control>
+
+                                    <Control Template="{StaticResource InventoryLock}" DataContext="{Binding CurrentPlayer.SelectedCharacter}" VerticalAlignment="Center"/>
+
+                                    <ls:LSButton x:Name="CloseButton" Style="{StaticResource SmallCloseButton}" BoundEvent="UICancel" SoundID="UI_HUD_CharacterPanel_Close" VerticalAlignment="Top" Command="ls:UIWidget.CloseRequestCommand" >
+                                        <b:Interaction.Triggers>
+                                            <b:EventTrigger EventName="MouseEnter">
+                                                <b:InvokeCommandAction Command="{Binding DataContext.PlaySoundEvent, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="UI_Shared_Hover"/>
+                                            </b:EventTrigger>
+
+                                            <b:EventTrigger EventName="LSButtonReleased">
+                                                <b:InvokeCommandAction Command="{Binding ClearFilterCommand}"/>
+                                                <b:InvokeCommandAction Command="{Binding HideAvailableEquipmentCommand}" CommandParameter="{Binding CurrentPlayer.SelectedCharacter.Equipment}"/>
+                                            </b:EventTrigger>
+
+                                            <!-- Open sounds -->
+                                            <b:EventTrigger EventName="Loaded">
+                                                <ls:LSPlaySound Sound="UI_HUD_Inventory_Open"/>
+                                                <b:Interaction.Behaviors>
+                                                    <b:ConditionBehavior>
+                                                        <b:ConditionalExpression>
+                                                            <b:ComparisonCondition LeftOperand="{Binding Metadata, ElementName=CharacterPanel}" Operator="Equal" RightOperand="ToggleInventory"/>
+                                                        </b:ConditionalExpression>
+                                                    </b:ConditionBehavior>
+                                                </b:Interaction.Behaviors>
+                                            </b:EventTrigger>
+                                            <b:EventTrigger EventName="Loaded">
+                                                <ls:LSPlaySound Sound="UI_HUD_SpellBook_Open"/>
+                                                <b:Interaction.Behaviors>
+                                                    <b:ConditionBehavior>
+                                                        <b:ConditionalExpression>
+                                                            <b:ComparisonCondition LeftOperand="{Binding Metadata, ElementName=CharacterPanel}" Operator="Equal" RightOperand="ToggleSpells"/>
+                                                        </b:ConditionalExpression>
+                                                    </b:ConditionBehavior>
+                                                </b:Interaction.Behaviors>
+                                            </b:EventTrigger>
+                                            <b:EventTrigger EventName="Loaded">
+                                                <ls:LSPlaySound Sound="UI_HUD_Reactions_Open"/>
+                                                <b:Interaction.Behaviors>
+                                                    <b:ConditionBehavior>
+                                                        <b:ConditionalExpression>
+                                                            <b:ComparisonCondition LeftOperand="{Binding Metadata, ElementName=CharacterPanel}" Operator="Equal" RightOperand="ToggleInterrupts"/>
+                                                        </b:ConditionalExpression>
+                                                    </b:ConditionBehavior>
+                                                </b:Interaction.Behaviors>
+                                            </b:EventTrigger>
+                                            <b:EventTrigger EventName="Loaded">
+                                                <ls:LSPlaySound Sound="UI_HUD_Alchemy_Open"/>
+                                                <b:Interaction.Behaviors>
+                                                    <b:ConditionBehavior>
+                                                        <b:ConditionalExpression>
+                                                            <b:ComparisonCondition LeftOperand="{Binding Metadata, ElementName=CharacterPanel}" Operator="Equal" RightOperand="ToggleAlchemy"/>
+                                                        </b:ConditionalExpression>
+                                                    </b:ConditionBehavior>
+                                                </b:Interaction.Behaviors>
+                                            </b:EventTrigger>
+
+                                            <!-- Closing sounds when whe closing animation starts -->
+                                            <b:EventTrigger SourceName="CharacterPanel" EventName="CloseRequested">
+                                                <b:Interaction.Behaviors>
+                                                    <b:ConditionBehavior>
+                                                        <b:ConditionalExpression>
+                                                            <b:ComparisonCondition LeftOperand="{Binding Metadata, ElementName=CharacterPanel}" Operator="Equal" RightOperand="ToggleInventory"/>
+                                                        </b:ConditionalExpression>
+                                                    </b:ConditionBehavior>
+                                                </b:Interaction.Behaviors>
+                                                <ls:LSPlaySound Sound="UI_HUD_Inventory_Close"/>
+                                            </b:EventTrigger>
+                                            <b:EventTrigger SourceName="CharacterPanel" EventName="CloseRequested">
+                                                <b:Interaction.Behaviors>
+                                                    <b:ConditionBehavior>
+                                                        <b:ConditionalExpression>
+                                                            <b:ComparisonCondition LeftOperand="{Binding Metadata, ElementName=CharacterPanel}" Operator="Equal" RightOperand="ToggleSpells"/>
+                                                        </b:ConditionalExpression>
+                                                    </b:ConditionBehavior>
+                                                </b:Interaction.Behaviors>
+                                                <ls:LSPlaySound Sound="UI_HUD_SpellBook_Close"/>
+                                            </b:EventTrigger>
+                                            <b:EventTrigger SourceName="CharacterPanel" EventName="CloseRequested">
+                                                <b:Interaction.Behaviors>
+                                                    <b:ConditionBehavior>
+                                                        <b:ConditionalExpression>
+                                                            <b:ComparisonCondition LeftOperand="{Binding Metadata, ElementName=CharacterPanel}" Operator="Equal" RightOperand="ToggleInterrupts"/>
+                                                        </b:ConditionalExpression>
+                                                    </b:ConditionBehavior>
+                                                </b:Interaction.Behaviors>
+                                                <ls:LSPlaySound Sound="UI_HUD_Reactions_Close"/>
+                                            </b:EventTrigger>
+                                            <b:EventTrigger SourceName="CharacterPanel" EventName="CloseRequested">
+                                                <b:Interaction.Behaviors>
+                                                    <b:ConditionBehavior>
+                                                        <b:ConditionalExpression>
+                                                            <b:ComparisonCondition LeftOperand="{Binding Metadata, ElementName=CharacterPanel}" Operator="Equal" RightOperand="ToggleAlchemy"/>
+                                                        </b:ConditionalExpression>
+                                                    </b:ConditionBehavior>
+                                                </b:Interaction.Behaviors>
+                                                <ls:LSPlaySound Sound="UI_HUD_Alchemy_Close"/>
+                                            </b:EventTrigger>
+                                        </b:Interaction.Triggers>
+                                    </ls:LSButton>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </ls:LSNineSliceImage>
+
+                    <Control x:Name="PopoutFilters"  Template="{StaticResource PopOutInventoryTemplate}" DataContext="{Binding CurrentPlayer.SelectedCharacter}" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.2" />
+                </Grid>
+				<ls:LSButton x:Name="ClosePage" Command="ls:UIWidget.CloseRequestCommand" BoundEvent="ToggleInventory"/>
+                <ls:LSInputBinding BoundEvent="ToggleCharacterOverview" Command="{Binding CustomEvent}" CommandParameter="CloseWidget"/>
+
+                <!-- Override input bindings to play open sounds when using keybinds (update triggers as well) -->
+                <ls:LSInputBinding x:Name="InventoryInputOverride" BoundEvent="ToggleInventory" Command="{Binding CustomEvent}" CommandParameter="ToggleInventory" IsEnabled="False">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="LSInputBindingPressed">
+                            <ls:LSPlaySound Sound="UI_HUD_Inventory_Open"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </ls:LSInputBinding>
+                <ls:LSInputBinding x:Name="SpellBookInputOverride" BoundEvent="ToggleSpells" Command="{Binding CustomEvent}" CommandParameter="ToggleSpells">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="LSInputBindingPressed">
+                            <ls:LSPlaySound Sound="UI_HUD_SpellBook_Open"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </ls:LSInputBinding>
+                <ls:LSInputBinding x:Name="InterruptsInputOverride" BoundEvent="ToggleReactions" Command="{Binding CustomEvent}" CommandParameter="ToggleInterrupts">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="LSInputBindingPressed">
+                            <ls:LSPlaySound Sound="UI_HUD_Reactions_Open"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </ls:LSInputBinding>
+                <ls:LSInputBinding x:Name="AlchemyInputOverride" BoundEvent="UIToggleAlchemy" Command="{Binding CustomEvent}" CommandParameter="ToggleAlchemy">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="LSInputBindingPressed">
+                            <ls:LSPlaySound Sound="UI_HUD_Alchemy_Open"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </ls:LSInputBinding>
+                <!--===== TRIGGERS & ANIMATIONS =====-->
+				<b:Interaction.Triggers>
+                    <b:StoryboardCompletedTrigger Storyboard="{Binding ElementName=CloseAnimation,Path=Storyboard}">
+						<b:InvokeCommandAction Command="{Binding CustomEvent}" CommandParameter="RemovePanelState"/>
+					</b:StoryboardCompletedTrigger>
+            <b:PropertyChangedTrigger Binding="{Binding Metadata, ElementName=CharacterPanel}">
+                <b:Interaction.Behaviors>
+                    <b:ConditionBehavior>
+                        <b:ConditionalExpression>
+                            <b:ComparisonCondition LeftOperand="{Binding IsClosing, ElementName=CharacterPanel}" Operator="Equal" RightOperand="True"/>
+                        </b:ConditionalExpression>
+                    </b:ConditionBehavior>
+                </b:Interaction.Behaviors>
+                <b:InvokeCommandAction Command="{Binding Path=DataContext.CustomEvent, ElementName=CharacterPanel}" CommandParameter="ToggleCharacterPanel"/>
+            </b:PropertyChangedTrigger>
+				</b:Interaction.Triggers>
+				<Grid.Triggers>
+					<EventTrigger RoutedEvent="FrameworkElement.Loaded">
+						<BeginStoryboard x:Name="OpenPanelAnimation" Storyboard="{StaticResource OpenPanelAnim}" />
+					</EventTrigger>
+
+                    <EventTrigger RoutedEvent="FrameworkElement.Unloaded">
+                        <StopStoryboard BeginStoryboardName="OpenPanelAnimation" />
+                        <StopStoryboard BeginStoryboardName="CancelAnimation" />
+                        <StopStoryboard BeginStoryboardName="CloseAnimation" />
+                    </EventTrigger>
+				</Grid.Triggers>
+			</Grid>
+			<ControlTemplate.Triggers>
+				<EventTrigger RoutedEvent="ls:UIWidget.CloseRequested">
+					<BeginStoryboard x:Name="CloseAnimation">
+						<BeginStoryboard.Storyboard>
+							<Storyboard Children="{StaticResource ClosePanelAnim}"/>
+						</BeginStoryboard.Storyboard>
+					</BeginStoryboard>
+                    <StopStoryboard BeginStoryboardName="CancelAnimation"/>
+				</EventTrigger>
+				<EventTrigger RoutedEvent="ls:UIWidget.CancelCloseRequested" >
+					<BeginStoryboard x:Name="CancelAnimation">
+						<BeginStoryboard.Storyboard>
+							<Storyboard Children="{StaticResource ClosePanelAnimInverted}"/>
+						</BeginStoryboard.Storyboard>
+					</BeginStoryboard>
+                    <StopStoryboard BeginStoryboardName="CloseAnimation"/>
+				</EventTrigger>
+
+                <Trigger Property="Visibility" Value="Visible" SourceName="IllithidBackgroundHolder">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard x:Name="FadeBrainIN" Storyboard="{StaticResource FadeInBrainImage}"/>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <StopStoryboard BeginStoryboardName="FadeBrainIN" />
+                    </Trigger.ExitActions>
+                </Trigger>
+
+                <Trigger Property="Visibility" Value="Visible" SourceName="AlchemyBackgroundHolder">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard x:Name="FadeAlchemyIN" Storyboard="{StaticResource FadeInAlchemyImage}"/>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <StopStoryboard BeginStoryboardName="FadeAlchemyIN" />
+                    </Trigger.ExitActions>
+                </Trigger>
+                <EventTrigger RoutedEvent="FrameworkElement.Unloaded">
+                    <StopStoryboard BeginStoryboardName="FadeBrainIN" />
+                    <StopStoryboard BeginStoryboardName="FadeAlchemyIN" />
+                </EventTrigger>
+
+                <DataTrigger Binding="{Binding Metadata, ElementName=CharacterPanel}" Value="ToggleSpells">
+                    <Setter TargetName="ClosePage" Property="BoundEvent" Value="ToggleSpells"/>
+                    <Setter TargetName="InventoryInputOverride" Property="IsEnabled" Value="True"/>
+                    <Setter TargetName="SpellBookInputOverride" Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Metadata, ElementName=CharacterPanel}" Value="ToggleInterrupts">
+                    <Setter TargetName="ClosePage" Property="BoundEvent" Value="ToggleReactions"/>
+                    <Setter TargetName="InventoryInputOverride" Property="IsEnabled" Value="True"/>
+                    <Setter TargetName="InterruptsInputOverride" Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Metadata, ElementName=CharacterPanel}" Value="ToggleAlchemy">
+                    <Setter TargetName="ClosePage" Property="BoundEvent" Value="UIToggleAlchemy"/>
+                    <Setter TargetName="InventoryInputOverride" Property="IsEnabled" Value="True"/>
+                    <Setter TargetName="AlchemyInputOverride" Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Metadata, ElementName=CharacterPanel}" Value="ToggleIllithid">
+                    <Setter TargetName="ClosePage" Property="BoundEvent" Value="UIToggleTadpolePowers"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsClosing, ElementName=CharacterPanel}" Value="True">
+                    <Setter TargetName="ClosePage" Property="Command" Value="ls:UIWidget.CancelCloseRequestCommand"/>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding CurrentPlayer.SelectedCharacter.TadpoleTreeState}" Value="Hidden">
+                    <Setter TargetName="HeaderDecor" Property="Source" Value="{StaticResource decorated_header_3}"/>
+                    <Setter TargetName="IllithidToggleButton" Property="Visibility" Value="Collapsed"/>
+                    <Setter TargetName="InventoryToggleButton" Property="IsChecked" Value="True"/>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding CurrentPlayer.SelectedCharacter.TadpoleTreeState}" Value="Locked">
+                    <Setter TargetName="IllithidBackgroundHolder_locked" Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding IsChecked, ElementName=ToggleEqView}" Value="False">
+                    <Setter TargetName="CharacterInfoPanel" Property="Visibility" Value="Collapsed"/>
+                    <Setter TargetName="EquipmentHolder" Property="Visibility" Value="Collapsed"/>
+                    <Setter TargetName="InventoryColumn" Property="Visibility" Value="Collapsed"/>
+                    <Setter TargetName="XPBar" Property="Visibility" Value="Collapsed"/>
+                    <!-- MOD_ACS: Add to hide button -->
+                    <Setter TargetName="ToggleCSView" Property="Visibility" Value="Collapsed"/>
+                    <!-- MOD_ACS: Add to recenter the doll -->
+                    <Setter TargetName="PaperdollHolder" Property="Margin" Value="0,-50,0,12"/>
+
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard x:Name="StartHideCharactersheet" Storyboard="{StaticResource HideCharacterSelectAnim}"/>
+                    </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                        <BeginStoryboard x:Name="StartShowCharactersheet" Storyboard="{StaticResource ShowCharacterSelectAnim}"/>
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding ElementName=CharacterPanel,Path=Metadata}" Value="ToggleInventory">
+                    <Setter TargetName="InventoryToggleButton" Property="IsChecked" Value="True"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=CharacterPanel,Path=Metadata}" Value="ToggleSpells">
+                    <Setter TargetName="SpellbookToggleButton" Property="IsChecked" Value="True"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=CharacterPanel,Path=Metadata}" Value="ToggleAlchemy">
+                    <Setter TargetName="AlchemyToggleButton" Property="IsChecked" Value="True"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=CharacterPanel,Path=Metadata}" Value="ToggleIllithid">
+                    <Setter TargetName="IllithidToggleButton" Property="IsChecked" Value="True"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=CharacterPanel,Path=Metadata}" Value="ToggleInterrupts">
+                    <Setter TargetName="SpellbookToggleButton" Property="IsChecked" Value="True"/>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding CurrentPlayer.SelectedCharacter.CharacterType}" Value="Summon">
+                    <Setter TargetName="InventoryColumn" Property="Opacity" Value="0.4"/>
+                    <Setter TargetName="InventoryColumn" Property="Background" Value="{StaticResource LS_PanelBackgroundRed}"/>
+                    <Setter TargetName="InventoryColumn" Property="IsHitTestVisible" Value="False"/>
+                    <Setter TargetName="EquipmentHolder" Property="Visibility" Value="Collapsed"/>
+                    <Setter TargetName="XPBar" Property="Visibility" Value="Collapsed"/>
+                    <Setter TargetName="AlchemyToggleButton" Property="Visibility" Value="Collapsed"/>
+                    <Setter TargetName="AlchemyInputOverride" Property="IsEnabled" Value="False"/>
+                    <Setter TargetName="HeaderDecor" Property="Source" Value="{StaticResource decorated_header_2}"/>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding CurrentPlayer.SelectedCharacter.CharacterType}" Value="Follower">
+                    <Setter TargetName="InventoryColumn" Property="Opacity" Value="0.4"/>
+                    <Setter TargetName="InventoryColumn" Property="Background" Value="{StaticResource LS_PanelBackgroundRed}"/>
+                    <Setter TargetName="InventoryColumn" Property="IsHitTestVisible" Value="False"/>
+                    <Setter TargetName="EquipmentHolder" Property="Visibility" Value="Collapsed"/>
+                    <Setter TargetName="XPBar" Property="Visibility" Value="Collapsed"/>
+                    <Setter TargetName="AlchemyToggleButton" Property="Visibility" Value="Collapsed"/>
+                    <Setter TargetName="AlchemyInputOverride" Property="IsEnabled" Value="False"/>
+                    <Setter TargetName="HeaderDecor" Property="Source" Value="{StaticResource decorated_header_2}"/>
+                </DataTrigger>
+                
+                <!-- MOD_ACS: Add AvatarIcon activator -->
+                <DataTrigger Binding="{Binding CurrentPlayer.SelectedCharacter.CharacterType}" Value="Avatar">
+                    <Setter TargetName="AvatarIcon" Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+                
+                <!-- MOD_ACS: Add ToggleCSView animate character sheet in and equipment out-->
+                <DataTrigger Binding="{Binding IsChecked, ElementName=ToggleCSView}" Value="False">
+                    <Setter TargetName="CharacterInfoPanel" Property="Visibility" Value="Visible"/>
+                    <Setter TargetName="ToggleCSView_Close" Property="Visibility" Value="Visible"/>
+                    <Setter TargetName="XPBar" Property="Visibility" Value="Collapsed"/>
+                    <Setter TargetName="EquipmentHolder" Property="Visibility" Value="Collapsed"/>
+                    <Setter TargetName="PaperdollHolder" Property="Visibility" Value="Collapsed"/>
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard x:Name="StartHideCharactersheet" Storyboard="{StaticResource ToggleCSView_HideCharacterSelectAnim}"/>
+                    </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                        <BeginStoryboard x:Name="StartShowCharactersheet" Storyboard="{StaticResource ToggleCSView_ShowCharacterSelectAnim}"/>
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+                
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+
+    </ls:UIWidget.Template>
+
+
+</ls:UIWidget>
