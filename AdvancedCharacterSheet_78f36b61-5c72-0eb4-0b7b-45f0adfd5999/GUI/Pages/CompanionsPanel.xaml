@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
-             xmlns:ls="clr-namespace:ls;assembly=SharedGUI"
+             xmlns:ls="clr-namespace:ls;assembly=Code"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:noesis="clr-namespace:NoesisGUIExtensions;assembly=Noesis.GUI.Extensions"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
@@ -265,7 +265,7 @@
 
                                 <Grid Grid.Row="0">
                                     <!-- MOD_ACS: Update Margin // BG3: Margin="0,-16,0,0" -->
-                                    <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterSheet/header_open_faded.png" Stretch="None" VerticalAlignment="Top" Margin="0,6,0,-6"/>
+                                    <Image Source="pack://application:,,,/Core;component/Assets/CharacterSheet/header_open_faded.png" Stretch="None" VerticalAlignment="Top" Margin="0,6,0,-6"/>
                                     <!--DRAG AREA-->
                                     <Border x:Name="DragHit" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" CornerRadius="26,26,0,0" Background="Transparent">
 
@@ -365,20 +365,20 @@
                                                                     <Grid.ToolTip>
                                                                         <ls:LSTooltip x:Name="Tooltip" Content="{Binding Source='hf76cbcb4g83ddg49d3gb01cgd00359f84713', Converter={StaticResource TranslatedStringConverter}}"/>
                                                                     </Grid.ToolTip>
-                                                                    <Image x:Name="btn" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterSheet/btn_round_medium_d.png" Stretch="None"/>
-                                                                    <Image x:Name="icon" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/BottomBar/ico_identity_d.png" Stretch="None"/>
+                                                                    <Image x:Name="btn" Source="pack://application:,,,/Core;component/Assets/CharacterSheet/btn_round_medium_d.png" Stretch="None"/>
+                                                                    <Image x:Name="icon" Source="pack://application:,,,/Core;component/Assets/BottomBar/ico_identity_d.png" Stretch="None"/>
                                                                 </Grid>
                                                                 <ControlTemplate.Triggers>
                                                                     <Trigger Property="IsChecked" Value="False">
                                                                         <Setter Property="Visibility" Value="Collapsed"/>
                                                                     </Trigger>
                                                                     <Trigger Property="IsMouseOver" Value="True">
-                                                                        <Setter TargetName="btn" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterSheet/btn_round_medium_h.png"/>
-                                                                        <Setter TargetName="icon" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/BottomBar/ico_identity_h.png"/>
+                                                                        <Setter TargetName="btn" Property="Source" Value="pack://application:,,,/Core;component/Assets/CharacterSheet/btn_round_medium_h.png"/>
+                                                                        <Setter TargetName="icon" Property="Source" Value="pack://application:,,,/Core;component/Assets/BottomBar/ico_identity_h.png"/>
                                                                     </Trigger>
                                                                     <Trigger Property="IsPressed" Value="True">
-                                                                        <Setter TargetName="btn" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterSheet/btn_round_medium_p.png"/>
-                                                                        <Setter TargetName="icon" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/BottomBar/ico_identity_p.png"/>
+                                                                        <Setter TargetName="btn" Property="Source" Value="pack://application:,,,/Core;component/Assets/CharacterSheet/btn_round_medium_p.png"/>
+                                                                        <Setter TargetName="icon" Property="Source" Value="pack://application:,,,/Core;component/Assets/BottomBar/ico_identity_p.png"/>
                                                                         <Setter TargetName="icon" Property="Margin" Value="0,0,0,-2"/>
                                                                     </Trigger>
                                                                 </ControlTemplate.Triggers>
@@ -521,7 +521,7 @@
                     </b:StoryboardCompletedTrigger>
                     <!-- MOD_ACS: Disable for CPCCE mod compatibility -->
                     <!-- BG3:
-                    <b:DataTrigger Binding="{Binding CurrentPlayer.SelectedCharacter.IsInCamp}" Value="False">
+                    <b:DataTrigger Binding="{Binding CurrentPlayer.SelectedCharacter.PlayerCharacterProperties.IsInCamp}" Value="False">
                         <b:InvokeCommandAction Command="{Binding CustomEvent}" CommandParameter="CloseCompanionsPanel"/>
                     </b:DataTrigger>
                     -->
@@ -561,7 +561,7 @@
                 </DataTrigger>
                 
                 <!-- MOD_ACS: Add not in camp paperDoll switch to portrait -->
-                <DataTrigger Binding="{Binding CurrentPlayer.SelectedCharacter.IsInCamp}" Value="False">
+                <DataTrigger Binding="{Binding CurrentPlayer.SelectedCharacter.PlayerCharacterProperties.IsInCamp}" Value="False">
                     <Setter TargetName="PaperdollHolder" Property="Visibility" Value="Collapsed"/>
                     <Setter TargetName="NotInCampPaperdollHolder" Property="Visibility" Value="Visible"/>
                 </DataTrigger>
@@ -584,7 +584,7 @@
                 <MultiDataTrigger>
                     <MultiDataTrigger.Conditions>
                         <Condition Binding="{Binding IsChecked, ElementName=ToggleCSView}" Value="False"/>
-                        <Condition Binding="{Binding CurrentPlayer.SelectedCharacter.IsInCamp}" Value="False"/>
+                        <Condition Binding="{Binding CurrentPlayer.SelectedCharacter.PlayerCharacterProperties.IsInCamp}" Value="False"/>
                     </MultiDataTrigger.Conditions>
                     <Setter TargetName="CharacterInfoColumn" Property="Visibility" Value="Visible"/>
                     <Setter TargetName="EquipmentColumn" Property="Visibility" Value="Collapsed"/>
