@@ -11,15 +11,16 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="DataTemplates_k.xaml"/>
         <ResourceDictionary Source="CharacterSheetTemplates.xaml"/>
-        <ResourceDictionary Source="/AdvancedCharacterSheet;component/Library/ACS_k.xaml"/>
 		<ResourceDictionary Source="/AdvancedCharacterSheet;component/Library/Images_k.xaml"/>
+        <ResourceDictionary Source="/AdvancedCharacterSheet;component/Library/ACS_k.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
     <BitmapImage x:Key="InventorySlotsTileImage" UriSource="pack://application:,,,/Core;component/Assets/CharacterPanel/invSlot.png"/>
 
     <ImageSource x:Key="SavingThrowDice">pack://application:,,,/Core;component/Assets/CharacterPanel/mainStats_ability_single.png</ImageSource>
     <ImageSource x:Key="ProficientAbility">pack://application:,,,/Core;component/Assets/Shared/proficient_ability.png</ImageSource>
-    <ImageSource x:Key="NoResistanceIcon">pack://application:,,,/Core;component/Assets/CharacterPanel/resistance_none_bg.png</ImageSource>
+    <!-- MOD_ACS: Update image -->
+    <ImageSource x:Key="NoResistanceIcon">pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/Resistances/ico_resistance_none_shield.png</ImageSource>
     <ImageSource x:Key="ProficientDice">pack://application:,,,/Core;component/Assets/CharacterPanel/ico_proficient.png</ImageSource>
 
 
@@ -662,7 +663,8 @@
             <!-- MOD_ACS: Add images -->
             <BitmapImage x:Key="ACS_SeparatorThin" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/Separators/separator_thin.png"/>
 
-            <BitmapImage x:Key="SpellbookBg_Small" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/SpellBook/spellbook_bg_small.png"/>
+            <!-- MOD_ACS: Update image -->
+            <BitmapImage x:Key="SpellbookBg_Small" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/spellbook_bg_small.png"/>
 
             <BitmapImage x:Key="SpellsBorder_Small" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/knownSpells_frame_small.png" />
 
@@ -745,7 +747,8 @@
 
             <BitmapImage x:Key="RemoveSpellIcon" UriSource="pack://application:,,,/Core;component/Assets/CharacterCreation/remover_spellslot.png" />
             <BitmapImage x:Key="PreparedSpellIcon" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/ico_prepared.png" />
-            <BitmapImage x:Key="PreparedSpellBorder" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/SpellBook/frame_perpared.png" />
+            <!-- MOD_ACS: Update image -->
+            <BitmapImage x:Key="PreparedSpellBorder" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/frame_perpared.png" />
 
             <Style TargetType="TextBlock">
                 <Setter Property="Foreground" Value="{StaticResource LS_tint100}"/>

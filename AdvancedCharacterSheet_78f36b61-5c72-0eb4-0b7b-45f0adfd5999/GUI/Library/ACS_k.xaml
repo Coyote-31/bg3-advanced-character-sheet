@@ -12,6 +12,10 @@
     <!-- === ACS keyboard library : All extracted parts === -->
     <!-- ================================================== -->
 
+    <ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="/AdvancedCharacterSheet;component/Library/Images_k.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    
     <!-- ========================================================================================= -->
     <!-- === MOD_ACS: Control dynamic Interrupt / Reactions button - START                    === -->
     <!-- === MOD_ACS: Extracted template from DataTemplates.xaml / InterruptToggleBtnTemplate === -->
@@ -182,7 +186,7 @@
     <DataTemplate DataType="{x:Type ls:VMResistance}">
         <!-- MOD_ACS: images -->
         <DataTemplate.Resources>
-            <ImageSource x:Key="NoResistanceIcon">pack://application:,,,/Core;component/Assets/CharacterPanel/resistance_none_bg.png</ImageSource>
+            <ImageSource x:Key="NoResistanceIcon">pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/Resistances/ico_resistance_none_shield.png</ImageSource>
         </DataTemplate.Resources>
         <!-- Enum value stored in tag as LocaEnum doesn't correctly support values past MAX. For those cases we have to alter the value (see triggers) -->
         <StackPanel x:Name="root" Tag="{Binding DamageTypeValue}">
@@ -375,5 +379,51 @@
             <TextBlock x:Name="Content" Style="{StaticResource TooltipDefaultTextStyle}" ls:TextBlockFormatter.SourceText="{Binding ., Converter={StaticResource TranslatedStringConverter}}"/>
         </StackPanel>
     </DataTemplate>
+    
+    <!-- === MOD_ACS: Add tabs BG === -->
+    <Style x:Key="InnerPanelWithDecor" TargetType="ls:LSNineSliceImage" BasedOn="{StaticResource {x:Type ls:LSNineSliceImage}}">
+        <Setter Property="ImageSource" Value="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/CharacterPanel/pane_body_bg_9s.png"/>
+        <Setter Property="Slices" Value="120,700,120,60"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="Opacity" Value="0.8"/>
+    </Style>
+
+    <!-- === MOD_ACS: Add Sort Toggle Button === -->
+
+    <ControlTemplate  x:Key="SortToggleButtonTemplate" TargetType="ToggleButton">
+        <Grid ToolTipService.Placement="Top">
+            <Grid.ToolTip>
+                <ls:LSTooltip Content="{Binding Source='h809e08f9g0ae8g4057g8941g245023916247', Converter={StaticResource TranslatedStringConverter}}"/>
+            </Grid.ToolTip>
+
+            <Image x:Name="btn" Source="{StaticResource btnRoundImg}" Stretch="None"/>
+            <Image x:Name="icon" Width="60" Height="60" Source="pack://application:,,,/Core;component/Assets/CharacterPanel/ico_sort.png" Stretch="Uniform"/>
+        </Grid>
+
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="btn" Property="Source" Value="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/CharacterPanel/btn_round_h.png"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="btn" Property="Source" Value="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/CharacterPanel/btn_round_p.png"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    
+    <!-- ===== MOD_ACS: SORTLIST TEMPLATE BUTTON ONLY=====-->
+    <ControlTemplate x:Key="SortListTemplate" TargetType="ComboBox" >
+        <Grid>
+            <ls:LSToggleButton x:Name="SortToggleButton" Template="{StaticResource SortToggleButtonTemplate}" VerticalAlignment="Center" IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"/>
+            <Popup x:Name="PART_Popup" Placement="Bottom" IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}" PlacementTarget="{Binding ElementName=SortToggleButton}" >
+                <ls:LSNineSliceImage x:Name="SortCategories" Style="{StaticResource PopoutNineSliceStyle}" MinWidth="300">
+                    <StackPanel>
+                        <TextBlock Text="{Binding Source='h809e08f9g0ae8g4057g8941g245023916247',Converter={StaticResource TranslatedStringConverter}}" Foreground="{StaticResource LS_accent25TxtColor}" FontSize="{StaticResource SmallishFontSize}"/>
+                        <ItemsPresenter/>
+                    </StackPanel>
+                </ls:LSNineSliceImage>
+            </Popup>
+        </Grid>
+    </ControlTemplate>
 
 </ResourceDictionary>
