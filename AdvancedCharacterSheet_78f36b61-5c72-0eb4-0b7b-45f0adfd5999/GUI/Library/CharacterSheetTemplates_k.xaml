@@ -889,6 +889,7 @@
                     
                     
                     <!-- MOD_ACS: Add LearnBtnContainerCloser -->
+                    <!-- MOD_ACS: Unused cause now btn only open learn spell widget -->
                     <Border x:Name="LearnBtnContainerCloser" Grid.Column="0" Grid.Row="1" Height="72" VerticalAlignment="Top" Margin="12,0,-12,0" Visibility="Collapsed">
                         <!-- MOD_ACS: Add LearnSpellsButton // BG3: HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,26,0" MinWidth="150" -->
                         <ls:LSButton x:Name="LearnSpellsButtonCloser" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" Command="{Binding DataContext.CustomEvent, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="CloseLearnSpells" MinWidth="0">
@@ -1091,6 +1092,7 @@
                     </DataTrigger>
 
                     <!-- MOD_ACS: Add switch for LearnBtnContainer/LearnBtnContainerCloser based on LearnSpellsSpy Visibility -->
+                    <!-- MOD_ACS: Removed cause now btn only open learn spell widget
                     <MultiDataTrigger>
                         <MultiDataTrigger.Conditions>
                             <Condition Binding="{Binding Path=(ls:AttachedProperties.InheritedTag), RelativeSource={RelativeSource Mode=Self}}" Value="Prepared"/>
@@ -1108,6 +1110,16 @@
                         </MultiDataTrigger.Conditions>
                         <Setter TargetName="LearnBtnContainer" Property="Visibility" Value="Collapsed"/>
                         <Setter TargetName="LearnBtnContainerCloser" Property="Visibility" Value="Visible"/>
+                    </MultiDataTrigger>
+                    -->
+                    
+                    <!-- MOD_ACS: Enable learn btn -->
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding Path=(ls:AttachedProperties.InheritedTag), RelativeSource={RelativeSource Mode=Self}}" Value="Prepared"/>
+                            <Condition Binding="{Binding SelectedItem.Class.CanLearnSpells, ElementName=Tabs}" Value="True"/>
+                        </MultiDataTrigger.Conditions>
+                        <Setter TargetName="LearnBtnContainer" Property="Visibility" Value="Visible"/>
                     </MultiDataTrigger>
 
                     <!-- MOD_ACS: Add switch for btn ClassSectionGrid Close/Open based on ClassSectionGrid Visibility -->
