@@ -1283,10 +1283,10 @@
                     <Setter TargetName="EquipmentHolder" Property="Visibility" Value="Collapsed"/>
                     <Setter TargetName="PaperdollHolder" Property="Visibility" Value="Collapsed"/>
                     <DataTrigger.EnterActions>
-                        <BeginStoryboard x:Name="StartHideCharactersheet" Storyboard="{StaticResource ToggleCSView_HideCharacterSelectAnim}"/>
+                        <BeginStoryboard x:Name="StartHideCharactersheetCSView" Storyboard="{StaticResource ToggleCSView_HideCharacterSelectAnim}"/>
                     </DataTrigger.EnterActions>
                     <DataTrigger.ExitActions>
-                        <BeginStoryboard x:Name="StartShowCharactersheet" Storyboard="{StaticResource ToggleCSView_ShowCharacterSelectAnim}"/>
+                        <BeginStoryboard x:Name="StartShowCharactersheetCSView" Storyboard="{StaticResource ToggleCSView_ShowCharacterSelectAnim}"/>
                     </DataTrigger.ExitActions>
                 </DataTrigger>
                 

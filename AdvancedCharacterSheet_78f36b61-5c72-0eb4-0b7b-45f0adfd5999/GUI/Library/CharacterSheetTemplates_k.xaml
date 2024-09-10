@@ -2217,7 +2217,7 @@
                                     <!-- MOD_ACS: Rework ClassSection with dynamic bg -->
                                     <!-- MOD_ACS: Add Grid + Rectangle (bg) -->
                                     <Grid x:Name="ClassSectionGrid">
-                                        <Rectangle x:Name="ClassSectionDecorativeStroke" Margin="16,0,17,-7" Width="Binding Width, ElementName=ClassSectionGrid" Height="Binding Height, ElementName=ClassSectionGrid" Visibility="{Binding Visibility, ElementName=ClassSection}"
+                                        <Rectangle x:Name="ClassSectionDecorativeStroke" Margin="16,0,17,-7" Visibility="{Binding Visibility, ElementName=ClassSection}"
                                             StrokeDashArray="5,3" StrokeThickness="2" Stroke="{StaticResource LS_PanelBorder}" RadiusX="{StaticResource CornerRadius}" RadiusY="{StaticResource CornerRadius}" Fill="{StaticResource ContentBGShade}"/>   
                              
                                         <!-- MOD_ACS: Add Collapse visibility ClassSectionOpening -->
@@ -2367,8 +2367,7 @@
                                     <!-- MOD_ACS: Switch visibility binding to PreparedSpellsSectionOpening // BG3:  Visibility="Collapsed" Width="{Binding Source.Width, ElementName=PreparedSpellsSectionOpening}" -->
                                     <Border x:Name="PreparedSpellsSection" Visibility="{Binding Visibility, ElementName=PreparedSpellsSectionOpening}" Width="{Binding ActualWidth, ElementName=PreparedSpellsSectionOpening}">
                                         <Border.Background>
-                                            <!-- MOD_ACS: Add visibility collapsed -->
-                                            <ImageBrush ImageSource="{StaticResource PreparedSpellsCenter}" Stretch="Fill" TileMode="Tile" AlignmentY="Top" ViewportUnits="Absolute" Visibility="Collapsed">
+                                            <ImageBrush ImageSource="{StaticResource PreparedSpellsCenter}" Stretch="Fill" TileMode="Tile" AlignmentY="Top" ViewportUnits="Absolute">
                                                 <ImageBrush.Viewport>
                                                     <MultiBinding Converter="{StaticResource CreateRectConverter}">
                                                         <Binding Source="0"/>
@@ -3113,13 +3112,11 @@
                 <Setter TargetName="WholePanelScrollViewer" Property="Margin" Value="13,0,-13,0"/>
                 <Setter TargetName="WholePanelScrollViewer" Property="Padding" Value="-13,0,13,0"/>
                 <Setter TargetName="ClassPanelFixedContent" Property="Margin" Value="0,0,0,0"/>
-                <Setter TargetName="ClassPanelFixedContent" Property="Padding" Value="0,0,0,0"/>
                 
                 <!-- MOD_ACS: Add ScrollableContent for ClassPanel scroll -->
                 <Setter TargetName="ClassPanelScrollableContent" Property="Margin" Value="14,8,-14,-2"/>
                 <Setter TargetName="ClassPanelScrollableContent" Property="Padding" Value="-14,-8,14,-20"/>
                 <Setter TargetName="ScrollableContent" Property="Margin" Value="0,0,0,20"/>
-                <Setter TargetName="ScrollableContent" Property="Padding" Value="0,0,0,0"/>
                 
                 <!-- MOD_ACS: Add Reactions margin -->
                 <Setter TargetName="Reactions" Property="Margin" Value="0,0,0,0"/>
@@ -3168,12 +3165,11 @@
 
                 <!-- MOD_ACS: Add ClassSection DecorativeStroke -->
                 <Setter TargetName="ClassSectionDecorativeStroke" Property="Margin" Value="15,4,15,-10"/>
-                <Setter TargetName="ClassSectionDecorativeStroke" Property="Padding" Value="0,-6,0,0"/>
                 <Setter TargetName="ClassSectionDecorativeStroke" Property="StrokeDashArray" Value="5,3"/>
                 <Setter TargetName="ClassSectionDecorativeStroke" Property="StrokeThickness" Value="2"/>
 
                 <!-- MOD_ACS: Disable/unused Setters for ClassSection -->
-                <Setter TargetName="ClassSectionOpening" Property="Fill" Value="{StaticResource ClassBorderEdges_Small}"/>
+                <!-- BG3: <Setter TargetName="ClassSectionOpening" Property="Fill" Value="{StaticResource ClassBorderEdges_Small}"/> -->
                 <!-- BG3: <Setter TargetName="ClassSectionOpening" Property="Margin" Value="-6 ,0,6,0"/> -->
                 <!-- BG3: <Setter TargetName="ClassSection" Property="Background" Value="{StaticResource ClassBorderCenter_Small}"/> -->
                 <Setter TargetName="ClassSectionClosure" Property="Fill" Value="{StaticResource ClassBorderEdges_Small}"/>
@@ -8924,7 +8920,7 @@
                     <!-- MOD_ACS: CampChest Gold & ItemsNumber -->
                     <DockPanel Grid.Column="1" Margin="0,0,0,0">
                         <!-- MOD_ACS: Gold -->
-                        <StackPanel x:Name="GoldContainer" DockPanel.Dock="Center" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" Style="{StaticResource ACS_MouseOverStyle}">
+                        <StackPanel x:Name="GoldContainer" DockPanel.Dock="Left" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" Style="{StaticResource ACS_MouseOverStyle}">
                             <TextBlock Text="{Binding Inventories[0].Gold, StringFormat={}{0:N0}}"/>
                             <Image Source="{StaticResource GoldIconImg}" Stretch="Uniform" Width="40" VerticalAlignment="Center" Margin="0,-6,-4,-6"/>
                             <StackPanel.ToolTip>
@@ -8932,7 +8928,7 @@
                             </StackPanel.ToolTip>
                         </StackPanel>
                         <!-- MOD_ACS: Number of items -->
-                        <StackPanel x:Name="ItemsCount"  DockPanel.Dock="Center" Orientation="Horizontal" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource ACS_MouseOverStyle}">
+                        <StackPanel x:Name="ItemsCount"  DockPanel.Dock="Left" Orientation="Horizontal" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource ACS_MouseOverStyle}">
                             <b:Interaction.Behaviors>
                                 <ls:InventoriesMergerBehavior x:Name="CampInventoriesMerged" Inventories="{Binding Inventories}"/>
                             </b:Interaction.Behaviors>

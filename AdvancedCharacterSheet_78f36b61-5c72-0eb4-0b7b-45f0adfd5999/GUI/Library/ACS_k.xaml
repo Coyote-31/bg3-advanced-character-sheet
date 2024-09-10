@@ -326,7 +326,7 @@
         <DataTemplate.Resources>
             <!-- MOD_ACS: Add camp portrait image -->
             <BitmapImage x:Key="CampPortraitImage" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/CompanionsPanel/campPortrait.png" />
-            <ImageBrush x:Key="CampPortraitImageBrush" ImageSource="{StaticResource CampPortraitImage}" Stretch="UniformToFill" Viewbox="0,0,0.8,1" Margin="0,-4,0,-4" />
+            <ImageBrush x:Key="CampPortraitImageBrush" ImageSource="{StaticResource CampPortraitImage}" Stretch="UniformToFill" Viewbox="0,0,0.8,1" />
 
             <Style TargetType="Border" >
                 <!-- MOD_ACS: Update portrait ImageBrush value // BG3: Value="{Binding Icon}" -->
