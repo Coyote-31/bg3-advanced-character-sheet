@@ -6058,9 +6058,10 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- MOD_ACS: Add Margin -->
-                    <Border x:Name="Background" Grid.Column="0" Grid.ColumnSpan="2" Background="{StaticResource LS_accent100TxtColor}" Opacity="0" CornerRadius="12" Margin="0,3,0,3" />
+                    <Border x:Name="Background" Grid.Column="0" Grid.ColumnSpan="2" Background="{StaticResource LS_accent100TxtColor}" Opacity="0" CornerRadius="12" Margin="12,3,0,3" />
                     <ContentPresenter x:Name="Content" Grid.Column="0" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"/>
-                    <Image x:Name="IsNewIcon" Grid.Column="1" Source="{StaticResource NewRecipeIcon}" Stretch="None" VerticalAlignment="Center" Visibility="{Binding IsNew, Converter={StaticResource BoolToVisibleConverter}, ConverterParameter={StaticResource TrueValue}}"/>
+                    <!-- MOD_ACS: Add Height / Update Stretch // BG3: Stretch="None" -->
+                    <Image x:Name="IsNewIcon" Grid.Column="1" Source="{StaticResource NewRecipeIcon}" Stretch="Uniform" VerticalAlignment="Center" Visibility="{Binding IsNew, Converter={StaticResource BoolToVisibleConverter}, ConverterParameter={StaticResource TrueValue}}" Height="72"/>
 
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="MouseEnter">
@@ -6105,9 +6106,9 @@
                 <Setter Property="TextWrapping" Value="Wrap"/>
                 <Setter Property="LineStackingStrategy" Value="BlockLineHeight"/>
                 <!-- MOD_ACS: Update LineHeight // BG3: Value="{StaticResource ScaledDefaultFontSizeLineHeight}" -->
-                <Setter Property="LineHeight" Value="{StaticResource ScaledMediumFontSizeLineHeight}"/>
+                <Setter Property="LineHeight" Value="{StaticResource ScaledSmallishFontSizeLineHeight}"/>
                 <!-- MOD_ACS: Add FontSize -->
-                <Setter Property="FontSize" Value="{StaticResource ScaledMediumFontSize}"/>
+                <Setter Property="FontSize" Value="{StaticResource ScaledSmallishFontSize}"/>
             </Style>
 
             <Style x:Key="AlchemyWrappingText" TargetType="TextBlock">
