@@ -2951,7 +2951,7 @@
             <DataTrigger Binding="{Binding SelectedItem.Class.MustPrepareSpells, ElementName=Tabs, FallbackValue=False}" Value="True">
                 <!-- MOD_ACS: Update MaxHeight 1300 // BG3: MaxHeight="1200"/> -->
                 <Setter TargetName="WholePanelScrollViewerRoot" Property="MaxHeight" Value="1300"/>
-                <!-- MOD_ACS: Disabled for now until I find a fix see TODOs -->
+                <!-- MOD_ACS: Disabled the mod use a toggle button instead -->
                 <Setter TargetName="WholePanelScrollViewer" Property="VerticalScrollBarVisibility" Value="Disabled"/>
             </DataTrigger>
             
@@ -3529,7 +3529,7 @@
             <!-- MOD_ACS: Update Margin // BG3: Margin="0,-18,0,0" -->
             <StackPanel VerticalAlignment="Center" Margin="0,-10,0,0">
                 <!-- MOD_ACS: Disable TextBlock title 'CA' -->
-                <!-- <TextBlock Text="{Binding Source='hc2ca2d88gc99cg4361g801fgd34ecdb85f19',Converter={StaticResource TranslatedStringConverter}}" Foreground="{StaticResource LS_tint100}" FontSize="{StaticResource SmallFontSize}" HorizontalAlignment="Center"/> -->
+                <!-- BG3: <TextBlock Text="{Binding Source='hc2ca2d88gc99cg4361g801fgd34ecdb85f19',Converter={StaticResource TranslatedStringConverter}}" Foreground="{StaticResource LS_tint100}" FontSize="{StaticResource SmallFontSize}" HorizontalAlignment="Center"/> -->
                 <TextBlock Foreground="{StaticResource LS_tint100}" FontSize="{StaticResource ScaledTitleFontSize}" Text="{Binding Value}" HorizontalAlignment="Center" Margin="0,-16"/>
             </StackPanel>
         </Grid>
@@ -6049,7 +6049,6 @@
             </DataTemplate>
 
             <!-- RECIPES -->
-             <!-- TODO: Reduce spacing between recipes -->
             <ControlTemplate x:Key="ListEntryTemplate" TargetType="ContentControl">
                 <Grid x:Name="RecipeEntryRoot">
                     <Grid.ColumnDefinitions>
