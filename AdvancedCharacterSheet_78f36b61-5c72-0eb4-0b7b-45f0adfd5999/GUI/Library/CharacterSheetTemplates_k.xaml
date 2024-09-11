@@ -6118,7 +6118,7 @@
                 <Setter Property="TextWrapping" Value="Wrap"/>
                 <Setter Property="LineStackingStrategy" Value="BlockLineHeight"/>
                 <!-- MOD_ACS: Update LineHeight // BG3: Value="{StaticResource ScaledDefaultFontSizeLineHeight}" -->
-                <Setter Property="LineHeight" Value="{StaticResource ScaledSmallishFontSizeLineHeight}"/>
+                <Setter Property="LineHeight" Value="42"/>
                 <!-- MOD_ACS: Add FontSize -->
                 <Setter Property="FontSize" Value="{StaticResource ScaledSmallishFontSize}"/>
             </Style>
