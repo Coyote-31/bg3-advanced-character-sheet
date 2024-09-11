@@ -356,35 +356,6 @@
 
                                                     <!-- MOD_ACS: Add name -->
                                                     <TextBlock x:Name="SelectedCompanionName" Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontSize="{StaticResource ScaledIntermediateFontSize}" Foreground="{StaticResource LS_accent100TxtColor}" noesis:Text.StrokeThickness="4" noesis:Text.Stroke="{StaticResource LS_PrimaryColorOutlineColor}" TextWrapping="Wrap"/>
-                                                    <!-- TOGGLE VIEW BTN -->
-                                                    <!-- MOD_ACS: Add Margin -->
-                                                    <ls:LSToggleButton x:Name="ToggleCSView" SoundID="UI_HUD_Options_ToggleButton" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="True" Margin="11,0,0,6">
-                                                        <ls:LSToggleButton.Template>
-                                                            <ControlTemplate TargetType="ls:LSToggleButton">
-                                                                <Grid ToolTipService.Placement="Top">
-                                                                    <Grid.ToolTip>
-                                                                        <ls:LSTooltip x:Name="Tooltip" Content="{Binding Source='hf76cbcb4g83ddg49d3gb01cgd00359f84713', Converter={StaticResource TranslatedStringConverter}}"/>
-                                                                    </Grid.ToolTip>
-                                                                    <Image x:Name="btn" Source="pack://application:,,,/Core;component/Assets/CharacterSheet/btn_round_medium_d.png" Stretch="None"/>
-                                                                    <Image x:Name="icon" Source="pack://application:,,,/Core;component/Assets/BottomBar/ico_identity_d.png" Stretch="None"/>
-                                                                </Grid>
-                                                                <ControlTemplate.Triggers>
-                                                                    <Trigger Property="IsChecked" Value="False">
-                                                                        <Setter Property="Visibility" Value="Collapsed"/>
-                                                                    </Trigger>
-                                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                                        <Setter TargetName="btn" Property="Source" Value="pack://application:,,,/Core;component/Assets/CharacterSheet/btn_round_medium_h.png"/>
-                                                                        <Setter TargetName="icon" Property="Source" Value="pack://application:,,,/Core;component/Assets/BottomBar/ico_identity_h.png"/>
-                                                                    </Trigger>
-                                                                    <Trigger Property="IsPressed" Value="True">
-                                                                        <Setter TargetName="btn" Property="Source" Value="pack://application:,,,/Core;component/Assets/CharacterSheet/btn_round_medium_p.png"/>
-                                                                        <Setter TargetName="icon" Property="Source" Value="pack://application:,,,/Core;component/Assets/BottomBar/ico_identity_p.png"/>
-                                                                        <Setter TargetName="icon" Property="Margin" Value="0,0,0,-2"/>
-                                                                    </Trigger>
-                                                                </ControlTemplate.Triggers>
-                                                            </ControlTemplate>
-                                                        </ls:LSToggleButton.Template>
-                                                    </ls:LSToggleButton>
                                                 </Grid>
                                             </Grid>
 
@@ -392,6 +363,7 @@
                                             <Grid Name="CharacterInfoColumn" Grid.Column="0" Visibility="Collapsed">
                                                 <Control Name="CharacterInfoPanel"  Template="{StaticResource CharSheetTabController}" HorizontalAlignment="Left" VerticalAlignment="Stretch"/>
                                                 <!--Close column-->
+                                                <!-- MOD_ACS: Disable using toggleCSView_Close btn instead
                                                 <ls:LSButton Style="{StaticResource SmallCloseButton}" SoundID="UI_Shared_Cancel" HorizontalAlignment="Right" VerticalAlignment="Top">
                                                     <b:Interaction.Triggers>
                                                         <b:EventTrigger EventName="Click">
@@ -399,6 +371,7 @@
                                                         </b:EventTrigger>
                                                     </b:Interaction.Triggers>
                                                 </ls:LSButton>
+                                                -->
                                             </Grid>
 
                                             <!-- INVENTORY COLUMN -->
@@ -434,6 +407,71 @@
                         <Grid.Resources>
                             <System:Double x:Key="ClippingWidth">1046</System:Double>
                         </Grid.Resources>
+                        
+                        <!-- TOGGLE VIEW BTN -->
+                        <!-- MOD_ACS: Moved from EquipmentHolder / Add Margin -->
+                        <ls:LSToggleButton x:Name="ToggleCSView" SoundID="UI_HUD_Options_ToggleButton" VerticalAlignment="Bottom" HorizontalAlignment="Left" IsChecked="True" Margin="62,0,0,-136">
+                            <ls:LSToggleButton.Template>
+                                <ControlTemplate TargetType="ls:LSToggleButton">
+                                    <Grid ToolTipService.Placement="Top">
+                                        <Grid.ToolTip>
+                                            <ls:LSTooltip x:Name="Tooltip" Content="{Binding Source='hf76cbcb4g83ddg49d3gb01cgd00359f84713', Converter={StaticResource TranslatedStringConverter}}"/>
+                                        </Grid.ToolTip>
+                                        <Image x:Name="btn" Source="pack://application:,,,/Core;component/Assets/CharacterSheet/btn_round_medium_d.png" Stretch="None"/>
+                                        <Image x:Name="icon" Source="pack://application:,,,/Core;component/Assets/BottomBar/ico_identity_d.png" Stretch="None"/>
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsChecked" Value="False">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </Trigger>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="btn" Property="Source" Value="pack://application:,,,/Core;component/Assets/CharacterSheet/btn_round_medium_h.png"/>
+                                            <Setter TargetName="icon" Property="Source" Value="pack://application:,,,/Core;component/Assets/BottomBar/ico_identity_h.png"/>
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter TargetName="btn" Property="Source" Value="pack://application:,,,/Core;component/Assets/CharacterSheet/btn_round_medium_p.png"/>
+                                            <Setter TargetName="icon" Property="Source" Value="pack://application:,,,/Core;component/Assets/BottomBar/ico_identity_p.png"/>
+                                            <Setter TargetName="icon" Property="Margin" Value="0,0,0,-2"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </ls:LSToggleButton.Template>
+                        </ls:LSToggleButton>
+                        
+                        <!-- MOD_ACS: Add close CharacterInfoPanel btn -->
+                        <ls:LSToggleButton x:Name="ToggleCSView_Close" SoundID="UI_Shared_Cancel" VerticalAlignment="Bottom" HorizontalAlignment="Left" IsChecked="False" Margin="62,0,0,-136" Visibility="Collapsed">
+                            <ls:LSToggleButton.Template>
+                                <ControlTemplate TargetType="ls:LSToggleButton">
+                                    <Grid ToolTipService.Placement="Top">
+                                        <Grid.ToolTip>
+                                            <ls:LSTooltip x:Name="Tooltip" Content="{Binding Source='h091222a8ga54fg4ac6g862dg4b260b2c37f0', Converter={StaticResource TranslatedStringConverter}}"/>
+                                        </Grid.ToolTip>
+                                        <Image x:Name="btn" Source="pack://application:,,,/Core;component/Assets/CharacterSheet/btn_round_medium_d.png" Stretch="None"/>
+                                        <Image x:Name="icon" Source="pack://application:,,,/Core;component/Assets/BottomBar/ico_equipment_d.png" Stretch="None"/>
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsChecked" Value="False">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </Trigger>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="btn" Property="Source" Value="pack://application:,,,/Core;component/Assets/CharacterSheet/btn_round_medium_h.png"/>
+                                            <Setter TargetName="icon" Property="Source" Value="pack://application:,,,/Core;component/Assets/BottomBar/ico_equipment_h.png"/>
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter TargetName="btn" Property="Source" Value="pack://application:,,,/Core;component/Assets/CharacterSheet/btn_round_medium_p.png"/>
+                                            <Setter TargetName="icon" Property="Source" Value="pack://application:,,,/Core;component/Assets/BottomBar/ico_equipment_h.png"/>
+                                            <Setter TargetName="icon" Property="Margin" Value="0,0,0,-2"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </ls:LSToggleButton.Template>
+                            <b:Interaction.Triggers>
+                                <b:EventTrigger EventName="Click">
+                                    <b:ChangePropertyAction TargetName="ToggleCSView" PropertyName="IsChecked" Value="True"/>
+                                </b:EventTrigger>
+                            </b:Interaction.Triggers>
+                        </ls:LSToggleButton>
+                        
                         <!--CHEST & COMPANION LINE-->
                         <!-- MOD_ACS: Update Margin // BG3: Margin="0,0,0,-112" -->
                         <ls:LSNineSliceImage x:Name="CompanionPanelListHolder" Style="{StaticResource DecorBookendHorizontal}" Margin="0,0,0,-122">
@@ -568,6 +606,7 @@
                 
                 <!--animate character sheet in and equipment out-->
                 <DataTrigger Binding="{Binding IsChecked, ElementName=ToggleCSView}" Value="False">
+                    <Setter TargetName="ToggleCSView_Close" Property="Visibility" Value="Visible"/>
                     <Setter TargetName="CharacterInfoColumn" Property="Visibility" Value="Visible"/>
                     <Setter TargetName="EquipmentColumn" Property="Visibility" Value="Collapsed"/>
                     <Setter TargetName="PaperdollHolder" Property="Visibility" Value="Collapsed"/>
@@ -586,6 +625,7 @@
                         <Condition Binding="{Binding IsChecked, ElementName=ToggleCSView}" Value="False"/>
                         <Condition Binding="{Binding CurrentPlayer.SelectedCharacter.PlayerCharacterProperties.IsInCamp}" Value="False"/>
                     </MultiDataTrigger.Conditions>
+                    <Setter TargetName="ToggleCSView_Close" Property="Visibility" Value="Visible"/>
                     <Setter TargetName="CharacterInfoColumn" Property="Visibility" Value="Visible"/>
                     <Setter TargetName="EquipmentColumn" Property="Visibility" Value="Collapsed"/>
                     <Setter TargetName="PaperdollHolder" Property="Visibility" Value="Collapsed"/>
@@ -598,6 +638,12 @@
                         <BeginStoryboard x:Name="StartShowCharactersheet_OutOfCamp" Storyboard="{StaticResource ShowCharacterSelectAnim_OutOfCamp}"/>
                     </DataTrigger.ExitActions>
                 </MultiDataTrigger>
+                
+                <!-- MOD_ACS: Add trigger to hide ToggleCSView btns inside TravellerChest tab -->
+                <DataTrigger Binding="{Binding Visibility, ElementName=TravellerChestPage}" Value="Visible">
+                    <Setter TargetName="ToggleCSView" Property="Visibility" Value="Collapsed"/>
+                    <Setter TargetName="ToggleCSView_Close" Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
 
             </ControlTemplate.Triggers>
         </ControlTemplate>
