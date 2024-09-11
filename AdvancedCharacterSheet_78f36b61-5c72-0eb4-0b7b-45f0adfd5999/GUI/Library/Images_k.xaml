@@ -24,8 +24,7 @@
     <!-- MOD_BTI_C: Update UriSource with ACS // MOD_BTI : pack://application:,,,/???;component/Assets/Shared/ico_resistance_vulnerable_phys.png -->
     <BitmapImage x:Key="Vulnerable_phys" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/Resistances/ico_resistance_vulnerable.png"/>
 	<!-- MOD_BTI_C: Remove as its only apply once with Vulnerable_phys -->
-    <!-- MOD_BTI: <BitmapImage x:Key="Vulnerable_magic" UriSource="pack://application:,,,/???;component/Assets/Shared/ico_resistance_vulnerable_magic.png"/> -->
-    <!-- MOD_BTI: <BitmapImage x:Key="Vulnerable_magic" UriSource="pack://application:,,,/???;component/Assets/Shared/ico_resistance_vulnerable_magic.png"/> -->
+    <BitmapImage x:Key="Vulnerable_magic" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/Resistances/ico_resistance_empty_bti.png"/>
 
     <!--=== MOD_ACS: Update vanilla images ===-->
     <!-- BG3: pack://application:,,,/Core;component/Assets/Shared/ico_resistance_immune.png -->
