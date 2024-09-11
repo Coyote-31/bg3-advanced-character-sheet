@@ -4883,7 +4883,8 @@
                         <Border.ToolTip>
                             <ls:LSTooltip x:Name="ProficiencyTooltip" Content="{Binding Path=DataContext,ElementName=ProficiencyBoxBorder}" ContentTemplate="{StaticResource ProficiencyTooltipTemplate}" ls:TooltipExtender.Context="Armour" ToolTipService.Placement="Right"/>
                         </Border.ToolTip>
-                        <Grid Height="52">
+                        <!-- MOD_ACS: Update Height // BG3: Height="52" -->
+                        <Grid Height="48">
                             <Grid.Resources>
                                 <BitmapImage x:Key="check">pack://application:,,,/Core;component/Assets/Buttons/ico_btn_check.png</BitmapImage>
                                 <BitmapImage x:Key="prof_armour">pack://application:,,,/Core;component/Assets/CharacterPanel/ico_prof_armour.png</BitmapImage>
