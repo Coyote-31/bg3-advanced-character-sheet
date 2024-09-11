@@ -666,18 +666,20 @@
             <!-- MOD_ACS: Update image -->
             <BitmapImage x:Key="SpellbookBg_Small" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/spellbook_bg_small.png"/>
 
-            <BitmapImage x:Key="SpellsBorder_Small" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/knownSpells_frame_small.png" />
+            <!-- MOD_ACS: Update image -->
+            <BitmapImage x:Key="SpellsBorder_Small" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/knownSpells_frame_small.png" />
 
             <!-- MOD_ACS: ClassBorderEdges_Small not used -->
             <BitmapImage x:Key="ClassBorder_Small" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/spellbookTop_frame_small.png" />
             <ImageBrush x:Key="ClassBorderEdges_Small" ImageSource="{StaticResource ClassBorder_Small}" Stretch="None" ViewboxUnits="Absolute" Viewbox="0,0,668,22"/>
             <ImageBrush x:Key="ClassBorderCenter_Small" ImageSource="{StaticResource ClassBorder_Small}" Stretch="Fill" TileMode="Tile" AlignmentY="Top" ViewboxUnits="Absolute" Viewbox="0,22,668,28" ViewportUnits="Absolute" Viewport="0,22,668,28"/>
 
-            <BitmapImage x:Key="PreparedSpellsTop_Small" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/preparedBoxTile_small_top.png" />
-            <BitmapImage x:Key="PreparedSpellsCenter_Small" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/preparedBoxTile_small_middle.png" />
+            <!-- MOD_ACS: Update images -->
+            <BitmapImage x:Key="PreparedSpellsTop_Small" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/preparedBoxTile_small_top.png" />
+            <BitmapImage x:Key="PreparedSpellsCenter_Small" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/preparedBoxTile_small_middle.png" />
             <!-- MOD_ACS: Add square less PreparedSpellsCenter -->
-            <BitmapImage x:Key="PreparedSpellsCenter_Small_SquareLess" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/preparedBoxTile_small_middle.png" />
-            <BitmapImage x:Key="PreparedSpellsBottom_Small" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/preparedBoxTile_small_bottom.png" />
+            <BitmapImage x:Key="PreparedSpellsCenter_Small_SquareLess" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/preparedBoxTile_small_middle_SquareLess.png" />
+            <BitmapImage x:Key="PreparedSpellsBottom_Small" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/preparedBoxTile_small_bottom.png" />
 
             <System:Double x:Key="PageIconSize">200</System:Double>
             <System:Double x:Key="SpellCellSize">72</System:Double>
@@ -690,24 +692,25 @@
 
             <BitmapImage x:Key="SpellbookBg" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/spellbook_bg.png"/>
 
-            <BitmapImage x:Key="CantripsIcon" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/ico_classCantrip.png" />
-            <BitmapImage x:Key="ClassActionIcon" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/ico_classAction.png" />
-            <BitmapImage x:Key="TadpoleActionIcon" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/ico_illithid.png" />
-            <BitmapImage x:Key="MetamagicIcon" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/ico_sorcerer.png" />
-            <BitmapImage x:Key="AlwaysPreparedSpellsIcon" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/ico_alwaysPrepared.png" />
-            <BitmapImage x:Key="PreparedSpellsIcon" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/ico_preparedList.png" />
-            <BitmapImage x:Key="WarlockSpellsIcon" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/ico_warlock.png" />
-            <BitmapImage x:Key="SpellsLv1Icon" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/ico_knownSpells_lvl_01.png" />
-            <BitmapImage x:Key="SpellsLv2Icon" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/ico_knownSpells_lvl_02.png" />
-            <BitmapImage x:Key="SpellsLv3Icon" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/ico_knownSpells_lvl_03.png" />
-            <BitmapImage x:Key="SpellsLv4Icon" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/ico_knownSpells_lvl_04.png" />
-            <BitmapImage x:Key="SpellsLv5Icon" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/ico_knownSpells_lvl_05.png" />
-            <BitmapImage x:Key="SpellsLv6Icon" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/ico_knownSpells_lvl_06.png" />
-            <BitmapImage x:Key="SpellsLv7Icon" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/ico_knownSpells_lvl_07.png" />
-            <BitmapImage x:Key="SpellsLv8Icon" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/ico_knownSpells_lvl_08.png" />
-            <BitmapImage x:Key="SpellsLv9Icon" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/ico_knownSpells_lvl_09.png" />
-            <BitmapImage x:Key="CastSavingIcon" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/ico_cast_saving.png" />
-            <BitmapImage x:Key="CastRollIcon" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/ico_cast_roll.png" />
+            <!-- MOD_ACS: Update images -->
+            <BitmapImage x:Key="CantripsIcon" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/ico_classCantrip.png" />
+            <BitmapImage x:Key="ClassActionIcon" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/ico_classAction.png" />
+            <BitmapImage x:Key="TadpoleActionIcon" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/ico_illithid.png" />
+            <BitmapImage x:Key="MetamagicIcon" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/ico_sorcerer.png" />
+            <BitmapImage x:Key="AlwaysPreparedSpellsIcon" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/ico_alwaysPrepared.png" />
+            <BitmapImage x:Key="PreparedSpellsIcon" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/ico_preparedList.png" />
+            <BitmapImage x:Key="WarlockSpellsIcon" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/ico_warlock.png" />
+            <BitmapImage x:Key="SpellsLv1Icon" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/ico_knownSpells_lvl_01.png" />
+            <BitmapImage x:Key="SpellsLv2Icon" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/ico_knownSpells_lvl_02.png" />
+            <BitmapImage x:Key="SpellsLv3Icon" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/ico_knownSpells_lvl_03.png" />
+            <BitmapImage x:Key="SpellsLv4Icon" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/ico_knownSpells_lvl_04.png" />
+            <BitmapImage x:Key="SpellsLv5Icon" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/ico_knownSpells_lvl_05.png" />
+            <BitmapImage x:Key="SpellsLv6Icon" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/ico_knownSpells_lvl_06.png" />
+            <BitmapImage x:Key="SpellsLv7Icon" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/ico_knownSpells_lvl_07.png" />
+            <BitmapImage x:Key="SpellsLv8Icon" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/ico_knownSpells_lvl_08.png" />
+            <BitmapImage x:Key="SpellsLv9Icon" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/ico_knownSpells_lvl_09.png" />
+            <BitmapImage x:Key="CastSavingIcon" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/ico_cast_saving.png" />
+            <BitmapImage x:Key="CastRollIcon" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/ico_cast_roll.png" />
             <BitmapImage x:Key="ProficientIcon" UriSource="pack://application:,,,/Core;component/Assets/CharacterPanel/ico_proficient.png" />
             <BitmapImage x:Key="LongRestIcon" UriSource="pack://application:,,,/Core;component/Assets/BottomBar/ico_camp_d.png" />
 
@@ -721,13 +724,15 @@
             <ImageBrush x:Key="ClassBorderEdges" ImageSource="{StaticResource ClassBorder}" Stretch="None" ViewboxUnits="Absolute" Viewbox="0,0,1124,23"/>
             <ImageBrush x:Key="ClassBorderCenter" ImageSource="{StaticResource ClassBorder}" Stretch="Fill" TileMode="Tile" AlignmentY="Top" ViewboxUnits="Absolute" Viewbox="0,23,1124,29" ViewportUnits="Absolute" Viewport="0,23,1124,29"/>
 
-            <BitmapImage x:Key="SpellsBorder" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/knownSpells_frame.png" />
+            <!-- MOD_ACS: Update image -->
+            <BitmapImage x:Key="SpellsBorder" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/knownSpells_frame.png" />
             <BitmapImage x:Key="SpellsBorderHalf" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/dashedBox_full.png" />
 
-            <BitmapImage x:Key="PreparedSpellsTop" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/preparedBoxTile_top.png" />
-            <BitmapImage x:Key="PreparedSpellsCenter" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/preparedBoxTile_middle.png" />
-            <BitmapImage x:Key="PreparedSpellsBottom" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/preparedBoxTile_bottom.png" />
-            <BitmapImage x:Key="FreeSlotBg" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/preparedBox_OpenSlot.png" />
+            <!-- MOD_ACS: Update images -->
+            <BitmapImage x:Key="PreparedSpellsTop" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/preparedBoxTile_top.png" />
+            <BitmapImage x:Key="PreparedSpellsCenter" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/preparedBoxTile_middle.png" />
+            <BitmapImage x:Key="PreparedSpellsBottom" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/preparedBoxTile_bottom.png" />
+            <BitmapImage x:Key="FreeSlotBg" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/preparedBox_OpenSlot.png" />
 
             <BitmapImage x:Key="SearchBarBg_d" UriSource="pack://application:,,,/Core;component/Assets/Buttons/btn_body_d.png" />
             <BitmapImage x:Key="SearchBarBg_h" UriSource="pack://application:,,,/Core;component/Assets/Buttons/btn_body_h.png" />
@@ -746,8 +751,8 @@
             <BitmapImage x:Key="TabSelected_p" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/CharacterPanel/tab_body_active_p.png" />
 
             <BitmapImage x:Key="RemoveSpellIcon" UriSource="pack://application:,,,/Core;component/Assets/CharacterCreation/remover_spellslot.png" />
-            <BitmapImage x:Key="PreparedSpellIcon" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/ico_prepared.png" />
-            <!-- MOD_ACS: Update image -->
+            <!-- MOD_ACS: Update images -->
+            <BitmapImage x:Key="PreparedSpellIcon" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/ico_prepared.png" />
             <BitmapImage x:Key="PreparedSpellBorder" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/frame_perpared.png" />
 
             <Style TargetType="TextBlock">
@@ -820,10 +825,11 @@
                             <ls:LSButton.Template>
                                 <ControlTemplate TargetType="ls:LSButton">
                                     <ControlTemplate.Resources>
-                                        <BitmapImage x:Key="Icon_d" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/ico_learnSpells_d.png" />
-                                        <BitmapImage x:Key="Icon_h" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/ico_learnSpells_h.png" />
-                                        <BitmapImage x:Key="Icon_p" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/ico_learnSpells_p.png" />
-                                        <BitmapImage x:Key="Icon_disabled" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/ico_learnSpells_disabled.png" />
+                                        <!-- MOD_ACS: Update images -->
+                                        <BitmapImage x:Key="Icon_d" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/ico_learnSpells_d.png" />
+                                        <BitmapImage x:Key="Icon_h" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/ico_learnSpells_h.png" />
+                                        <BitmapImage x:Key="Icon_p" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/ico_learnSpells_p.png" />
+                                        <BitmapImage x:Key="Icon_disabled" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/ico_learnSpells_disabled.png" />
                                     </ControlTemplate.Resources>
 
                                     <!-- BG3: Slices="36,34" Padding="20,10" Height="72" -->
@@ -896,10 +902,11 @@
                             <ls:LSButton.Template>
                                 <ControlTemplate TargetType="ls:LSButton">
                                     <ControlTemplate.Resources>
-                                        <BitmapImage x:Key="Icon_d" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/ico_learnSpells_d.png" />
-                                        <BitmapImage x:Key="Icon_h" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/ico_learnSpells_h.png" />
-                                        <BitmapImage x:Key="Icon_p" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/ico_learnSpells_p.png" />
-                                        <BitmapImage x:Key="Icon_disabled" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/ico_learnSpells_disabled.png" />
+                                        <!-- MOD_ACS: Update images -->
+                                        <BitmapImage x:Key="Icon_d" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/ico_learnSpells_d.png" />
+                                        <BitmapImage x:Key="Icon_h" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/ico_learnSpells_h.png" />
+                                        <BitmapImage x:Key="Icon_p" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/ico_learnSpells_p.png" />
+                                        <BitmapImage x:Key="Icon_disabled" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/ico_learnSpells_disabled.png" />
                                     </ControlTemplate.Resources>
 
                                     <!-- BG3: Slices="36,34" Padding="20,10" Height="72" -->
@@ -2287,10 +2294,11 @@
                                                     <ls:LSButton.Template>
                                                         <ControlTemplate TargetType="ls:LSButton">
                                                             <ControlTemplate.Resources>
-                                                                <BitmapImage x:Key="Icon_d" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/ico_learnSpells_d.png" />
-                                                                <BitmapImage x:Key="Icon_h" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/ico_learnSpells_h.png" />
-                                                                <BitmapImage x:Key="Icon_p" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/ico_learnSpells_p.png" />
-                                                                <BitmapImage x:Key="Icon_disabled" UriSource="pack://application:,,,/Core;component/Assets/SpellBook/ico_learnSpells_disabled.png" />
+                                                                <!-- MOD_ACS: Update images -->
+                                                                <BitmapImage x:Key="Icon_d" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/ico_learnSpells_d.png" />
+                                                                <BitmapImage x:Key="Icon_h" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/ico_learnSpells_h.png" />
+                                                                <BitmapImage x:Key="Icon_p" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/ico_learnSpells_p.png" />
+                                                                <BitmapImage x:Key="Icon_disabled" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/ico_learnSpells_disabled.png" />
                                                             </ControlTemplate.Resources>
 
                                                             <ls:LSNineSliceImage x:Name="SearchBarContainer" ImageSource="{StaticResource SearchBarBg_d}" Slices="36,34" Padding="20,10" Height="72">
