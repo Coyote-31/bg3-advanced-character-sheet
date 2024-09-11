@@ -14,8 +14,8 @@ The purpose of this mod is to improve Character, Party and Companions Panels. Al
 > Delete manually AToR old mod version.
 
 ## 🔖 Version
-- 📦 **ACS** mod : `2.5.1`
-- 🎮 **BG3** compatibility : `Hotfix #21 [Patch6_Hotfix4]`
+- 📦 **ACS** mod : `3.0.0`
+- 🎮 **BG3** compatibility : `Patch 7`
 
 ## ✨ Features
 
@@ -42,20 +42,22 @@ The purpose of this mod is to improve Character, Party and Companions Panels. Al
 
 ## 🔀 Compatibility
 
+If you install this mod from BG3 UI ingame : RESTART YOUR GAME !
+If you face any problem try to : RESTART YOUR GAME !
+
 ### 🟢 **Compatible** with the following mods :
-- **Better Character and Party Panels** ( *BCPP* ) *All variants* : Tested with BCPP v1.6.2 ( Alias 1.62 )
-- **Better Tooltips** ( *BT* ) : Tested with BT v1.1.1 ( Alias 1.11 )
-- **Better Target Info** ( *BTI* ) : Tested with BTI v1.2.0.1 ( Alias 1.2 )
+- **Better Character and Party Panels** ( *BCPP* ) *All variants* : Tested with BCPP v1.6.5
+- **Better Tooltips** ( *BT* ) : Tested with BT v1.2.4
+- **Better Target Info** ( *BTI* ) : Tested with BTI v1.2.2
 
     > The icons of resistance work fine. Unfortunately, I can't achieved to display the none ones. But 13 icons on top of the screen all the time is what you really want to anyway ?
     
-- **Companions Panel and Camp Chest Everywhere** ( *CPCCE* ) : Tested with CPCCE v1.2.0 ( Alias 1.2 )
-- **Dynamic Siderbar** ( *DS* ) : Tested with DS v1.2.9 ( Alias 1.29 )
+- **Companions Panel and Camp Chest Everywhere** ( *CPCCE* ) : Tested with CPCCE v1.2.3
 - **Scroll Learning SE**
 - **No Spell Prep SE**
 
 ### 🟡 Compatible with **minor bugs** :
-- None -> *Tell me if you find one ❗*
+- **Dynamic Siderbar** ( *DS* )
 
 ### 🔴 **Not compatible** with the following mods :
 - None -> *Tell me if you find one ❗*
