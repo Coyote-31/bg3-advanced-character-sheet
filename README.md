@@ -10,7 +10,7 @@ The purpose of this mod is to improve Character, Party and Companions Panels.
 Also display **All Types of Resistance** including ones without any immunity, resistance or weakness.
 
 ## 🔖 Version
-- 📦 **ACS** mod : `3.0.0`
+- 📦 **ACS** mod : `3.0.1`
 - 🎮 **BG3** compatibility : `Patch 7`
 
 ## ✨ Features
@@ -46,7 +46,7 @@ Also display **All Types of Resistance** including ones without any immunity, re
 ### 🟢 **Compatible** with the following mods :
 - **Better Character and Party Panels** ( *BCPP* ) *All variants* : Tested with BCPP v1.6.5
 - **Better Tooltips** ( *BT* ) : Tested with BT v1.2.4
-- **Better Target Info** ( *BTI* ) : Tested with BTI v1.2.2
+- **Better Target Info** ( *BTI* ) : Tested with BTI v1.2.3
 
     > The icons of resistance work fine. Unfortunately, I can't achieved to display the none ones. But 13 icons on top of the screen all the time is what you really want to anyway ?
     
