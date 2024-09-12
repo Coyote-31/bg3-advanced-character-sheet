@@ -1,17 +1,13 @@
 <p align="center">
-  <img src="Docs/Banner/ACS_Banner.png" alt="ACS Banner"/>
+  <img src="Docs/Banner/ACS_Banner_16_9.png" alt="ACS Banner"/>
 </p>
 
 # ACS : Advanced Character Sheet (BG3 mod)
 
 This is a mod for the game **Baldur's Gate 3**.
 
-The purpose of this mod is to improve Character, Party and Companions Panels. Also display **All Types of Resistance** including ones without any immunity, resistance or weakness.
-
-> [!CAUTION]
-> This mod is renamed !
-> Previously named : All Types of Resistance.
-> Delete manually AToR old mod version.
+The purpose of this mod is to improve Character, Party and Companions Panels. 
+Also display **All Types of Resistance** including ones without any immunity, resistance or weakness.
 
 ## 🔖 Version
 - 📦 **ACS** mod : `3.0.0`
@@ -42,8 +38,10 @@ The purpose of this mod is to improve Character, Party and Companions Panels. Al
 
 ## 🔀 Compatibility
 
-If you install this mod from BG3 UI ingame : RESTART YOUR GAME !
-If you face any problem try to : RESTART YOUR GAME !
+🚨 You have to respect this load order for the compatibility between these mods :
+<p align="left">
+  <img src="Docs/Compatibility/ACS_load_order.png" alt="ACS Load Order"/>
+</p>
 
 ### 🟢 **Compatible** with the following mods :
 - **Better Character and Party Panels** ( *BCPP* ) *All variants* : Tested with BCPP v1.6.5
@@ -53,11 +51,12 @@ If you face any problem try to : RESTART YOUR GAME !
     > The icons of resistance work fine. Unfortunately, I can't achieved to display the none ones. But 13 icons on top of the screen all the time is what you really want to anyway ?
     
 - **Companions Panel and Camp Chest Everywhere** ( *CPCCE* ) : Tested with CPCCE v1.2.3
+- **Dynamic Siderbar** ( *DS* ) : Tested with DS v1.3.5
 - **Scroll Learning SE**
 - **No Spell Prep SE**
 
 ### 🟡 Compatible with **minor bugs** :
-- **Dynamic Siderbar** ( *DS* )
+- None -> *Tell me if you find one ❗*
 
 ### 🔴 **Not compatible** with the following mods :
 - None -> *Tell me if you find one ❗*
@@ -66,11 +65,11 @@ If you face any problem try to : RESTART YOUR GAME !
 
 This mod changes the following files of the game :
 
-- Public\Game\GUI\Library\
+- GUI\Library\
   - **CharacterSheetTemplates_k.xaml**
   - **Images_k.xaml**
   
-- Public\Game\GUI\Widgets\
+- GUI\Pages\
   - **CharacterPanel.xaml**
   - **CompanionsPanel.xaml**
 
@@ -79,6 +78,7 @@ This mod changes the following files of the game :
 ### Download the mod : 
 - [GitHub](https://github.com/Coyote-31/bg3-advanced-character-sheet/releases)
 - [NexusMods](https://www.nexusmods.com/baldursgate3/mods/6458)
+- [BG3 Mod.io](https://mod.io/g/baldursgate3/m/advancedcharactersheet)
 
 ### Manual :
 Drop the `.pak` file from the `.zip` archive inside the folder :
@@ -86,10 +86,11 @@ Drop the `.pak` file from the `.zip` archive inside the folder :
     %LocalAppData%\Larian Studios\Baldur's Gate 3\Mods
 
 ### Manager :
-- With `BG3 Mod Manager` : The mod should be in **Overrides**.
-- With `Vortex` : Mark the mod as **replacer**.
+- With `BG3 Mod Manager` or `Vortex` : You have to respect the mod order with Pavelk's mods (see compatibility).
 
 ## ❌ Uninstall
+
+🚨 If you uninstall from the ingame manager : **restart** your game after.
 
 ### Manual :
 Remove the mod's `.pak` file from :
