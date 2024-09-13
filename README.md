@@ -10,7 +10,7 @@ The purpose of this mod is to improve Character, Party and Companions Panels.
 Also display **All Types of Resistance** including ones without any immunity, resistance or weakness.
 
 ## 🔖 Version
-- 📦 **ACS** mod : `3.0.1`
+- 📦 **ACS** mod : `3.0.2`
 - 🎮 **BG3** compatibility : `Patch 7`
 
 ## ✨ Features
@@ -51,7 +51,7 @@ Also display **All Types of Resistance** including ones without any immunity, re
     > The icons of resistance work fine. Unfortunately, I can't achieved to display the none ones. But 13 icons on top of the screen all the time is what you really want to anyway ?
     
 - **Companions Panel and Camp Chest Everywhere** ( *CPCCE* ) : Tested with CPCCE v1.2.3
-- **Dynamic Siderbar** ( *DS* ) : Tested with DS v1.3.5
+- **Dynamic Sidebar** ( *DS* ) : Tested with DS v1.3.5
 - **Scroll Learning SE**
 - **No Spell Prep SE**
 
@@ -72,6 +72,7 @@ This mod changes the following files of the game :
 - GUI\Pages\
   - **CharacterPanel.xaml**
   - **CompanionsPanel.xaml**
+  - **LearnSpells.xaml**
 
 ## 💾 Install
 
@@ -86,7 +87,7 @@ Drop the `.pak` file from the `.zip` archive inside the folder :
     %LocalAppData%\Larian Studios\Baldur's Gate 3\Mods
 
 ### Manager :
-- With `BG3 Mod Manager` or `Vortex` : You have to respect the mod order with Pavelk's mods (see compatibility).
+- With `BG3 Mod Manager` or `Vortex` : You have to respect the mod load order with Pavelk's mods (see compatibility).
 
 ## ❌ Uninstall
 
