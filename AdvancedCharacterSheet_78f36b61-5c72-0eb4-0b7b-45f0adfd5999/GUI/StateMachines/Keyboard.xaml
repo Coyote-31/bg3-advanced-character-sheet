@@ -40,6 +40,48 @@
                 </ls:StateEvent>
             </ls:State.Events>
         </ls:State>
+        
+        <!--STATE: Learn Spells Popup Panel (PopupPanels layer for character panel) -->
+        <ls:State Name="LearnSpellsPopupPanel" Layout="Player" Owner="Player" HideStatesBelow="False" IsModal="False" ModType="Override">
+            <ls:State.Widgets>
+                <ls:StateWidget Filename="LearnSpells.xaml" Layer="PopupPanels"/>
+            </ls:State.Widgets>
+
+            <ls:State.Events>
+                <ls:StateEvent Name = "CloseWidget">
+                    <ls:StateEvent.Actions>
+                        <ls:RemoveState/>
+                    </ls:StateEvent.Actions>
+                </ls:StateEvent>
+
+                <ls:StateEvent Name = "CloseLearnSpells">
+                    <ls:StateEvent.Actions>
+                        <ls:RemoveState/>
+                    </ls:StateEvent.Actions>
+                </ls:StateEvent>
+            </ls:State.Events>
+        </ls:State>
+
+        <!--STATE: Learn Spells Panel (Panels layer for party panels) -->
+        <ls:State Name="LearnSpellsPanel" Layout="Player" Owner="Player" HideStatesBelow="False" IsModal="False" ModType="Override">
+            <ls:State.Widgets>
+                <ls:StateWidget Filename="LearnSpells.xaml" Layer="Panels"/>
+            </ls:State.Widgets>
+
+            <ls:State.Events>
+                <ls:StateEvent Name = "CloseWidget">
+                    <ls:StateEvent.Actions>
+                        <ls:RemoveState/>
+                    </ls:StateEvent.Actions>
+                </ls:StateEvent>
+
+                <ls:StateEvent Name = "CloseLearnSpells">
+                    <ls:StateEvent.Actions>
+                        <ls:RemoveState/>
+                    </ls:StateEvent.Actions>
+                </ls:StateEvent>
+            </ls:State.Events>
+        </ls:State>
 		
 		<!--STATE: CompanionsPanel-->
         <ls:State Name="CompanionsPanel" Layout="Player" Owner="Player" HideStatesBelow="False" ModType="Override">

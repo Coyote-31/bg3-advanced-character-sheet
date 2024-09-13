@@ -37,7 +37,7 @@
                         </TransformGroup>
                     </Grid.RenderTransform>
 
-                    <Image Source="pack://application:,,,/Core;component/Assets/SpellBook/transcribe_bg.png" Stretch="None"/>
+                    <Image Source="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/transcribe_bg.png" Stretch="None"/>
                     <Rectangle x:Name="DragHit" Fill="Transparent" IsHitTestVisible="True" VerticalAlignment="Top" Margin="10,10,10,0" Height="146"/>
 
                     <ls:LSButton x:Name="CloseButton" Style="{StaticResource SmallCloseButton}" BoundEvent="UICancel" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,20,20,0" Command="{Binding CustomEvent}" CommandParameter="CloseLearnSpells"/>
@@ -45,7 +45,7 @@
                     <TextBlock x:Name="Title" Text="{Binding Source=h9d4b5933g552ag4656gb59fg8ab0b22a11cf, Converter={StaticResource TranslatedStringConverter}}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,16,0,0" FontSize="{StaticResource MediumFontSize}" IsHitTestVisible="False"/>
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,50,0,0" Visibility="{Binding SavantSchools.Count, Converter={StaticResource CountToVisibilityConverter}}" IsHitTestVisible="False" Height="80">
-                        <Image x:Name="SavantStar" Source="pack://application:,,,/Core;component/Assets/SpellBook/transcribe_ico_proficiency.png" Stretch="None" VerticalAlignment="Center"/>
+                        <Image x:Name="SavantStar" Source="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/transcribe_ico_proficiency.png" Stretch="None" VerticalAlignment="Center"/>
 
                         <ItemsControl ItemsSource="{Binding SavantSchools}" AlternationCount="{Binding SavantSchools.Count}" VerticalAlignment="Center" MaxWidth="660">
                             <ItemsControl.ItemsPanel>
@@ -155,11 +155,11 @@
                                     <Rectangle x:Name="Icon" Grid.Column="1" Fill="{Binding Icon}" Width="60" Height="60" VerticalAlignment="Center" Visibility="{Binding IsAlreadyKnown, Converter={StaticResource BoolToHiddenConverter}}"/>
                                     <TextBlock x:Name="Name" Grid.Column="2" Text="{Binding Name}" VerticalAlignment="Center" FontSize="{DynamicResource SmallFontSize}" Foreground="{StaticResource LS_baseTxtColor}" TextTrimming="CharacterEllipsis" />
                                     <TextBlock x:Name="SpellLevel" Grid.Column="3" Text="{Binding SpellLevel, Converter={StaticResource DecimalToRomanConverter}}" VerticalAlignment="Center" FontSize="{DynamicResource SmallFontSize}" Foreground="{StaticResource LS_baseTxtColor}" HorizontalAlignment="Center"/>
-                                    <Image x:Name="Star" Grid.Column="4" Source="pack://application:,,,/Core;component/Assets/SpellBook/transcribe_ico_proficiency.png" Stretch="None" Visibility="{Binding HasDiscount, Converter={StaticResource BoolToVisibleConverter}, ConverterParameter='true'}"/>
+                                    <Image x:Name="Star" Grid.Column="4" Source="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/transcribe_ico_proficiency.png" Stretch="None" Visibility="{Binding HasDiscount, Converter={StaticResource BoolToVisibleConverter}, ConverterParameter='true'}"/>
                                     <TextBlock x:Name="Cost" Grid.Column="5" Text="{Binding LearnCost}" VerticalAlignment="Center" FontSize="{DynamicResource MiniFontSize}" />
                                     <Grid Grid.Column="6">
-                                        <Image x:Name="Checkbox" Source="pack://application:,,,/Core;component/Assets/SpellBook/transcribe_checkBox_d.png" Stretch="None"/>
-                                        <Image Source="pack://application:,,,/Core;component/Assets/SpellBook/transcribe_ico_check.png" Stretch="None" Visibility="{Binding Path=IsSelected, RelativeSource={RelativeSource AncestorType=ListBoxItem}, Converter={StaticResource BoolToVisibleConverter}}"/>
+                                        <Image x:Name="Checkbox" Source="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/transcribe_checkBox_d.png" Stretch="None"/>
+                                        <Image Source="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/SpellBook/transcribe_ico_check.png" Stretch="None" Visibility="{Binding Path=IsSelected, RelativeSource={RelativeSource AncestorType=ListBoxItem}, Converter={StaticResource BoolToVisibleConverter}}"/>
                                     </Grid>
                                 </Grid>
                                 <DataTemplate.Triggers>
@@ -277,4 +277,3 @@
     </ls:UIWidget.Template>
 
 </ls:UIWidget>
-
