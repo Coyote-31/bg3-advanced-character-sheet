@@ -11,7 +11,6 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="DataTemplates_k.xaml"/>
         <ResourceDictionary Source="CharacterSheetTemplates.xaml"/>
-		<ResourceDictionary Source="/AdvancedCharacterSheet;component/Library/Images_k.xaml"/>
         <ResourceDictionary Source="/AdvancedCharacterSheet;component/Library/ACS_k.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 

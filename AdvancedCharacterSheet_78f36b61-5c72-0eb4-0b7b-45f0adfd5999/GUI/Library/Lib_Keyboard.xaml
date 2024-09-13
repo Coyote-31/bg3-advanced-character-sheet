@@ -20,7 +20,6 @@
     
 	<ResourceDictionary.MergedDictionaries>
 		<ResourceDictionary Source="/AdvancedCharacterSheet;component/Library/CharacterSheetTemplates_k.xaml"/>
-		<ResourceDictionary Source="/AdvancedCharacterSheet;component/Library/Images_k.xaml"/>
 	</ResourceDictionary.MergedDictionaries>
 	
 </ResourceDictionary>
