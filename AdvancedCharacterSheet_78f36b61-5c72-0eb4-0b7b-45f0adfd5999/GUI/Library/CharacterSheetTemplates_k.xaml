@@ -9,7 +9,8 @@
                     mc:Ignorable="d">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="DataTemplates_k.xaml"/>
+        <!-- MOD_ACS: Disable for ImpUI compatibility (custom action resources) -->
+        <!-- BG3: <ResourceDictionary Source="DataTemplates_k.xaml"/> -->
         <ResourceDictionary Source="CharacterSheetTemplates.xaml"/>
         <ResourceDictionary Source="/AdvancedCharacterSheet;component/Library/ACS_k.xaml"/>
     </ResourceDictionary.MergedDictionaries>
