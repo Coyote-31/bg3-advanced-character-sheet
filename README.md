@@ -10,7 +10,7 @@ The purpose of this mod is to improve Character, Party and Companions Panels.
 Also display **All Types of Resistance** including ones without any immunity, resistance or weakness.
 
 ## 🔖 Version
-- 📦 **ACS** mod : `3.0.2`
+- 📦 **ACS** mod : `3.0.3`
 - 🎮 **BG3** compatibility : `Patch 7`
 
 ## ✨ Features
@@ -54,6 +54,7 @@ Also display **All Types of Resistance** including ones without any immunity, re
 - **Dynamic Sidebar** ( *DS* ) : Tested with DS v1.3.5
 - **Scroll Learning SE**
 - **No Spell Prep SE**
+- **ImpUI**
 
 ### 🟡 Compatible with **minor bugs** :
 - None -> *Tell me if you find one ❗*
