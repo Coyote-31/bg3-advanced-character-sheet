@@ -10,8 +10,8 @@ The purpose of this mod is to improve Character, Party and Companions Panels.
 Also display **All Types of Resistance** including ones without any immunity, resistance or weakness.
 
 ## 🔖 Version
-- 📦 **ACS** mod : `3.0.3`
-- 🎮 **BG3** compatibility : `Patch 7`
+- 📦 **ACS** mod : `3.1.0`
+- 🎮 **BG3** compatibility : `Patch 8`
 
 ## ✨ Features
 

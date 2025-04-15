@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <save>
-    <version major="4" minor="7" revision="1" build="3"/>
+    <version major="4" minor="8" revision="0" build="10"/>
     <region id="Config">
         <node id="root">
             <children>
@@ -9,11 +9,19 @@
                     <children>
                         <node id="ModuleShortDesc">
                             <attribute id="Folder" type="LSString" value="GustavDev"/>
-                            <attribute id="MD5" type="LSString" value="96c19798a020e178251944be557fc464"/>
+                            <attribute id="MD5" type="LSString" value="c360fcf32ac7d77e2ba190ccb102c94d"/>
                             <attribute id="Name" type="LSString" value="GustavDev"/>
                             <attribute id="PublishHandle" type="uint64" value="0"/>
                             <attribute id="UUID" type="guid" value="28ac9ce2-2aba-8cda-b3b5-6e922f71b6b8"/>
-                            <attribute id="Version64" type="int64" value="145100393449790344"/>
+                            <attribute id="Version64" type="int64" value="145241130939120737"/>
+                        </node>
+                        <node id="ModuleShortDesc">
+                            <attribute id="Folder" type="LSString" value="GustavX"/>
+                            <attribute id="MD5" type="LSString" value="180daa208a8a447d4ea7f6b4a47e93f1"/>
+                            <attribute id="Name" type="LSString" value="GustavX"/>
+                            <attribute id="PublishHandle" type="uint64" value="0"/>
+                            <attribute id="UUID" type="guid" value="cb555efe-2d9e-131f-8195-a89329d218ea"/>
+                            <attribute id="Version64" type="int64" value="145241152413957217"/>
                         </node>
                     </children>
                 </node>
@@ -21,10 +29,10 @@
                     <attribute id="Author" type="LSString" value="Coyote31"/>
                     <attribute id="CharacterCreationLevelName" type="FixedString" value=""/>
                     <attribute id="Description" type="LSString" value="Improve Character, Party and Companions Panels. Also display all damage types including ones without resistances or weakness. IF NOT WORKING CHECK YOUR LOAD ORDER ! Put this mod at the end or disable/enable it."/>
-                    <attribute id="FileSize" type="uint64" value="4257086"/>
+                    <attribute id="FileSize" type="uint64" value="4258239"/>
                     <attribute id="Folder" type="LSString" value="AdvancedCharacterSheet_78f36b61-5c72-0eb4-0b7b-45f0adfd5999"/>
                     <attribute id="LobbyLevelName" type="FixedString" value=""/>
-                    <attribute id="MD5" type="LSString" value="3310821047d4e96d8ded6a3940338af1"/>
+                    <attribute id="MD5" type="LSString" value="d29cb68ad06163332a59aa1dbb7c247e"/>
                     <attribute id="MenuLevelName" type="FixedString" value=""/>
                     <attribute id="Name" type="LSString" value="AdvancedCharacterSheet"/>
                     <attribute id="NumPlayers" type="uint8" value="4"/>
@@ -32,7 +40,7 @@
                     <attribute id="PublishHandle" type="uint64" value="4331793"/>
                     <attribute id="StartupLevelName" type="FixedString" value=""/>
                     <attribute id="UUID" type="FixedString" value="78f36b61-5c72-0eb4-0b7b-45f0adfd5999"/>
-                    <attribute id="Version64" type="int64" value="108086397499342901"/>
+                    <attribute id="Version64" type="int64" value="108227128545247288"/>
                     <children>
                         <node id="PublishVersion">
                             <attribute id="Version64" type="int64" value="144255927717549775"/>
