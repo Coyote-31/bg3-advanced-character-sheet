@@ -1,0 +1,280 @@
+﻿<ls:UIWidget
+    x:Name="LearnSpells"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:ls="clr-namespace:ls;assembly=Code"
+    xmlns:b="http://schemas.microsoft.com/xaml/behaviors" 
+    mc:Ignorable="d"
+    ls:UIWidget.UseCustomDC="True"
+    ls:UIWidget.ContextName="LearnSpellsContext"
+    d:DataContext="{d:DesignInstance {x:Type ls:DCLearnSpells}, IsDesignTimeCreatable=True}"
+    ls:TooltipExtender.Owner="{Binding CurrentPlayer.SelectedCharacter}"
+    HorizontalAlignment="Stretch"
+    VerticalAlignment="Stretch"
+    >
+
+    <ls:UIWidget.Resources>
+        <GridLength x:Key="ColWidthQuantity">52</GridLength>
+        <GridLength x:Key="ColWidthIcon">80</GridLength>
+        <GridLength x:Key="ColWidthLevel">80</GridLength>
+        <GridLength x:Key="ColWidthStar">44</GridLength>
+        <GridLength x:Key="ColWidthCost">60</GridLength>
+        <GridLength x:Key="ColWidthCheckBox">50</GridLength>
+    </ls:UIWidget.Resources>
+    <ls:UIWidget.Template>
+        <ControlTemplate>
+            <Border>
+                <Grid x:Name="Container" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <b:Interaction.Behaviors>
+                        <ls:LSMouseDragElementBehavior HitArea="{Binding ElementName=DragHit,Mode=OneWay}" PositionBounds="{Binding InitialLearnSpellsBounds}" Placement="Center"/>
+                        <ls:CollectionSortBehavior x:Name="SortBehavior" ItemsSource="{Binding LearnableScrolls}" Comparer="{Binding ScrollSortComparer}"/>
+                    </b:Interaction.Behaviors>
+                    <Grid.RenderTransform>
+                        <TransformGroup>
+                            <TranslateTransform x:Name="PosTransForm" />
+                        </TransformGroup>
+                    </Grid.RenderTransform>
+
+                    <Image Source="pack://application:,,,/Core;component/Assets/SpellBook/transcribe_bg.png" Stretch="None"/>
+                    <Rectangle x:Name="DragHit" Fill="Transparent" IsHitTestVisible="True" VerticalAlignment="Top" Margin="10,10,10,0" Height="146"/>
+
+                    <ls:LSButton x:Name="CloseButton" Style="{StaticResource SmallCloseButton}" BoundEvent="UICancel" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,20,20,0" Command="{Binding CustomEvent}" CommandParameter="CloseLearnSpells"/>
+
+                    <TextBlock x:Name="Title" Text="{Binding Source=h9d4b5933g552ag4656gb59fg8ab0b22a11cf, Converter={StaticResource TranslatedStringConverter}}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,16,0,0" FontSize="{StaticResource MediumFontSize}" IsHitTestVisible="False"/>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,50,0,0" Visibility="{Binding SavantSchools.Count, Converter={StaticResource CountToVisibilityConverter}}" IsHitTestVisible="False" Height="80">
+                        <Image x:Name="SavantStar" Source="pack://application:,,,/Core;component/Assets/SpellBook/transcribe_ico_proficiency.png" Stretch="None" VerticalAlignment="Center"/>
+
+                        <ItemsControl ItemsSource="{Binding SavantSchools}" AlternationCount="{Binding SavantSchools.Count}" VerticalAlignment="Center" MaxWidth="660">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel VerticalAlignment="Center"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock x:Name="SpellSchool" FontSize="{DynamicResource SmallFontSize}" VerticalAlignment="Center"/>
+                                        <TextBlock x:Name="Separator" Text="{Binding Source=h2519408dg5fd7g4cbcg840cg14370239edf8, Converter={StaticResource TranslatedStringConverter}}" FontSize="{DynamicResource SmallFontSize}" />
+                                    </StackPanel>
+
+                                    <DataTemplate.Triggers>
+                                        <DataTrigger Binding="{Binding ReflectionString}" Value="Abjuration">
+                                            <Setter TargetName="SpellSchool" Property="ls:TextBlockFormatter.SourceText" Value="{Binding Source=hd31978a1g8e58g43bdga6e9gd62fd9f146e5, Converter={StaticResource TranslatedStringConverter}}"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ReflectionString}" Value="Conjuration">
+                                            <Setter TargetName="SpellSchool" Property="ls:TextBlockFormatter.SourceText" Value="{Binding Source=hb621a062gbe72g4aaag8fe3g7813a70938ee, Converter={StaticResource TranslatedStringConverter}}"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ReflectionString}" Value="Divination">
+                                            <Setter TargetName="SpellSchool" Property="ls:TextBlockFormatter.SourceText" Value="{Binding Source=hfdd52f29gb5adg40ccga92dg81b02e72ff6e, Converter={StaticResource TranslatedStringConverter}}"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ReflectionString}" Value="Enchantment">
+                                            <Setter TargetName="SpellSchool" Property="ls:TextBlockFormatter.SourceText" Value="{Binding Source=he3a6ff7ag4b94g4c31gbd94ga9f25e991027, Converter={StaticResource TranslatedStringConverter}}"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ReflectionString}" Value="Evocation">
+                                            <Setter TargetName="SpellSchool" Property="ls:TextBlockFormatter.SourceText" Value="{Binding Source=h65139440gc030g4536gbfcfg18873fa90443, Converter={StaticResource TranslatedStringConverter}}"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ReflectionString}" Value="Illusion">
+                                            <Setter TargetName="SpellSchool" Property="ls:TextBlockFormatter.SourceText" Value="{Binding Source=h44c418f6g8d46g462bg82a1ge41e1d126193, Converter={StaticResource TranslatedStringConverter}}"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ReflectionString}" Value="Necromancy">
+                                            <Setter TargetName="SpellSchool" Property="ls:TextBlockFormatter.SourceText" Value="{Binding Source=ha106a896g592bg4b4egb7adg450adc98519d, Converter={StaticResource TranslatedStringConverter}}"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ReflectionString}" Value="Transmutation">
+                                            <Setter TargetName="SpellSchool" Property="ls:TextBlockFormatter.SourceText" Value="{Binding Source=h7e6c8899g9c4bg4b79ga180g0eee3b93b7e4, Converter={StaticResource TranslatedStringConverter}}"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Value="False">
+                                            <DataTrigger.Binding>
+                                                <MultiBinding Converter="{StaticResource LessThanOrEqualMultiConverter}">
+                                                    <Binding Path="(ItemsControl.AlternationIndex)" RelativeSource="{RelativeSource Mode=Self}" Converter="{StaticResource AddConverter}" ConverterParameter="2"/>
+                                                    <Binding Path="(ItemsControl.AlternationCount)" RelativeSource="{RelativeSource AncestorType={x:Type ItemsControl}}"/>
+                                                </MultiBinding>
+                                            </DataTrigger.Binding>
+                                            <Setter TargetName="Separator" Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
+                                    </DataTemplate.Triggers>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+
+                        </ItemsControl>
+                    </StackPanel>
+
+                    <Grid Width="720" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,126,0,0" IsHitTestVisible="False">
+                        <Grid.Resources>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="FontSize" Value="{DynamicResource MiniFontSize}"/>
+                                <Setter Property="Foreground" Value="{StaticResource LS_accent25TxtColor}"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                            </Style>
+                        </Grid.Resources>
+                        <!-- These columns should mirror the ones for the list items to ensure proper alignment -->
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="{StaticResource ColWidthQuantity}"/>
+                            <ColumnDefinition Width="{StaticResource ColWidthIcon}"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="{StaticResource ColWidthLevel}"/>
+                            <ColumnDefinition Width="{StaticResource ColWidthStar}"/>
+                            <ColumnDefinition Width="{StaticResource ColWidthCost}"/>
+                            <ColumnDefinition Width="{StaticResource ColWidthCheckBox}"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="QuantityTitle" Grid.Column="0" Text="{Binding Source=hd25888c3gd6c9g41bbga437gec871f50555f, Converter={StaticResource TranslatedStringConverter}}" HorizontalAlignment="Center" />
+                        <TextBlock x:Name="NameTitle" Grid.Column="2" Text="{Binding Source=h28c02084gc184g4b93g8dfbgdfcd1fee3871, Converter={StaticResource TranslatedStringConverter}}"/>
+                        <TextBlock x:Name="SpellLevel" Grid.Column="3" Text="{Binding Source=hb7c9dbb8gd727g421egaf0ag910c2bec58e1, Converter={StaticResource TranslatedStringConverter}}" HorizontalAlignment="Center"/>
+                        <Image Grid.Column="5" Source="{StaticResource GoldIconImg}" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+
+                    <ListBox x:Name="ScrollList" ItemsSource="{Binding Path=(b:Interaction.Behaviors)[1].SortedItems, ElementName=Container}" HorizontalAlignment="Left" VerticalAlignment="Top" SelectionMode="Multiple" Height="722" Margin="50,162,0,0" Visibility="{Binding LearnableScrolls.Count, Converter={StaticResource CountToVisibilityConverter}}">
+
+                        <ListBox.Template>
+                            <ControlTemplate>
+                                <ls:LSScrollViewer Style="{DynamicResource OverlappingScrollViewer}" VerticalScrollBarVisibility="Visible" HorizontalAlignment="Left">
+                                    <ItemsPresenter Margin="0,0,50,0"/>
+                                </ls:LSScrollViewer>
+                            </ControlTemplate>
+                        </ListBox.Template>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid x:Name="Container" IsHitTestVisible="False">
+                                    <b:Interaction.Behaviors>
+                                        <ls:CollectionPropertyCountBehavior ItemsSource="{Binding SourceItems}" PropertyName="Count"/>
+                                    </b:Interaction.Behaviors>
+                                    <!-- These columns should mirror the ones for the column titles to ensure proper alignment -->
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="{StaticResource ColWidthQuantity}"/>
+                                        <ColumnDefinition Width="{StaticResource ColWidthIcon}"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="{StaticResource ColWidthLevel}"/>
+                                        <ColumnDefinition Width="{StaticResource ColWidthStar}"/>
+                                        <ColumnDefinition Width="{StaticResource ColWidthCost}"/>
+                                        <ColumnDefinition Width="{StaticResource ColWidthCheckBox}"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock x:Name="Quantity" Grid.Column="0" Text="{Binding Path=(b:Interaction.Behaviors)[0].Result, ElementName=Container}" VerticalAlignment="Center" HorizontalAlignment="Center"  FontSize="{DynamicResource MiniFontSize}" Foreground="{StaticResource LS_baseTxtColor}"/>
+                                    <Rectangle x:Name="Icon" Grid.Column="1" Fill="{Binding Icon}" Width="60" Height="60" VerticalAlignment="Center" Visibility="{Binding IsAlreadyKnown, Converter={StaticResource BoolToHiddenConverter}}"/>
+                                    <TextBlock x:Name="Name" Grid.Column="2" Text="{Binding Name}" VerticalAlignment="Center" FontSize="{DynamicResource SmallFontSize}" Foreground="{StaticResource LS_baseTxtColor}" TextTrimming="CharacterEllipsis" />
+                                    <TextBlock x:Name="SpellLevel" Grid.Column="3" Text="{Binding SpellLevel, Converter={StaticResource DecimalToRomanConverter}}" VerticalAlignment="Center" FontSize="{DynamicResource SmallFontSize}" Foreground="{StaticResource LS_baseTxtColor}" HorizontalAlignment="Center"/>
+                                    <Image x:Name="Star" Grid.Column="4" Source="pack://application:,,,/Core;component/Assets/SpellBook/transcribe_ico_proficiency.png" Stretch="None" Visibility="{Binding HasDiscount, Converter={StaticResource BoolToVisibleConverter}, ConverterParameter='true'}"/>
+                                    <TextBlock x:Name="Cost" Grid.Column="5" Text="{Binding LearnCost}" VerticalAlignment="Center" FontSize="{DynamicResource MiniFontSize}" />
+                                    <Grid Grid.Column="6">
+                                        <Image x:Name="Checkbox" Source="pack://application:,,,/Core;component/Assets/SpellBook/transcribe_checkBox_d.png" Stretch="None"/>
+                                        <Image Source="pack://application:,,,/Core;component/Assets/SpellBook/transcribe_ico_check.png" Stretch="None" Visibility="{Binding Path=IsSelected, RelativeSource={RelativeSource AncestorType=ListBoxItem}, Converter={StaticResource BoolToVisibleConverter}}"/>
+                                    </Grid>
+                                </Grid>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding HasRequiredLevel}" Value="False">
+                                        <Setter TargetName="SpellLevel" Property="Foreground" Value="{StaticResource LS_alertTxtColor}"/>
+                                        <Setter TargetName="Checkbox" Property="Opacity" Value="0.7"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding HasDiscount}" Value="True">
+                                        <Setter TargetName="Cost" Property="Foreground" Value="{StaticResource LS_bonusTxtColor}"/>
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <Grid Width="720" Background="Transparent" ToolTipService.ShowOnDisabled="True">
+                                                <Grid.ToolTip>
+                                                    <ls:LSTooltip Content="{TemplateBinding DataContext}" IsHitTestVisible="False" ls:TooltipExtender.Owner="{Binding DataContext.CurrentPlayer.SelectedCharacter, ElementName=LearnSpells}"/>
+                                                </Grid.ToolTip>
+
+                                                <Image x:Name="Background" Source="pack://application:,,,/Core;component/Assets/SpellBook/transcribe_listItem_d.png" Stretch="None" HorizontalAlignment="Left" Margin="-8,0,0,-12"  IsHitTestVisible="False"/>
+                                                <ContentPresenter/>
+
+                                                <b:Interaction.Triggers>
+                                                    <b:EventTrigger EventName="MouseEnter">
+                                                        <ls:LSPlaySound Sound="UI_Shared_Hover"/>
+                                                    </b:EventTrigger>
+                                                </b:Interaction.Triggers>
+                                            </Grid>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="Background" Property="Source" Value="pack://application:,,,/Core;component/Assets/SpellBook/transcribe_listItem_h.png" />
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding HasRequiredLevel}" Value="False">
+                                        <Setter Property="IsEnabled" Value="False"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="SelectionChanged">
+                                <ls:LSPlaySound Sound="UI_HUD_Shared_Click"/>
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </ListBox>
+
+                    <TextBlock ls:TextBlockFormatter.SourceText="{Binding Source=he42b09d7ga8a6g43a9gb829g43fee5664185, Converter={StaticResource TranslatedStringConverter}}" Visibility="{Binding Path=Visibility, ElementName=ScrollList, Converter={StaticResource InvertVisibilityConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource LS_baseTxtColor}" MaxWidth="600" TextWrapping="Wrap" TextAlignment="Center"/>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,140" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                        <TextBlock x:Name="SelectionCost" FontSize="{StaticResource SmallFontSize}">
+                            <b:Interaction.Behaviors>
+                                <ls:CollectionPropertyCountBehavior ItemsSource="{Binding SelectedItems, ElementName=ScrollList}" PropertyName="LearnCost"/>
+                            </b:Interaction.Behaviors>
+                            <ls:TextBlockFormatter.SourceText>
+                                <MultiBinding StringFormat="{}{0}: {1}">
+                                    <Binding Source="h8189a676g99feg436fgb9e6g7500c6690fb6" Converter="{StaticResource TranslatedStringConverter}"/>
+                                    <Binding Path="(b:Interaction.Behaviors)[0].Result" ElementName="SelectionCost"/>
+                                </MultiBinding>
+                            </ls:TextBlockFormatter.SourceText>
+                        </TextBlock>
+                        <Image Source="{StaticResource GoldIconImg}" Stretch="None" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                    </StackPanel>
+
+                    <ls:LSButton x:Name="TranscribeButton" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,70" Command="{Binding TranscribeScrollsCommand}" CommandParameter="{Binding SelectedItems, ElementName=ScrollList}" Content="{Binding Source=h82b57884g9542g4415gac97g16a53810d331, Converter={StaticResource TranslatedStringConverter}}" FontSize="{StaticResource SmallFontSize}">
+                        <ls:LSButton.Style>
+	                        <Style TargetType="{x:Type ls:LSButton}" BasedOn="{StaticResource BaseButtonStyle}">
+		                        <Setter Property="ls:ButtonHelper.ImageSource" Value="pack://application:,,,/Core;component/Assets/CharacterPanel/btn_pil_d.png"/>
+		                        <Style.Triggers>
+			                        <Trigger Property="IsMouseOver" Value="True">
+				                        <Setter Property="ls:ButtonHelper.ImageSource" Value="pack://application:,,,/Core;component/Assets/CharacterPanel/btn_pil_h.png" />
+			                        </Trigger>
+			                        <Trigger Property="IsPressed" Value="True">
+				                        <Setter Property="ls:ButtonHelper.ImageSource" Value="pack://application:,,,/Core;component/Assets/CharacterPanel/btn_pil_p.png"/>
+			                        </Trigger>
+			                        <Trigger Property="IsEnabled" Value="False">
+				                        <Setter Property="ls:ButtonHelper.ImageSource" Value="pack://application:,,,/Core;component/Assets/CharacterPanel/btn_pil_disabled.png" />
+			                        </Trigger>
+		                        </Style.Triggers>
+	                        </Style>
+                        </ls:LSButton.Style>
+                        <ls:LSButton.IsEnabled>
+                            <MultiBinding Converter="{StaticResource LessThanOrEqualMultiConverter}">
+                                <Binding Path="(b:Interaction.Behaviors)[0].Result" ElementName="SelectionCost"/>
+                                <Binding Path="UserGold"/>
+                            </MultiBinding>
+                        </ls:LSButton.IsEnabled>
+                    </ls:LSButton>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,20" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                        <TextBlock FontSize="{StaticResource MiniFontSize}" Text="{Binding Source=h76bfc212gcdd9g4c2ag899eg6bbeaf84f1e5, Converter={StaticResource TranslatedStringConverter}}" Foreground="{StaticResource LS_baseTxtColor}"/>
+                        <TextBlock x:Name="PartyGold" FontSize="{StaticResource MiniFontSize}" Text="{Binding UserGold, StringFormat={}{0:N0}}" Margin="10,0,10,0"/>
+                        <Image Source="{StaticResource GoldIconImg}" VerticalAlignment="Center" Width="26" Height="26"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <ControlTemplate.Triggers>
+                <DataTrigger Binding="{Binding SelectedItems.Count, ElementName=ScrollList, Converter={StaticResource GreaterThanConverter}, ConverterParameter=0}" Value="False">
+                    <Setter TargetName="TranscribeButton" Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </ls:UIWidget.Template>
+
+</ls:UIWidget>
+
