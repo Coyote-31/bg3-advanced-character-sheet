@@ -17,7 +17,12 @@
             <b:InvokeCommandAction Command="{Binding ActionCancelCommand}"/>
             <ls:LSPlaySound Sound="UI_HUD_Examine_Open"/>
         </b:EventTrigger>
+
+        <b:EventTrigger EventName="WidgetClosing">
+            <b:InvokeCommandAction Command="{Binding CloseCampContainersCommand}"/>
+        </b:EventTrigger>
     </b:Interaction.Triggers>
+
     <ls:UIWidget.Resources>
 
         <Storyboard x:Key="HideCharacterSelectAnim" FillBehavior="Stop">

@@ -74,7 +74,7 @@
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal" ToolTip="{StaticResource ManagedTooltip}" ToolTipService.IsEnabled="True" ToolTipService.Placement="Right" >
                                     <TextBlock Style="{StaticResource SectionResourceNameStyle}" VerticalAlignment="Center" Text="{Binding MaxValue, StringFormat='{}{0}'}" Visibility="{Binding MaxValue, Converter={StaticResource CountToVisibilityConverter}, ConverterParameter='1'}" Margin="0,0,4,0"/>
-                                    <Image Stretch="Uniform" Style="{StaticResource SectionImageStyle}" Height="36" Width="36"/>
+                                    <Image Stretch="Uniform" Style="{DynamicResource SectionImageStyle}" Height="36" Width="36"/>
                                     <TextBlock Style="{StaticResource SectionResourceNameStyle}" VerticalAlignment="Center" Text="{Binding Level, Converter={StaticResource DecimalToRomanConverter}}" Visibility="{Binding Level, Converter={StaticResource CountToVisibilityConverter}, ConverterParameter='1'}"/>
                                 </StackPanel>
                             </DataTemplate>
@@ -337,6 +337,10 @@
             </Style>
         </DataTemplate.Resources>
         <Grid>
+            <b:Interaction.Behaviors>
+                <ls:RuleSetModifierValueBehavior x:Name="HideNpcHpModifier" Modifiers="{Binding DataContext.Data.CurrentRuleSetModifiers, RelativeSource={RelativeSource AncestorType=ls:UIWidget}}" ModifierName="HIDE_NPC_HP"/>
+            </b:Interaction.Behaviors>
+
             <Border Name="Backfill" Background="{StaticResource LS_tint00}"/>
             <Border Name="PortraitImage" />
 
@@ -346,6 +350,41 @@
                 </ls:LSEntityObject.ToolTip>
             </ls:LSEntityObject>
         </Grid>
+        <DataTemplate.Triggers>
+
+            <!--If Character is dead (excluding Items)-->
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Type}" Value="Character"/>
+                    <Condition Binding="{Binding Stats.IsAlive}" Value="False"/>
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.Setters>
+                    <Setter TargetName="PortraitImage" Property="Effect">
+                        <Setter.Value>
+                            <ls:SaturationEffect Saturation="0.1"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter TargetName="HealthBar" Property="Foreground" Value="{StaticResource LS_PortraitDeadRadialColor}"/>
+                </MultiDataTrigger.Setters>
+            </MultiDataTrigger>
+
+            <!-- Hide NPC HP -->
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding IsPlayableCharacter}" Value="False"/>
+                    <Condition Binding="{Binding ModifierEnabled, ElementName=HideNpcHpModifier}" Value="True"/>
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.Setters>
+                    <Setter TargetName="HealthText" Property="Visibility" Value="Hidden"/>
+                </MultiDataTrigger.Setters>
+            </MultiDataTrigger>
+
+            <!-- Item adjustments-->
+            <DataTrigger Binding="{Binding Type}" Value="Item">
+                <Setter TargetName="HealthText" Property="Visibility" Value="Hidden"/>
+                <Setter TargetName="HealthBar" Property="Visibility" Value="Hidden"/>
+            </DataTrigger>
+        </DataTemplate.Triggers>
     </DataTemplate>
     <!-- === MOD_ACS: CampPortraitTemplate // BG3: From CharacterPortraitTemplate in DataTemplates.xaml - END === -->
     <!-- ======================================================================================================== -->

@@ -41,7 +41,6 @@
     <System:Double x:Key="CSContentHeight">1550</System:Double>
     <System:Double x:Key="CSColumnWidth">648</System:Double>
 
-    <Thickness x:Key="CSInfoMargin">52,52,52,24</Thickness>
     <Thickness x:Key="ScrollOffset">0,0,-38,0</Thickness>
 
     <GridLength x:Key="CSSlotSize">88</GridLength>
@@ -313,6 +312,36 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
+    <!-- FILTER LIST BUTTON STYLE -->
+    <Style x:Key="FilterListButtonStyle" TargetType="ListBoxItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <ControlTemplate.Resources>
+                        <BitmapImage x:Key="ButtonBackground" UriSource="/Core;component/Assets/CharacterPanel/selector_listitem_d.png"/>
+                    </ControlTemplate.Resources>
+                    <Grid>
+                        <Image x:Name="BtnBorder" Stretch="None" Source="{StaticResource ButtonBackground}"/>
+
+                        <ContentPresenter HorizontalAlignment="Left"/>
+
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="MouseEnter">
+                                <ls:LSPlaySound Sound="UI_Shared_Hover"/>
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="BtnBorder" Property="Source" Value="/Core;component/Assets/CharacterPanel/selector_listitem_h.png"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <!--INVENTORY FILTER TEMPLATE-->
     <!-- DataContext: VMCharacter or null | Tag: inventory or inventories to filter -->
     <ControlTemplate x:Key="FilterHolderTemplate" TargetType="ls:FilteringContainer">
@@ -384,7 +413,7 @@
                         <StackPanel>
                             <TextBlock Foreground="{StaticResource LS_accent25TxtColor}" FontSize="{StaticResource SmallishFontSize}" Text="{Binding Source='hc0ed9c5ag8a2cg4167g8242g5076d73d695f',Converter={StaticResource TranslatedStringConverter}}" Margin="20,0" VerticalAlignment="Top"/>
 
-                            <ListBox x:Name="FilterListHolder" ItemsSource="{TemplateBinding SuggestedFiltersList}" SelectedItem="{Binding CurrentFilterInternal,RelativeSource={RelativeSource TemplatedParent}}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="20,0,0,0" VerticalAlignment="Top">
+                            <ListBox x:Name="FilterListHolder" ItemsSource="{TemplateBinding SuggestedFiltersList}" SelectedItem="{Binding CurrentFilterInternal,RelativeSource={RelativeSource TemplatedParent}}" ItemContainerStyle="{StaticResource FilterListButtonStyle}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="20,0,0,0" VerticalAlignment="Top">
                                 <ListBox.Resources>
                                     <DataTemplate DataType="{x:Type ls:VMEnumFilter}">
                                         <Grid>
@@ -392,13 +421,11 @@
                                                 <ColumnDefinition Width="Auto"/>
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
-                                            <Image Grid.Column="0" Grid.ColumnSpan="2" x:Name="BtnBorder" Stretch="None" Source="/Core;component/Assets/CharacterPanel/selector_listitem_d.png"/>
                                             <Image Grid.Column="0" Stretch="None" Source="/Core;component/Assets/CharacterPanel/ico_filter.png" VerticalAlignment="Center" Margin="4,0,16,0"/>
                                             <TextBlock Grid.Column="1" x:Name="BtnText" Text="{Binding }" Foreground="{StaticResource LS_baseTxtColor}" FontSize="{StaticResource MediumFontSize}" HorizontalAlignment="Left" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Width="400"/>
                                         </Grid>
                                         <DataTemplate.Triggers>
                                             <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter TargetName="BtnBorder" Property="Source" Value="/Core;component/Assets/CharacterPanel/selector_listitem_h.png"/>
                                                 <Setter TargetName="BtnText" Property="Foreground" Value="{StaticResource LS_accent100TxtColor}"/>
                                             </Trigger>
 
@@ -414,13 +441,11 @@
                                                 <ColumnDefinition Width="Auto"/>
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
-                                            <Image Grid.Column="0" Grid.ColumnSpan="2" x:Name="BtnBorder" Stretch="None" Source="/Core;component/Assets/CharacterPanel/selector_listitem_d.png"/>
                                             <Rectangle Grid.Column="0" Height="28" Width="28" Fill="{Binding Object.Icon}" VerticalAlignment="Center" Margin="4,0,16,0"/>
                                             <TextBlock Grid.Column="1" x:Name="BtnText" Text="{Binding Object.Name}" Foreground="{StaticResource LS_baseTxtColor}" FontSize="{StaticResource MediumFontSize}" HorizontalAlignment="Left" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Width="400"/>
                                         </Grid>
                                         <DataTemplate.Triggers>
                                             <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter TargetName="BtnBorder" Property="Source" Value="/Core;component/Assets/CharacterPanel/selector_listitem_h.png"/>
                                                 <Setter TargetName="BtnText" Property="Foreground" Value="{StaticResource LS_accent100TxtColor}"/>
                                             </Trigger>
                                         </DataTemplate.Triggers>
@@ -594,6 +619,12 @@
                                                     </b:Interaction.Behaviors>
                                                 </Image>
                                                 <ContentPresenter Margin="20,0"/>
+
+                                                <b:Interaction.Triggers>
+                                                    <b:EventTrigger EventName="MouseEnter">
+                                                        <ls:LSPlaySound Sound="UI_Shared_Hover"/>
+                                                    </b:EventTrigger>
+                                                </b:Interaction.Triggers>
                                             </Grid>
 
                                             <ControlTemplate.Triggers>
@@ -618,6 +649,12 @@
                     </ListBox>
                 </ls:LSNineSliceImage>
             </Popup>
+
+            <b:Interaction.Triggers>
+                <b:EventTrigger EventName="MouseEnter">
+                    <ls:LSPlaySound Sound="UI_Shared_Hover"/>
+                </b:EventTrigger>
+            </b:Interaction.Triggers>
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
@@ -769,6 +806,14 @@
                 <Setter Property="Margin" Value="0,22,0,0"/>
             </Style>
 
+            <Style x:Key="CastInfoNineSliceStyle" TargetType="ls:LSNineSliceImage" BasedOn="{StaticResource {x:Type ls:LSNineSliceImage}}">
+                <Setter Property="ImageSource" Value="{StaticResource HeaderEntryBg}"/>
+                <Setter Property="Slices" Value="16"/>
+                <Setter Property="Padding" Value="20,10"/>
+                <Setter Property="Height" Value="60"/>
+                <Setter Property="MinWidth" Value="128"/>
+            </Style>
+
             <Style x:Key="CastInfoControlStyle" TargetType="ContentControl">
                 <Setter Property="MinWidth" Value="150"/>
                 <Setter Property="Margin" Value="2,0"/>
@@ -776,7 +821,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate>
-                            <ls:LSNineSliceImage ImageSource="{StaticResource HeaderEntryBg}" Slices="16" Padding="20,10" Height="60" MinWidth="128" >
+                            <ls:LSNineSliceImage Style="{StaticResource CastInfoNineSliceStyle}">
                                 <ContentPresenter HorizontalAlignment="Center"/>
                             </ls:LSNineSliceImage>
                         </ControlTemplate>
@@ -788,6 +833,38 @@
                         <Setter Property="MinWidth" Value="136"/>
                     </DataTrigger>
                 </Style.Triggers>
+            </Style>
+
+            <DataTemplate x:Key="CastAbilityTemplate" DataType="{x:Type ls:VMStatAbilityDependant}">
+                <StackPanel Orientation="Horizontal">
+                    <Image x:Name="CastAbilityIcon" Source="{StaticResource ProficientIcon}" Stretch="None" VerticalAlignment="Center"/>
+                    <Control x:Name="CastAbility" Template="{StaticResource AbilityShortDisplayName}" VerticalAlignment="Center" Foreground="{StaticResource LS_tint100}" />
+                </StackPanel>
+            </DataTemplate>
+
+            <Style x:Key="CastAbilityPresenterStyle" TargetType="ContentPresenter">
+                <Setter Property="ContentTemplate" Value="{StaticResource CastAbilityTemplate}"/>
+                <Setter Property="Margin" Value="-12,0,0,0"/>
+            </Style>
+
+            <Style x:Key="CastAbilityInfoControlStyle" TargetType="ContentControl" BasedOn="{StaticResource CastInfoControlStyle}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ContentControl">
+                            <ls:LSNineSliceImage Style="{StaticResource CastInfoNineSliceStyle}">
+                                <ls:LSNineSliceImage.ToolTip>
+                                    <ls:LSTooltip>
+                                        <StackPanel>
+                                            <TextBlock ls:TextBlockFormatter.SourceText="{Binding Source=h3289692bg0388g4f68gad45g82b8fd0ffbf8, Converter={StaticResource TranslatedStringConverter}}" Style="{StaticResource TooltipTitleStyle}"/>
+                                            <TextBlock ls:TextBlockFormatter.SourceText="{Binding Source=h91535f32g4f47g4d5bgbf59ge05726ecb96e, Converter={StaticResource TranslatedStringConverter}}" Style="{StaticResource TooltipDefaultTextStyle}"/>
+                                        </StackPanel>
+                                    </ls:LSTooltip>
+                                </ls:LSNineSliceImage.ToolTip>
+                                <ContentPresenter HorizontalAlignment="Center" Margin="-12,0,0,0" Style="{StaticResource CastAbilityPresenterStyle}" Content="{TemplateBinding Content}"/>
+                            </ls:LSNineSliceImage>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
             </Style>
 
             <ItemsPanelTemplate x:Key="SpellbookItemsPanelTemplate">
@@ -1263,6 +1340,11 @@
 
             <ControlTemplate x:Key="SpellCellTemplate">
                 <Grid x:Name="Container" Background="Transparent" Width="{StaticResource SpellCellContentSize}" Height="{StaticResource SpellCellContentSize}" >
+                    <ls:AttachedProperties.AutomationId>
+                        <MultiBinding StringFormat="{}SpellCell_{0}">
+                            <Binding Path="PrototypeID"/>
+                        </MultiBinding>
+                    </ls:AttachedProperties.AutomationId>
                     <Rectangle x:Name="Icon" Fill="{Binding Icon}" Width="{StaticResource SpellCellContentSize}" Height="{StaticResource SpellCellContentSize}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     <Rectangle x:Name="hover" Fill="{StaticResource LS_HoverColor}" Visibility="Hidden"/>
                     <Image x:Name="hoverIcon" Source="{StaticResource RemoveSpellIcon}" Stretch="Fill" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Hidden"/>
@@ -1340,7 +1422,7 @@
 
                     <b:Interaction.Behaviors>
                         <ls:DragGenericBehavior StartDragCommand="{Binding DataContext.DragCharacterActionCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
-                        <ls:DropOnGenericBehavior DropCommand="{Binding DataContext.DropPrepareCharacterAction, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
+                        <ls:DropOnGenericBehavior DropCommand="{Binding DataContext.DropPrepareCharacterAction, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" DropCommandParameter="{Binding Path=(ls:DragAndDropProperties.DropTargetOwner), ElementName=Container}"/>
                     </b:Interaction.Behaviors>
 
                     <b:Interaction.Triggers>
@@ -1464,14 +1546,42 @@
                 <Setter Property="ItemTemplate" Value="{StaticResource ActionGroupItemTemplate}"/>
             </Style>
 
+            <Style x:Key="ActionGroupAlternateBGStyle" TargetType="Image">
+                <Setter Property="Source" Value="{StaticResource KnownSpellsBg}"/>
+                <Setter Property="Stretch" Value="Fill"/>
+                <Setter Property="Visibility" Value="Hidden"/>
+                <!-- MOD_ACS: Update Margin // BG3: Margin="0,0,12,0" -->
+                <Setter Property="Margin" Value="0,0,14,0"/>
+            </Style>
+            
             <DataTemplate DataType="{x:Type ls:VMActionGroup}">
                 <Grid>
-                    <!-- MOD_ACS: Update Margin // BG3: Margin="0,0,12,0" -->
-                    <Image x:Name="AlternateBg" Source="{StaticResource KnownSpellsBg}" Stretch="Fill" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Visibility="Hidden" Margin="0,0,14,0"/>
+                    <Image x:Name="AlternateBg" Style="{StaticResource ActionGroupAlternateBGStyle}"/>
 
                     <ItemsControl x:Name="ActionsControl" 
                                                   Style="{StaticResource ActionCellItemsControlStyle}" 
                                                   ItemsSource="{Binding Actions}" VerticalAlignment="Center"/>
+                </Grid>
+
+                <DataTemplate.Triggers>
+                    <DataTrigger Binding="{Binding (ItemsControl.AlternationIndex), RelativeSource={RelativeSource Self}, Converter={StaticResource ModuloConverter}, ConverterParameter='2'}" Value="1">
+                        <Setter TargetName="AlternateBg" Property="Visibility" Value="Visible"/>
+                    </DataTrigger>
+                </DataTemplate.Triggers>
+            </DataTemplate>
+            
+            <DataTemplate x:Key="ActionGroupWithoutInitiationsTemplate" DataType="{x:Type ls:VMActionGroup}">
+                <Grid>
+                    <b:Interaction.Behaviors>
+                        <ls:CollectionFilterBehavior x:Name="InitiationFilter" ItemsSource="{Binding Actions}"
+                                                     Predicate="{Binding DataContext.Data.CharacterActionNoInitiationsPredicate, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
+                    </b:Interaction.Behaviors>
+
+                    <Image x:Name="AlternateBg" Style="{StaticResource ActionGroupAlternateBGStyle}"/>
+
+                    <ItemsControl x:Name="ActionsControl" 
+                                                  Style="{StaticResource ActionCellItemsControlStyle}" 
+                                                  ItemsSource="{Binding FilteredItems, ElementName=InitiationFilter}" VerticalAlignment="Center"/>
                 </Grid>
 
                 <DataTemplate.Triggers>
@@ -1509,7 +1619,7 @@
                             <StackPanel>
                                 <TextBlock Foreground="{StaticResource LS_accent25TxtColor}" FontSize="{StaticResource SmallishFontSize}" Text="{Binding Source='hc0ed9c5ag8a2cg4167g8242g5076d73d695f',Converter={StaticResource TranslatedStringConverter}}" Margin="20,0" VerticalAlignment="Top"/>
 
-                                <ListBox x:Name="FilterListHolder" ItemsSource="{TemplateBinding SuggestedFiltersList}" SelectedItem="{Binding CurrentFilterInternal,RelativeSource={RelativeSource TemplatedParent}}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="20,0,0,0" VerticalAlignment="Top">
+                                <ListBox x:Name="FilterListHolder" ItemsSource="{TemplateBinding SuggestedFiltersList}" SelectedItem="{Binding CurrentFilterInternal,RelativeSource={RelativeSource TemplatedParent}}" ItemContainerStyle="{StaticResource FilterListButtonStyle}"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="20,0,0,0" VerticalAlignment="Top">
                                     <ListBox.Resources>
                                         <DataTemplate DataType="{x:Type ls:VMEnumFilter}">
                                             <Grid>
@@ -1518,7 +1628,6 @@
                                                     <ColumnDefinition Width="Auto"/>
                                                     <ColumnDefinition Width="*"/>
                                                 </Grid.ColumnDefinitions>
-                                                <Image Grid.Column="0" Grid.ColumnSpan="3" x:Name="BtnBorder" Stretch="None" Source="{StaticResource SearchSelector_d}"/>
                                                 <Image Grid.Column="0" Stretch="None" Source="{StaticResource SearchFilterIcon}" VerticalAlignment="Center" Margin="4,0,16,0"/>
                                                 <TextBlock Grid.Column="1" x:Name="BtnText" Text="{Binding Name}" Foreground="{StaticResource LS_baseTxtColor}" FontSize="{StaticResource MediumFontSize}" HorizontalAlignment="Left" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
                                                 <TextBlock Grid.Column="2" x:Name="CategoryText" Foreground="{StaticResource LS_baseTxtColor}" FontSize="{StaticResource MediumFontSize}" HorizontalAlignment="Left" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Margin="0,0,20,0"/>
@@ -1526,7 +1635,6 @@
 
                                             <DataTemplate.Triggers>
                                                 <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter TargetName="BtnBorder" Property="Source" Value="{StaticResource SearchSelector_h}"/>
                                                     <Setter TargetName="BtnText" Property="Foreground" Value="{StaticResource LS_accent100TxtColor}"/>
                                                     <Setter TargetName="CategoryText" Property="Foreground" Value="{StaticResource LS_accent100TxtColor}"/>
                                                 </Trigger>
@@ -1558,14 +1666,12 @@
                                                     <ColumnDefinition Width="Auto"/>
                                                     <ColumnDefinition Width="*"/>
                                                 </Grid.ColumnDefinitions>
-                                                <Image Grid.Column="0" Grid.ColumnSpan="2" x:Name="BtnBorder" Stretch="None" Source="{StaticResource SearchSelector_d}"/>
                                                 <Rectangle Grid.Column="0" Width="28" Height="28" Fill="{Binding Icon}" VerticalAlignment="Center" Margin="4,0,16,0"/>
                                                 <TextBlock Grid.Column="1" x:Name="BtnText" Text="{Binding Name}" Foreground="{StaticResource LS_baseTxtColor}" FontSize="{StaticResource MediumFontSize}" HorizontalAlignment="Left" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Width="400"/>
                                             </Grid>
 
                                             <DataTemplate.Triggers>
                                                 <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter TargetName="BtnBorder" Property="Source" Value="{StaticResource SearchSelector_h}"/>
                                                     <Setter TargetName="BtnText" Property="Foreground" Value="{StaticResource LS_accent100TxtColor}"/>
                                                 </Trigger>
                                             </DataTemplate.Triggers>
@@ -1649,29 +1755,31 @@
         </ControlTemplate.Resources>
 
         <!-- MOD_ACS: Spell Book Container -->
-        <Grid x:Name="MultiClassSpellbookContainer">
+        <!-- I put this relative source binding in the Tag because it's used a lot in the filter behaviours below, so this way it's much faster -->
+        <Grid x:Name="MultiClassSpellbookContainer" Tag="{Binding DataContext.Data, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"
+              d:DataContext="{d:DesignInstance {x:Type ls:Character}, IsDesignTimeCreatable=True}">
 
             <b:Interaction.Behaviors>
                 <ls:CollectionSortBehavior x:Name="SpellbooksSortBehavior" ItemsSource="{Binding PlayerCharacterProperties.SpellBooks}" Comparer="{Binding PlayerCharacterProperties.SpellBookComparer}" />
 
-                <ls:CollectionFilterBehavior x:Name="PassivesFilter" ItemsSource="{Binding SelectedItem.Passives, ElementName=Tabs}" Predicate="{Binding PlayerCharacterProperties.TogglablePassivePredicate}"/>
-                <ls:CollectionFilterBehavior x:Name="MetaMagicFilter" ItemsSource="{Binding SelectedItem.Passives, ElementName=Tabs}" Predicate="{Binding PlayerCharacterProperties.TogglableMetaMagicPassivePredicate}"/>
-                <ls:CollectionFilterBehavior x:Name="CantripGroupFilter" ItemsSource="{Binding SelectedItem.ActionGroups, ElementName=Tabs}" Predicate="{Binding PlayerCharacterProperties.CantripGroupPredicate}"/>
-                <ls:CollectionFilterBehavior x:Name="SpellLevelsGroupFilter" ItemsSource="{Binding SelectedItem.ActionGroups, ElementName=Tabs}" Predicate="{Binding PlayerCharacterProperties.SpellLevelsGroupPredicate}" SortDirection="Descending"/>
-                <ls:CollectionFilterBehavior x:Name="CharacterActionGroupFilter" ItemsSource="{Binding SelectedItem.ActionGroups, ElementName=Tabs}" Predicate="{Binding PlayerCharacterProperties.CharacterActionsGroupPredicate}"/>
-                <ls:CollectionFilterBehavior x:Name="ClassActionGroupFilter" ItemsSource="{Binding SelectedItem.ActionGroups, ElementName=Tabs}" Predicate="{Binding PlayerCharacterProperties.ClassActionsGroupPredicate}"/>
-                <ls:CollectionFilterBehavior x:Name="CharacterFeatsFilter" ItemsSource="{Binding SelectedItem.Passives, ElementName=Tabs}" Predicate="{Binding Stats.CharacterFeaturesPredicate}"/>
-                <ls:CollectionFilterBehavior x:Name="ClassFeatsFilter" ItemsSource="{Binding SelectedItem.Passives, ElementName=Tabs}" Predicate="{Binding Stats.ClassFeaturesPredicate}"/>
+                <ls:CollectionFilterBehavior x:Name="PassivesFilter" ItemsSource="{Binding SelectedItem.Passives, ElementName=Tabs}" Predicate="{Binding Tag.TogglablePassivePredicate, ElementName=MultiClassSpellbookContainer}"/>
+                <ls:CollectionFilterBehavior x:Name="MetaMagicFilter" ItemsSource="{Binding SelectedItem.Passives, ElementName=Tabs}" Predicate="{Binding Tag.TogglableMetaMagicPassivePredicate, ElementName=MultiClassSpellbookContainer}"/>
+                <ls:CollectionFilterBehavior x:Name="CantripGroupFilter" ItemsSource="{Binding SelectedItem.ActionGroups, ElementName=Tabs}" Predicate="{Binding Tag.CantripGroupPredicate, ElementName=MultiClassSpellbookContainer}"/>
+                <ls:CollectionFilterBehavior x:Name="SpellLevelsGroupFilter" ItemsSource="{Binding SelectedItem.ActionGroups, ElementName=Tabs}" Predicate="{Binding Tag.SpellLevelsGroupPredicate, ElementName=MultiClassSpellbookContainer}" SortDirection="Descending"/>
+                <ls:CollectionFilterBehavior x:Name="CharacterActionGroupFilter" ItemsSource="{Binding SelectedItem.ActionGroups, ElementName=Tabs}" Predicate="{Binding Tag.CharacterActionsGroupPredicate, ElementName=MultiClassSpellbookContainer}"/>
+                <ls:CollectionFilterBehavior x:Name="ClassActionGroupFilter" ItemsSource="{Binding SelectedItem.ActionGroups, ElementName=Tabs}" Predicate="{Binding Tag.ClassActionsGroupPredicate, ElementName=MultiClassSpellbookContainer}"/>
+                <ls:CollectionFilterBehavior x:Name="CharacterFeatsFilter" ItemsSource="{Binding SelectedItem.Passives, ElementName=Tabs}" Predicate="{Binding Tag.CharacterFeaturesPredicate, ElementName=MultiClassSpellbookContainer}"/>
+                <ls:CollectionFilterBehavior x:Name="ClassFeatsFilter" ItemsSource="{Binding SelectedItem.Passives, ElementName=Tabs}" Predicate="{Binding Tag.ClassFeaturesPredicate, ElementName=MultiClassSpellbookContainer}"/>
 
-                <ls:CollectionFilterBehavior x:Name="NonFeatCantripGroupFilter" ItemsSource="{Binding FilteredItems, ElementName=CantripGroupFilter}" Predicate="{Binding PlayerCharacterProperties.NonFeatActionsGroupPredicate}"/>
-                <ls:CollectionFilterBehavior x:Name="NonNullAlwaysPreparedSpellsFilter" ItemsSource="{Binding SelectedItem.AlwaysPreparedActions, ElementName=Tabs}" Predicate="{Binding PlayerCharacterProperties.CharacterActionRemoveNullPredicate}"/>
-                <ls:CollectionFilterBehavior x:Name="NonAlwaysPreparedSpellLevelsGroupFilter" ItemsSource="{Binding FilteredItems, ElementName=SpellLevelsGroupFilter}" Predicate="{Binding PlayerCharacterProperties.NonAlwaysPreparedActionsGroupPredicate}"/>
-                <ls:CollectionFilterBehavior x:Name="NonFeatSpellLevelsGroupFilter" ItemsSource="{Binding FilteredItems, ElementName=SpellLevelsGroupFilter}" Predicate="{Binding PlayerCharacterProperties.NonFeatActionsGroupPredicate}"/>
-                <ls:CollectionFilterBehavior x:Name="NonFeatOrAlwaysPreparedSpellLevelsGroupFilter" ItemsSource="{Binding FilteredItems, ElementName=SpellLevelsGroupFilter}" Predicate="{Binding PlayerCharacterProperties.NonFeatOrAlwaysPreparedActionsGroupPredicate}"/>
+                <ls:CollectionFilterBehavior x:Name="NonFeatCantripGroupFilter" ItemsSource="{Binding FilteredItems, ElementName=CantripGroupFilter}" Predicate="{Binding Tag.NonInitiationActionsGroupPredicate, ElementName=MultiClassSpellbookContainer}"/>
+                <ls:CollectionFilterBehavior x:Name="NonNullAlwaysPreparedSpellsFilter" ItemsSource="{Binding SelectedItem.AlwaysPreparedActions, ElementName=Tabs}" Predicate="{Binding Tag.CharacterActionRemoveNullPredicate, ElementName=MultiClassSpellbookContainer}"/>
+                <ls:CollectionFilterBehavior x:Name="NonAlwaysPreparedSpellLevelsGroupFilter" ItemsSource="{Binding FilteredItems, ElementName=SpellLevelsGroupFilter}" Predicate="{Binding Tag.NonAlwaysPreparedActionsGroupPredicate, ElementName=MultiClassSpellbookContainer}"/>
+                <ls:CollectionFilterBehavior x:Name="NonFeatSpellLevelsGroupFilter" ItemsSource="{Binding FilteredItems, ElementName=SpellLevelsGroupFilter}" Predicate="{Binding Tag.NonInitiationActionsGroupPredicate, ElementName=MultiClassSpellbookContainer}"/>
+                <ls:CollectionFilterBehavior x:Name="NonFeatOrAlwaysPreparedSpellLevelsGroupFilter" ItemsSource="{Binding FilteredItems, ElementName=SpellLevelsGroupFilter}" Predicate="{Binding Tag.NonFeatOrAlwaysPreparedActionsGroupPredicate, ElementName=MultiClassSpellbookContainer}"/>
 
-                <ls:CollectionFilterBehavior x:Name="TadpolePassivesFilter" ItemsSource="{Binding PlayerCharacterProperties.TadpoleSpellBook.Passives}" Predicate="{Binding PlayerCharacterProperties.TogglablePassivePredicate}"/>
-                <ls:CollectionFilterBehavior x:Name="TadpoleFeatsFilter" ItemsSource="{Binding PlayerCharacterProperties.TadpoleSpellBook.Passives}" Predicate="{Binding Stats.TadpoleFeaturesPredicate}"/>
-                <ls:CollectionFilterBehavior x:Name="TadpoleActionsFilter" ItemsSource="{Binding PlayerCharacterProperties.TadpoleSpellBook.ActionGroups}" Predicate="{Binding PlayerCharacterProperties.AllActionsGroupPredicate}"/>
+                <ls:CollectionFilterBehavior x:Name="TadpolePassivesFilter" ItemsSource="{Binding PlayerCharacterProperties.TadpoleSpellBook.Passives}" Predicate="{Binding Tag.TogglablePassivePredicate, ElementName=MultiClassSpellbookContainer}"/>
+                <ls:CollectionFilterBehavior x:Name="TadpoleFeatsFilter" ItemsSource="{Binding PlayerCharacterProperties.TadpoleSpellBook.Passives}" Predicate="{Binding Tag.TadpoleFeaturesPredicate, ElementName=MultiClassSpellbookContainer}"/>
+                <ls:CollectionFilterBehavior x:Name="TadpoleActionsFilter" ItemsSource="{Binding PlayerCharacterProperties.TadpoleSpellBook.ActionGroups}" Predicate="{Binding Tag.AllActionsGroupPredicate, ElementName=MultiClassSpellbookContainer}"/>
             </b:Interaction.Behaviors>
 
             <b:Interaction.Triggers>
@@ -2110,8 +2218,8 @@
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate DataType="{x:Type ls:VMActionResource}">
                                             <StackPanel Orientation="Horizontal" ToolTip="{StaticResource ManagedTooltip}">
-                                                <Image Stretch="Uniform" Style="{StaticResource SectionImageStyle}" VerticalAlignment="Center" Margin="0" MaxHeight="40"/>
-                                                <TextBlock VerticalAlignment="Center" ls:TextBlockFormatter.SourceText="{Binding MaxValue, StringFormat='{}{0} '}"/>
+                                                <Image Stretch="Uniform" Style="{DynamicResource SectionImageStyle}" VerticalAlignment="Center" Margin="0" MaxHeight="40"/>
+                                                <TextBlock VerticalAlignment="Center" ls:TextBlockFormatter.SourceText="{Binding MaxValue, StringFormat='{}{0} '}" Foreground="{StaticResource LS_tint100}"/>
                                             </StackPanel>
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
@@ -2119,20 +2227,10 @@
                             </ContentControl>
 
                             <!-- Caster stuff -->
-                            <ContentControl x:Name="CastAbilityContainer" Grid.Column="3" Grid.Row="0" Style="{StaticResource CastInfoControlStyle}" Visibility="{Binding DataContext, ElementName=CastAbility, Converter={StaticResource NullToCollapsedConverter}}">
-                                <StackPanel Orientation="Horizontal">
-                                    <StackPanel.ToolTip>
-                                        <ls:LSTooltip>
-                                            <StackPanel>
-                                                <TextBlock ls:TextBlockFormatter.SourceText="{Binding Source=h3289692bg0388g4f68gad45g82b8fd0ffbf8, Converter={StaticResource TranslatedStringConverter}}" Style="{StaticResource TooltipTitleStyle}"/>
-                                                <TextBlock ls:TextBlockFormatter.SourceText="{Binding Source=h91535f32g4f47g4d5bgbf59ge05726ecb96e, Converter={StaticResource TranslatedStringConverter}}" Style="{StaticResource TooltipDefaultTextStyle}"/>
-                                            </StackPanel>
-                                        </ls:LSTooltip>
-                                    </StackPanel.ToolTip>
-                                    <Image x:Name="CastAbilityIcon" Source="{StaticResource ProficientIcon}" Stretch="None" VerticalAlignment="Center" Margin="-12,0,0,0"/>
-                                    <Control x:Name="CastAbility" Template="{StaticResource AbilityShortDisplayName}" DataContext="{Binding SelectedItem.Class.SpellCastAbility, ElementName=Tabs}" VerticalAlignment="Center" Foreground="{StaticResource LS_tint100}" />
-                                </StackPanel>
-                            </ContentControl>
+                            <ContentControl x:Name="CastAbilityContainer" Grid.Column="3" Grid.Row="0" 
+                                            Style="{StaticResource CastAbilityInfoControlStyle}"
+                                            Content="{Binding SelectedItem.Class.SpellCastAbility, ElementName=Tabs}"
+                                            Visibility="{Binding Content, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource NullToCollapsedConverter}}"/>
 
                             <ContentControl x:Name="SpellDCContainer" Grid.Column="4" Grid.Row="0" Style="{StaticResource CastInfoControlStyle}"
                                                             Visibility="{Binding Text, ElementName=SpellDC, Converter={StaticResource NullToCollapsedConverter}, ConverterParameter='EmptyString'}">
@@ -2261,7 +2359,8 @@
                                                 <ItemsControl x:Name="CantripList" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Stretch" 
                                                             ItemsSource="{Binding FilteredItems, ElementName=CantripGroupFilter}" 
                                                             Visibility="{Binding Path=ItemsSource.Count, RelativeSource={RelativeSource Self}, Converter={StaticResource CountToVisibilityConverter}}" 
-                                                            ls:AttachedProperties.InheritedTag="HideFeats"/>
+                                                            ItemTemplate="{StaticResource ActionGroupWithoutInitiationsTemplate}"/>
+
 
                                                 <!-- Class Actions -->
                                                 <ItemsControl x:Name="ClassActionsList" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" HorizontalAlignment="Stretch" 
@@ -2362,8 +2461,8 @@
                                             <ItemsControl x:Name="NonPreparableSpellsCategories" VerticalAlignment="Top" HorizontalAlignment="Stretch"
                                                                     ItemsSource="{Binding FilteredItems, ElementName=SpellLevelsGroupFilter}" 
                                                                     AlternationCount="{Binding ItemsSource.Count, RelativeSource={RelativeSource Self}}"
-                                                                    ls:AttachedProperties.InheritedTag="HideFeats"
-                                                                    Visibility="Collapsed"/>
+                                                                    Visibility="Collapsed"
+                                                                    ItemTemplate="{StaticResource ActionGroupWithoutInitiationsTemplate}"/>
 
                                             <!-- MOD_ACS: Add text center / Update margin // BG3: Margin="0,-10,0,0 -->
                                             <TextBlock x:Name="NonPreparableReplaceableSpellsNote" Style="{StaticResource ActionGroupTitleStyle}" HorizontalAlignment="Center" Visibility="Collapsed" FontStyle="Italic" TextAlignment="Center" Margin="100,4,100,4" TextWrapping="Wrap"/>
@@ -2485,9 +2584,9 @@
                                                     <StackPanel x:Name="InitiationRoot" Width="{Binding ActualWidth, ElementName=ClassPanelContent, Converter={StaticResource MultiplierConverter}, ConverterParameter=0.48}" HorizontalAlignment="Center">
                                                         <b:Interaction.Behaviors>
                                                             <ls:CollectionFilterBehavior x:Name="CantripGroupFilter" ItemsSource="{Binding ActionGroups}"
-                                                                                         Predicate="{Binding DataContext.CurrentPlayer.SelectedCharacter.PlayerCharacterProperties.CantripGroupPredicate, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
+                                                                                         Predicate="{Binding DataContext.Data.CantripGroupPredicate, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
                                                             <ls:CollectionFilterBehavior x:Name="SpellLevelsGroupFilter" ItemsSource="{Binding ActionGroups}"
-                                                                                         Predicate="{Binding DataContext.CurrentPlayer.SelectedCharacter.PlayerCharacterProperties.SpellLevelsGroupPredicate, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
+                                                                                         Predicate="{Binding DataContext.Data.SpellLevelsGroupPredicate, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
                                                         </b:Interaction.Behaviors>
 
                                                         <TextBlock Text="{Binding ClassName}" Margin="6,0,0,0" Foreground="{StaticResource LS_accent100TxtColor}"/>
@@ -2500,30 +2599,15 @@
                                                                 <ColumnDefinition Width="*"/>
                                                             </Grid.ColumnDefinitions>
 
-                                                            <ContentControl x:Name="CastAbilityContainer" Grid.Column="0" Style="{StaticResource CastInfoControlStyle}"
-                                                            Visibility="{Binding DataContext, ElementName=CastAbility, Converter={StaticResource NullToCollapsedConverter}}">
-                                                                <ContentControl.ToolTip>
-                                                                    <ls:LSTooltip>
-                                                                        <StackPanel>
-                                                                            <TextBlock ls:TextBlockFormatter.SourceText="{Binding Source=h3289692bg0388g4f68gad45g82b8fd0ffbf8, Converter={StaticResource TranslatedStringConverter}}" Style="{StaticResource TooltipTitleStyle}"/>
-                                                                            <TextBlock ls:TextBlockFormatter.SourceText="{Binding Source=h91535f32g4f47g4d5bgbf59ge05726ecb96e, Converter={StaticResource TranslatedStringConverter}}" Style="{StaticResource TooltipDefaultTextStyle}"/>
-                                                                        </StackPanel>
-                                                                    </ls:LSTooltip>
-                                                                </ContentControl.ToolTip>
-                                                                <StackPanel Orientation="Horizontal">
-                                                                    <Image x:Name="CastAbilityIcon" 
-                                                                                   Source="{StaticResource ProficientIcon}" 
-                                                                                   Stretch="None" 
-                                                                                   VerticalAlignment="Center" 
-                                                                                   Margin="-12,0,0,0"/>
-                                                                    <Control x:Name="CastAbility" Template="{StaticResource AbilityShortDisplayName}" DataContext="{Binding Stats.SpellCastAbility}" VerticalAlignment="Center" Foreground="{StaticResource LS_tint100}" />
-                                                                </StackPanel>
-                                                            </ContentControl>
+                                                            <ContentControl x:Name="CastAbilityContainer" Grid.Column="0" 
+                                                                            Style="{StaticResource CastAbilityInfoControlStyle}"
+                                                                            Content="{Binding SpellCastAbility}"
+                                                                            Visibility="{Binding DataContext, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource NullToCollapsedConverter}}"/>
 
                                                             <ContentControl x:Name="SpellDCContainer" Grid.Column="1" Style="{StaticResource CastInfoControlStyle}"
                                                             Visibility="{Binding Text, ElementName=SpellDC, Converter={StaticResource NullToCollapsedConverter}, ConverterParameter='EmptyString'}">
                                                                 <ContentControl.ToolTip>
-                                                                    <ls:LSTooltip Content="{Binding Path=(ls:TooltipExtender.Owner).Stats.SpellDifficultyCheck, RelativeSource={RelativeSource Mode=Self}}"/>
+                                                                    <ls:LSTooltip Content="{Binding DataContext.SpellDifficultyCheck, ElementName=SpellDCContainer}"/>
                                                                 </ContentControl.ToolTip>
                                                                 <StackPanel Orientation="Horizontal">
                                                                     <Image x:Name="SpellDCIcon" 
@@ -2533,7 +2617,7 @@
                                                                                    Margin="-8,0,0,0"/>
                                                                     <TextBlock x:Name="SpellDC" 
                                                                                        Text="{Binding SpellDifficultyCheck.Value}" 
-                                                                                       VerticalAlignment="Center"/>
+                                                                                       VerticalAlignment="Center" Foreground="{StaticResource LS_tint100}"/>
                                                                 </StackPanel>
                                                             </ContentControl>
 
@@ -2550,7 +2634,7 @@
                                                                                    Margin="-10,0,0,0"/>
                                                                     <TextBlock x:Name="SpellAttackBonus" 
                                                                                        Text="{Binding SpellAttackBonus.Value, StringFormat={}{0:+#;-#;0}}" 
-                                                                                       VerticalAlignment="Center"/>
+                                                                                       VerticalAlignment="Center" Foreground="{StaticResource LS_tint100}"/>
                                                                 </StackPanel>
                                                             </ContentControl>
                                                         </Grid>
@@ -2842,9 +2926,6 @@
                 <Setter TargetName="ClassActionsList" Property="Grid.ColumnSpan" Value="1"/>
                 <Setter TargetName="ClassActionsList" Property="Grid.Column" Value="1"/>
                 <Setter TargetName="ClassActionsList" Property="Grid.Row" Value="0"/>
-
-                <Setter TargetName="CantripList" Property="ls:AttachedProperties.InheritedTag" Value="HideFeatsAndResources"/>
-                <Setter TargetName="ClassActionsList" Property="ls:AttachedProperties.InheritedTag" Value="HideResources"/>
             </MultiDataTrigger>
 
             <!-- MOD_ACS: Disable LearnSpellsButton here - Btn moved to SpellbookActionGroup -->
@@ -5349,6 +5430,7 @@
                 </ControlTemplate.Triggers>
             </ControlTemplate>
         </DataTemplate.Resources>
+
         <Grid x:Name="DetailedPanelContent">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -5553,14 +5635,14 @@
                             <TextBlock Style="{StaticResource DetailedListText}" Text="{Binding Result, ElementName=TagList}" TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center"/>
                         </ContentControl>
                     </StackPanel>
-
-
-
                 </StackPanel>
             </ScrollViewer>
+
+            <b:Interaction.Behaviors>
+                <ls:RuleSetModifierValueBehavior x:Name="HideNpcHpModifier" Modifiers="{Binding DataContext.Data.CurrentRuleSetModifiers, RelativeSource={RelativeSource AncestorType=ls:UIWidget}}" ModifierName="HIDE_NPC_HP"/>
+            </b:Interaction.Behaviors>
         </Grid>
         
-       
         <DataTemplate.Triggers>
             <!--Hide Diety on Examine Panel-->
             <DataTrigger Binding="{Binding Name, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Value="Examine" >
@@ -5571,7 +5653,7 @@
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
                     <Condition Binding="{Binding IsPlayableCharacter}" Value="False"/>
-                    <Condition Binding="{Binding DataContext.Data.CurrentRuleSetModifiers, Converter={StaticResource RuleSetModifierValueConverter}, ConverterParameter='HIDE_NPC_HP', RelativeSource={RelativeSource AncestorType=ls:UIWidget}}" Value="True"/>
+                    <Condition Binding="{Binding ModifierEnabled, ElementName=HideNpcHpModifier}" Value="True"/>
                 </MultiDataTrigger.Conditions>
                 <Setter TargetName="Health" Property="Visibility" Value="Collapsed"/>
                 <Setter TargetName="Health" Property="Visibility" Value="Collapsed"/>
@@ -5582,85 +5664,16 @@
     </DataTemplate>
 
     <!--===== TABINATION =====-->
-    <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type HeaderedContentControl}}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="TabItem">
-                    <ControlTemplate.Resources>
-                        <!-- MOD_ACS: Fix tabs artefacts // BG3: .../Assets/CharacterPanel/... --> 
-                        <BitmapImage x:Key="TabBG_d" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/CharacterPanel/tab_body_inactive_d.png"/>
-                        <BitmapImage x:Key="TabBG_h" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/CharacterPanel/tab_body_inactive_h.png"/>
-                        <BitmapImage x:Key="TabBGSelected_d" UriSource="pack://application:,,,/AdvancedCharacterSheet;component/Assets/ACS/CharacterPanel/tab_body_active_d.png"/>
-                    </ControlTemplate.Resources>
-
-                    <Grid x:Name="TabRoot" ToolTipService.Placement="Left" >
-                        <ls:LSNineSliceImage x:Name="tab" ImageSource="{StaticResource TabBG_d}" Slices="66,36,66, 52" IconWidth="16" Padding="66,10,66,0" Height="88" Width="{Binding ActualWidth, ElementName=SummaryPanelContent, Converter={StaticResource DivideConverter}, ConverterParameter=3}"/>
-                        <!-- MOD_ACS: Update Margin // BG3: Margin="40,12" -->
-                        <ContentPresenter ContentSource="Header" Margin="40,16,40,8"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <b:Interaction.Triggers>
-                            <b:EventTrigger EventName="MouseEnter">
-                                <b:Interaction.Behaviors>
-                                    <b:ConditionBehavior>
-                                        <b:ConditionalExpression>
-                                            <b:ComparisonCondition LeftOperand="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TabItem}}, Path=IsSelected}" Operator="NotEqual" RightOperand="True"/>
-                                        </b:ConditionalExpression>
-                                    </b:ConditionBehavior>
-                                </b:Interaction.Behaviors>
-                                <ls:LSPlaySound Sound="UI_Shared_Hover"/>
-                            </b:EventTrigger>
-                            <b:EventTrigger EventName="MouseDown">
-                                <b:Interaction.Behaviors>
-                                    <b:ConditionBehavior>
-                                        <b:ConditionalExpression>
-                                            <b:ComparisonCondition LeftOperand="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TabItem}}, Path=IsSelected}" Operator="NotEqual" RightOperand="True"/>
-                                        </b:ConditionalExpression>
-                                    </b:ConditionBehavior>
-                                </b:Interaction.Behaviors>
-                                <ls:LSPlaySound Sound="UI_Shared_Panel_Select"/>
-                            </b:EventTrigger>
-                        </b:Interaction.Triggers>
-                    </Grid>
-
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="tab" Property="ImageSource" Value="{StaticResource TabBG_h}"/>
-                        </Trigger>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter TargetName="tab" Property="ImageSource" Value="{StaticResource TabBGSelected_d}"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="FocusVisualStyle" Value="{StaticResource Style.Focus.Inner.Uniform}"/>
-    </Style>
-
-    <Style x:Name="ColumnTemplate" TargetType="TabControl" BasedOn="{StaticResource {x:Type ItemsControl}}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <TabPanel x:Name="HeaderPanel" IsItemsHost="True" KeyboardNavigation.TabIndex="1" Panel.ZIndex="1" Grid.Row="0" HorizontalAlignment="Center" Margin="0,0,0,-16" />
-                        <Grid Grid.Row="1">
-                            <ls:LSNineSliceImage x:Name="InfoBGpanel" Style="{StaticResource InnerPanelWithDecor}"/>
-                            <ContentPresenter ContentSource="SelectedContent" Margin="{StaticResource CSInfoMargin}"/>
-                        </Grid>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-
+ 
     <!--TAB CONTENT-->
     <ControlTemplate x:Key="CharSheetTabController" TargetType="Control">
         <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <TabControl>
-
+                <TabControl.Resources>
+                    <Style TargetType="TabItem" BasedOn="{StaticResource TabItemStyle}">
+                        <Setter Property="MinWidth" Value="{Binding ActualWidth, ElementName=SummaryPanelContent, Converter={StaticResource DivideConverter}, ConverterParameter=3}"/>
+                    </Style>
+                </TabControl.Resources>
                 <!-- ====== SUMMARY TAB =======-->
                 <TabItem x:Name="SummaryTab" IsSelected="True" >
                     <TabItem.Header>
@@ -5783,10 +5796,9 @@
                                     <Border Style="{StaticResource ListSectionBackground}">
                                         <Grid VerticalAlignment="stretch">
                                             <b:Interaction.Behaviors>
-                                                <ls:CollectionFilterBehavior x:Name="AllCharacterFeaturesPredicate" ItemsSource="{Binding Stats.Passives}" Predicate="{Binding Stats.AllCharacterFeaturesPredicate}"/>
-                                                <ls:CollectionFilterBehavior x:Name="FullList" ItemsSource="{Binding Stats.Passives}"/>
-                                                <ls:CollectionSortBehavior x:Name="AllCharacterFeaturesSorted" ItemsSource="{Binding FilteredItems, ElementName=AllCharacterFeaturesPredicate}" Comparer="{Binding Stats.PassivesSortComparer}"/>
-                                                <ls:CollectionSortBehavior x:Name="FullListSorted" ItemsSource="{Binding FilteredItems, ElementName=FullList}" Comparer="{Binding Stats.PassivesSortComparer}"/>
+                                                <ls:CollectionFilterBehavior x:Name="AllCharacterFeaturesPredicate" ItemsSource="{Binding Stats.Passives}" Predicate="{Binding DataContext.Data.AllCharacterFeaturesPredicate, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
+                                                <ls:CollectionSortBehavior x:Name="AllCharacterFeaturesSorted" ItemsSource="{Binding FilteredItems, ElementName=AllCharacterFeaturesPredicate}" Comparer="{Binding DataContext.Data.PassivesSortComparer, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
+                                                <ls:CollectionSortBehavior x:Name="FullListSorted" ItemsSource="{Binding Stats.Passives}" Comparer="{Binding DataContext.Data.PassivesSortComparer, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
                                             </b:Interaction.Behaviors>
                                             <ItemsControl x:Name="FeaturesHolder" ItemsSource="{Binding SortedItems, ElementName=AllCharacterFeaturesSorted}" ItemTemplate="{StaticResource FeaturesListItemTemplate}" Margin="12" Visibility="Visible"/>
                                         </Grid>
@@ -7472,7 +7484,7 @@
                         <ls:LSEntityObject Context="Inventory" DataContext="{Binding Object}" EntityRef="{Binding EntityHandle}" x:Name="invCellBase" Background="{TemplateBinding Background}" ToolTipService.Placement="Right" Tag="{Binding DataContext,RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" ls:ContextMenuService.GenerateEnabled="False" ls:MoveFocus.Focusable="True" Focusable="True" AllowDrop="False">
 
                             <b:Interaction.Behaviors>
-                                <ls:ContextMenuFillBehavior Context="Inventory" Player="{Binding DataContext.CurrentPlayer, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" TargetObject="{Binding .}" Source="{Binding SelectedItems,ElementName=InventoryHolder}" Command="{Binding DataContext.ContextActionPressed, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
+                                <ls:ContextMenuFillBehavior Context="Inventory" Player="{Binding DataContext.CurrentPlayer, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" TargetObject="{Binding .}" Source="{Binding SelectedItems,ElementName=InventoryHolder}" FillCommand="{Binding DataContext.ContextActionMenuFill, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
                             </b:Interaction.Behaviors>
                             <b:Interaction.Triggers>
                                 <b:EventTrigger EventName="MouseEnter">
@@ -7606,12 +7618,12 @@
                         <BitmapImage  x:Key="SelOverlayUri" UriSource="pack://application:,,,/Core;component/Assets/CharacterPanel/EQSlots_overlaySelected.png" />
                     </ControlTemplate.Resources>
 
-                    <Grid x:Name="root"  Width="{StaticResource EquipmentSlotSize}" Height="{StaticResource EquipmentSlotSize}" ToolTipService.IsEnabled="{Binding Item,Converter={StaticResource NullToBoolFalseConverter}}" Background="Transparent" ToolTipService.ShowOnDisabled="True" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTipService.Placement="{TemplateBinding ToolTipService.Placement}">
+                    <Grid x:Name="root" Tag="{TemplateBinding Tag}" Width="{StaticResource EquipmentSlotSize}" Height="{StaticResource EquipmentSlotSize}" ToolTipService.IsEnabled="{Binding Item,Converter={StaticResource NullToBoolFalseConverter}}" Background="Transparent" ToolTipService.ShowOnDisabled="True" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTipService.Placement="{TemplateBinding ToolTipService.Placement}">
                         <b:Interaction.Behaviors>
-                            <ls:ContextMenuFillBehavior Context="Equipment" Player="{Binding DataContext.CurrentPlayer, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" TargetObject="{Binding Item}" Command="{Binding DataContext.ContextActionPressed, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
+                            <ls:ContextMenuFillBehavior Context="Equipment" Player="{Binding DataContext.CurrentPlayer, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" TargetObject="{Binding Item}" FillCommand="{Binding DataContext.ContextActionMenuFill, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
                         </b:Interaction.Behaviors>
                         <Grid.ToolTip>
-                            <ls:LSTooltip x:Name="tooltip" IsHitTestVisible="False" Content="{Binding Path=DataContext.Item,ElementName=root}"/>
+                            <ls:LSTooltip x:Name="tooltip" IsHitTestVisible="False" Content="{Binding Path=DataContext.Item, ElementName=root}" ls:TooltipExtender.Owner="{Binding Tag, ElementName=root}"/>
                         </Grid.ToolTip>
                         <Image x:Name="SlotBg" Style="{StaticResource EquipmentSlogBgImageStyle}"/>
                         <Grid x:Name="IconControl" Background="{StaticResource EquipmentSlotBg}" Opacity="1.0" DataContext="{Binding Item}" IsHitTestVisible="False">
@@ -7775,7 +7787,7 @@
             <Setter.Value>
                 <noesis:StyleBehaviorCollection>
                     <ls:DragGenericBehavior StartDragCommand="{Binding DataContext.DragEquipmentSlotCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
-                    <ls:DropOnGenericBehavior DropCommand="{Binding DataContext.DropEquipmentSlotCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
+                    <ls:DropOnGenericBehavior DropCommand="{Binding DataContext.DropEquipmentSlotCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" DropCommandParameter="{Binding}"/>
                 </noesis:StyleBehaviorCollection>
             </Setter.Value>
         </Setter>
@@ -7877,7 +7889,7 @@
 
     <ControlTemplate x:Key="HelmetEQTemplate" TargetType="Control">
         <Grid HorizontalAlignment="Left">
-            <ls:LSButton x:Name="EquipmentHelmetSlot" Style="{StaticResource EquipmentSlotStyle}"/>
+            <ls:LSButton x:Name="EquipmentHelmetSlot" Style="{StaticResource EquipmentSlotStyle}" Tag="{TemplateBinding Tag}"/>
             <ls:LSButton x:Name="VisibilityButton" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-4,-40,0,0" Command="{Binding DataContext.ChangeEquipmentVisibilityCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="{Binding}" Template="{StaticResource VisibilityButtonTemplate}" Opacity="0"/>
         </Grid>
         <ControlTemplate.Triggers>
@@ -7975,7 +7987,7 @@
     <ControlTemplate x:Key="MuscialEQTemplate">
 
         <Grid>
-            <ls:LSButton x:Name="EquipmentInstrumentSlot" Style="{StaticResource EquipmentSlotStyle}" VerticalAlignment="Bottom"/>
+            <ls:LSButton x:Name="EquipmentInstrumentSlot" Tag="{Binding DataContext, ElementName=EquipmentSlots}" Style="{StaticResource EquipmentSlotStyle}" VerticalAlignment="Bottom"/>
             <ls:LSButton x:Name="VisibilityButton" Command="{Binding DataContext.ChangeStowedVisibilityCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="{Binding}" Template="{StaticResource StowedVisibilityButtonTemplate}" Visibility="Collapsed" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,-40,0,0">
             </ls:LSButton>
         </Grid>
@@ -8048,7 +8060,7 @@
     </ControlTemplate>
 
     <ControlTemplate x:Key="WeaponAttackBonusTemplate" TargetType="Control">
-        <Grid HorizontalAlignment="Stretch" DataContext="{Binding Stats}" Background="{StaticResource LS_PopUpBackgroundColor}">
+        <Grid x:Name="rootWeaponBonus" HorizontalAlignment="Stretch" Background="{StaticResource LS_PopUpBackgroundColor}">
             <Grid.Resources>
                 <Style TargetType="TextBlock" BasedOn="{StaticResource DetailedListValue}">
                     <Setter Property="HorizontalAlignment" Value="Stretch"/>
@@ -8071,9 +8083,9 @@
             </Grid.RowDefinitions>
 
             <!-- ==== ATTACK BONUS ROW ==== -->
-            <Border x:Name="AtackBonusRow" Grid.Row="0" Style="{StaticResource RowBG_d}" HorizontalAlignment="Stretch" Margin="2,0" ToolTipService.Placement="Right"  ToolTipService.VerticalOffset="-80">
+            <Border x:Name="AtackBonusRow" Grid.Row="0" Style="{StaticResource RowBG_d}" DataContext="{Binding Stats}" HorizontalAlignment="Stretch" Margin="2,0" ToolTipService.Placement="Right"  ToolTipService.VerticalOffset="-80">
                 <Border.ToolTip>
-                    <ls:LSTooltip Content="{Binding Path=DataContext.AttackBonus, ElementName=AtackBonusRow}"/>
+                    <ls:LSTooltip Content="{Binding Path=DataContext.AttackBonus, ElementName=AtackBonusRow}" ls:TooltipExtender.Owner="{Binding DataContext, ElementName=rootWeaponBonus}"/>
                 </Border.ToolTip>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -8099,9 +8111,9 @@
             </Border>
 
             <!-- ==== DAMAGE ROW ==== -->
-            <Border x:Name="DamageBonusRow"  Grid.Row="1" Style="{StaticResource RowBG_d}" HorizontalAlignment="Stretch" Margin="2,0" ToolTipService.Placement="Right" ToolTipService.VerticalOffset="-80">
+            <Border x:Name="DamageBonusRow"  Grid.Row="1" Style="{StaticResource RowBG_d}" DataContext="{Binding Stats}" HorizontalAlignment="Stretch" Margin="2,0" ToolTipService.Placement="Right" ToolTipService.VerticalOffset="-80">
                 <Border.ToolTip>
-                    <ls:LSTooltip Content="{Binding Path=DataContext.EquippedWeaponDamage, ElementName=DamageBonusRow}"/>
+                    <ls:LSTooltip Content="{Binding Path=DataContext.EquippedWeaponDamage, ElementName=DamageBonusRow}" ls:TooltipExtender.Owner="{Binding DataContext, ElementName=rootWeaponBonus}"/>
                 </Border.ToolTip>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -8308,7 +8320,7 @@
                                                                ToolTipService.Placement="Right" Tag="{Binding (ls:WidgetData.DataContext), RelativeSource={RelativeSource TemplatedParent}}"
                                                                ls:ContextMenuService.GenerateEnabled="False" ls:MoveFocus.Focusable="True" Focusable="True">
                         <b:Interaction.Behaviors>
-                            <ls:ContextMenuFillBehavior Context="{Binding (ls:ContextMenuService.Context) , RelativeSource={RelativeSource Mode=TemplatedParent} }" Player="{Binding (ls:WidgetData.DataContext).CurrentPlayer, RelativeSource={RelativeSource TemplatedParent}}" TargetObject="{Binding .}" Source="{Binding SelectedItems,ElementName=InventoryHolder}" Command="{Binding (ls:WidgetData.DataContext).ContextActionPressed, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <ls:ContextMenuFillBehavior Context="{Binding (ls:ContextMenuService.Context) , RelativeSource={RelativeSource Mode=TemplatedParent} }" Player="{Binding (ls:WidgetData.DataContext).CurrentPlayer, RelativeSource={RelativeSource TemplatedParent}}" TargetObject="{Binding .}" Source="{Binding SelectedItems,ElementName=InventoryHolder}" FillCommand="{Binding DataContext.ContextActionMenuFill, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
                         </b:Interaction.Behaviors>
                         <b:Interaction.Triggers>
                             <b:EventTrigger EventName="MouseEnter">
@@ -8376,7 +8388,8 @@
 
     <!--INVENTORY TEMPLATE WITH FILTERS-->
     <ControlTemplate x:Key="CharacterInventoryTemplate" TargetType="Control">
-        <Grid x:Name="CharacterPanelHolder" Tag="{Binding PlayerCharacterProperties.IsContentEditable}">
+        <Grid x:Name="CharacterPanelHolder" Tag="{Binding PlayerCharacterProperties.IsContentEditable}"
+              d:DataContext="{d:DesignInstance {x:Type ls:Character}, IsDesignTimeCreatable=True}">
             <b:Interaction.Triggers>
                 <b:DataTrigger Binding="{Binding IsVisible, ElementName=CharacterPanelHolder}" Value="True">
                     <!-- Tutorial UI Event - Inventory Opened-->
@@ -8577,14 +8590,14 @@
                     <ls:FilteringContainer Grid.Column="1" x:Name="FilteringContainerHolder" Margin="4,0,4,0" FilterPredicate="{Binding PlayerCharacterProperties.InventoryPredicate}" Template="{StaticResource FilterHolderTemplate}"
                                            CurrentFilter="{Binding DataContext.CurrentPlayer.UIData.GlobalSelectedFilter, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}, Mode=OneWay}"
                                            ItemsList="{Binding InventoriesSlots, ElementName=InventoriesMerger}" DefaultViewItemsList="{Binding Inventory.Slots}" MaxDisplayedFilters="12"
-                                           SortComparer="{Binding DataContext.Data.InventoryIndexSortComparer, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}">
+                                           SortComparer="{Binding DataContext.Data.InventoryIndexSortComparer, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"
+                                           HoldFiltering="{Binding IsMerging, ElementName=InventoriesMerger}">
                         <ls:FilteringContainer.EnumFiltersList>
-                            <ls:EnumFilterItem EnumId="gui::EPopularFilters" Label="h977af483ga6d9g4334g9ee0g3b85b94c67db" AlwaysVisible="True" />
+                            <ls:EnumFilterItem EnumId="ls.EPopularFilters" Label="h977af483ga6d9g4334g9ee0g3b85b94c67db" AlwaysVisible="True" />
                             <ls:EnumFilterItem EnumId="eoc::EProficiencyGroup" Label="ha4c5f0cfg93ebg47ecg8eecg6524ad70aee0" />
                         </ls:FilteringContainer.EnumFiltersList>
 
                         <b:Interaction.Triggers>
-
                             <b:DataTrigger Binding="{Binding IsKeyboardFocusWithin, ElementName=FilteringContainerHolder}" Value="True">
                                 <b:InvokeCommandAction Command="{Binding DataContext.HideAvailableEquipmentCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="{Binding DataContext.CurrentPlayer.SelectedCharacter.Equipment, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
                             </b:DataTrigger>
@@ -8593,20 +8606,12 @@
                                 <b:InvokeCommandAction Command="{Binding DataContext.ClearFilterCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
                                 <b:ChangePropertyAction TargetName="ChangePartyContextButton" PropertyName="IsChecked" Value="False"/>
                             </b:EventTrigger>
-
-                            <b:PropertyChangedTrigger Binding="{Binding DataContext.CurrentPlayer.UIData.GlobalSelectedFilter, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}">
-                                <b:ChangePropertyAction TargetName="FilteringContainerHolder" PropertyName="CurrentFilter" Value="{Binding DataContext.CurrentPlayer.UIData.GlobalSelectedFilter, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}, Mode=OneWay}"/>
-                            </b:PropertyChangedTrigger>
-
                         </b:Interaction.Triggers>
                     </ls:FilteringContainer>
 
                     <!--Infotip-->
                     <!-- MOD_ACS: Add Name / Update Margin // BG3: Margin="-8,-8,8,0" -->
                     <Control x:Name="CharacterSheetInfotip" Grid.Column="2" Template="{StaticResource CharacterSheetInfotipTemplate}" VerticalAlignment="Center" Margin="-111,-8,111,0" HorizontalAlignment="Right" ToolTipService.Placement="Right"/>
-
-
-
                 </Grid>
 
             </Grid>
@@ -8675,20 +8680,12 @@
                 <b:Interaction.Triggers>
 
                     <!-- Selecting the slot while it's not active = enabling all the filters -->
-                    <b:PropertyChangedTrigger Binding="{Binding PlayerCharacterProperties.ActiveEquipmentSlot}" >
-                        <b:Interaction.Behaviors>
-                            <b:ConditionBehavior>
-                                <b:ConditionalExpression>
-                                    <b:ComparisonCondition LeftOperand="{Binding PlayerCharacterProperties.ActiveEquipmentSlot}" Operator="NotEqual" RightOperand="{x:Null}"/>
-                                </b:ConditionalExpression>
-                            </b:ConditionBehavior>
-                        </b:Interaction.Behaviors>
+                    <b:DataTrigger Binding="{Binding PlayerCharacterProperties.ActiveEquipmentSlot}" Comparison="NotEqual" Value="{x:Null}">
                         <b:ChangePropertyAction TargetName="FilteringContainerHolder" PropertyName="CurrentFilter" Value="{Binding PlayerCharacterProperties.ActiveEquipmentSlot.FilterType}"/>
                         <b:ChangePropertyAction TargetName="ChangePartyContextButton" PropertyName="IsChecked" Value="True"/>
-                    </b:PropertyChangedTrigger>
+                    </b:DataTrigger>
 
                     <!-- Selecting the slot while it's active = no more filtering -->
-
                     <b:DataTrigger Binding="{Binding PlayerCharacterProperties.ActiveEquipmentSlot}" Value="{x:Null}">
                         <b:ChangePropertyAction TargetName="FilteringContainerHolder" PropertyName="CurrentFilter" Value="{x:Null}"/>
                         <b:ChangePropertyAction TargetName="ChangePartyContextButton" PropertyName="IsChecked" Value="False"/>
@@ -8770,9 +8767,10 @@
                         <ls:FilteringContainer x:Name="FilteringContainerHolder" Margin="8,0,0,0" FilterPredicate="{Binding PlayerCharacterProperties.InventoryPredicate}" Template="{StaticResource FilterHolderTemplate}"
                                            CurrentFilter="{Binding DataContext.CurrentPlayer.UIData.GlobalSelectedFilter, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}, Mode=OneWay}"
                                            ItemsList="{Binding InventoriesSlots, ElementName=InventoriesMerger}" DefaultViewItemsList="{Binding Inventory.Slots}" MaxDisplayedFilters="7"
-                                           SortComparer="{Binding DataContext.Data.InventoryIndexSortComparer, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Visibility="Collapsed">
+                                           SortComparer="{Binding DataContext.Data.InventoryIndexSortComparer, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Visibility="Collapsed"
+                                           HoldFiltering="{Binding IsMerging, ElementName=InventoriesMerger}">
                             <ls:FilteringContainer.EnumFiltersList>
-                                <ls:EnumFilterItem EnumId="gui::EPopularFilters" Label="h977af483ga6d9g4334g9ee0g3b85b94c67db" AlwaysVisible="True" />
+                                <ls:EnumFilterItem EnumId="ls.EPopularFilters" Label="h977af483ga6d9g4334g9ee0g3b85b94c67db" AlwaysVisible="True" />
                                 <ls:EnumFilterItem EnumId="eoc::EProficiencyGroup" Label="ha4c5f0cfg93ebg47ecg8eecg6524ad70aee0" />
                             </ls:FilteringContainer.EnumFiltersList>
 
@@ -8809,6 +8807,7 @@
             
             <DataTrigger Binding="{Binding IsChecked, ElementName=ChangePartyContextButton}" Value="True">
                 <Setter TargetName="FilteringContainerHolder" Property="ItemsList" Value="{Binding InventoriesSlots, ElementName=PartyInventoriesMerger}"/>
+                <Setter TargetName="FilteringContainerHolder" Property="HoldFiltering" Value="{Binding IsMerging, ElementName=PartyInventoriesMerger}"/>
                 <Setter TargetName="FilteringContainerHolder" Property="DefaultViewItemsList" Value="{Binding DataContext.CurrentPlayer.PartyInventory.Slots, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
             </DataTrigger>
 
@@ -9117,28 +9116,30 @@
                                     </Border.Effect>
                                 </Border>
 
+                                <!-- Setting the Tag on the equipmentslots, because in Trade trying to set the ls:TooltipExtender.Owner to the correct 'CurrentTradingCharacter', doesn't trigger inheritance of the property on the first opening of the tooltips. 
+                                        and if the property changes it's also not reacting as long as this inheritance is broken.-->
                                 <!-- MOD_ACS: Add margin -->
-                                <ls:LSButton x:Name="VanityBodySlot" Grid.Row="0" Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.VanityBody}" Margin="0,0,0,4"/>
-                                <ls:LSButton x:Name="VanityBootsSlot" Grid.Row="1" Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.VanityBoots}"/>
+                                <ls:LSButton x:Name="VanityBodySlot" Tag="{Binding DataContext, ElementName=EquipmentSlots}" Grid.Row="0" Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.VanityBody}" Margin="0,0,0,4"/>
+                                <ls:LSButton x:Name="VanityBootsSlot" Tag="{Binding DataContext, ElementName=EquipmentSlots}" Grid.Row="1" Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.VanityBoots}"/>
                                 <!-- MOD_ACS: Update margin // BG3: Margin="0,-40,-6,0" -->
-                                <ls:LSButton x:Name="ArmorVisibilityToggle" Grid.RowSpan="2" VerticalAlignment="Top" Command="{Binding DataContext.ToggleArmorSetVisibility, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="{Binding .}" Template="{StaticResource VanityButtonTemplate}" HorizontalAlignment="Right" Margin="0,-41,-5,0">
+                                <ls:LSButton x:Name="ArmorVisibilityToggle" Tag="{Binding DataContext, ElementName=EquipmentSlots}" Grid.RowSpan="2" VerticalAlignment="Top" Command="{Binding DataContext.ToggleArmorSetVisibility, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="{Binding .}" Template="{StaticResource VanityButtonTemplate}" HorizontalAlignment="Right" Margin="0,-41,-5,0">
                                     <ls:LSButton.ToolTip>
                                         <ls:LSTooltip Content="{Binding Source='had94b224g2d0eg43a9g96a7g27311c05ef99',Converter={StaticResource TranslatedStringConverter}}" x:Name="TooltipContent"/>
                                     </ls:LSButton.ToolTip>
                                 </ls:LSButton>
                             </Grid>
                             <!-- MOD_ACS: Update margin // MOD_BCPP: Margin="0,8" // BG3: Margin="0,24" -->
-                            <ls:LSButton x:Name="VanityUnderwearSlot" Margin="0,16" Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Underwear}"/>
+                            <ls:LSButton x:Name="VanityUnderwearSlot" Tag="{Binding DataContext, ElementName=EquipmentSlots}" Margin="0,16" Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Underwear}"/>
                             <!-- MOD_ACS: Add marginS -->
-                            <ls:LSButton x:Name="EquipmentAmuletSlot" Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Amulet}" Margin="0,0,0,4"/>
-                            <ls:LSButton x:Name="EquipmentRing1Slot" Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Ring}" Margin="0,0,0,4"/>
-                            <ls:LSButton x:Name="EquipmentRing2Slot" Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Ring2}"/>
+                            <ls:LSButton x:Name="EquipmentAmuletSlot" Tag="{Binding DataContext, ElementName=EquipmentSlots}" Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Amulet}" Margin="0,0,0,4"/>
+                            <ls:LSButton x:Name="EquipmentRing1Slot" Tag="{Binding DataContext, ElementName=EquipmentSlots}" Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Ring}" Margin="0,0,0,4"/>
+                            <ls:LSButton x:Name="EquipmentRing2Slot" Tag="{Binding DataContext, ElementName=EquipmentSlots}" Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Ring2}"/>
                         </StackPanel>
                     </DockPanel>
 
                     <DockPanel Name="EquipmentLeft" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Margin="{StaticResource EquipMargin}">
                         <!--LIGHTSOURCE-->
-                        <ls:LSButton x:Name="LightSource" DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Style="{StaticResource EquipmentSlotBaseStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.LightSource}" ToolTipService.Placement="Left">
+                        <ls:LSButton x:Name="LightSource" DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Tag="{Binding DataContext, ElementName=EquipmentSlots}" Style="{StaticResource EquipmentSlotBaseStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.LightSource}" ToolTipService.Placement="Left">
                             <b:Interaction.Behaviors>
                                 <ls:DropOnGenericBehavior DropCommand="{Binding DataContext.DropLightSourceCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
                             </b:Interaction.Behaviors>
@@ -9147,11 +9148,11 @@
                         <StackPanel DockPanel.Dock="Top">
 
                             <!-- MOD_ACS: Add marginS -->
-                            <Control Template="{StaticResource HelmetEQTemplate}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Helmet}" ToolTipService.Placement="Left" Margin="0,0,0,4"/>
-                            <ls:LSButton x:Name="EquipmentCloakSlot" Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Cloak}" ToolTipService.Placement="Left" Margin="0,0,0,4"/>
-                            <ls:LSButton x:Name="EquipmentBreastSlot" Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Breast}" ToolTipService.Placement="Left" Margin="0,0,0,4"/>
-                            <ls:LSButton x:Name="EquipmentGlovesSlot" Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Gloves}" ToolTipService.Placement="Left" Margin="0,0,0,4"/>
-                            <ls:LSButton x:Name="EquipmentBootsSlot" Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Boots}" ToolTipService.Placement="Left"/>
+                            <Control Template="{StaticResource HelmetEQTemplate}" Tag="{Binding DataContext, ElementName=EquipmentSlots}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Helmet}" ToolTipService.Placement="Left" Margin="0,0,0,4"/>
+                            <ls:LSButton x:Name="EquipmentCloakSlot" Tag="{Binding DataContext, ElementName=EquipmentSlots}" Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Cloak}" ToolTipService.Placement="Left" Margin="0,0,0,4"/>
+                            <ls:LSButton x:Name="EquipmentBreastSlot" Tag="{Binding DataContext, ElementName=EquipmentSlots}" Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Breast}" ToolTipService.Placement="Left" Margin="0,0,0,4"/>
+                            <ls:LSButton x:Name="EquipmentGlovesSlot" Tag="{Binding DataContext, ElementName=EquipmentSlots}" Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Gloves}" ToolTipService.Placement="Left" Margin="0,0,0,4"/>
+                            <ls:LSButton x:Name="EquipmentBootsSlot" Tag="{Binding DataContext, ElementName=EquipmentSlots}" Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.Boots}" ToolTipService.Placement="Left"/>
                         </StackPanel>
 
                         <!-- MOD_ACS: Move Armor Class to left panel RenderTransformOrigin="0.5,0.5" -->
@@ -9173,8 +9174,8 @@
                         </TextBlock>
                         <StackPanel Orientation="Horizontal">
                             <!-- MOD_ACS: Add Margin -->
-                            <ls:LSButton x:Name="EquipmentMeleeMainSlot" Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.MeleeMainHand}" ToolTipService.Placement="Left" Margin="0,0,4,0"/>
-                            <ls:LSButton x:Name="EquipmentMeleeOffSlot" Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.MeleeOffHand}" ToolTipService.Placement="Left"/>
+                            <ls:LSButton x:Name="EquipmentMeleeMainSlot" Tag="{Binding DataContext, ElementName=EquipmentSlots}" Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.MeleeMainHand}" ToolTipService.Placement="Left" Margin="0,0,4,0"/>
+                            <ls:LSButton x:Name="EquipmentMeleeOffSlot" Tag="{Binding DataContext, ElementName=EquipmentSlots}" Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.MeleeOffHand}" ToolTipService.Placement="Left"/>
                         </StackPanel>
                     </StackPanel>
 
@@ -9188,8 +9189,8 @@
                         </TextBlock>
                         <StackPanel Orientation="Horizontal">
                             <!-- MOD_ACS: Add Margin -->
-                            <ls:LSButton x:Name="EquipmentRangedMainSlot" Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.RangedMainHand}" Margin="0,0,4,0"/>
-                            <ls:LSButton x:Name="EquipmentRangedOffSlot" Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.RangedOffHand}"/>
+                            <ls:LSButton x:Name="EquipmentRangedMainSlot" Tag="{Binding DataContext, ElementName=EquipmentSlots}" Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.RangedMainHand}" Margin="0,0,4,0"/>
+                            <ls:LSButton x:Name="EquipmentRangedOffSlot" Tag="{Binding DataContext, ElementName=EquipmentSlots}" Style="{StaticResource EquipmentSlotStyle}" Panel.ZIndex="{Binding IsSelecting, Converter={StaticResource BoolToIntConverter}, ConverterParameter=20}" DataContext="{Binding Equipment.RangedOffHand}"/>
                         </StackPanel>
                     </StackPanel>
 
@@ -9632,6 +9633,11 @@
                     <Expander.Header>
                         <Control Template="{StaticResource PartyCharacterExpanderHeaderTemplate}"/>
                     </Expander.Header>
+                    <ls:AttachedProperties.AutomationId>
+                        <MultiBinding StringFormat="{}SingleInventory_{0}">
+                            <Binding Path="EntityUUID"/>
+                        </MultiBinding>
+                    </ls:AttachedProperties.AutomationId>
 
                     <ContentControl x:Name="PlayerBarterInventory" Template="{StaticResource PartyCharacterInventoryTemplate}" Content="{Binding Path=(b:Interaction.Behaviors)[2].SortedItems, ElementName=SingleInventoryRoot}"/>
                 </Expander>
@@ -9649,6 +9655,11 @@
                     <Expander.Header>
                         <Control Template="{StaticResource PartyCharacterExpanderHeaderTemplate}" DataContext="{Binding OwnerObject}"/>
                     </Expander.Header>
+                    <ls:AttachedProperties.AutomationId>
+                        <MultiBinding StringFormat="{}SingleInventory_{0}">
+                            <Binding Path="OwnerObject.EntityUUID"/>
+                        </MultiBinding>
+                    </ls:AttachedProperties.AutomationId>
 
                     <ContentControl x:Name="PlayerBarterInventory" Template="{StaticResource PartyCharacterInventoryTemplate}" Content="{Binding Path=(b:Interaction.Behaviors)[2].SortedItems, ElementName=SingleInventoryRoot}"/>
                 </Expander>
