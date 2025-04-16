@@ -29,7 +29,7 @@
                     <attribute id="Author" type="LSString" value="Coyote31"/>
                     <attribute id="CharacterCreationLevelName" type="FixedString" value=""/>
                     <attribute id="Description" type="LSString" value="Improve Character, Party and Companions Panels. Also display all damage types including ones without resistances or weakness. IF NOT WORKING CHECK YOUR LOAD ORDER ! Put this mod at the end or disable/enable it."/>
-                    <attribute id="FileSize" type="uint64" value="4258239"/>
+                    <attribute id="FileSize" type="uint64" value="4259137"/>
                     <attribute id="Folder" type="LSString" value="AdvancedCharacterSheet_78f36b61-5c72-0eb4-0b7b-45f0adfd5999"/>
                     <attribute id="LobbyLevelName" type="FixedString" value=""/>
                     <attribute id="MD5" type="LSString" value="d29cb68ad06163332a59aa1dbb7c247e"/>
@@ -40,7 +40,7 @@
                     <attribute id="PublishHandle" type="uint64" value="4331793"/>
                     <attribute id="StartupLevelName" type="FixedString" value=""/>
                     <attribute id="UUID" type="FixedString" value="78f36b61-5c72-0eb4-0b7b-45f0adfd5999"/>
-                    <attribute id="Version64" type="int64" value="108227128545247288"/>
+                    <attribute id="Version64" type="int64" value="108227130692730937"/>
                     <children>
                         <node id="PublishVersion">
                             <attribute id="Version64" type="int64" value="144255927717549775"/>
